@@ -43,6 +43,7 @@ export const EXTENSION_MESSAGES = {
   DESKTOP_APP_CONNECTION_STATUS_UPDATED: "desktopAppConnectionStatusUpdated",
   IS_SESSION_REPLAY_ENABLED: "isSessionReplayEnabled",
   TRIGGER_OPEN_CURL_MODAL: "triggerOpenCurlModal",
+  START_NETWORK_RECORDING: "startNetworkRecording",
   STOP_NETWORK_RECORDING: "stopNetworkRecording",
   GET_NETWORK_RECORDING_STATE: "getNetworkRecordingState",
   // v2 body capture: SW → client content script → page script (networkBodyRecorder) start/stop.
@@ -50,13 +51,6 @@ export const EXTENSION_MESSAGES = {
   STOP_NETWORK_BODY_CAPTURE: "stopNetworkBodyCapture",
   // Floating widget: content script → SW request to reopen the closed side panel.
   REOPEN_NETWORK_RECORDING_PANEL: "reopenNetworkRecordingPanel",
-};
-
-export const EXTENSION_EXTERNAL_MESSAGES = {
-  GET_EXTENSION_METADATA: "getExtensionMetadata",
-  START_NETWORK_RECORDING: "startNetworkRecording",
-  STOP_NETWORK_RECORDING: "stopNetworkRecording",
-  GET_NETWORK_RECORDING_SUMMARY: "getNetworkRecordingSummary",
 };
 
 export const CLIENT_MESSAGES = {

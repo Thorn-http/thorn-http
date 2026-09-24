@@ -22,14 +22,6 @@ const CLIENT_SCRIPTS: chrome.scripting.RegisteredContentScript[] = [
     runAt: "document_start",
     excludeMatches: excludeMatchesPatterns,
   },
-  {
-    id: "page-script-sessionRecorder",
-    js: ["page-scripts/sessionRecorderHelper.ps.js"],
-    world: "MAIN",
-    persistAcrossSessions: false,
-    matches: ["http://*/*", "https://*/*"],
-    runAt: "document_start",
-  },
 ];
 
 declare const window: {

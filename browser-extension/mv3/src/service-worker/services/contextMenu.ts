@@ -3,12 +3,9 @@ import { isExtensionEnabled } from "../../utils";
 import extensionIconManager from "./extensionIconManager";
 import { sendMessageToApp } from "./messageHandler/sender";
 import { CLIENT_MESSAGES } from "common/constants";
-import { stopRecordingOnAllTabs } from "./sessionRecording";
-import { triggerOpenCurlModalMessage } from "./utils";
 
 enum MenuItem {
   TOGGLE_ACTIVATION_STATUS = "toggle-activation-status",
-  RUN_CURL_REQUEST = "run-curl-request",
 }
 
 enum ToggleActivationStatusLabel {
@@ -36,10 +33,6 @@ export const updateActivationStatus = (isExtensionEnabled: boolean) => {
     isExtensionEnabled,
     extensionIconState: extensionIconManager.getState(),
   });
-
-  if (isExtensionEnabled === false) {
-    stopRecordingOnAllTabs();
-  }
 };
 
 export const initContextMenu = async () => {
@@ -49,12 +42,6 @@ export const initContextMenu = async () => {
     id: MenuItem.TOGGLE_ACTIVATION_STATUS,
     title: ToggleActivationStatusLabel.DEACTIVATE,
     contexts: ["action"],
-  });
-
-  chrome.contextMenus.create({
-    id: MenuItem.RUN_CURL_REQUEST,
-    title: "Run cURL Request",
-    contexts: ["selection"],
   });
 
   chrome.contextMenus.onClicked.addListener(async (info: chrome.contextMenus.OnClickData) => {
@@ -69,9 +56,6 @@ export const initContextMenu = async () => {
         isExtensionEnabled: extensionStatus,
         extensionIconState: extensionIconManager.getState(),
       });
-    } else if (info.menuItemId === MenuItem.RUN_CURL_REQUEST) {
-      // Handle the cURL request action
-      await triggerOpenCurlModalMessage({ selectedText: info.selectionText, pageURL: info.pageUrl }, "context_menu");
     }
   });
 

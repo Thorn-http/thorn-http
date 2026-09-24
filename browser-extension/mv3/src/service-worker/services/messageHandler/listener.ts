@@ -1,20 +1,7 @@
-import { CLIENT_MESSAGES, EXTENSION_EXTERNAL_MESSAGES, EXTENSION_MESSAGES } from "common/constants";
+import { CLIENT_MESSAGES, EXTENSION_MESSAGES } from "common/constants";
 import { checkIfNoRulesPresent, getRulesAndGroups } from "common/rulesStore";
 import { applyScriptRules } from "../scriptRuleHandler";
-import {
-  cacheRecordedSessionOnClientPageUnload,
-  getTabSession,
-  handleSessionRecordingOnClientPageLoad,
-  initSessionRecordingSDK,
-  launchUrlAndStartRecording,
-  onSessionRecordingStartedNotification,
-  onSessionRecordingStoppedNotification,
-  startRecordingExplicitly,
-  stopRecording,
-  watchRecording,
-} from "../sessionRecording";
 import { initCustomWidgets } from "../customWidgets";
-import { getAPIResponse } from "../apiClient";
 import { requestProcessor } from "../requestProcessor";
 import {
   handleTestRuleOnClientPageLoad,
@@ -22,71 +9,20 @@ import {
   saveTestRuleResult,
 } from "../testThisRuleHandler";
 import ruleExecutionHandler from "../ruleExecutionHandler";
-import { getPopupConfig, isExtensionEnabled, isUrlInBlockList } from "../../../utils";
+import { isExtensionEnabled, isUrlInBlockList } from "../../../utils";
 import { globalStateManager } from "../globalStateManager";
-import { isProxyApplied } from "../proxy";
-import {
-  connectToDesktopAppAndApplyProxy,
-  disconnectFromDesktopAppAndRemoveProxy,
-  checkIfDesktopAppOpen,
-} from "../desktopApp/index";
 import { sendMessageToApp } from "./sender";
-import { triggerOpenCurlModalMessage, updateExtensionStatus } from "../utils";
+import { updateExtensionStatus } from "../utils";
 import extensionIconManager from "../extensionIconManager";
 import {
   startNetworkRecording,
   stopNetworkRecording,
   getNetworkRecordingState,
-  getNetworkRecordingSummary,
   handleNetworkRecordingOnClientPageLoad,
   onNetworkBodyCaptured,
   onBodyRecorderReady,
   reopenNetworkRecordingPanel,
-  refreshIncognitoAllowedCache,
 } from "../networkRecording";
-
-export const initExternalMessageListener = () => {
-  chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
-    switch (message.action) {
-      case EXTENSION_EXTERNAL_MESSAGES.GET_EXTENSION_METADATA:
-        // Re-seed the incognito-allowed cache on every pre-flight (no change event exists) and
-        // expose it so LTS can gate the "Incognito window" option before a start.
-        Promise.all([isExtensionEnabled(), refreshIncognitoAllowedCache()])
-          .then(([enabled, incognitoAllowed]) => {
-            sendResponse({
-              name: chrome.runtime.getManifest().name,
-              version: chrome.runtime.getManifest().version,
-              isExtensionEnabled: enabled,
-              incognitoAllowed,
-            });
-          })
-          .catch(() => {
-            sendResponse({
-              name: chrome.runtime.getManifest().name,
-              version: chrome.runtime.getManifest().version,
-              isExtensionEnabled: false,
-              incognitoAllowed: false,
-            });
-          });
-        return true;
-
-      case EXTENSION_EXTERNAL_MESSAGES.START_NETWORK_RECORDING:
-        startNetworkRecording(message.payload?.url, message.payload?.config || {}, {
-          tabId: sender.tab?.id,
-          windowId: sender.tab?.windowId,
-        }).then(sendResponse);
-        return true;
-
-      case EXTENSION_EXTERNAL_MESSAGES.STOP_NETWORK_RECORDING:
-        sendResponse(stopNetworkRecording(message.payload?.targetTabId));
-        break;
-
-      case EXTENSION_EXTERNAL_MESSAGES.GET_NETWORK_RECORDING_SUMMARY:
-        sendResponse(getNetworkRecordingSummary(message.payload?.targetTabId));
-        break;
-    }
-  });
-};
 
 export const initMessageHandler = () => {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -103,20 +39,7 @@ export const initMessageHandler = () => {
       case EXTENSION_MESSAGES.CLIENT_PAGE_LOADED:
         ruleExecutionHandler.processTabCachedRulesExecutions(sender.tab.id);
         handleTestRuleOnClientPageLoad(sender.tab);
-        handleSessionRecordingOnClientPageLoad(sender.tab, sender.frameId);
         handleNetworkRecordingOnClientPageLoad(sender.tab);
-        break;
-
-      case EXTENSION_MESSAGES.INIT_SESSION_RECORDER:
-        initSessionRecordingSDK(sender.tab.id, sender.frameId).then(() => sendResponse());
-        return true;
-
-      case CLIENT_MESSAGES.NOTIFY_SESSION_RECORDING_STARTED:
-        onSessionRecordingStartedNotification(sender.tab.id, message.payload.markRecordingIcon);
-        break;
-
-      case CLIENT_MESSAGES.NOTIFY_SESSION_RECORDING_STOPPED:
-        onSessionRecordingStoppedNotification(sender.tab.id);
         break;
 
       case CLIENT_MESSAGES.NETWORK_BODY_CAPTURED:
@@ -134,28 +57,8 @@ export const initMessageHandler = () => {
         reopenNetworkRecordingPanel(sender.tab?.id);
         break;
 
-      case EXTENSION_MESSAGES.START_RECORDING_EXPLICITLY:
-        startRecordingExplicitly(message.tab ?? sender.tab, message.showWidget);
-        break;
-
-      case EXTENSION_MESSAGES.START_RECORDING_ON_URL:
-        launchUrlAndStartRecording(message.url);
-        break;
-
-      case EXTENSION_MESSAGES.STOP_RECORDING:
-        stopRecording(message.tabId ?? sender.tab.id, message.openRecording);
-        break;
-
-      case EXTENSION_MESSAGES.GET_TAB_SESSION:
-        getTabSession(message.tabId, sendResponse);
-        return true;
-
       case EXTENSION_MESSAGES.GET_RULES_AND_GROUPS:
         getRulesAndGroups().then(sendResponse);
-        return true;
-
-      case EXTENSION_MESSAGES.GET_API_RESPONSE:
-        getAPIResponse(message.apiRequest).then(sendResponse);
         return true;
 
       case EXTENSION_MESSAGES.GET_EXECUTED_RULES:
@@ -201,14 +104,6 @@ export const initMessageHandler = () => {
           });
         return true;
 
-      case EXTENSION_MESSAGES.WATCH_RECORDING:
-        watchRecording(message.tabId ?? sender.tab?.id);
-        break;
-
-      case EXTENSION_MESSAGES.CACHE_RECORDED_SESSION_ON_PAGE_UNLOAD:
-        cacheRecordedSessionOnClientPageUnload(sender.tab.id, message.payload);
-        break;
-
       case EXTENSION_MESSAGES.ON_BEFORE_AJAX_REQUEST:
         requestProcessor.onBeforeAJAXRequest(sender.tab.id, message.requestDetails).then(sendResponse);
         return true;
@@ -251,39 +146,13 @@ export const initMessageHandler = () => {
         globalStateManager.updateSharedStateInStorage(sender.tab.id, message.sharedState);
         break;
 
-      case EXTENSION_MESSAGES.CONNECT_TO_DESKTOP_APP:
-        connectToDesktopAppAndApplyProxy()
-          .then(sendResponse)
-          .catch(() => sendResponse(false));
+      case EXTENSION_MESSAGES.START_NETWORK_RECORDING:
+        // From the popup: record the given URL in a new tab with the side panel open.
+        // No await before startNetworkRecording, it must run inside the click's user gesture.
+        startNetworkRecording(message.url, {}, { tabId: sender.tab?.id, windowId: sender.tab?.windowId }).then(
+          sendResponse
+        );
         return true;
-
-      case EXTENSION_MESSAGES.DISCONNECT_FROM_DESKTOP_APP:
-        disconnectFromDesktopAppAndRemoveProxy()
-          .then(sendResponse)
-          .catch(() => sendResponse(false));
-        return true;
-
-      case EXTENSION_MESSAGES.IS_PROXY_APPLIED:
-        isProxyApplied().then(sendResponse);
-        return true;
-
-      case EXTENSION_MESSAGES.CHECK_IF_DESKTOP_APP_OPEN:
-        checkIfDesktopAppOpen().then(sendResponse);
-        return true;
-
-      case EXTENSION_MESSAGES.IS_SESSION_REPLAY_ENABLED:
-        getPopupConfig()
-          .then((config) => {
-            sendResponse(config?.session_replay === true);
-          })
-          .catch(() => {
-            sendResponse(false);
-          });
-        return true;
-
-      case EXTENSION_MESSAGES.TRIGGER_OPEN_CURL_MODAL:
-        triggerOpenCurlModalMessage({}, message.source);
-        break;
 
       case EXTENSION_MESSAGES.STOP_NETWORK_RECORDING:
         stopNetworkRecording(message.targetTabId || sender.tab?.id);

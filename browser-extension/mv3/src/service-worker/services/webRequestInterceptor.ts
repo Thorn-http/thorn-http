@@ -4,8 +4,6 @@ import ruleExecutionHandler from "./ruleExecutionHandler";
 import rulesStorageService from "../../rulesStorageService";
 import { isUrlInBlockList, isExtensionEnabled } from "../../utils";
 import { onVariableChange, Variable } from "../variable";
-import { apiRequestCorrelationManager } from "./apiClient/ApiRequestCorrelationManager";
-import { REQUESTLY_ID_HEADER } from "./apiClient";
 
 const onBeforeRequest = async (details: chrome.webRequest.WebRequestBodyDetails) => {
   // Firefox and Safari do not have documentLifecycle
@@ -58,11 +56,6 @@ const onBeforeSendHeaders = async (details: chrome.webRequest.WebRequestHeadersD
     return;
   }
 
-  const rqId = details.requestHeaders.find((h) => h.name.toLowerCase() === REQUESTLY_ID_HEADER)?.value;
-  if (rqId) {
-    apiRequestCorrelationManager.linkWebRequestToRqId(details.requestId, rqId);
-  }
-
   rulesStorageService.getEnabledRules().then((enabledRules) => {
     enabledRules.forEach((rule) => {
       switch (rule.ruleType) {
@@ -88,7 +81,6 @@ const onBeforeSendHeaders = async (details: chrome.webRequest.WebRequestHeadersD
 };
 
 const onHeadersReceived = async (details: chrome.webRequest.WebResponseHeadersDetails) => {
-  apiRequestCorrelationManager.invokeHandler(details);
   let isMainOrPrerenderedFrame =
     //@ts-ignore
     details.type === "main_frame" || details.documentLifecycle === "prerender" ? true : false;
