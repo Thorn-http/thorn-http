@@ -2,6 +2,7 @@ import PSMH from "../config/PageScriptMessageHandler";
 import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import * as semver from "semver";
 import UAParser from "ua-parser-js";
+import { isThornExtension } from "utils/EnvUtils";
 
 export function getExtensionVersion() {
   return document.documentElement.getAttribute("rq-ext-version");
@@ -36,6 +37,8 @@ export function isSessionBearExtensionInstalled() {
 }
 
 export function isExtensionVersionCompatible(compatibleVersion = "0.0.1") {
+  // Thorn HTTP bundles the app with the extension: they are always compatible.
+  if (isThornExtension()) return true;
   let currentExtensionVersion = getExtensionVersion();
   currentExtensionVersion = currentExtensionVersion ? currentExtensionVersion : "0.0.1";
   return semver.gte(currentExtensionVersion, compatibleVersion);

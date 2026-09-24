@@ -40,3 +40,10 @@ test("the app makes no third-party network requests", async ({ context, openApp 
   }
   expect(external).toEqual([]);
 });
+
+test("global settings show the extension options", async ({ openApp }) => {
+  // Guards the feature-compatibility checks: they used to hide these for extension version 1.x.
+  const page = await openApp("/settings/global-settings");
+  await expect(page.getByText("Show widget when rule is applied")).toBeVisible();
+  await expect(page.getByText("Blocked Sites")).toBeVisible();
+});

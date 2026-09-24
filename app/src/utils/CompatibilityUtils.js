@@ -1,6 +1,7 @@
 import { FEATURE_COMPATIBLE_VERSION } from "config/constants/compatibility";
 import * as semver from "semver";
 import { getAppDetails } from "./AppUtils";
+import { isThornExtension } from "./EnvUtils";
 
 /**
  *
@@ -10,6 +11,14 @@ import { getAppDetails } from "./AppUtils";
 export function isFeatureCompatible(featureName) {
   const { app_mode, app_version, os } = getAppDetails();
   const compatibilityVersionMap = FEATURE_COMPATIBLE_VERSION[featureName] || {};
+
+  // The Thorn HTTP extension bundles this app, so both always ship the same code. Its own
+  // versions (1.x) don't relate to the upstream version table: a feature is supported whenever
+  // it exists for the current mode.
+  if (isThornExtension()) {
+    return !!compatibilityVersionMap[app_mode];
+  }
+
   return checkVersionCompatibility(app_version, os, compatibilityVersionMap[app_mode]);
 }
 
