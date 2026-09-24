@@ -39,12 +39,7 @@ import PATHS from "config/constants/sub/paths";
 import { isFeatureCompatible } from "utils/CompatibilityUtils";
 import FEATURES from "config/constants/sub/features";
 import { getActiveWorkspaceId } from "store/slices/workspaces/selectors";
-import { ApiClientImporterType } from "features/apiClient/types";
 import { clientStorageService } from "services/clientStorageService";
-import { initAndSubscribeSecretsManager } from "features/apiClient/slices/secrets-manager";
-import { secretsManagerService } from "services/secretsManagerService";
-import { PRICING } from "features/pricing";
-import { secretVariables } from "lib/secret-variables";
 
 let hasAppModeBeenSet = false;
 /**
@@ -245,30 +240,6 @@ const AppModeInitializer = () => {
   }, [appMode]);
 
   useEffect(() => {
-    const isUserProfessional = [
-      PRICING.PLAN_NAMES.PROFESSIONAL,
-      PRICING.PLAN_NAMES.ENTERPRISE,
-      PRICING.PLAN_NAMES.PROFESSIONAL_ENTERPRISE,
-      PRICING.PLAN_NAMES.API_CLIENT_ENTERPRISE,
-      PRICING.PLAN_NAMES.API_CLIENT_PROFESSIONAL,
-    ].includes(user?.details?.planDetails?.planName || "");
-    if (
-      appMode === GLOBAL_CONSTANTS.APP_MODES.DESKTOP &&
-      user?.loggedIn &&
-      isUserProfessional &&
-      isFeatureCompatible(FEATURES.SECRETS_MANAGER)
-    ) {
-      const initPromise = dispatch(initAndSubscribeSecretsManager(user?.details?.profile?.uid));
-
-      return () => {
-        initPromise.abort();
-        secretsManagerService.unsubscribeFromProvidersChange();
-        secretVariables.updateSourceFromSecrets([]);
-      };
-    }
-  }, [appMode, dispatch, user?.details?.planDetails?.planName, user?.details?.profile?.uid, user?.loggedIn]);
-
-  useEffect(() => {
     if (
       isProxyServerRunning &&
       appMode === GLOBAL_CONSTANTS.APP_MODES.DESKTOP &&
@@ -345,24 +316,6 @@ const AppModeInitializer = () => {
           appMode,
           isSyncEnabled: user?.details?.isSyncEnabled,
         });
-
-        return {
-          received: true,
-        };
-      });
-
-      PSMH.addMessageListener(GLOBAL_CONSTANTS.EXTENSION_MESSAGES.OPEN_CURL_IMPORT_MODAL, (message) => {
-        const { payload } = message;
-
-        // Navigate to API Client with cURL import modal state
-        const navigationState = {
-          modal: ApiClientImporterType.CURL,
-          curlCommand: payload.curlCommand,
-          pageURL: payload.pageURL,
-          source: payload.source,
-        };
-
-        navigate(PATHS.API_CLIENT.ABSOLUTE, { state: navigationState });
 
         return {
           received: true,

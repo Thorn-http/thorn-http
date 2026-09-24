@@ -19,12 +19,10 @@ import { trackErrorInSavingDNR } from "modules/analytics/events/common/rules";
 import { useSelector } from "react-redux";
 import { getAppMode } from "store/selectors";
 import { LocalFirstComingSoon } from "componentsV2/Nudge/views/LocalFirstComingSoon/LocalFirstComingSoon";
-import { useCheckLocalSyncSupport } from "features/apiClient/helpers/modules/sync/useCheckLocalSyncSupport";
 import clientRuleStorageService from "services/clientStorageService/features/rule";
 
 const RulesFeatureContainer = () => {
   const appMode = useSelector(getAppMode);
-  const isLocalSyncEnabled = useCheckLocalSyncSupport();
 
   useEffect(() => {
     PageScriptMessageHandler.addMessageListener("ruleSaveError", (message: any) => {
@@ -78,15 +76,6 @@ const RulesFeatureContainer = () => {
       });
     });
   }, [appMode]);
-
-  if (isLocalSyncEnabled) {
-    return (
-      <LocalFirstComingSoon
-        featureName="HTTP Rules"
-        featureDescription="HTTP rules are powerful and open-source debugging tool to intercept & modify network requests, headers, API requests, inject scripts & much more—all in one place."
-      />
-    );
-  }
 
   return (
     <SecondarySidebarLayout secondarySidebar={<RulesSidebar />}>

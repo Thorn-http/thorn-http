@@ -20,18 +20,11 @@ import { toast } from "utils/Toast";
 import { useLocation } from "react-router-dom";
 import PATHS from "config/constants/sub/paths";
 import { trackCodeEditorCollapsedClick, trackCodeEditorExpandedClick } from "../analytics";
-import { VariablePopover } from "./components/VariablePopOver";
 import "./editor.scss";
 import { prettifyCode } from "componentsV2/CodeEditor/utils";
-import "./components/VariablePopOver/variable-popover.scss";
 import { useDebounce } from "hooks/useDebounce";
-import { ScopedVariables } from "features/apiClient/helpers/variableResolver/variable-resolver";
 import { MergeViewEditor } from "componentsV2/CodeEditor/components/EditorV2/components/MergeViewEditor/MergeViewEditor";
-import {
-  customKeyBinding,
-  highlightVariablesPlugin,
-  generateCompletionsForVariables,
-} from "componentsV2/CodeEditor/components/EditorV2/plugins";
+import { customKeyBinding } from "componentsV2/CodeEditor/components/EditorV2/plugins";
 import { placeholder as placeholderExtension } from "@codemirror/view";
 import { getLinterExtension } from "./lints/linterRegistry";
 
@@ -47,7 +40,6 @@ interface EditorProps {
   hideCharacterCount?: boolean;
   handleChange?: (value: string, triggerUnsavedChanges?: boolean) => void;
   prettifyOnInit?: boolean;
-  envVariables?: ScopedVariables;
   analyticEventProperties?: AnalyticEventProperties;
   showOptions?: {
     enablePrettify?: boolean;
@@ -79,7 +71,6 @@ const Editor: React.FC<EditorProps> = ({
   analyticEventProperties = {},
   scriptId = "",
   prettifyOnInit = false,
-  envVariables,
   showOptions = { enablePrettify: true },
   hideToolbar = false,
   autoFocus = false,
@@ -95,9 +86,7 @@ const Editor: React.FC<EditorProps> = ({
   const dispatch = useDispatch();
   const editorRef = useRef<ReactCodeMirrorRef | null>(null);
   const [editorHeight, setEditorHeight] = useState(height);
-  const [hoveredVariable, setHoveredVariable] = useState<string | null>(null);
   const isFullScreenModeOnboardingCompleted = useSelector(getIsCodeEditorFullScreenModeOnboardingCompleted);
-  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
   const [isEditorInitialized, setIsEditorInitialized] = useState(false);
   const allEditorToast = useSelector(getAllEditorToast);
   const toastOverlay = useMemo(() => allEditorToast[scriptId], [allEditorToast, scriptId]); // todo: rename
@@ -105,7 +94,6 @@ const Editor: React.FC<EditorProps> = ({
   const isDefaultPrettificationDone = useRef(false);
   const isUnsaveChange = useRef(false);
   const [isFullScreen, setFullScreen] = useState(false);
-  const [isPopoverPinned, setIsPopoverPinned] = useState(false);
 
   const handleFullScreenChange = () => {
     setFullScreen((prev) => !prev);
@@ -271,28 +259,6 @@ const Editor: React.FC<EditorProps> = ({
     ]
   );
 
-  const handleMouseLeave = useCallback(() => {
-    if (!isPopoverPinned) {
-      setHoveredVariable(null);
-    }
-  }, [isPopoverPinned]);
-
-  const handleClosePopover = useCallback(() => {
-    setHoveredVariable(null);
-    setIsPopoverPinned(false);
-  }, []);
-
-  const handleSetVariable = useCallback(
-    (variable: string | null) => {
-      if (!variable) {
-        handleMouseLeave();
-      } else {
-        setHoveredVariable(variable);
-      }
-    },
-    [handleMouseLeave]
-  );
-
   const extensions: Extension[] = useMemo(() => {
     const result: Extension[] = [];
 
@@ -317,42 +283,14 @@ const Editor: React.FC<EditorProps> = ({
 
     result.push(customKeyBinding, EditorView.lineWrapping);
 
-    if (envVariables) {
-      result.push(
-        highlightVariablesPlugin(
-          {
-            handleSetVariable,
-            setPopupPosition,
-          },
-          envVariables
-        )
-      );
-    }
-
-    const completionExtension = generateCompletionsForVariables(envVariables);
-    if (completionExtension) {
-      result.push(completionExtension);
-    }
-
     return result;
-  }, [
-    editorLanguage,
-    language,
-    customTheme,
-    placeholder,
-    envVariables,
-    handleSetVariable,
-    setPopupPosition,
-    disableLinting,
-  ]);
+  }, [editorLanguage, language, customTheme, placeholder, disableLinting]);
 
   const editor = (
     <>
       <CodeMirror
         ref={editorRefCallback}
-        className={`code-editor ${envVariables ? "code-editor-with-env-variables" : ""} ${
-          !isEditorInitialized ? "not-visible" : ""
-        }`}
+        className={`code-editor ${!isEditorInitialized ? "not-visible" : ""}`}
         width="100%"
         readOnly={isReadOnly}
         value={value ?? ""}
@@ -371,17 +309,6 @@ const Editor: React.FC<EditorProps> = ({
         data-gramm_editor="false"
         data-gramm="false"
       />
-      <div className="editor-popup-container" onMouseLeave={handleMouseLeave}>
-        {hoveredVariable && envVariables && (
-          <VariablePopover
-            hoveredVariable={hoveredVariable}
-            popupPosition={popupPosition}
-            variables={envVariables}
-            onPinChange={setIsPopoverPinned}
-            onClose={handleClosePopover}
-          />
-        )}
-      </div>
     </>
   );
 
