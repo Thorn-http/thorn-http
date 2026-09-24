@@ -1,5 +1,4 @@
 import { Page } from "@playwright/test";
-import { WEB_URL } from "../../config/dist/config.build.json";
 
 export const waitForPromiseToSettle = async (promise: Promise<any>, timeoutMillis: number) => {
   let isResolved = false;
@@ -26,7 +25,7 @@ export const waitForPromiseToSettle = async (promise: Promise<any>, timeoutMilli
 
 export const loadRules = async (page: Page, rules: Record<string, any>) => {
   await page.evaluate(
-    ({ rules, WEB_URL }) => {
+    ({ rules }) => {
       window.postMessage(
         {
           action: "SAVE_STORAGE_OBJECT",
@@ -34,26 +33,23 @@ export const loadRules = async (page: Page, rules: Record<string, any>) => {
           source: "page_script",
           object: rules,
         },
-        WEB_URL
+        window.origin
       );
     },
-    { rules, WEB_URL }
+    { rules }
   );
   await page.waitForTimeout(1000);
 };
 
 export const clearRules = async (page: any) => {
-  await page.evaluate(
-    ({ WEB_URL }) => {
-      window.postMessage(
-        {
-          action: "CLEAR_STORAGE",
-          requestId: Math.random().toString(36).substring(7),
-          source: "page_script",
-        },
-        WEB_URL
-      );
-    },
-    { WEB_URL }
-  );
+  await page.evaluate(() => {
+    window.postMessage(
+      {
+        action: "CLEAR_STORAGE",
+        requestId: Math.random().toString(36).substring(7),
+        source: "page_script",
+      },
+      window.origin
+    );
+  });
 };

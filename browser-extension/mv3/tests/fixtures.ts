@@ -1,6 +1,5 @@
 import { BrowserContext, Page, test as base, chromium } from "@playwright/test";
 import path from "path";
-import { WEB_URL } from "../../config/dist/config.build.json";
 import { clearRules } from "./utils";
 
 export const test = base.extend<{
@@ -29,9 +28,10 @@ export const test = base.extend<{
     const extensionId = background.url().split("/")[2];
     await use(extensionId);
   },
-  appPage: async ({ context }, use) => {
+  appPage: async ({ context, extensionId }, use) => {
     const appPage = await context.newPage();
-    await appPage.goto(WEB_URL, { waitUntil: "domcontentloaded" });
+    // The rule editor is bundled in the extension (app.html) and talks to it via app.cs.js
+    await appPage.goto(`chrome-extension://${extensionId}/app.html#/rules`, { waitUntil: "domcontentloaded" });
     await appPage.waitForFunction(() => !!document?.documentElement?.getAttribute("rq-ext-version"));
     await appPage.waitForTimeout(3000); //Important to wait otherwise some tests fail in production
     await use(appPage);
