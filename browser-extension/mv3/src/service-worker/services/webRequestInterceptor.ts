@@ -1,4 +1,5 @@
 import { RuleType } from "common/types";
+import { ChangeType } from "common/storage";
 import { matchRuleWithRequest } from "../../common/ruleMatcher";
 import ruleExecutionHandler from "./ruleExecutionHandler";
 import rulesStorageService from "../../rulesStorageService";
@@ -159,11 +160,15 @@ export const initWebRequestInterceptor = () => {
     }
   });
 
-  onVariableChange<boolean>(Variable.IS_EXTENSION_ENABLED, (extensionStatus) => {
-    if (extensionStatus) {
-      addListeners();
-    } else {
-      removeListeners();
-    }
-  });
+  onVariableChange<boolean>(
+    Variable.IS_EXTENSION_ENABLED,
+    (extensionStatus) => {
+      if (extensionStatus) {
+        addListeners();
+      } else {
+        removeListeners();
+      }
+    },
+    [ChangeType.MODIFIED, ChangeType.CREATED]
+  );
 };

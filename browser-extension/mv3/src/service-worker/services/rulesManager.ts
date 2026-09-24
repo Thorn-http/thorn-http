@@ -1,6 +1,7 @@
 import config from "common/config";
 import { getEnabledRules, onRuleOrGroupChange } from "common/rulesStore";
 import { onVariableChange, Variable } from "../variable";
+import { ChangeType } from "common/storage";
 import { debounce, getBlockedDomains, isExtensionEnabled, onBlockListChange } from "../../utils";
 import { TAB_SERVICE_DATA, tabService } from "./tabService";
 import { SessionRuleType } from "./requestProcessor/types";
@@ -141,14 +142,19 @@ const applyExtensionRules = async (): Promise<void> => {
 
 export const initRulesManager = async (): Promise<void> => {
   onRuleOrGroupChange(debounce(applyExtensionRules, 500));
-  onVariableChange(Variable.IS_EXTENSION_ENABLED, (newValue, oldValue) => {
-    console.log(`[initRulesManager.onVariableChange] IS_EXTENSION_ENABLED changed`, {
-      newValue,
-      oldValue,
-    });
-    applyExtensionRules();
-    deleteAllSessionRules();
-  });
+  // CREATED too: on a fresh install the variable doesn't exist yet, so the first pause creates it.
+  onVariableChange(
+    Variable.IS_EXTENSION_ENABLED,
+    (newValue, oldValue) => {
+      console.log(`[initRulesManager.onVariableChange] IS_EXTENSION_ENABLED changed`, {
+        newValue,
+        oldValue,
+      });
+      applyExtensionRules();
+      deleteAllSessionRules();
+    },
+    [ChangeType.MODIFIED, ChangeType.CREATED]
+  );
   applyExtensionRules();
 
   onBlockListChange(() => {

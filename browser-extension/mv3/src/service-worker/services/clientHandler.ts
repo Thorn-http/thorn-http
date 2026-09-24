@@ -1,4 +1,5 @@
 import { generateUrlPattern, getBlockedDomains, isExtensionEnabled, onBlockListChange } from "../../utils";
+import { ChangeType } from "common/storage";
 import { WEB_URL, OTHER_WEB_URLS } from "../../../../config/dist/config.build.json";
 import { onVariableChange, Variable } from "../variable";
 import { RuleType } from "common/types";
@@ -81,10 +82,14 @@ export const initClientHandler = async () => {
   const isExtensionStatusEnabled = await isExtensionEnabled();
   setupClientScript(isExtensionStatusEnabled);
 
-  onVariableChange<boolean>(Variable.IS_EXTENSION_ENABLED, (extensionStatus) => {
-    console.log("[initClientHandler]", "onVariableChange", { extensionStatus });
-    setupClientScript(extensionStatus);
-  });
+  onVariableChange<boolean>(
+    Variable.IS_EXTENSION_ENABLED,
+    (extensionStatus) => {
+      console.log("[initClientHandler]", "onVariableChange", { extensionStatus });
+      setupClientScript(extensionStatus);
+    },
+    [ChangeType.MODIFIED, ChangeType.CREATED]
+  );
 
   onBlockListChange(() => {
     unregisterClientScripts().then(() => {
@@ -151,9 +156,13 @@ const updateTabRuleCache = async (tabId: number, frameId?: number) => {
 export const initClientSideCaching = async () => {
   // TODO: Do not inject in Requestly Pages and blocklisted domains. No harm in injecting though
   let isExtensionStatusEnabled = await isExtensionEnabled();
-  onVariableChange<boolean>(Variable.IS_EXTENSION_ENABLED, (extensionStatus) => {
-    isExtensionStatusEnabled = extensionStatus;
-  });
+  onVariableChange<boolean>(
+    Variable.IS_EXTENSION_ENABLED,
+    (extensionStatus) => {
+      isExtensionStatusEnabled = extensionStatus;
+    },
+    [ChangeType.MODIFIED, ChangeType.CREATED]
+  );
 
   chrome.webNavigation.onCommitted.addListener(async (navigatedTabData) => {
     // Skip non-http(s) commits (e.g. about:blank, chrome://). The extension has no host access to
