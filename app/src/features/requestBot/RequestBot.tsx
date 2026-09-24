@@ -7,6 +7,7 @@ import { RequestBotModel } from "./types";
 import { MODELS } from "./constants";
 import { AIConsentModal } from "features/ai";
 import { getIsOptedforAIFeatures } from "store/slices/global/user/selectors";
+import { isThornExtension } from "utils/EnvUtils";
 import "./requestBot.css";
 
 interface RequestBotProps {
@@ -15,7 +16,13 @@ interface RequestBotProps {
   modelType?: RequestBotModel;
 }
 
-export const RequestBot: React.FC<RequestBotProps> = ({ isOpen, onClose, modelType = "app" }) => {
+export const RequestBot: React.FC<RequestBotProps> = (props) => {
+  // The AI bot is a third-party hosted widget; not available in Thorn HTTP.
+  if (isThornExtension()) return null;
+  return <HostedRequestBot {...props} />;
+};
+
+const HostedRequestBot: React.FC<RequestBotProps> = ({ isOpen, onClose, modelType = "app" }) => {
   const isOptedforAIFeatures = useSelector(getIsOptedforAIFeatures);
   const [userHasConsented, setUserHasConsented] = useState(false);
 

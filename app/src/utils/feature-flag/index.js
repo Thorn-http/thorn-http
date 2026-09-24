@@ -1,43 +1,13 @@
-import Logger from "lib/logger";
-import posthog from "posthog-js";
-
+// Remote feature flags were served by PostHog. Thorn HTTP has no backend, so every flag
+// resolves to the caller's default value.
 class FeatureFlag {
-  constructor() {
-    this.isFeatureFlagLoaded = false;
-    this.isPosthogInit = false;
-  }
+  isFeatureFlagLoaded = true;
 
-  // This is initialized after posthog has been initialized
-  init = () => {
-    this.isPosthogInit = true;
-    this.isFeatureFlagLoaded = false;
-    posthog.reloadFeatureFlags();
-    posthog.onFeatureFlags(() => {
-      Logger.log("Feature Flags Loaded");
-      featureFlag.setIsFeatureFlagLoaded(true);
-    });
-  };
+  init = () => {};
 
-  setIsFeatureFlagLoaded = (value) => {
-    this.isFeatureFlagLoaded = true;
-  };
+  setIsFeatureFlagLoaded = () => {};
 
-  getValue = (flagName, defaultValue = null) => {
-    if (!flagName) {
-      Logger.log("Flag Name is must");
-    }
-
-    let flagValue = defaultValue;
-    Logger.log("isloaded", this.isFeatureFlagLoaded);
-    Logger.log("isInit", this.isPosthogInit);
-
-    if (this.isPosthogInit && posthog) {
-      Logger.log(posthog.feature_flags.getFlagVariants());
-      flagValue = posthog.getFeatureFlag(flagName);
-    }
-
-    return flagValue;
-  };
+  getValue = (_flagName, defaultValue = null) => defaultValue;
 }
 
 const featureFlag = new FeatureFlag();

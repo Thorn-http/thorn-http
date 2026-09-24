@@ -22,6 +22,11 @@ window.__rq_debug__.backendEnv = getBackendEnv();
 window.__rq_debug__.nodeEnv = getNodeEnv();
 window.__rq_debug__.mode = import.meta?.env?.MODE;
 
+/* When the app is bundled inside the Thorn HTTP extension (no backend, no third-party services) */
+export const isThornExtension = (): boolean => {
+  return process.env.VITE_THORN_EXTENSION === "true";
+};
+
 /* When running local emulator */
 export const isBackendEnvEmulator = (): boolean => {
   return getBackendEnv() === BACKEND_ENV.EMULATOR;

@@ -32,12 +32,13 @@ import { useAppLanguageObserver } from "hooks/useAppLanguageObserver";
 import useClientStorageService from "services/clientStorageService/hooks/useClientStorageService";
 import { BlockScreenHoc } from "componentsV2/BlockScreen/BlockScreenHoc";
 import { AppUpdateNotifier } from "componentsV2/AppUpdateNotifier/AppUpdateNotifier";
+import { isThornExtension } from "utils/EnvUtils";
 
 const { PATHS } = APP_CONSTANTS;
 const App: React.FC = () => {
   useEffect(() => {
     // Load features asynchronously when the app renders
-    growthbook.loadFeatures({ autoRefresh: true });
+    if (!isThornExtension()) growthbook.loadFeatures({ autoRefresh: true });
   }, []);
 
   usePreLoadRemover();
@@ -50,7 +51,8 @@ const App: React.FC = () => {
 
   submitAppDetailAttributes();
 
-  if (!isEmpty(window.location.hash)) {
+  // In the extension the hash holds the route itself, not a legacy URL
+  if (!isThornExtension() && !isEmpty(window.location.hash)) {
     //Support legacy URL formats
     const hashURL = window.location.hash.split("/");
     const hashType = hashURL[0];
@@ -72,10 +74,11 @@ const App: React.FC = () => {
   return (
     <>
       <ExtensionContextInvalidationNotice />
-      <AutomationNotAllowedNotice />
+      {!isThornExtension() && <AutomationNotAllowedNotice />}
       <AppModeInitializer />
       <AuthHandler />
-      <AppUpdateNotifier />
+      {/* Extension updates come from the web store, not a remote version check */}
+      {!isThornExtension() && <AppUpdateNotifier />}
 
       <GrowthBookProvider growthbook={growthbook}>
         <DBListeners />

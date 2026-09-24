@@ -19,6 +19,7 @@ import { Col } from "antd";
 import PremiumPlanBadge from "./PremiumPlanBadge/PremiumPlanBadge";
 import { getUserAuthDetails } from "store/slices/global/user/selectors";
 import GitHubButton from "react-github-btn";
+import { isThornExtension } from "utils/EnvUtils";
 import "./menuHeader.scss";
 
 export const MenuHeader = () => {
@@ -83,7 +84,7 @@ export const MenuHeader = () => {
           </RQButton> */}
         </div>
         <div className="app-primary-header__right-section">
-          <div>{gitHubStarButton}</div>
+          {!isThornExtension() && <div>{gitHubStarButton}</div>}
           <RQButton
             type="transparent"
             icon={<BotIcon />}

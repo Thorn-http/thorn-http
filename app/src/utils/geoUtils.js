@@ -16,6 +16,9 @@ export const filesByCountry = {
 };
 
 export const getUserGeoDetails = async () => {
+  // Thorn HTTP does not look up the user's location.
+  if (process.env.VITE_THORN_EXTENSION === "true") return undefined;
+
   const endpoints = [
     "https://www.cloudflare.com/cdn-cgi/trace",
     "https://cf-ns.com/cdn-cgi/trace", // Cloudflare China Network

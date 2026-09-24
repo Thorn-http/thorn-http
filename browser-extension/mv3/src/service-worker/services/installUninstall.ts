@@ -1,10 +1,13 @@
-import config from "common/config";
+import config, { isPackagedApp } from "common/config";
 import { initBlockedDomainsStorage } from "../../utils";
 
 const handleExtensionInstalledOrUpdated = (details: chrome.runtime.InstalledDetails) => {
   if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
     initBlockedDomainsStorage();
-    chrome.tabs.create({ url: config.LANDING_PAGE_BASE_URL + "/extension-installed-success" });
+    // Open the bundled app instead of a remote landing page.
+    chrome.tabs.create({
+      url: isPackagedApp ? config.WEB_URL : config.LANDING_PAGE_BASE_URL + "/extension-installed-success",
+    });
   }
 
   if (details.reason === chrome.runtime.OnInstalledReason.UPDATE) {
@@ -16,5 +19,8 @@ const handleExtensionInstalledOrUpdated = (details: chrome.runtime.InstalledDeta
 
 export const handleInstallUninstall = () => {
   chrome.runtime.onInstalled.addListener(handleExtensionInstalledOrUpdated);
-  chrome.runtime.setUninstallURL(config.WEB_URL + "/goodbye/");
+  if (!isPackagedApp) {
+    // Uninstall URLs must be http(s); the packaged app has no hosted goodbye page.
+    chrome.runtime.setUninstallURL(config.WEB_URL + "/goodbye/");
+  }
 };
