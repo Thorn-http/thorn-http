@@ -1,38 +1,23 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getAppMode, getCurrentlySelectedRuleData } from "store/selectors";
-import { getUserAuthDetails } from "store/slices/global/user/selectors";
 import { Col } from "antd";
 import { TestReportsTable } from "./components/TestReportsTable";
-import { getTabSession } from "actions/ExtensionActions";
 import { BottomSheetPlacement, useBottomSheetContext } from "componentsV2/BottomSheet";
 import PageScriptMessageHandler from "config/PageScriptMessageHandler";
 import { TestReport } from "./types";
-import { getTestReportById, getTestReportsByRuleId, saveTestReport, deleteTestReport } from "./utils/testReports";
-import { generateDraftSessionTitle } from "features/sessionBook/screens/DraftSessionScreen/utils";
-import { saveRecording } from "backend/sessionRecording/saveRecording";
-import {
-  compressEvents,
-  getRecordingOptionsToSave,
-  getSessionEventsToSave,
-} from "views/features/sessions/SessionViewer/sessionEventsUtils";
-import { DebugInfo, SessionSaveMode } from "views/features/sessions/SessionViewer/types";
-import { getSessionRecordingSharedLink } from "utils/PathUtils";
+import { getTestReportsByRuleId, deleteTestReport } from "./utils/testReports";
 import { EmptyTestResultScreen } from "./components/EmptyTestResultScreen";
 import { toast } from "utils/Toast";
 import Logger from "lib/logger";
 //@ts-ignore
 import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
-import { SOURCE } from "modules/analytics/events/common/constants";
-import { trackTestRuleReportDeleted, trackTestRuleReportGenerated, trackTestRuleSessionDraftSaved } from "./analytics";
+import { trackTestRuleReportDeleted, trackTestRuleReportGenerated } from "./analytics";
 import { TestRuleHeader } from "./components/TestRuleHeader";
 import "./TestThisRule.scss";
-import { getActiveWorkspaceId } from "store/slices/workspaces/selectors";
 
 export const TestThisRule = () => {
   const appMode = useSelector(getAppMode);
-  const user = useSelector(getUserAuthDetails);
-  const activeWorkspaceId = useSelector(getActiveWorkspaceId);
   const [testReports, setTestReports] = useState<TestReport[] | null>(null);
   const currentlySelectedRuleData = useSelector(getCurrentlySelectedRuleData);
 
@@ -56,62 +41,6 @@ export const TestThisRule = () => {
         });
     },
     [appMode, currentlySelectedRuleData?.id]
-  );
-
-  const handleSaveTestSession = useCallback(
-    (tabId: number, reportId: string, ruleAppliedStatus: boolean) => {
-      getTabSession(tabId)
-        .then((tabSession) => {
-          if (!tabSession) return;
-          const sessionMetadata = {
-            sessionAttributes: tabSession.attributes,
-            name: generateDraftSessionTitle(tabSession.attributes?.url),
-            recordingMode: tabSession.recordingMode || null,
-          };
-          const sessionEvents = tabSession.events;
-
-          const recordingOptionsToSave = getRecordingOptionsToSave([
-            DebugInfo.INCLUDE_CONSOLE_LOGS,
-            DebugInfo.INCLUDE_NETWORK_LOGS,
-          ]);
-
-          saveRecording(
-            user.details?.profile?.uid ?? null,
-            activeWorkspaceId,
-            sessionMetadata,
-            compressEvents(getSessionEventsToSave(sessionEvents, recordingOptionsToSave)),
-            recordingOptionsToSave,
-            SOURCE.TEST_THIS_RULE,
-            {
-              appliedStatus: ruleAppliedStatus,
-              ruleType: currentlySelectedRuleData?.ruleType,
-            }
-          ).then((response) => {
-            if (response.success) {
-              trackTestRuleSessionDraftSaved(SessionSaveMode.ONLINE);
-              getTestReportById(appMode, reportId).then((testReport) => {
-                if (testReport) {
-                  testReport.sessionLink = getSessionRecordingSharedLink(response?.firestoreId);
-                  saveTestReport(appMode, reportId, testReport).then(() => {
-                    fetchAndUpdateTestReports();
-                  });
-                }
-              });
-            }
-          });
-        })
-        .catch((error) => {
-          Logger.log(error);
-          toast.error("Error saving test session");
-        });
-    },
-    [
-      appMode,
-      user.details?.profile?.uid,
-      activeWorkspaceId,
-      fetchAndUpdateTestReports,
-      currentlySelectedRuleData?.ruleType,
-    ]
   );
 
   const handleTestReportDelete = useCallback(
@@ -138,15 +67,10 @@ export const TestThisRule = () => {
         if (sheetPlacement === BottomSheetPlacement.BOTTOM) {
           toggleBottomSheet({ isOpen: true, action: "test_rule_bottom_sheet" });
         }
-        if (message.record && user.loggedIn) {
-          handleSaveTestSession(parseInt(message.testPageTabId), message.testReportId, message.appliedStatus);
-        }
       }
     );
   }, [
-    user.loggedIn,
     currentlySelectedRuleData.ruleType,
-    handleSaveTestSession,
     fetchAndUpdateTestReports,
     isBottomSheetOpen,
     toggleBottomSheet,

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Row, Col, Input, Tooltip, Typography, Menu, Dropdown, Popconfirm } from "antd";
 import { globalActions } from "store/slices/global/slice";
 //Icons
-import { DeleteOutlined, DownOutlined, FolderOpenOutlined } from "@ant-design/icons";
+import { DeleteOutlined, DownOutlined } from "@ant-design/icons";
 import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
 //Constants
 import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
@@ -13,7 +13,6 @@ import { isFeatureCompatible } from "utils/CompatibilityUtils";
 import FEATURES from "config/constants/sub/features";
 import { getDefaultScriptRender, createRenderedScript } from "./utils";
 import { isExtensionManifestVersion3 } from "actions/ExtensionActions";
-import { MockPickerModal } from "features/mocks/modals";
 import { EditorLanguage } from "componentsV2/CodeEditor";
 import { RuleType } from "@requestly/shared/types/entities/rules";
 import Editor from "componentsV2/CodeEditor";
@@ -53,8 +52,6 @@ const CustomScriptRow = ({
       : EditorLanguage.CSS;
   }, [script.codeType, isCompatibleWithAttributes]);
 
-  const [isMockPickerVisible, setIsMockPickerVisible] = useState(false);
-
   useEffect(() => {
     /* USED TO SET THE CORRECT RENDERED VALUE OF THE RULE, ON EVERY UPDATE */
     if (initialCodeEditorValue !== null) return;
@@ -78,22 +75,6 @@ const CustomScriptRow = ({
     isCompatibleWithAttributes,
   ]);
 
-  const handleMockPickerVisibilityChange = (visible) => {
-    setIsMockPickerVisible(visible);
-  };
-
-  const handleMockPickerSelectionCallback = (url) => {
-    setIsMockPickerVisible(false);
-    dispatch(
-      globalActions.updateRulePairAtGivenPath({
-        pairIndex,
-        updates: {
-          [`scripts[${scriptIndex}].value`]: url,
-        },
-      })
-    );
-  };
-
   const renderURLInput = () => {
     return (
       <Col span={24}>
@@ -103,15 +84,6 @@ const CustomScriptRow = ({
           </Col>
           <Col span={22}>
             <Input
-              style={{ cursor: "pointer" }}
-              addonAfter={
-                isInputDisabled ? null : (
-                  <Tooltip title="Import a existing Mock API" onClick={() => setIsMockPickerVisible(true)}>
-                    <FolderOpenOutlined />
-                    &nbsp; Pick from File Server
-                  </Tooltip>
-                )
-              }
               className="display-inline-block has-dark-text"
               placeholder="Enter Source URL (relative or absolute)"
               type="text"
@@ -129,17 +101,6 @@ const CustomScriptRow = ({
               value={script.value}
             />
           </Col>
-          {/* MODALS */}
-          {/* TODO: Remove this once MockV2 Released */}
-          {isMockPickerVisible ? (
-            <Col span={2}>
-              <MockPickerModal
-                isVisible={isMockPickerVisible}
-                onVisibilityChange={handleMockPickerVisibilityChange}
-                mockSelectionCallback={handleMockPickerSelectionCallback}
-              />
-            </Col>
-          ) : null}
         </Row>
         {isCompatibleWithAttributes ? (
           <Row className="margin-top-one" span={24} gutter={16} align="middle">

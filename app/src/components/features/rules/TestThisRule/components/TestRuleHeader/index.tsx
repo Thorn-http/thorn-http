@@ -115,22 +115,6 @@ export const TestRuleHeader = () => {
           </RQButton>
         </Col>
       </Row>
-      <AuthConfirmationPopover
-        placement="topRight"
-        title="You need to signup to capture your test session"
-        source={SOURCE.TEST_THIS_RULE}
-      >
-        <Checkbox
-          disabled={!isValidPermission}
-          checked={doCaptureSession}
-          onClick={() => {
-            if (user.loggedIn) setDoCaptureSession(!doCaptureSession);
-          }}
-          className="test-rule-checkbox"
-        >
-          Save the test session with video, console & network logs
-        </Checkbox>
-      </AuthConfirmationPopover>
     </>
   );
 };

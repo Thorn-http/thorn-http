@@ -1,5 +1,4 @@
 import { RuleType } from "@requestly/shared/types/entities/rules";
-import { MockType } from "components/features/mocksV2/types";
 import { ReactNode } from "react";
 
 export enum EditorLanguage {
@@ -58,10 +57,6 @@ export type AnalyticEventProperties =
   | {
       source: "rule_editor";
       rule_type: RuleType;
-    }
-  | {
-      source: "mocks";
-      mock_type: MockType;
     }
   | {
       source: "api_client";
