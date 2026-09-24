@@ -7,6 +7,7 @@ import { globalActions } from "store/slices/global/slice";
 import { FeatureLimitType } from "./types";
 import { getPlanNameFromId } from "utils/PremiumUtils";
 import { PRICING } from "features/pricing";
+import { isThornExtension } from "utils/EnvUtils";
 
 const premiumPlansToCheckLimit = [PRICING.PLAN_NAMES.LITE, PRICING.PLAN_NAMES.BASIC, PRICING.PLAN_NAMES.BASIC_V2];
 
@@ -67,6 +68,16 @@ export const useFeatureLimiter = () => {
       featureLimits[userPlan]?.[featureLimitType] ?? featureLimits[PRICING.PLAN_NAMES.BASIC_V2]?.[featureLimitType]
     );
   };
+
+  if (isThornExtension()) {
+    // Thorn HTTP is free: no plans, no limits.
+    return {
+      checkFeatureLimits: () => {},
+      getFeatureLimitValue: (_featureLimitType: FeatureLimitType) => Infinity,
+      getIsFeatureEnabled: (_featureLimitType: FeatureLimitType) => true,
+      checkIfFeatureLimitReached: (_featureLimitType: FeatureLimitType, _checkType: "breached" | "reached") => false,
+    };
+  }
 
   return {
     checkFeatureLimits,

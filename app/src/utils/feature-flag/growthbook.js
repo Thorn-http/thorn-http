@@ -2,10 +2,18 @@ import { GrowthBook } from "@growthbook/growthbook";
 import { trackAttr, trackEvent } from "modules/analytics";
 import { buildBasicUserProperties } from "modules/analytics/utils";
 
+// Thorn HTTP has no remote flag service: these local defaults decide which gated features are on.
+// Any flag not listed here resolves to the default passed at the call site.
+const THORN_FEATURE_DEFAULTS = {
+  import_rules_from_charles: { defaultValue: true },
+  content_table_drag_and_drop_support: { defaultValue: true },
+};
+
 export const growthbook = new GrowthBook({
   apiHost: "https://cdn.growthbook.io",
   clientKey: process.env.VITE_GROWTHBOOK_CLIENT_KEY,
   enableDevMode: true,
+  ...(process.env.VITE_THORN_EXTENSION === "true" && { features: THORN_FEATURE_DEFAULTS }),
   trackingCallback: (experiment, result) => {
     trackEvent("experiment_assigned", { id: experiment.key, value: result.value });
   },

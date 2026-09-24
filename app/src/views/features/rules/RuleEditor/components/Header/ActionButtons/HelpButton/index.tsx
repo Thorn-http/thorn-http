@@ -6,9 +6,16 @@ import { useSelector } from "react-redux";
 import { getCurrentlySelectedRuleData } from "store/selectors";
 import { AiOutlineQuestionCircle } from "@react-icons/all-files/ai/AiOutlineQuestionCircle";
 import { trackDocsSidebarClosed } from "modules/analytics/events/common/rules";
+import { isThornExtension } from "utils/EnvUtils";
 import "./index.scss";
 
 export const HelpButton = () => {
+  // The help drawer loads docs from Requestly's servers; not available in Thorn HTTP.
+  if (isThornExtension()) return null;
+  return <RemoteDocsHelpButton />;
+};
+
+const RemoteDocsHelpButton = () => {
   const [isHelpDrawerOpen, setIsHelpDrawerOpen] = useState(false);
   const currentlySelectedRuleData = useSelector(getCurrentlySelectedRuleData);
 

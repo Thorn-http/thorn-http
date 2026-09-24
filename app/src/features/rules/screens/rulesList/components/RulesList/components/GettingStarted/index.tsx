@@ -32,10 +32,6 @@ import { HiOutlineTemplate } from "@react-icons/all-files/hi/HiOutlineTemplate";
 import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
 import RULE_TYPES_CONFIG from "config/constants/sub/rule-types";
 import { RuleSelectionListDrawer } from "../RuleSelectionListDrawer/RuleSelectionListDrawer";
-import { trackAskAIClicked } from "features/requestBot";
-import { RQButton } from "lib/design-system/components";
-import BotIcon from "assets/icons/bot.svg?react";
-import { globalActions } from "store/slices/global/slice";
 import { redirectToTeam } from "utils/RedirectionUtils";
 import { useIsRedirectFromCreateRulesRoute } from "../../hooks/useIsRedirectFromCreateRulesRoute";
 import "./gettingStarted.scss";
@@ -360,26 +356,6 @@ export const GettingStarted: React.FC = () => {
                 </Button>
               </div>
             ) : null}
-          </div>
-
-          <div className="ask-ai-container">
-            <div className="title">Ask AI for any help with using Requestly</div>
-            <div>
-              <RQButton
-                block
-                className="ask-ai-btn"
-                onClick={() => {
-                  trackAskAIClicked("rules_empty_state");
-                  trackRulesEmptyStateClicked("ai_bot");
-                  dispatch(globalActions.updateRequestBot({ isActive: true, modelType: "app" }));
-                }}
-              >
-                <div className="ask-ai-btn-content">
-                  <BotIcon />
-                  e.g. How can I insert custom CSS code on a web page?
-                </div>
-              </RQButton>
-            </div>
           </div>
         </div>
       </div>

@@ -4,23 +4,16 @@ import { EXTENSION_MESSAGES } from "../../../constants";
 import PopupHeader from "./PopupHeader";
 import { HttpsRuleOptions } from "../HttpsRuleOptions";
 import { EVENT, sendEvent } from "../../events";
-import SessionRecordingView from "../SessionRecording/SessionRecordingView";
 import { getExtensionVersion } from "../../utils";
 import { BlockedExtensionView } from "../BlockedExtensionView/BlockedExtensionView";
-import DesktopAppProxy from "../DesktopAppProxy/DesktopAppProxy";
-import { ConnectedToDesktopView } from "../DesktopAppProxy/components/ConnectedToDesktopView/ConnectedToDesktopView";
 import "./popup.css";
 import { message } from "antd";
-import { ApiClientContainer } from "../ApiClientContainer/ApiClientContainer";
 
 const Popup: React.FC = () => {
   const [ifNoRulesPresent, setIfNoRulesPresent] = useState<boolean>(true);
   const [isExtensionEnabled, setIsExtensionEnabled] = useState<boolean>(true);
   const [isBlockedOnTab, setIsBlockedOnTab] = useState<boolean>(false);
   const [currentTab, setCurrentTab] = useState<chrome.tabs.Tab>(null);
-  const [isProxyApplied, setIsProxyApplied] = useState<boolean>(false);
-  const [isDesktopAppOpen, setIsDesktopAppOpen] = useState(false);
-  const [isSessionReplayEnabled, setIsSessionReplayEnabled] = useState<boolean>(false);
 
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, ([activeTab]) => {
@@ -48,22 +41,6 @@ const Popup: React.FC = () => {
       ?.then(setIsBlockedOnTab);
   }, [currentTab]);
 
-  useEffect(() => {
-    chrome.runtime
-      .sendMessage({
-        action: EXTENSION_MESSAGES.IS_SESSION_REPLAY_ENABLED,
-      })
-      ?.then(setIsSessionReplayEnabled);
-  }, []);
-
-  const checkIfDesktopAppOpen = useCallback(() => {
-    chrome.runtime.sendMessage({ action: EXTENSION_MESSAGES.CHECK_IF_DESKTOP_APP_OPEN }).then(setIsDesktopAppOpen);
-  }, []);
-
-  useEffect(() => {
-    checkIfDesktopAppOpen();
-  }, [checkIfDesktopAppOpen]);
-
   const handleToggleExtensionStatus = useCallback((newStatus: boolean) => {
     console.log("[Popup] handleToggleExtensionStatus", {
       newStatus,
@@ -88,47 +65,25 @@ const Popup: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <div className="popup">
-        {isProxyApplied ? (
-          <ConnectedToDesktopView onDisconnectClick={() => setIsProxyApplied(false)} />
+    <div className="popup">
+      <PopupHeader isExtensionEnabled={isExtensionEnabled} handleToggleExtensionStatus={handleToggleExtensionStatus} />
+      <div className="popup-body">
+        {isBlockedOnTab ? (
+          <BlockedExtensionView />
         ) : (
           <>
-            <PopupHeader
-              isExtensionEnabled={isExtensionEnabled}
-              handleToggleExtensionStatus={handleToggleExtensionStatus}
-            />
-            <div className="popup-body">
-              {isBlockedOnTab ? (
-                <BlockedExtensionView />
-              ) : (
-                <>
-                  {!isExtensionEnabled && <div className="extension-paused-overlay"></div>}
-                  <div className="popup-content">
-                    {ifNoRulesPresent || isProxyApplied || isDesktopAppOpen ? (
-                      <HttpsRuleOptions />
-                    ) : (
-                      <PopupTabs isSessionReplayEnabled={isSessionReplayEnabled} />
-                    )}
-                    {isSessionReplayEnabled && <SessionRecordingView />}
-                    <DesktopAppProxy
-                      isProxyApplied={isProxyApplied}
-                      onProxyStatusChange={setIsProxyApplied}
-                      isDesktopAppOpen={isDesktopAppOpen}
-                    />
-                    <ApiClientContainer />
-                  </div>
-                </>
-              )}
+            {!isExtensionEnabled && <div className="extension-paused-overlay"></div>}
+            <div className="popup-content">
+              {ifNoRulesPresent ? <HttpsRuleOptions /> : <PopupTabs isSessionReplayEnabled={false} />}
             </div>
           </>
         )}
-
-        <div className="popup-footer">
-          <div className="extension-version">v{getExtensionVersion()}</div>
-        </div>
       </div>
-    </>
+
+      <div className="popup-footer">
+        <div className="extension-version">v{getExtensionVersion()}</div>
+      </div>
+    </div>
   );
 };
 

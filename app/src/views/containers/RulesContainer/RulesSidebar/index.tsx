@@ -4,7 +4,6 @@ import PATHS from "config/constants/sub/paths";
 import { SecondarySidebarLink } from "../../common/SecondarySidebarLink";
 import MyRulesIcon from "assets/icons/http-rules/my-rules.svg?react";
 import TemplatesIcon from "assets/icons/http-rules/templates.svg?react";
-import SharedListIcon from "assets/icons/http-rules/shared-list.svg?react";
 import TrashIcon from "assets/icons/http-rules/trash.svg?react";
 import "./RulesSidebar.css";
 import { useFeatureIsOn } from "@growthbook/growthbook-react";
@@ -14,11 +13,6 @@ const ruleRoutes = [
     title: "My Rules",
     path: PATHS.RULES.MY_RULES.ABSOLUTE,
     icon: <MyRulesIcon />,
-  },
-  {
-    title: "Shared lists",
-    path: PATHS.SHARED_LISTS.RELATIVE,
-    icon: <SharedListIcon />,
   },
   {
     title: "Templates",

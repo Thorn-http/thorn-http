@@ -20,6 +20,7 @@ import PATHS from "config/constants/sub/paths";
 import { ExampleType, UseCaseExample } from "./types";
 import "./RuleDetailsPanel.scss";
 import { RuleType } from "@requestly/shared/types/entities/rules";
+import { isThornExtension } from "utils/EnvUtils";
 
 export type RuleDetails = {
   type: RuleType | string;
@@ -83,6 +84,7 @@ export const RuleDetailsPanel: React.FC<RuleDetailsPanelProps> = ({
       }
 
       case ExampleType.DOWNLOAD_DESKTOP_APP: {
+        if (isThornExtension()) return null;
         return (
           <>
             <Button
@@ -102,6 +104,7 @@ export const RuleDetailsPanel: React.FC<RuleDetailsPanelProps> = ({
       }
 
       case ExampleType.PLAYGROUND_LINK: {
+        if (isThornExtension()) return null;
         return (
           <>
             <Button
@@ -161,19 +164,21 @@ export const RuleDetailsPanel: React.FC<RuleDetailsPanelProps> = ({
           <div className="title">{name}</div>
           <div className="description">{description}</div>
           <div className="links">
-            <Button
-              type="link"
-              target="_blank"
-              rel="noreferrer"
-              className="link documentation-link"
-              href={documentationLink}
-              onClick={() => trackRuleDetailsPanelDocsClicked(ruleType, source)}
-            >
-              <MdMenuBook /> Read complete documentation <MdOutlineOpenInNew />
-            </Button>
+            {!isThornExtension() && (
+              <Button
+                type="link"
+                target="_blank"
+                rel="noreferrer"
+                className="link documentation-link"
+                href={documentationLink}
+                onClick={() => trackRuleDetailsPanelDocsClicked(ruleType, source)}
+              >
+                <MdMenuBook /> Read complete documentation <MdOutlineOpenInNew />
+              </Button>
+            )}
 
             <Button type="link" className="templates-btn link" onClick={handleAllTemplatesClick}>
-              <MdOutlineDashboard /> Explore all templates <MdOutlineOpenInNew />
+              <MdOutlineDashboard /> Explore all templates
             </Button>
           </div>
         </div>

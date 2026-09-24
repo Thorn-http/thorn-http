@@ -7,20 +7,12 @@ import { joinPaths } from "utils/PathUtils";
 // V2 Imports
 import RulesContainerV2 from "./container";
 import { RulesListScreen } from "./screens/rulesList";
-import { SharedListsScreen } from "./screens/sharedLists";
 import { TemplatesList } from "./screens/templatesList";
-import { SharedListViewerScreen } from "./screens/sharedListViewer";
 
 export const ruleRoutes: RouteObject[] = [
   {
     path: PATHS.RULES.INDEX,
     element: <RulesContainer />,
-    children: [
-      {
-        path: PATHS.SHARED_LISTS.VIEWER.RELATIVE, // currently broken in prod
-        element: <Navigate to={PATHS.SHARED_LISTS.ABSOLUTE} />,
-      },
-    ],
   },
   {
     path: PATHS.MARKETPLACE.RELATIVE,
@@ -75,25 +67,6 @@ export const ruleRoutes: RouteObject[] = [
         handle: {
           breadcrumb: {
             label: "Create rule",
-            disabled: true,
-          },
-        },
-      },
-      {
-        path: PATHS.SHARED_LISTS.RELATIVE,
-        element: <SharedListsScreen />,
-        handle: {
-          breadcrumb: {
-            label: "Shared lists",
-          },
-        },
-      },
-      {
-        path: joinPaths(PATHS.SHARED_LISTS.VIEWER.RELATIVE, PATHS.ANY),
-        element: <SharedListViewerScreen />,
-        handle: {
-          breadcrumb: {
-            label: "Shared list viewer",
             disabled: true,
           },
         },
