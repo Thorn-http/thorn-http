@@ -147,6 +147,26 @@ const NetworkRecordingPanel: React.FC = () => {
     setStopReason("user");
   }, []);
 
+  // Download everything captured so far as a HAR 1.2 file (works while recording and after stop).
+  const handleExportHar = useCallback(() => {
+    const har = {
+      log: {
+        version: "1.2",
+        creator: { name: "Thorn HTTP", version: chrome.runtime.getManifest().version },
+        pages: [] as unknown[],
+        entries,
+      },
+    };
+    const blob = new Blob([JSON.stringify(har, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const host = targetUrl || "recording";
+    link.href = url;
+    link.download = `${host}-${new Date().toISOString().replace(/[:.]/g, "-")}.har`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [entries, targetUrl]);
+
   const filteredEntries = useMemo(() => {
     return entries.filter((entry) => {
       if (filter.method !== "ALL" && entry.request.method !== filter.method) return false;
@@ -174,12 +194,17 @@ const NetworkRecordingPanel: React.FC = () => {
             <span className="recording-label">{isRecording ? "Recording" : "Stopped"}</span>
             <span className="recording-time">{formatTime(elapsedTime)}</span>
           </div>
-          {isRecording && (
-            <button className="stop-btn" onClick={handleStop}>
-              <span className="stop-icon" />
-              Stop
+          <div className="header-actions">
+            <button className="export-btn" onClick={handleExportHar} disabled={entries.length === 0}>
+              Export HAR
             </button>
-          )}
+            {isRecording && (
+              <button className="stop-btn" onClick={handleStop}>
+                <span className="stop-icon" />
+                Stop
+              </button>
+            )}
+          </div>
         </div>
         {targetUrl && <div className="target-url">{targetUrl}</div>}
       </div>

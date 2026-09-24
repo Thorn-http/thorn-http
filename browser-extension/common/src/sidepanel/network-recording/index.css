@@ -364,3 +364,30 @@ body {
 .version {
   color: #666;
 }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.export-btn {
+  background: transparent;
+  color: inherit;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.export-btn:hover:not(:disabled) {
+  border-color: #228b54;
+  color: #3ec07a;
+}
+
+.export-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
