@@ -74,13 +74,17 @@ Legenda: `[x]` feito · `[ ]` pendente · 👤 depende de você (contas, jurídi
 
 ## Fase 5 — Qualidade ✅
 
-- [x] Suíte e2e local (`cd browser-extension/mv3 && npm run test:e2e`, Playwright + servidor local, sem internet): regra Redirect pelo editor, pausa, export/apagar/import, gravação de rede + HAR, todos os editores renderizam, zero requisições a terceiros, settings visíveis
+- [x] Suíte e2e local com 25 testes (`cd browser-extension/mv3 && npm run test:e2e`, Playwright + servidor local, sem internet). Todas as regras são criadas pela UI e verificadas numa página real: Redirect, Replace, Query Param, headers de request/response, Request Body, Response (fetch + XHR, status code, JS dinâmico, operação GraphQL), Insert Script JS e CSS, Cancel, Delay, User-Agent. Mais: editar regra salva, grupos, lista de bloqueio, templates, export/import, pausa, gravação de rede + HAR, registro de regras executadas, zero requisições a terceiros, settings visíveis
 - [x] Testes originais de regras (`tests/`) adaptados ao editor empacotado (ainda precisam de internet: usam `requestly.tech`/`example.com`)
 - [x] CI (GitHub Actions): install, build, e2e, zips das lojas, lint do Firefox
 - [x] Bugs encontrados e corrigidos no caminho:
   - abas do app ficavam repassando `CLIENT_PAGE_LOADED` sem parar → service worker inundado e todas as abas travadas (introduzido ao empacotar o editor)
   - a primeira pausa após instalar não desligava as regras (bug do upstream: mudança `CREATED` do storage ignorada)
   - checagens de recurso comparavam com versões do upstream e escondiam recursos na versão 1.x
+  - o page script de fetch/XHR quebrava ao carregar (`chrome.runtime.getURL` no mundo MAIN): Modify API Response, Modify Request Body e Delay de XHR/fetch não faziam nada (introduzido ao empacotar o editor)
+  - `fetch` disparado durante o parse da página escapava da regra de Response (regras ainda não estavam no cache da página)
+  - o editor de código perdia o texto digitado logo depois de abrir (formatação assíncrona sobrescrevia) ou logo antes de salvar (debounce)
+  - GraphQL não podia ser selecionado ao abrir o editor direto (ex.: pelo popup)
 - [x] Pacotes das lojas gerados e verificados: zip do Chrome passa na suíte e2e; zip do Firefox passa no `web-ext lint` (0 erros)
 - [ ] Teste manual no Firefox (`about:debugging` → carregar o zip) — o Playwright não carrega extensões no Firefox
 - [ ] Validação de HTML do Insert Script é pulada na extensão (`html-validate` precisa de `new Function`); trocar por uma checagem compatível com a CSP
