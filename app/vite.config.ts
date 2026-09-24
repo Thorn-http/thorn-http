@@ -8,14 +8,9 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 import { getThemeVariables } from "antd/dist/theme";
 import { theme } from "./src/lib/design-system/theme";
 
-// Either this with vite.config.mjs file or non top-level-import like below
-// import { viteStaticCopy } from "vite-plugin-static-copy";
-
 const config = async ({ mode }) => {
   // To Be used withing the vite.config.ts file
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), "") };
-
-  const { viteStaticCopy } = await import("vite-plugin-static-copy");
 
   const generateSourcemap = process.env.VITE_GENERATE_SOURCEMAP === "true";
 
@@ -49,13 +44,6 @@ const config = async ({ mode }) => {
       viteTsconfigPaths(),
       commonjs(),
       svgr(),
-      // To support curlconverter
-      viteStaticCopy({
-        targets: [
-          { src: "node_modules/web-tree-sitter/tree-sitter.wasm", dest: "." },
-          { src: "node_modules/curlconverter/dist/tree-sitter-bash.wasm", dest: "." },
-        ],
-      }),
       generateSourcemap &&
         sentryVitePlugin({
           authToken: process.env.VITE_SENTRY_AUTH_TOKEN,

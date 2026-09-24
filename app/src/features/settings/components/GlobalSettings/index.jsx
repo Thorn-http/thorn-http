@@ -7,7 +7,6 @@ import { isFeatureCompatible } from "../../../../utils/CompatibilityUtils";
 import { ImplicitRuleTesting } from "./components/ImplicitRuleTesting";
 import "./index.scss";
 import { BlockList } from "./components/BlockListSettings/BlockListSettings";
-import { PopupConfig } from "./components/PopupConfig/PopupConfig";
 
 export const GlobalSettings = () => {
   const appMode = useSelector(getAppMode);
@@ -28,7 +27,6 @@ export const GlobalSettings = () => {
           <ImplicitRuleTesting />
         ) : null}
         {isFeatureCompatible(APP_CONSTANTS.FEATURES.BLOCK_LIST) && <BlockList />}
-        {isFeatureCompatible(APP_CONSTANTS.FEATURES.POPUP_CONFIG) && <PopupConfig />}
       </div>
     </div>
   );
