@@ -6,10 +6,16 @@ import { sendExtensionMessage } from "../app/messageHandler";
  * Listens for specific messages from the extension and forwards them to the client page using sendExtensionMessage.
  */
 
+const IS_EXTENSION_PAGE = location.protocol === "chrome-extension:" || location.protocol === "moz-extension:";
+
 export const initExtensionMessageListener = () => {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     switch (message.action) {
       case EXTENSION_MESSAGES.CLIENT_PAGE_LOADED:
+        // Only content scripts forward this to the service worker. In the bundled app page
+        // (app.html) this listener also receives every runtime broadcast, so re-sending would
+        // bounce the message between open app tabs forever and flood the service worker.
+        if (IS_EXTENSION_PAGE) break;
         chrome.runtime.sendMessage({ action: EXTENSION_MESSAGES.CLIENT_PAGE_LOADED });
         break;
 
