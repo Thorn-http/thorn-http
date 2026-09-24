@@ -23,7 +23,8 @@ Legenda: `[x]` feito · `[ ]` pendente
 - [x] `LICENSE`: copyright Thorn HTTP + aviso de modificação e de não-afiliação
 - [x] `package.json` raiz: nome, descrição, autor, homepage
 - [x] `README.md` novo com atribuição ao Requestly
-- [ ] Logo e ícones novos (16/48/128px da extensão, favicon, `app/src/assets/img/brand/`)
+- [x] Ícones placeholder (extensão em todos os estados, favicon, logos da app)
+- [ ] Logo e ícones definitivos
 - [ ] Trocar strings "Requestly" restantes na UI da app (~200 ocorrências em `app/src`). Fazer **depois** da Fase 1, para não renomear código que será apagado
 - [ ] Cor/tema da marca (opcional)
 
@@ -38,7 +39,8 @@ Legenda: `[x]` feito · `[ ]` pendente
 - [ ] **Onboarding** atrelado a login (`features/onboarding`, `backend/onboarding`)
 - [ ] **Integração com desktop app do Requestly:** popup `DesktopAppProxy/`, telas de desktop na app
 - [ ] **Integração BrowserStack:** `externally_connectable` nos manifests e mensagens externas em `messageHandler/listener.ts` (`onMessageExternal`)
-- [ ] **Analytics/tracking:** `common/analytics-vendors/`, eventos de analytics na app e extensão
+- [x] **Analytics/tracking na app:** PostHog, feature flags, GrowthBook, geo lookup, Stripe auto-load, bot Writesonic, checagem de versão remota, botão GitHub — zero requisições externas no load
+- [ ] **Analytics/tracking restante:** `common/analytics-vendors/`, remover código morto (hoje são no-ops)
 - [ ] **Firebase:** `app/src/firebase.js`, SDK `firebase` nas dependências, `emulator.dockerfile`, script `deploy-beta`
 - [ ] **Docs do Requestly:** `documentation/` (254 MB, Mintlify). Apagar e escrever docs próprias enxutas
 - [ ] **Diversos:** `eligible-student-domains.md`, `.all-contributorsrc`, `.whitesource`, `.deepsource.toml`, `.hive/`, `docs/superpowers/`, workflows em `.github/` que apontam para infra da Requestly
@@ -56,12 +58,14 @@ Legenda: `[x]` feito · `[ ]` pendente
 Hoje o editor de regras é a web app hospedada em `app.requestly.io` (`WEB_URL` em `browser-extension/config/configs/env/*.json`); o popup só abre essa página.
 
 - [x] Decisão: empacotar a UI dentro da extensão (página da extensão, zero hospedagem). Hospedar em `app.thorn-http.dev` fica para reavaliar depois
-- [ ] Build da `app/` gerando bundle para dentro da extensão (página `app.html` ou options page) com roteamento por hash
-- [ ] Popup/devtools abrindo a página interna (`chrome.runtime.getURL`) no lugar de `WEB_URL`
-- [ ] Trocar a ponte app ↔ extensão (content script `app.cs.js` + `postMessage`) por chamadas diretas `chrome.runtime`/`chrome.storage`
-- [ ] Ajustar CSP da extensão para o bundle da app (sem scripts remotos, sem `eval`)
-- [ ] Atualizar `WEB_URL`, `OTHER_WEB_URLS`, `LANDING_PAGE_BASE_URL`, `SESSIONS_URL`
-- [ ] Atualizar `content_scripts.matches` (`*.requestly.io`, `requestly.com`) nos 4 manifests
+- [x] Build da `app/` no modo `extension` (`app/app.html`, `.env.extension`) copiado para dentro da extensão, com hash router
+- [x] Popup/devtools abrindo a página interna (`chrome.runtime.getURL`) no lugar de `WEB_URL`
+- [x] Ponte app ↔ extensão: `app.html` carrega `app.cs.js` direto (mesmo protocolo `postMessage`)
+- [ ] (opcional) Trocar a ponte por chamadas diretas `chrome.runtime`/`chrome.storage`
+- [x] Ajustar CSP da extensão para o bundle da app (sem scripts remotos, sem `eval`)
+- [x] `WEB_URL="extension"` (resolve para `chrome-extension://<id>/app.html#`), `OTHER_WEB_URLS`, `LANDING_PAGE_BASE_URL`, `SESSIONS_URL`
+- [x] Content script da app removido do manifest no build empacotado
+- [ ] Limpar `content_scripts.matches` (`*.requestly.io`) dos manifests-fonte
 - [ ] Firefox: novo `browser_specific_settings.gecko.id` (hoje `extension@requestly.in`) e remover `update_url`
 - [ ] Trocar links para `requestly.com`, `docs.requestly.com`, `get.requestly.com` por `thorn-http.dev`
 
@@ -86,6 +90,13 @@ Não quebra nada para o usuário, mas limpa o código. Como não há base de usu
 - [ ] Arquivos `claude.md`, `.cursorrules`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `getting-started.md`
 
 ## Fase 5 — Qualidade e build
+
+- [x] Build completo passando (`bash build.sh`) e extensão carregando no Chromium
+- [x] Teste e2e manual: regra Redirect criada pela UI empacotada é aplicada numa página real
+- [x] Fontes empacotadas (Inter, Roboto Mono) em vez de Google Fonts
+- [ ] Transformar o smoke/e2e (Playwright) em teste versionado no repo
+- [ ] Validação de HTML do Insert Script: `html-validate` usa `new Function` (bloqueado pela CSP) e hoje é pulada — trocar por validação via `DOMParser`
+- [ ] Import de cURL usa tree-sitter WASM com `eval` no glue — verificar se funciona com a CSP
 
 - [ ] Build limpo da extensão (Chrome, Edge, Firefox) após os cortes
 - [ ] Rodar/ajustar testes (`browser-extension/mv3/tests`, Playwright) e testes da app
