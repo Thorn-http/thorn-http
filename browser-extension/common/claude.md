@@ -18,18 +18,15 @@ The extension popup UI — a standalone React app (Ant Design dark theme) render
 
 - Entry point: `index.tsx` — Renders `<Popup>` inside `RecordsProvider` and Ant Design `ConfigProvider`.
 - **`components/Popup/`** — Main popup component with header and tab navigation.
-- **`components/PopupTabs/`** — Tab navigation (recent rules, pinned rules, executed rules, session recording).
+- **`components/PopupTabs/`** — Tab navigation (recent rules, pinned rules, executed rules).
 - **`components/ExecutedRules/`** — Shows rules that fired on the current tab.
 - **`components/RecentRecords/`**, **`PinnedRecords/`** — Rule lists with pin/unpin actions.
-- **`components/SessionRecording/`** — Session recording controls.
-- **`components/ApiClientContainer/`** — API client entry point in popup.
-- **`components/DesktopAppProxy/`** — Desktop app connection status and controls.
 - **`components/HttpsRuleOptions/`** — HTTPS rule configuration.
 - **`contexts/RecordsContext/`** — React context + reducer for managing records state (rules, groups, pinned items) in the popup.
 
 ## Devtools Panel (`src/devtools/`)
 
-Chrome DevTools panel integration — adds a "Requestly" panel to Chrome DevTools.
+Chrome DevTools panel integration — adds a "Thorn HTTP" panel to Chrome DevTools.
 
 - **`devtools.js`** — Panel registration via `chrome.devtools.panels.create`. Firefox gets plain text title; Chrome/others get emoji prefix.
 - **`index.tsx`** — Devtools panel React app entry point.
@@ -46,11 +43,6 @@ Web Components (Custom Elements) injected into target pages for in-page UI:
 - **`test-rule-widget/`** — Widgets shown during rule testing:
   - `explicit-test-rule-widget/` — Shown when user explicitly tests a rule.
   - `implicit-test-rule-widget/` — Shown for automatic rule testing feedback.
-- **`session-recording-widgets/`** — Session recording UI:
-  - `manual-mode-widget/` — Controls for manual recording.
-  - `auto-mode-widget/` — Controls for auto recording.
-  - `draft-session-viewer/` — Preview of recorded session.
-  - `post-session-save-widget/` — Post-save confirmation widget.
 - **`abstract-classes/draggable-widget.ts`** — Base class for draggable floating widgets.
 
 All custom elements are registered in `index.ts`.
@@ -59,7 +51,7 @@ All custom elements are registered in `index.ts`.
 
 - **Bundler**: Rollup (`rollup.config.js`)
 - **Build command**: `npm run build` (output to `dist/`)
-- **Dependencies**: React 18, Ant Design 5, CodeMirror 6, `@devtools-ds/*` for devtools UI, `@requestly/analytics-vendors` (local package).
+- **Dependencies**: React 18, Ant Design 5, CodeMirror 6, `@devtools-ds/*` for devtools UI, `@thorn-http/analytics-vendors` (local package).
 - **Preprocessor**: Uses PostCSS + Sass for styles.
 - **Pre-install hook**: Builds the analytics vendor package via `scripts/build-analytics-vendor.sh`.
 

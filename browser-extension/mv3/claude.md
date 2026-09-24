@@ -1,4 +1,4 @@
-Manifest V3 browser extension for Chrome, Edge, Firefox, and Safari. Uses `chrome.declarativeNetRequest` for rule-based request interception and `chrome.webRequest` for observational tracking (execution logging, not blocking).
+Manifest V3 browser extension for Chrome, Edge and Firefox (Safari sources are kept but not built). Uses `chrome.declarativeNetRequest` for rule-based request interception and `chrome.webRequest` for observational tracking (execution logging, not blocking).
 
 # Architecture
 
@@ -15,15 +15,13 @@ The extension uses **two complementary interception mechanisms**:
 Entry point: `index.ts` — initializes all services at startup.
 
 Key services in `services/`:
-- **`rulesManager.ts`** — Core DNR rule management. Converts Requestly rules → DNR rules via `rule.extensionRules`, registers them with `chrome.declarativeNetRequest.updateDynamicRules`. Re-applies on rule change, extension toggle, or block-list update. Also manages per-tab session rules via `updateRequestSpecificRules`.
+- **`rulesManager.ts`** — Core DNR rule management. Converts rules → DNR rules via `rule.extensionRules`, registers them with `chrome.declarativeNetRequest.updateDynamicRules`. Re-applies on rule change, extension toggle, or block-list update. Also manages per-tab session rules via `updateRequestSpecificRules`.
 - **`webRequestInterceptor.ts`** — Read-only webRequest listeners for execution tracking. Adds/removes listeners based on extension enabled state.
-- **`clientHandler.ts`** — Registers MAIN-world content scripts (`ajaxRequestInterceptor`, `sessionRecorderHelper`) via `chrome.scripting.registerContentScripts`. Also handles client-side rule caching — injects rule data into `window.__REQUESTLY__` on every navigation.
+- **`clientHandler.ts`** — Registers MAIN-world content scripts (`ajaxRequestInterceptor`, `networkBodyRecorder`) via `chrome.scripting.registerContentScripts`. Also handles client-side rule caching — injects rule data into `window.__REQUESTLY__` on every navigation.
 - **`messageHandler/`** — Central message router (`listener.ts`) handling 30+ message types from popup, content scripts, devtools, and the web app. `sender.ts` sends messages back to the app tab.
 - **`ruleExecutionHandler.ts`** — Tracks which rules were applied to which tabs/requests. Caches executions per tab.
 - **`scriptRuleHandler.ts`** — Injects user-defined scripts (Insert Scripts rule type) into matching tabs.
 - **`requestProcessor/`** — Handles edge cases: forwarding headers on redirect, CSP error handling, initiator domain functions.
-- **`sessionRecording.ts`** — Manages session recording lifecycle (start, stop, cache, replay).
-- **`desktopApp/`** — WebSocket connection to the Requestly desktop app for proxy-based interception. Port scanning, connection management, proxy toggling.
 - **`tabService.ts`** — Per-tab data store (session rules map, execution data).
 - **`extensionIconManager.ts`** — Manages extension icon state (active/inactive/recording).
 - **`globalStateManager.ts`** — Shared state caching between content script and service worker.
@@ -32,17 +30,15 @@ Key services in `services/`:
 
 Two content script bundles:
 - **`client/`** — Injected into all pages. Handles page script message relay, rule execution notifications from client-side interception, and test-rule mode.
-- **`app/`** — Injected only into Requestly web app pages (`*.requestly.io`, `*.requestly.in`, `requestly.com`). Handles bidirectional sync between the web app and extension storage.
+- **`app/`** — Not injected in the packaged build: `app.html` (the bundled rule editor) loads `app.cs.js` directly as its bridge to the extension. Handles bidirectional sync between the web app and extension storage.
 
 Common modules in `content-scripts/common/`:
-- `sessionRecorder.ts` — Initializes session recording SDK in content script context.
 - `extensionMessageListener.ts` — Listens for messages from service worker.
 
 ## Page Scripts (`src/page-scripts/`)
 
 Injected into the MAIN world (page's JS context):
 - **`ajaxRequestInterceptor/`** — Monkey-patches `fetch` and `XMLHttpRequest` to intercept and modify requests/responses. Reads rules from `window.__REQUESTLY__`.
-- **`sessionRecorderHelper.js`** — Bridges session recording events from the page to the content script.
 
 ## Rule Matching (`src/common/ruleMatcher.ts`)
 
@@ -50,7 +46,7 @@ Local rule matcher used by webRequest listeners and the request processor. Suppo
 
 This is separate from the `common/rule-processor/` shared package — it's a lighter-weight matcher specific to the extension's needs.
 
-# Safari Differences
+# Safari (disabled)
 
 Safari uses separate entry points suffixed with `.safari.ts`:
 - `service-worker/index.safari.ts`

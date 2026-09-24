@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: bash install.sh
+
+      - name: Build (Chrome)
+        run: bash build.sh
+
+      - name: Install Playwright Chromium
+        working-directory: browser-extension/mv3
+        run: npx playwright install --with-deps chromium
+
+      - name: End-to-end tests
+        working-directory: browser-extension/mv3
+        run: npm run test:e2e
+        env:
+          CI: "true"
+
+      - name: Package store zips (Chrome, Edge, Firefox)
+        working-directory: browser-extension/mv3
+        run: npm run release
+
+      - name: Lint Firefox package
+        working-directory: browser-extension/mv3
+        run: |
+          (cd ../config && BROWSER=firefox ENV=prod npm run build)
+          BUILD_MODE=production npm run build:current
+          npx web-ext lint -s dist --warnings-as-errors=false
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extension-zips
+          path: browser-extension/mv3/builds/

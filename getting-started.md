@@ -1,51 +1,44 @@
 # Getting Started
 
-This repository contains most of the modules that make up Requestly.
+Requirements: Node.js >= 18.18 (CI uses Node 22) and npm.
 
-- UI application
-- Browser extension
-- Common code shared between this project and other projects like Desktop app and Web proxy.
-
-### Install
-
-Please make sure that Node version >= 18.18.0 is installed on your system.
-
-#### Windows Users
-
-If you're using Windows and encounter issues while cloning this repository (due to long file paths), run this command first:
+## Install
 
 ```sh
-git config --system core.longpaths true
+bash install.sh
 ```
 
-Then proceed with the installation:
+## Build the extension
 
 ```sh
-sh install.sh local
-```    
+bash build.sh
+```
 
-### Build
+This builds the rule processor, shared types, the rule editor app (Vite, `extension` mode) and the MV3 extension. The loadable extension ends up in `browser-extension/mv3/dist`.
+
+## Load it in the browser
+
+- **Chrome / Edge / Brave:** open `chrome://extensions`, enable *Developer mode*, click *Load unpacked* and pick `browser-extension/mv3/dist`.
+- **Firefox:** build for Firefox first (below), then open `about:debugging#/runtime/this-firefox` → *Load Temporary Add-on…* → pick `browser-extension/mv3/dist/manifest.json`.
+
+## Other browsers
 
 ```sh
-sh build.sh    
+cd browser-extension/config && BROWSER=firefox ENV=prod npm run build   # or edge / chrome
+cd ../mv3 && npm run build
 ```
 
-### Test
+## Tests
 
-```sh 
-sh test.sh
+```sh
+cd browser-extension/mv3 && npm run test:e2e
 ```
 
-## Develop individual modules
+End-to-end tests load the built extension in Chromium with Playwright (run `bash build.sh` first).
 
-### UI application:
+## Develop the rule editor
 
-👉 Follow [README](./app/README.md).
-
-### Browser extension:
-
-👉 Follow [README](./browser-extension/README.md).
-
-### Rule processor:
-
-👉 Follow [README](./common/rule-processor/README.md).
+```sh
+cd app && npm run build:extension   # rebuild the bundled editor
+cd ../browser-extension/mv3 && npm run build:current   # copy it into the extension
+```

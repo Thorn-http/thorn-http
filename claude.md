@@ -1,94 +1,30 @@
-This repo contains the client-side code for the Requestly app - a developer tool for intercepting, modifying, and debugging HTTP requests.
+Thorn HTTP: a free, local-first HTTP interceptor browser extension (fork of Requestly HTTP Interceptor, AGPLv3). No accounts, no backend, no telemetry. See `ROADMAP.md` for status.
 
-# Sub directories
+# Layout
 
-## `app/` - React Web Application
-The main React application that provides the UI for Requestly. This code runs in:
-- Web browser (https://app.requestly.io)
-- Desktop app (loaded inside Electron from `../requestly-desktop-app`)
-- Browser extension popup/options pages
+- `browser-extension/mv3/` — MV3 extension: service worker, content scripts, page scripts, DNR rule management. Built with Rollup into `browser-extension/mv3/dist`. See `browser-extension/mv3/claude.md`.
+- `browser-extension/common/` — Extension UI and shared extension code: popup, DevTools panel, network-recording side panel, in-page custom elements, storage. See `browser-extension/common/claude.md`.
+- `browser-extension/config/` — Build-time config (`configs/env/*.json`, `configs/browser/*.json`) → `config/dist/config.build.json`.
+- `app/` — React rule editor (Vite). Built in `extension` mode (`app/app.html`, `app/.env.extension`) and copied into the extension dist; served as `chrome-extension://<id>/app.html#/...` with a hash router.
+- `common/rule-processor/` — Rule matching/processing engine (`@thorn-http/rule-processor`, exposed via root package `@thorn-http/core`).
+- `common/analytics-vendors/` — Analytics Inspector vendor definitions for the DevTools panel (not telemetry).
+- `shared/` — Shared TypeScript types (`@thorn-http/shared`).
 
-The app contains features for:
-- Rule creation and management (Redirect, Modify Headers, Insert Scripts, etc.)
-- API Client (Postman-like REST API testing)
-- Mock Server
-- Session Recording and playback
-- Network Inspector
-- Workspace and team management
-- Billing and subscriptions
+# How the pieces talk
 
-See `app/claude.md` for detailed breakdown of the app structure.
+- `WEB_URL` in the extension config is `"extension"`; `browser-extension/common/src/config.ts` resolves it at runtime to `chrome.runtime.getURL("app.html#")`, so `${WEB_URL}/rules/...` opens the bundled editor.
+- `app.html` loads `app.cs.js` (the old app content script) directly; the app and the extension keep talking through the same `window.postMessage` protocol (`app/src/config/PageScriptMessageHandler.js` ↔ `browser-extension/mv3/src/content-scripts/app/messageHandler.ts`).
+- Rules live in `chrome.storage.local`. Sharing = JSON export/import.
+- `isThornExtension()` (`app/src/utils/EnvUtils.ts`) gates behaviour that only makes sense in the upstream hosted app. Feature flags are local defaults in `app/src/utils/feature-flag/growthbook.js`.
 
-## `shared/` - Shared Types and Common Helpers
-Common TypeScript types and utility functions used across the codebase. This includes:
-- Core entity type definitions (Rules, Groups, Sessions, etc.)
-- Shared helper functions
-- Constants and enums
+# Constraints
 
-This code is shared between the app, browser extension, and other parts of the system.
+- Extension pages have a strict CSP: no remote scripts, no `eval`/`new Function` (only `wasm-unsafe-eval`). Libraries that compile code at import time must be lazy-loaded or avoided.
+- The extension must make no third-party network requests.
+- Keep the AGPLv3 license and BrowserStack copyright notices intact.
 
-## `browser-extension/` - Browser Extension Code
-Browser extension implementation for Chrome, Firefox, Safari, Edge, and other browsers. Provides:
-- Request interception using webRequest/declarativeNetRequest APIs
-- Rule execution in the browser context
-- Background service worker/script
-- Content scripts for script injection
-- Extension popup UI (loads React app from `app/`)
-- Communication with the desktop app and web app
+# Build & test
 
-The extension shares the rule processor from `common/rule-processor`.
-
-Key subdirectories:
-- **`browser-extension/mv3/`** — MV3 extension: service worker, content scripts, page scripts, DNR rule management, Safari variants. See `browser-extension/mv3/claude.md` for details.
-- **`browser-extension/common/`** — Shared extension code: storage layer, popup UI, devtools panel, custom elements (in-page widgets), constants, and types. See `browser-extension/common/claude.md` for details.
-
-## `common/rule-processor/` - Core Rule Processing Engine
-The core rule execution engine that processes Requestly rules. This code is shared across:
-- Browser extension (rule execution in browser)
-- Desktop app (rule execution in proxy)
-- Web app (rule preview and validation)
-
-Contains the logic for:
-- Evaluating rule conditions (URL matching, resource type, etc.)
-- Applying rule modifications (redirects, header changes, response modifications, etc.)
-- Rule prioritization and conflict resolution
-- Performance-optimized rule matching
-
-# Architecture Overview
-
-Requestly follows a modular architecture:
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Web App (app/)                        │
-│              React + Redux + Firebase                    │
-│         (runs in browser, desktop, extension)            │
-└─────────────────────────────────────────────────────────┘
-                           │
-                           │ uses
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│              Shared Types (shared/)                      │
-│              Common utilities and types                  │
-└─────────────────────────────────────────────────────────┘
-                           │
-                           │ uses
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│          Browser Extension (browser-extension/)          │
-│           Uses webRequest/declarativeNetRequest          │
-└─────────────────────────────────────────────────────────┘
-                           │
-                           │ uses
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│         Rule Processor (common/rule-processor/)          │
-│          Core rule matching and execution logic          │
-│        (shared across extension, desktop, web)           │
-└─────────────────────────────────────────────────────────┘
-```
-
-# External Dependencies
-
-The code in this repo integrates with:
-- `../requestly-cloud/` - Firebase Cloud Functions backend (authentication, database, serverless functions)
-- `../requestly-desktop-app/` - Electron desktop app wrapper (loads `app/` UI and runs proxy for interception)
+- `bash install.sh` once, then `bash build.sh` → load `browser-extension/mv3/dist` unpacked.
+- Browser: `BROWSER=firefox|edge|chrome` via `cd browser-extension/config && BROWSER=firefox ENV=prod npm run build`, then rebuild `mv3`.
+- E2E tests: `cd browser-extension/mv3 && npm run test:e2e` (Playwright, loads the built extension).

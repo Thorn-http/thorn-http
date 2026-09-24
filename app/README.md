@@ -1,34 +1,10 @@
-# UI Application
+# Rule editor (app)
 
-Front-end application which provides UI to manage rules, mocks, SessionBooks, user profile and workspaces.
-
-It currently supports three modes:
-1. Browser Extension - when website is opened in a browser where Requestly extension is installed
-2. Desktop Mode - when Requestly desktop application is launched
-3. Remote - when account is connected to a mobile application
-
-## Install
-
-Please make sure that Node version >= 18.18.0 is installed on your system. 
+React + Vite application that provides the rule editor UI of Thorn HTTP. It is built in `extension` mode and bundled inside the browser extension (served from `app.html`).
 
 ```sh
 npm install
+npm run build:extension   # output in app/build, copied into the extension by browser-extension/mv3
 ```
 
-## Build & Run Locally
-
-### Prerequisite - Build and Install Local Extension
-Some features require the Requestly Extension to be installed. Follow the steps below to build and install the extension
-https://github.com/requestly/interceptor/blob/master/browser-extension/mv3/README.md
-
-### Build WebApp
-```
-npm run start
-```
-
-The application will start running at http://localhost:3000. 
-
-By default, the local application communicates to our dev Firebase server. 
-
-The browser extension to be used should be built using local environment configuration. Follow [guide](/browser-extension/mv3/README.md).
-
+See [../getting-started.md](../getting-started.md) for the full build and [../claude.md](../claude.md) for how the app talks to the extension.
