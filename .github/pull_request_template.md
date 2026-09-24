@@ -1,4 +1,4 @@
-<!-- 🙌 Thanks for contributing to Requestly. Adding details below will help us to merge your PR faster. -->
+<!-- Thanks for contributing to Thorn HTTP! Adding details below helps us review your PR faster. -->
 
 Closes issue: <!-- Link to Github issue -->
 

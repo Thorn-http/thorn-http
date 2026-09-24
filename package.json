@@ -12,7 +12,6 @@
   },
   "scripts": {
     "start": "http-server -p 3000",
-    "deploy-beta": "./build.sh beta && firebase deploy --only hosting -P requestly-beta",
     "prepare": "husky install",
     "build": "rollup -c"
   },
