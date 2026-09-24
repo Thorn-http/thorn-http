@@ -8,7 +8,7 @@ const EXTENSION_PATH = path.join(__dirname, "..", "dist");
 type Fixtures = {
   context: BrowserContext;
   extensionId: string;
-  server: { origin: string };
+  server: { origin: string; domainOrigin: string };
   openApp: (hashPath: string) => Promise<Page>;
 };
 
@@ -22,6 +22,41 @@ const createServer = () =>
     if (url.startsWith("/api")) {
       res.setHeader("content-type", "application/json");
       res.end(JSON.stringify({ source: "server", headers: req.headers }));
+      return;
+    }
+    if (url.startsWith("/echo")) {
+      // Echoes what the server received, so tests can check request modifications.
+      let body = "";
+      req.on("data", (chunk) => (body += chunk));
+      req.on("end", () => {
+        res.setHeader("content-type", "application/json");
+        res.setHeader("access-control-expose-headers", "*");
+        res.end(JSON.stringify({ method: req.method, url, headers: req.headers, body }));
+      });
+      return;
+    }
+    if (url.startsWith("/graphql")) {
+      let body = "";
+      req.on("data", (chunk) => (body += chunk));
+      req.on("end", () => {
+        res.setHeader("content-type", "application/json");
+        res.end(JSON.stringify({ data: { source: "server", operation: JSON.parse(body || "{}").operationName } }));
+      });
+      return;
+    }
+    if (url.startsWith("/post.json")) {
+      res.setHeader("content-type", "application/json");
+      res.end(JSON.stringify({ title: "original" }));
+      return;
+    }
+    if (url.startsWith("/blog")) {
+      // Fetches the JSON immediately (while parsing), later, and via XHR.
+      res.setHeader("content-type", "text/html");
+      res.end(`<html><body><pre id="now"></pre><pre id="later"></pre><pre id="xhr"></pre><script>
+        fetch("/post.json").then((r) => r.text()).then((t) => (document.getElementById("now").textContent = t));
+        setTimeout(() => fetch("/post.json").then((r) => r.text()).then((t) => (document.getElementById("later").textContent = t)), 1000);
+        const x = new XMLHttpRequest(); x.open("GET", "/post.json"); x.onload = () => (document.getElementById("xhr").textContent = x.responseText); x.send();
+      </script></body></html>`);
       return;
     }
     if (url.startsWith("/with-fetch")) {
@@ -41,7 +76,7 @@ export const test = base.extend<Fixtures>({
     const server = createServer();
     await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
     const { port } = server.address() as AddressInfo;
-    await use({ origin: `http://localhost:${port}` });
+    await use({ origin: `http://localhost:${port}`, domainOrigin: `http://thorn.test:${port}` });
     server.close();
   },
 
@@ -53,7 +88,12 @@ export const test = base.extend<Fixtures>({
       headless: true,
       viewport: { width: 1400, height: 900 },
       acceptDownloads: true,
-      args: [`--disable-extensions-except=${EXTENSION_PATH}`, `--load-extension=${EXTENSION_PATH}`],
+      args: [
+        `--disable-extensions-except=${EXTENSION_PATH}`,
+        `--load-extension=${EXTENSION_PATH}`,
+        // A real-looking domain for the local server (e.g. the block list only accepts domains).
+        "--host-resolver-rules=MAP thorn.test 127.0.0.1",
+      ],
     });
     await use(context);
     await context.close();
@@ -71,6 +111,9 @@ export const test = base.extend<Fixtures>({
     await use(async (hashPath: string) => {
       const page = await context.newPage();
       await page.goto(`chrome-extension://${extensionId}/app.html#${hashPath}`);
+      // The tab the extension opens on install stays in front otherwise, and background tabs don't
+      // run CSS animations (modals would stay invisible).
+      await page.bringToFront();
       return page;
     });
   },
@@ -86,6 +129,39 @@ export const readPage = async (context: BrowserContext, url: string) => {
   const text = await page.evaluate(() => document.getElementById("page")?.textContent);
   await page.close();
   return text;
+};
+
+/** Opens a new rule of `ruleType` in the editor and fills its name and source condition. */
+export const newRule = async (openApp: Fixtures["openApp"], ruleType: string, name: string, source?: string) => {
+  const editor = await openApp(`/rules/editor/create/${ruleType}`);
+  await editor.waitForSelector('[placeholder="Enter rule name"]');
+  await editor.fill('[placeholder="Enter rule name"]', name);
+  if (source !== undefined) await editor.fill('[data-selectionid="source-value"]', source);
+  return editor;
+};
+
+/** Saves the rule open in `editor` and waits for the extension to apply it. */
+export const saveRule = async (editor: Page) => {
+  await editor.click('button:has-text("Save rule")');
+  await editor.waitForURL(/#\/rules\/editor\/edit\//);
+  await editor.waitForTimeout(1000);
+};
+
+/** Replaces the content of the n-th code editor on the page. */
+export const typeInCodeEditor = async (editor: Page, text: string, index = 0) => {
+  await editor.locator(".cm-content").nth(index).click();
+  await editor.keyboard.press("ControlOrMeta+A");
+  await editor.keyboard.press("Delete");
+  await editor.keyboard.insertText(text);
+};
+
+/** Loads `url` in a new tab and returns the JSON the /echo endpoint sent back. */
+export const readEcho = async (context: BrowserContext, url: string) => {
+  const page = await context.newPage();
+  await page.goto(url);
+  const text = await page.evaluate(() => document.body.innerText);
+  await page.close();
+  return JSON.parse(text);
 };
 
 /** Creates a Redirect rule from the rule editor UI. */
