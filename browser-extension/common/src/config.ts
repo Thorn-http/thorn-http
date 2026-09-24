@@ -12,4 +12,15 @@ export interface ExtensionConfig {
   LANDING_PAGE_BASE_URL: string;
 }
 
+// WEB_URL "extension" means the app UI is bundled inside the extension as app.html
+// and uses hash routing, so `${WEB_URL}/rules/...` resolves to `app.html#/rules/...`.
+export const PACKAGED_APP_WEB_URL = "extension";
+export const PACKAGED_APP_PAGE = "app.html";
+
+export const isPackagedApp = (config as ExtensionConfig).WEB_URL === PACKAGED_APP_WEB_URL;
+
+if (isPackagedApp) {
+  (config as ExtensionConfig).WEB_URL = chrome.runtime.getURL(`${PACKAGED_APP_PAGE}#`);
+}
+
 export default config as ExtensionConfig;

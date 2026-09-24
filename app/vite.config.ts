@@ -101,6 +101,8 @@ const config = async ({ mode }) => {
       outDir: "build",
       target: "esnext",
       sourcemap: generateSourcemap,
+      // Extension build: app.html is the entry (no inline/remote scripts, see app.html)
+      ...(mode === "extension" && { rollupOptions: { input: "app.html" } }),
     },
     server: {
       open: false,

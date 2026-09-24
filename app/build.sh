@@ -1,10 +1,4 @@
 #!/usr/bin/env bash
 
-env=$1
-if [[ -z $1 ]]; then
-    env="beta"
-fi
-
-npm run build
-
-cp -r build/* ../public/
+# The app is bundled into the browser extension (see browser-extension/mv3/rollup.config.js)
+npm run build:extension

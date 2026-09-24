@@ -1,6 +1,5 @@
 import { parse } from "acorn";
 import { simple } from "acorn-walk";
-import { HtmlValidate, StaticConfigLoader } from "html-validate";
 import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
 
 /* LOGICAL VALIDATORS - currently not being fully applied */
@@ -156,6 +155,16 @@ export const removeUrlAttribute = (attributes, codeType) => {
 
 /* Pass the code string through an HTML linter and return errors if any */
 async function htmlValidateRawCodeString(codeString) {
+  // html-validate compiles JSON schemas with `new Function`, which the extension CSP blocks.
+  // Load it lazily and skip linting when it can't run, instead of breaking the whole app.
+  let HtmlValidate, StaticConfigLoader;
+  try {
+    ({ HtmlValidate, StaticConfigLoader } = await import("html-validate"));
+  } catch (error) {
+    console.debug("HTML linting unavailable", error);
+    return { isValid: true, validationErrors: [] };
+  }
+
   const loader = new StaticConfigLoader({
     extends: ["html-validate:recommended"],
     elements: ["html5"],

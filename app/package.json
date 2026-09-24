@@ -29,6 +29,7 @@
     "type-check": "tsc --noEmit",
     "build": "vite build",
     "build:emulator": "vite build --mode dev-emulator",
+    "build:extension": "vite build --mode extension",
     "preview": "npm run build && vite preview --port 3000",
     "preview:emulator": "npm run build:emulator && vite preview --port 3000",
     "dev": "concurrently --kill-others --names \"@requestly/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite\"",

@@ -8,6 +8,9 @@ import { browser, WEB_URL, OTHER_WEB_URLS } from "../config/dist/config.build.js
 
 const OUTPUT_DIR = "dist";
 const isProductionBuildMode = process.env.BUILD_MODE === "production";
+// WEB_URL "extension": the app UI is bundled into the extension as app.html (see common/src/config.ts)
+const isPackagedApp = WEB_URL === "extension";
+const APP_BUILD_DIR = "../../app/build";
 
 const generateUrlPattern = (urlString, includePort = true) => {
   try {
@@ -33,12 +36,20 @@ const processManifest = (content) => {
 
   const { content_scripts: contentScripts } = manifestJson;
 
-  const webURLPatterns = [WEB_URL, ...OTHER_WEB_URLS]
-    .map((pattern) => generateUrlPattern(pattern, browser === "chrome"))
-    .filter((pattern) => !!pattern); // remove null entries
+  if (isPackagedApp) {
+    // app.cs.js is loaded directly by app.html, so the app content script entry is not needed.
+    manifestJson.content_scripts = contentScripts.slice(1);
+    // The app uses WebAssembly (tree-sitter for cURL import).
+    manifestJson.content_security_policy.extension_pages =
+      "script-src 'self' 'wasm-unsafe-eval'; script-src-elem 'self'; object-src 'self'";
+  } else {
+    const webURLPatterns = [WEB_URL, ...OTHER_WEB_URLS]
+      .map((pattern) => generateUrlPattern(pattern, browser === "chrome"))
+      .filter((pattern) => !!pattern); // remove null entries
 
-  contentScripts[0].matches = webURLPatterns;
-  contentScripts[1].exclude_matches = webURLPatterns;
+    contentScripts[0].matches = webURLPatterns;
+    contentScripts[1].exclude_matches = webURLPatterns;
+  }
 
   if (!isProductionBuildMode) {
     manifestJson.commands = {
@@ -108,6 +119,22 @@ export default [
           { src: "../common/dist/popup", dest: OUTPUT_DIR },
           { src: "../common/dist/sidepanel", dest: OUTPUT_DIR },
           { src: "../common/dist/lib/customElements.js", dest: `${OUTPUT_DIR}/libs` },
+          ...(isPackagedApp
+            ? [
+                {
+                  src: [
+                    `${APP_BUILD_DIR}/*`,
+                    `!${APP_BUILD_DIR}/index.html`,
+                    `!${APP_BUILD_DIR}/manifest.json`,
+                    `!${APP_BUILD_DIR}/desktop`,
+                    `!${APP_BUILD_DIR}/firefox`,
+                    `!${APP_BUILD_DIR}/wordpress`,
+                    `!${APP_BUILD_DIR}/sessionBear*`,
+                  ],
+                  dest: OUTPUT_DIR,
+                },
+              ]
+            : []),
         ],
       }),
     ],

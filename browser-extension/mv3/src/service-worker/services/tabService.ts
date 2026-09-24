@@ -1,6 +1,6 @@
 import { EXTENSION_MESSAGES } from "common/constants";
 import { getAllSupportedWebURLs } from "../../utils";
-import config from "common/config";
+import config, { isPackagedApp, PACKAGED_APP_PAGE } from "common/config";
 
 type TabId = chrome.tabs.Tab["id"];
 
@@ -94,6 +94,13 @@ class TabService {
   }
 
   async getAppTabs(): Promise<chrome.tabs.Tab[]> {
+    if (isPackagedApp) {
+      // Match patterns don't support the extension scheme, so filter by URL prefix instead.
+      const appPageUrl = chrome.runtime.getURL(PACKAGED_APP_PAGE);
+      const tabs = await chrome.tabs.query({});
+      return tabs.filter((tab) => tab.url?.startsWith(appPageUrl));
+    }
+
     const webURLs = getAllSupportedWebURLs();
     let appTabs: chrome.tabs.Tab[] = [];
 
