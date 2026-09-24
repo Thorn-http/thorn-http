@@ -48,7 +48,7 @@ const STOP_BANNERS: Partial<Record<StopReason, { icon: string; text: string; var
   },
   "extension-disabled": {
     icon: "⚠",
-    text: "Requestly was disabled — recording stopped",
+    text: "Thorn HTTP was disabled — recording stopped",
     variant: "error",
   },
 };

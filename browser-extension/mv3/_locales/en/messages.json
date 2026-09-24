@@ -1,14 +1,14 @@
 {
   "extName": {
-    "message": "Requestly: Intercept & Modify HTTP Requests",
-    "description": "Requestly browser extension name which is visible in Web Stores"
+    "message": "Thorn HTTP: Intercept & Modify HTTP Requests",
+    "description": "Thorn HTTP browser extension name which is visible in Web Stores"
   },
   "extDesc": {
-    "message": "Intercept & modify HTTP(S) traffic: redirect URLs, modify headers, inject scripts, mock REST & GraphQL APIs, and more.",
-    "description": "Requestly browser extension description visible in Web Stores"
+    "message": "Free, local-first HTTP(S) interceptor: redirect URLs, modify headers, inject scripts, mock REST & GraphQL APIs, and more.",
+    "description": "Thorn HTTP browser extension description visible in Web Stores"
   },
   "extIconTitle": {
-    "message": "Requestly: Intercept & Modify HTTP Requests",
-    "description": "Tooltip text shown on hovering Requestly browser extension icon"
+    "message": "Thorn HTTP: Intercept & Modify HTTP Requests",
+    "description": "Tooltip text shown on hovering Thorn HTTP browser extension icon"
   }
 }

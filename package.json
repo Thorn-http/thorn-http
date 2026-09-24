@@ -1,7 +1,7 @@
 {
-  "name": "@requestly/requestly-core",
+  "name": "thorn-http",
   "version": "1.1.1",
-  "description": "Requestly app, extension and other components",
+  "description": "Thorn HTTP: free, local-first HTTP interceptor extension (fork of Requestly)",
   "main": "dist/requestly-core.cjs.js",
   "module": "dist/requestly-core.esm.js",
   "exports": {
@@ -21,9 +21,8 @@
     "url": "git+https://github.com/requestly/interceptor.git"
   },
   "author": {
-    "name": "Requestly",
-    "email": "contact@requestly.io",
-    "url": "https://requestly.com/"
+    "name": "Thorn HTTP contributors",
+    "url": "https://thorn-http.dev"
   },
   "license": "SEE LICENSE IN LICENSE",
   "engines": {
@@ -33,7 +32,7 @@
   "bugs": {
     "url": "https://github.com/requestly/interceptor/issues"
   },
-  "homepage": "https://requestly.com",
+  "homepage": "https://thorn-http.dev",
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",

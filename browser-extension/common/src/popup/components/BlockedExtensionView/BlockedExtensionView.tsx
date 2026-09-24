@@ -8,9 +8,9 @@ export const BlockedExtensionView = () => {
   return (
     <div className="blocked-extension-view-container">
       <BlockedExtension className="blocked-extension-view-icon" />
-      <div className="blocked-extension-view-title">Requestly is blocked on this page.</div>
+      <div className="blocked-extension-view-title">Thorn HTTP is blocked on this page.</div>
       <div className="blocked-extension-view-description">
-        This page is in the blocklist. Please remove it from the app blocklist settings for Requestly to work.
+        This page is in the blocklist. Please remove it from the app blocklist settings for Thorn HTTP to work.
       </div>
       <Button
         type="primary"

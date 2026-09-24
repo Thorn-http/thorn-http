@@ -807,7 +807,7 @@ export const startNetworkRecording = async (
   if (!isExtensionEnabledCache) {
     return {
       success: false,
-      error: "Requestly extension is disabled. Enable it to start a recording.",
+      error: "Thorn HTTP extension is disabled. Enable it to start a recording.",
     };
   }
 
@@ -825,7 +825,7 @@ export const startNetworkRecording = async (
       success: false,
       code: "INCOGNITO_NOT_ALLOWED",
       error:
-        'Requestly is not allowed in Incognito. Open chrome://extensions, enable "Allow in Incognito" for Requestly, then start the recording again.',
+        'Thorn HTTP is not allowed in Incognito. Open chrome://extensions, enable "Allow in Incognito" for Thorn HTTP, then start the recording again.',
     };
   }
 

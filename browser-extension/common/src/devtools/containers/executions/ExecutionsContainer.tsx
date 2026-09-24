@@ -98,7 +98,7 @@ const ExecutionsContainer: React.FC = () => {
         <EmptyContainerPlaceholder
           lines={[
             "Recording rule executions...",
-            "Perform a request or Reload the page to see network requests intercepted and modified by Requestly.",
+            "Perform a request or Reload the page to see network requests intercepted and modified by Thorn HTTP.",
           ]}
         />
       )}

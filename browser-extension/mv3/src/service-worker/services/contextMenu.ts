@@ -12,8 +12,8 @@ enum MenuItem {
 }
 
 enum ToggleActivationStatusLabel {
-  ACTIVATE = "Activate Requestly",
-  DEACTIVATE = "Deactivate Requestly",
+  ACTIVATE = "Activate Thorn HTTP",
+  DEACTIVATE = "Deactivate Thorn HTTP",
 }
 
 export const updateActivationStatus = (isExtensionEnabled: boolean) => {

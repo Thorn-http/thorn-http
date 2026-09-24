@@ -15,7 +15,7 @@ export const getFunctionFromCode = (code, ruleType) => {
       if (!logShown) {
         logShown = true;
         console.log(
-          `%cRequestly%c Please reload the page for ${ruleType} rule to take effect`,
+          `%cThorn HTTP%c Please reload the page for ${ruleType} rule to take effect`,
           "color: #3c89e8; padding: 1px 5px; border-radius: 4px; border: 1px solid #91caff;",
           "color: red; font-style: italic"
         );
