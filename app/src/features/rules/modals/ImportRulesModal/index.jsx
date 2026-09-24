@@ -35,7 +35,7 @@ import { SOURCE } from "modules/analytics/events/common/constants";
 import { ImportFromModheader } from "features/rules/screens/rulesList/components/RulesList/components/ImporterComponents/ModheaderImporter/ModheaderImporter";
 import { ImportFromResourceOverride } from "features/rules/screens/rulesList/components/RulesList/components/ImporterComponents/ResourceOverrideImporter";
 import { useLocation } from "react-router-dom";
-import { ImporterType } from "components/Home/types";
+import { ImporterType } from "features/rules/types/importers";
 import { HeaderEditorImporter } from "features/rules/screens/rulesList/components/RulesList/components/ImporterComponents/HeaderEditorImporter/HeaderEditorImporterComponent";
 
 export const ImportRulesModal = ({ toggle: toggleModal, isOpen }) => {

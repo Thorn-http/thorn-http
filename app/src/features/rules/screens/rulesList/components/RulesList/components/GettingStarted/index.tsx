@@ -37,7 +37,7 @@ import { useIsRedirectFromCreateRulesRoute } from "../../hooks/useIsRedirectFrom
 import "./gettingStarted.scss";
 import { RuleType } from "@requestly/shared/types/entities/rules";
 import { ImportFromResourceOverrideModal } from "../ImporterComponents/ResourceOverrideImporter";
-import { ImporterType } from "components/Home/types";
+import { ImporterType } from "features/rules/types/importers";
 import { getActiveWorkspaceId, isActiveWorkspaceShared } from "store/slices/workspaces/selectors";
 import { getLinkWithMetadata } from "modules/analytics/metadata";
 import { HeaderEditorImporterModal } from "../ImporterComponents/HeaderEditorImporter/HeaderEditorImporterModal";

@@ -1,6 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { RequestBotModel } from "features/requestBot/types";
 import { GlobalSliceState } from "store/slices/global/types";
+type RequestBotModel = "app";
 
 export const updateRequestBot = (
   prevState: GlobalSliceState,

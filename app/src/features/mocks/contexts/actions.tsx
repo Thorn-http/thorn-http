@@ -26,7 +26,7 @@ import { updateMocksCollection } from "backend/mocks/updateMocksCollection";
 import { DEFAULT_COLLECTION_ID, DEFAULT_COLLECTION_PATH } from "../constants";
 import { getActiveWorkspaceId } from "store/slices/workspaces/selectors";
 import { RBAC, useRBAC } from "features/rbac";
-import { ImporterType } from "components/Home/types";
+import { ImporterType } from "features/rules/types/importers";
 import { SOURCE } from "modules/analytics/events/common/constants";
 
 type MocksActionContextType = {
