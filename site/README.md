@@ -1,0 +1,11 @@
+# thorn-http.dev
+
+Static website for Thorn HTTP (no build step, no cookies, no analytics).
+
+- `index.html` — landing page
+- `docs/index.html` — user docs (`/docs`)
+- `privacy.html`, `terms.html` — required by the extension stores
+- `_redirects` — `/source` and `/issues` → GitHub (Cloudflare Pages / Netlify syntax)
+
+Deploy: point Cloudflare Pages (or Netlify) at this folder with no build command. `.dev` domains require HTTPS, which both provide.
+For GitHub Pages, replace `_redirects` with small HTML redirect pages at `source/index.html` and `issues/index.html`.

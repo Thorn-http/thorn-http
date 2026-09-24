@@ -1,0 +1,4 @@
+# Cloudflare Pages / Netlify redirects. Update the GitHub URLs once the public repository exists.
+/source   https://github.com/thorn-http/thorn-http   302
+/issues   https://github.com/thorn-http/thorn-http/issues   302
+/docs     /docs/   301
