@@ -1,10 +1,10 @@
 //CONSTANTS
 import APP_CONSTANTS from "../../config/constants";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import Logger from "lib/logger";
 import { setCurrentlySelectedRule } from "components/features/rules/RuleBuilder/actions";
 import { isRule } from "features/rules";
-import { RedirectRule } from "@requestly/shared/types/entities/rules";
+import { RedirectRule } from "@thorn-http/shared/types/entities/rules";
 import clientRuleStorageService from "services/clientStorageService/features/rule";
 
 const { RULE_TYPES_CONFIG, RULES_LIST_TABLE_CONSTANTS } = APP_CONSTANTS;
@@ -40,10 +40,10 @@ export const getRuleConfigInEditMode = (rule) => {
 /**
  *
  * @param {string} appMode
- * @param {import("@requestly/shared/types/entities/rules").Rule["id"][]} selectedRuleIds
+ * @param {import("@thorn-http/shared/types/entities/rules").Rule["id"][]} selectedRuleIds
  * @returns {Promise<{
- *  rules: import("@requestly/shared/types/entities/rules").Rule[],
- *  groups: import("@requestly/shared/types/entities/rules").Group[]
+ *  rules: import("@thorn-http/shared/types/entities/rules").Rule[],
+ *  groups: import("@thorn-http/shared/types/entities/rules").Group[]
  * }>}
  */
 export const getRulesAndGroupsFromRuleIds = (appMode, selectedRuleIds) => {

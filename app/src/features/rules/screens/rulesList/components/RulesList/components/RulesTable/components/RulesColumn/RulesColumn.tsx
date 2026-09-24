@@ -6,7 +6,7 @@ import { Button, Progress, Tooltip, TooltipProps, Typography } from "antd";
 import { RiInformationLine } from "@react-icons/all-files/ri/RiInformationLine";
 import { RuleSelectionListDrawer } from "../../../RuleSelectionListDrawer/RuleSelectionListDrawer";
 import PATHS from "config/constants/sub/paths";
-import { RecordStatus } from "@requestly/shared/types/entities/rules";
+import { RecordStatus } from "@thorn-http/shared/types/entities/rules";
 import { useTheme } from "styled-components";
 import { SOURCE } from "modules/analytics/events/common/constants";
 import { trackNewRuleButtonClicked } from "modules/analytics/events/common/rules";

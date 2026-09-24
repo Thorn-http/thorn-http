@@ -7,14 +7,14 @@ import { globalActions } from "store/slices/global/slice";
 import { DeleteOutlined, DownOutlined } from "@ant-design/icons";
 import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
 //Constants
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import "./CustomScriptRow.css";
 import { isFeatureCompatible } from "utils/CompatibilityUtils";
 import FEATURES from "config/constants/sub/features";
 import { getDefaultScriptRender, createRenderedScript } from "./utils";
 import { isExtensionManifestVersion3 } from "actions/ExtensionActions";
 import { EditorLanguage } from "componentsV2/CodeEditor";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 import Editor from "componentsV2/CodeEditor";
 
 const { Text } = Typography;

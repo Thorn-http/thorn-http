@@ -13,7 +13,7 @@ import { copyToClipBoard } from "utils/Misc";
 import { parseRulesFromModheader } from "modules/rule-adapters/modheader-rule-adapters/parseRulesFromModheader";
 import { addRulesAndGroupsToStorage } from "components/features/rules/ImportRulesModal/actions";
 import "../importer-components.css";
-import { Group, Rule } from "@requestly/shared/types/entities/rules";
+import { Group, Rule } from "@thorn-http/shared/types/entities/rules";
 
 const validExportSteps = [
   {

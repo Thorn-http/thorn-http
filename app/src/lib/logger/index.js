@@ -1,3 +1,3 @@
-import { LOGGER as Logger } from "@requestly/requestly-core";
+import { LOGGER as Logger } from "@thorn-http/core";
 
 export default Logger;

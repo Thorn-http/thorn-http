@@ -1,5 +1,5 @@
 {
-  "name": "@requestly/shared",
+  "name": "@thorn-http/shared",
   "version": "1.0.10",
   "description": "",
   "engines": {
@@ -15,7 +15,10 @@
     "build-dist": "rollup -c --bundleConfigAsCjs",
     "build-alias": "tsc-alias"
   },
-  "author": "",
+  "author": {
+    "name": "Thorn HTTP contributors",
+    "url": "https://thorn-http.dev"
+  },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.1.1",
     "@rollup/plugin-babel": "^6.0.4",

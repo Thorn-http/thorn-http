@@ -12,7 +12,7 @@ import {
 import { addRulesAndGroupsToStorage } from "components/features/rules/ImportRulesModal/actions";
 //CONSTANTS
 import APP_CONSTANTS from "config/constants";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import * as Sentry from "@sentry/react";
 
 // Adds single record to trash

@@ -3,7 +3,7 @@ import { getNewRule } from "components/features/rules/RuleBuilder/actions";
 import { generateObjectId } from "utils/FormattingHelper";
 import { getGroupName, getLocation } from "../../utils";
 import { CharlesRuleType, MapLocalRule, MapLocalRuleMappings, ParsedRule } from "../types";
-import { RecordStatus, RedirectRule, RuleType } from "@requestly/shared/types/entities/rules";
+import { RecordStatus, RedirectRule, RuleType } from "@thorn-http/shared/types/entities/rules";
 
 export const mapLocalRuleAdapter = (rules: MapLocalRule): ParsedRule => {
   const mappings = get(rules, "mapLocal.mappings.mapLocalMapping") as MapLocalRuleMappings;

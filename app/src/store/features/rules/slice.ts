@@ -1,5 +1,5 @@
 import { createSlice, createEntityAdapter, EntityState, PayloadAction } from "@reduxjs/toolkit";
-import { StorageRecord } from "@requestly/shared/types/entities/rules";
+import { StorageRecord } from "@thorn-http/shared/types/entities/rules";
 import { ReducerKeys } from "store/constants";
 
 // type ModalName =

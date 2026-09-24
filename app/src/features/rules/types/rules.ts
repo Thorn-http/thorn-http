@@ -1,4 +1,4 @@
-import { Group, Rule } from "@requestly/shared/types/entities/rules";
+import { Group, Rule } from "@thorn-http/shared/types/entities/rules";
 
 export enum RuleEditorMode {
   EDIT = "edit",

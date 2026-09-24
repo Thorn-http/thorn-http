@@ -1,4 +1,4 @@
-import { HeaderRule, Rule, RuleSourceOperator } from "@requestly/shared/types/entities/rules";
+import { HeaderRule, Rule, RuleSourceOperator } from "@thorn-http/shared/types/entities/rules";
 
 export enum CharlesRuleImportErrorMessage {
   EMPTY_FILE = "Imported file is empty!",

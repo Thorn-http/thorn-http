@@ -5,7 +5,7 @@ import { Button, Modal, Row, Col, Input, Typography } from "antd";
 //UTILITIES
 import { getCurrentlySelectedRuleData } from "../../../../../store/selectors";
 //EXTERNALS
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import APP_CONSTANTS from "config/constants";
 //actions
 import deleteObjectAtPath from "./actions/deleteObjectAtPath";
@@ -25,7 +25,7 @@ import { setCurrentlySelectedRule } from "../../RuleBuilder/actions";
 import { debounce, snakeCase } from "lodash";
 import { globalActions } from "store/slices/global/slice";
 import LINKS from "config/constants/sub/links";
-import { ResponseRule } from "@requestly/shared/types/entities/rules";
+import { ResponseRule } from "@thorn-http/shared/types/entities/rules";
 
 const { Link } = Typography;
 

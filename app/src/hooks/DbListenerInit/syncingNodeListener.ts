@@ -24,7 +24,7 @@ import { SYNC_CONSTANTS } from "utils/syncing/syncConstants";
 import APP_CONSTANTS from "config/constants";
 import { SyncType } from "utils/syncing/SyncUtils";
 // @ts-ignore
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { decompressRecords } from "../../utils/Compression";
 import clientSessionRecordingStorageService from "services/clientStorageService/features/session-recording";
 import { clientStorageService } from "services/clientStorageService";

@@ -1,4 +1,4 @@
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 
 const migrateHeaderRuleToV2 = (rule) => {
   if (rule.ruleType !== GLOBAL_CONSTANTS.RULE_TYPES.HEADERS) {

@@ -4,7 +4,7 @@ import { generateObjectId } from "../../../../../utils/FormattingHelper";
 //EXTERNALS
 import { StorageService } from "../../../../../init";
 //CONSTANT
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 //ACTIONS
 import { generateObjectCreationDate } from "utils/DateTimeUtils";
 import Logger from "lib/logger";

@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Alert, Badge, Button, Card, Col, Row, Space, Tabs } from "antd";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import HeadersPairModificationRowV2 from "./HeadersPairModificationRowV2";
 import { generateObjectId } from "../../../../../../../utils/FormattingHelper";
 import { EditOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";

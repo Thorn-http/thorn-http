@@ -1,7 +1,7 @@
 import { trackEvent } from "modules/analytics";
 import { PRICING } from "../constants";
 import { FeatureLimitType } from "hooks/featureLimiter/types";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 
 type ViewPricingPlansClickSource = "crown" | "my_profile" | "feature_limiter_banner" | "workspace_upgrade";
 

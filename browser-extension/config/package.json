@@ -1,8 +1,8 @@
 {
-  "name": "@requestly/browser-extension-config",
+  "name": "@thorn-http/browser-extension-config",
   "version": "1.0.0",
   "description": "Config for MV2 (now deprecated) and MV3 browser extensions",
-  "homepage": "https://requestly.com",
+  "homepage": "https://thorn-http.dev",
   "private": true,
   "repository": {
     "type": "git",
@@ -10,12 +10,11 @@
     "directory": "browser-extension/config"
   },
   "bugs": {
-    "url": "https://github.com/requestly/interceptor/issues"
+    "url": "https://thorn-http.dev/issues"
   },
   "author": {
-    "name": "Requestly",
-    "email": "contact@requestly.io",
-    "url": "https://requestly.com/"
+    "name": "Thorn HTTP contributors",
+    "url": "https://thorn-http.dev"
   },
   "engines": {
     "node": ">=18.18.0",

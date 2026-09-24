@@ -7,7 +7,7 @@ import {
   RuleSourceKey,
   RuleSourceOperator,
   RuleType,
-} from "@requestly/shared/types/entities/rules";
+} from "@thorn-http/shared/types/entities/rules";
 import { getNewGroup, getNewRule } from "components/features/rules/RuleBuilder/actions";
 
 interface ModheaderProfile {

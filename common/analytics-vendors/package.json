@@ -1,5 +1,5 @@
 {
-  "name": "analytics-vendors",
+  "name": "@thorn-http/analytics-vendors",
   "version": "1.0.0",
   "description": "\"List of popular analytics vendors, their Identifiers and helps you test, debug and validate the analytics implementation\"",
   "engines": {
@@ -11,7 +11,10 @@
   "scripts": {
     "build": "rm -rf dist && webpack"
   },
-  "author": "Requestlers",
+  "author": {
+    "name": "Thorn HTTP contributors",
+    "url": "https://thorn-http.dev"
+  },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
     "@types/chrome": "^0.0.271",

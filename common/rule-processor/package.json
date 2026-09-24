@@ -1,5 +1,5 @@
 {
-  "name": "@requestly/rule-processor",
+  "name": "@thorn-http/rule-processor",
   "version": "1.0.0",
   "description": "",
   "engines": {
@@ -13,9 +13,8 @@
     "test": "karma start"
   },
   "author": {
-    "name": "Requestly",
-    "email": "contact@requestly.io",
-    "url": "https://requestly.com/"
+    "name": "Thorn HTTP contributors",
+    "url": "https://thorn-http.dev"
   },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {

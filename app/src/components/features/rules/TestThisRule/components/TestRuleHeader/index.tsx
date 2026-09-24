@@ -10,7 +10,7 @@ import { prefixUrlWithHttps } from "utils/URLUtils";
 import { isValidUrl } from "utils/FormattingHelper";
 import { testRuleOnUrl } from "actions/ExtensionActions";
 //@ts-ignore
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { MdOutlineScience } from "@react-icons/all-files/md/MdOutlineScience";
 import { MdOutlineWarningAmber } from "@react-icons/all-files/md/MdOutlineWarningAmber";
 import { AuthConfirmationPopover } from "components/hoc/auth/AuthConfirmationPopover";

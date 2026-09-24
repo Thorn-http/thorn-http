@@ -3,7 +3,7 @@
  * Currently used for making rules from the network interceptor of Desktop App
  */
 
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { generateObjectId } from "../../../../../utils/FormattingHelper";
 import APP_CONSTANTS from "config/constants";
 import { saveRule } from "../../../../../views/features/rules/RuleEditor/components/Header/ActionButtons/actions";

@@ -1,6 +1,6 @@
 import React from "react";
 import RULE_TYPES_CONFIG from "config/constants/sub/rule-types";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 
 enum RuleCategories {
   URL_REWRITES = "urlRewrites",

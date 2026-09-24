@@ -1,7 +1,7 @@
 import { CustomSteps, PointerPlacement } from "./types";
 import { generateRuleEditorTour, getTourTarget } from "./utils";
 //@ts-ignore
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import FEATURES from "config/constants/sub/features";
 import { MISC_TOURS } from "./constants";
 import LINKS from "config/constants/sub/links";
@@ -14,7 +14,7 @@ import {
   ResponseRule,
   Rule,
   UserAgentRule,
-} from "@requestly/shared/types/entities/rules";
+} from "@thorn-http/shared/types/entities/rules";
 
 const tourTooltipPresets = {
   disableBeacon: true,

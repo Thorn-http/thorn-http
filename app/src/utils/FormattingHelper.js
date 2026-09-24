@@ -1,5 +1,5 @@
 // CONSTANTS
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { PRICING } from "features/pricing";
 import { capitalize } from "lodash";
 import { isSetappBuild } from "./AppUtils";

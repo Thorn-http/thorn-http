@@ -1,8 +1,8 @@
 import { getFilterObjectPath } from "utils/rules/getFilterObjectPath";
-// import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+// import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { get, set } from "lodash";
 import { GlobalSliceState } from "store/slices/global/types";
-import { Group, QueryParamRule, Rule, ScriptRule } from "@requestly/shared/types/entities/rules";
+import { Group, QueryParamRule, Rule, ScriptRule } from "@thorn-http/shared/types/entities/rules";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export const updateLastBackupTimeStamp = (prevState: GlobalSliceState, action: PayloadAction<number>) => {

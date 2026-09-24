@@ -1,7 +1,7 @@
 import { FilterType } from "componentsV2/ContentList";
-import { RecordStatus, Rule, StorageRecord } from "@requestly/shared/types/entities/rules";
+import { RecordStatus, Rule, StorageRecord } from "@thorn-http/shared/types/entities/rules";
 import { submitAttrUtil } from "utils/AnalyticsUtils";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 
 // FIXME: Performance Improvements
 // TODO: REname

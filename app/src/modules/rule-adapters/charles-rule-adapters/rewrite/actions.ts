@@ -10,7 +10,7 @@ import {
 import { rewriteRuleActionTypes } from "./constants";
 import { getNewRule } from "components/features/rules/RuleBuilder/actions";
 //@ts-ignore
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import RULE_TYPES_CONFIG from "config/constants/sub/rule-types";
 import { RewriteRuleActionType } from "./types";
 import { statusCodes } from "config/constants/sub/statusCode";
@@ -23,7 +23,7 @@ import {
   ResponseRule,
   RuleSourceOperator,
   RuleType,
-} from "@requestly/shared/types/entities/rules";
+} from "@thorn-http/shared/types/entities/rules";
 
 export const createModifyHeaderRule = (pair: RewriteRulePair, source: SourceData) => {
   const headerAction = {

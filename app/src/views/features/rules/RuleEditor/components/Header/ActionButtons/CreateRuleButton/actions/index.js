@@ -2,7 +2,7 @@ import isEmpty from "is-empty";
 import { globalActions } from "store/slices/global/slice";
 //UTILS
 import { isValidUrl } from "../../../../../../../../../utils/FormattingHelper";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { cloneDeep, inRange } from "lodash";
 import { parseHTMLString, getHTMLNodeName, validateHTMLTag, removeUrlAttribute } from "./insertScriptValidators";
 import { isFeatureCompatible } from "utils/CompatibilityUtils";
@@ -11,7 +11,7 @@ import { countCapturingGroups } from "modules/extension/mv3RuleParser/utils";
 import { RE2JS } from "re2js";
 import { prettifyCode } from "componentsV2/CodeEditor/utils";
 import { EditorLanguage } from "componentsV2/CodeEditor";
-import { ResponseRule } from "@requestly/shared/types/entities/rules";
+import { ResponseRule } from "@thorn-http/shared/types/entities/rules";
 
 /**
  * In case of a few rules, input from the rule editor does not directly map to rule schema.

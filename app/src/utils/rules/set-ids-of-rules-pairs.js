@@ -1,6 +1,6 @@
 import { generateObjectId } from "../FormattingHelper";
 //CONSTANTS
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 
 export const setIdsOfSingleRulePairs = (rule) => {
   switch (rule.ruleType) {

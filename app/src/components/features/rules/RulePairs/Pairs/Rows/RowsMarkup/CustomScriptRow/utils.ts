@@ -1,4 +1,4 @@
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 
 /* TYPES todo: make enum */
 enum ScriptLanguage {

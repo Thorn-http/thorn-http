@@ -17,10 +17,10 @@ import { preparePlan } from "./DbListenerInit/userSubscriptionDocListener";
 import APP_CONSTANTS from "config/constants";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { getUser } from "backend/user/getUser";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { isAppOpenedInIframe } from "utils/AppUtils";
 import { getEmailType } from "utils/mailCheckerUtils";
-import { EmailType } from "@requestly/shared/types/common";
+import { EmailType } from "@thorn-http/shared/types/common";
 import { clientStorageService } from "services/clientStorageService";
 
 const TRACKING = APP_CONSTANTS.GA_EVENTS;

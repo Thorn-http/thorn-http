@@ -4,7 +4,7 @@ import {
   setCurrentlySelectedRule,
   setIsCurrentlySelectedRuleHasUnsavedChanges,
 } from "../../../../../../../../components/features/rules/RuleBuilder/actions";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { getAppMode, getCurrentlySelectedRuleData } from "../../../../../../../../store/selectors";
 import { getUserAuthDetails } from "store/slices/global/user/selectors";
 import { Switch, Tooltip } from "antd";

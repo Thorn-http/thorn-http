@@ -1,4 +1,4 @@
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import React, { useMemo } from "react";
 import { TestThisRule } from "components/features/rules/TestThisRule";
 import { BottomSheet } from "componentsV2/BottomSheet";

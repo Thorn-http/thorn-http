@@ -1,5 +1,5 @@
 // FEATURE COMPATIBILITY VERSIONS
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import FEATURES from "./sub/features";
 
 // set null if the version is never compatiable on appMode

@@ -1,4 +1,4 @@
-import { ScriptRule } from "@requestly/shared/types/entities/rules";
+import { ScriptRule } from "@thorn-http/shared/types/entities/rules";
 import {
   ExtensionResourceType,
   ExtensionRule,

@@ -1,4 +1,4 @@
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import DataStoreUtils from "./DataStoreUtils";
 import { getDateString } from "./DateTimeUtils";
 import { getAppDetails, getAppFlavour } from "./AppUtils";

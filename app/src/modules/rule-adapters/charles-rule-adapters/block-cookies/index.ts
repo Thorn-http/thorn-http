@@ -3,7 +3,7 @@ import { BlockCookiesRule, CharlesRuleType, ParsedRule } from "../types";
 import { getGroupName, getHeaders, getSourcesData } from "../../utils";
 import { headersConfig } from "./header-config";
 import { getNewRule } from "components/features/rules/RuleBuilder/actions";
-import { HeaderRule, RecordStatus, RuleType } from "@requestly/shared/types/entities/rules";
+import { HeaderRule, RecordStatus, RuleType } from "@thorn-http/shared/types/entities/rules";
 
 export const blockCookiesRuleAdapter = (rules: BlockCookiesRule): ParsedRule<HeaderRule.Record> => {
   const locations = get(rules, "selectedHostsTool.locations.locationPatterns.locationMatch");

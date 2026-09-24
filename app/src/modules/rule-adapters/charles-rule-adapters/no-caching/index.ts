@@ -3,7 +3,7 @@ import { getNewRule } from "components/features/rules/RuleBuilder/actions";
 import { getSourcesData, getHeaders, getGroupName } from "../../utils";
 import { CharlesRuleType, NoCachingRule, ParsedRule, SourceUrl } from "../types";
 import { headersConfig } from "./headers-config";
-import { HeaderRule, RecordStatus, RuleType } from "@requestly/shared/types/entities/rules";
+import { HeaderRule, RecordStatus, RuleType } from "@thorn-http/shared/types/entities/rules";
 
 export const noCachingRuleAdapter = (rules: NoCachingRule): ParsedRule<HeaderRule.Record> => {
   const locations = get(rules, "selectedHostsTool.locations.locationPatterns.locationMatch") as SourceUrl[];

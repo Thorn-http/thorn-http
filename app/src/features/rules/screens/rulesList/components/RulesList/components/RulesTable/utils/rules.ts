@@ -6,7 +6,7 @@ import { addRulesAndGroupsToStorage, processDataToImport } from "features/rules/
 import { AppMode } from "utils/syncing/SyncUtils";
 import { localSampleRules, sampleRuleDetails } from "../../../constants";
 import { generateObjectCreationDate } from "utils/DateTimeUtils";
-import { Group, RecordStatus, RecordType, Rule, StorageRecord } from "@requestly/shared/types/entities/rules";
+import { Group, RecordStatus, RecordType, Rule, StorageRecord } from "@thorn-http/shared/types/entities/rules";
 import { RuleTemplate } from "features/rules/types/rules";
 import { UserAuth } from "store/slices/global/user/types";
 

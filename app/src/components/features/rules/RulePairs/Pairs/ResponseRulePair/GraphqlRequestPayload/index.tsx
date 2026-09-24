@@ -16,7 +16,7 @@ import {
 import "./GraphqlRequestPayload.css";
 import FEATURES from "config/constants/sub/features";
 import { isFeatureCompatible } from "utils/CompatibilityUtils";
-import { ResponseRule } from "@requestly/shared/types/entities/rules";
+import { ResponseRule } from "@thorn-http/shared/types/entities/rules";
 import getObjectValue from "../../../Filters/actions/getObjectValue";
 
 const {

@@ -1,6 +1,6 @@
 import { TestReport } from "../types";
 //@ts-ignore
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { clientStorageService } from "services/clientStorageService";
 
 const getAllTestReports = async (appMode: string): Promise<Record<string, TestReport>> => {

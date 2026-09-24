@@ -5,7 +5,7 @@ import { redirectToRoot } from "../../../../../utils/RedirectionUtils";
 import { globalActions } from "store/slices/global/slice";
 //CONSTANTS
 import APP_CONSTANTS from "../../../../../config/constants";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { generateObjectCreationDate } from "utils/DateTimeUtils";
 import { getRuleLevelInitialConfigs } from "./utils";
 import { isExtensionManifestVersion3 } from "actions/ExtensionActions";

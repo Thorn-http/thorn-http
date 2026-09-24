@@ -9,8 +9,8 @@ import {
   RuleSourceOperator,
   RuleType,
   ScriptRule,
-} from "@requestly/shared/types/entities/rules";
-import { ResourceType } from "@requestly/shared/types/common/network";
+} from "@thorn-http/shared/types/entities/rules";
+import { ResourceType } from "@thorn-http/shared/types/common/network";
 
 import { TemplateRecord } from "../types";
 

@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Col, Dropdown, Input, Menu } from "antd";
 import Text from "antd/lib/typography/Text";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { DownOutlined } from "@ant-design/icons";
 import { globalActions } from "store/slices/global/slice";
 

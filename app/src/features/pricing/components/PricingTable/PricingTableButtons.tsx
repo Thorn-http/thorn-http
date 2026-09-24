@@ -21,7 +21,7 @@ import APP_CONSTANTS from "config/constants";
 import { redirectToPricingPlans, redirectToUrl } from "utils/RedirectionUtils";
 import { createBStackCheckoutUrl } from "features/pricing/utils";
 import { getAppMode } from "store/selectors";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { trackSignUpButtonClicked } from "modules/analytics/events/common/auth/signup";
 import { SOURCE } from "modules/analytics/events/common/constants";
 import LINKS from "config/constants/sub/links";

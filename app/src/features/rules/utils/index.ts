@@ -1,4 +1,4 @@
-import { Group, Rule, RecordType, StorageRecord } from "@requestly/shared/types/entities/rules";
+import { Group, Rule, RecordType, StorageRecord } from "@thorn-http/shared/types/entities/rules";
 
 export const isRule = (record: StorageRecord): record is Rule => {
   return record?.objectType === RecordType.RULE;

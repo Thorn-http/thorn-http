@@ -1,8 +1,8 @@
 {
-  "name": "@requestly/app",
+  "name": "@thorn-http/app",
   "version": "26.8.14",
   "private": true,
-  "description": "Requestly - Lightweight Proxy to Intercept & Modify HTTP(s) requests",
+  "description": "Thorn HTTP - Lightweight Proxy to Intercept & Modify HTTP(s) requests",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -10,12 +10,11 @@
     "directory": "app"
   },
   "bugs": {
-    "url": "https://github.com/requestly/interceptor/issues"
+    "url": "https://thorn-http.dev/issues"
   },
   "author": {
-    "name": "Requestly",
-    "email": "contact@requestly.io",
-    "url": "https://requestly.com/"
+    "name": "Thorn HTTP contributors",
+    "url": "https://thorn-http.dev"
   },
   "engines": {
     "node": ">=18.18.0",
@@ -32,12 +31,12 @@
     "build:extension": "vite build --mode extension",
     "preview": "npm run build && vite preview --port 3000",
     "preview:emulator": "npm run build:emulator && vite preview --port 3000",
-    "dev": "concurrently --kill-others --names \"@requestly/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite\"",
-    "dev:emulator": "concurrently --kill-others --names \"@requestly/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite --mode dev-emulator\"",
-    "start": "concurrently --kill-others --names \"@requestly/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite\"",
-    "start:emulator": "concurrently --kill-others --names \"@requestly/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite --mode dev-emulator\"",
+    "dev": "concurrently --kill-others --names \"@thorn-http/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite\"",
+    "dev:emulator": "concurrently --kill-others --names \"@thorn-http/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite --mode dev-emulator\"",
+    "start": "concurrently --kill-others --names \"@thorn-http/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite\"",
+    "start:emulator": "concurrently --kill-others --names \"@thorn-http/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite --mode dev-emulator\"",
     "//": "****Deprecated****",
-    "emulated-dev": "concurrently --kill-others --names \"@requestly/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite --mode dev-emulator\"",
+    "emulated-dev": "concurrently --kill-others --names \"@thorn-http/shared, @requestly/app\" \"cd ../shared && npm run watch\" \"vite --mode dev-emulator\"",
     "emulated-start": "vite --mode dev-emulator"
   },
   "browserslist": [
@@ -82,8 +81,8 @@
     "@reduxjs/toolkit": "^1.9.0",
     "@requestly/alternative-importers": "^0.2.1",
     "@requestly/mock-server": "0.1.6",
-    "@requestly/requestly-core": "file:..",
-    "@requestly/shared": "file:../shared",
+    "@thorn-http/core": "file:..",
+    "@thorn-http/shared": "file:../shared",
     "@sentry/core": "^10.32.1",
     "@sentry/react": "^10.32.1",
     "@stripe/react-stripe-js": "^2.3.0",

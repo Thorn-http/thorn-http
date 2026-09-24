@@ -1,5 +1,5 @@
 //CONSTANTS
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { SYNC_CONSTANTS } from "./syncing/syncConstants";
 //UTILS
 import { processRecordsArrayIntoObject } from "./syncing/syncDataUtils";

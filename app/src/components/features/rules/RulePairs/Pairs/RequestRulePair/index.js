@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col } from "antd";
 import RequestSourceRow from "../Rows/RowsMarkup/RequestSourceRow";
 import RequestBodyRow from "../Rows/RowsMarkup/RequestBodyRow";
-import { RequestRule } from "@requestly/shared/types/entities/rules";
+import { RequestRule } from "@thorn-http/shared/types/entities/rules";
 import GraphqlRequestPayload from "../ResponseRulePair/GraphqlRequestPayload";
 import { getRequestRuleResourceType } from "store/selectors";
 import { useSelector } from "react-redux";

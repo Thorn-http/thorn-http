@@ -10,7 +10,7 @@ import { useFeatureLimiter } from "hooks/featureLimiter/useFeatureLimiter";
 import { FeatureLimitType } from "hooks/featureLimiter/types";
 import { PremiumIcon } from "components/common/PremiumIcon";
 import { PremiumFeature } from "features/pricing";
-import { ResponseRule, RuleType } from "@requestly/shared/types/entities/rules";
+import { ResponseRule, RuleType } from "@thorn-http/shared/types/entities/rules";
 import "./RequestResponseRuleResourceTypes.css";
 
 const ResponseRuleResourceTypes: React.FC<{ ruleDetails: Record<string, unknown>; disabled: boolean }> = ({

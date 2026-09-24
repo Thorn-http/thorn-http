@@ -1,5 +1,5 @@
 import { getRulesAndGroupsFromRuleIds } from "utils/rules/misc";
-import { Group as NewGroup, StorageRecord } from "@requestly/shared/types/entities/rules";
+import { Group as NewGroup, StorageRecord } from "@thorn-http/shared/types/entities/rules";
 
 export const prepareContentToExport = (appMode: string, selectedRuleIds: string[]) => {
   return new Promise((resolve) => {

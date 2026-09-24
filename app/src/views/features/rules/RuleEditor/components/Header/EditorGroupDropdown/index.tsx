@@ -12,7 +12,7 @@ import { trackGroupChangedEvent, trackGroupCreatedEvent } from "features/rules/a
 import Logger from "lib/logger";
 import { RQButton } from "lib/design-system-v2/components";
 import "./EditorGroupDropdown.css";
-import { Group, RecordType } from "@requestly/shared/types/entities/rules";
+import { Group, RecordType } from "@thorn-http/shared/types/entities/rules";
 import { MdOutlineKeyboardArrowDown } from "@react-icons/all-files/md/MdOutlineKeyboardArrowDown";
 import clientRuleStorageService from "services/clientStorageService/features/rule";
 

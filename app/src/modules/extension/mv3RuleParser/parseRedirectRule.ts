@@ -1,4 +1,4 @@
-import { RedirectRule } from "@requestly/shared/types/entities/rules";
+import { RedirectRule } from "@thorn-http/shared/types/entities/rules";
 import { ExtensionRule, ExtensionRuleAction, RuleActionType } from "../types";
 import { parseConditionFromSource } from "./utils";
 

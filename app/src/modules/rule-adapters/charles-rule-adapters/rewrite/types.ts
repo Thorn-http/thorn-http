@@ -1,4 +1,4 @@
-import { HeaderRule, QueryParamRule, RuleType } from "@requestly/shared/types/entities/rules";
+import { HeaderRule, QueryParamRule, RuleType } from "@thorn-http/shared/types/entities/rules";
 import { WhereToApplyRule } from "../types";
 
 export enum RewriteRuleActionType {

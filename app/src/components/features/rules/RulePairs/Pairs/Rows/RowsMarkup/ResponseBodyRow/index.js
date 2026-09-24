@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useTheme } from "styled-components";
 import { Row, Col, Radio, Popover, Space, Checkbox, Tooltip, Input } from "antd";
 import { globalActions } from "store/slices/global/slice";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import {
   displayFileSelector,
   handleOpenLocalFileInBrowser,
@@ -19,7 +19,7 @@ import { RQButton } from "lib/design-system-v2/components";
 import LINKS from "config/constants/sub/links";
 import { EditorLanguage } from "componentsV2/CodeEditor";
 import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 import { MdOutlineEdit } from "@react-icons/all-files/md/MdOutlineEdit";
 import "./ResponseBodyRow.css";
 import Editor from "componentsV2/CodeEditor";

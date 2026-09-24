@@ -1,6 +1,6 @@
 import { generateObjectId } from "utils/FormattingHelper";
 import { getBaseRule } from "../../../../../common/rule-processor/tests/helpers/MockObjects";
-import { Rule } from "@requestly/shared/types/entities/rules";
+import { Rule } from "@thorn-http/shared/types/entities/rules";
 
 type FileInjectRule = {
   type: "fileInject";

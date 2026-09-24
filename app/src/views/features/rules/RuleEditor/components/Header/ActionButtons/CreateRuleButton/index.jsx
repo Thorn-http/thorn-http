@@ -16,7 +16,7 @@ import {
   setIsCurrentlySelectedRuleHasUnsavedChanges,
 } from "../../../../../../../../components/features/rules/RuleBuilder/actions";
 import { validateRule } from "./actions";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import APP_CONSTANTS from "../../../../../../../../config/constants";
 import { redirectToRuleEditor } from "utils/RedirectionUtils";
 import { getAllRedirectDestinationTypes, getAllResponseBodyTypes } from "utils/rules/misc";

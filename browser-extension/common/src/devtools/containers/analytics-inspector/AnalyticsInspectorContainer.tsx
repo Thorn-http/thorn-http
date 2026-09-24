@@ -3,7 +3,7 @@ import { NetworkEvent, NetworkSettings } from "../../types";
 import EmptyContainerPlaceholder from "../../components/EmptyContainerPlaceholder/EmptyContainerPlaceholder";
 import { Collapse } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
-import getAnalyticsVendorsRegistry from "@requestly/analytics-vendors";
+import getAnalyticsVendorsRegistry from "@thorn-http/analytics-vendors";
 import { VendorEventPanel } from "./components/VendorEventPanel/VendorEventPanel";
 import { PrimaryToolbar } from "./toolbars";
 import "./analyticsInspectorContainer.scss";

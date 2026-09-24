@@ -14,7 +14,7 @@ import { globalActions } from "store/slices/global/slice";
 import { ToastType } from "componentsV2/CodeEditor/components/EditorToast/types";
 import { toast } from "utils/Toast";
 import { minifyCode } from "utils/CodeEditorUtils";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import clientRuleStorageService from "services/clientStorageService/features/rule";
 
 export const saveRule = async (appMode, dispatch, ruleObject) => {

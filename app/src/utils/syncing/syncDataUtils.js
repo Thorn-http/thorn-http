@@ -3,7 +3,7 @@ import { StorageService } from "../../init";
 import { trackSyncCompleted, trackSyncTriggered } from "modules/analytics/events/features/syncing";
 import { getAllRulesAndGroups, getAllRulesAndGroupsIds } from "../rules/misc";
 import { SYNC_CONSTANTS } from "./syncConstants";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { isEqual, uniqWith } from "lodash";
 import { isEmpty } from "lodash";
 import Logger from "lib/logger";

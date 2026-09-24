@@ -4,7 +4,7 @@ import APP_CONSTANTS from "../config/constants";
 import { isFeatureCompatible } from "./CompatibilityUtils";
 import FEATURES from "config/constants/sub/features";
 import { getAppFlavour } from "./AppUtils";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 
 //CONSTANTS
 const { PATHS, LINKS } = APP_CONSTANTS;

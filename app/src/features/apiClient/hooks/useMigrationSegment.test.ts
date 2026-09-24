@@ -7,7 +7,7 @@ import { ApiClientViewMode } from "features/apiClient/slices/workspaceView/types
 // These mocks look unused because the tests only call the pure `computeMigrationSegment`,
 // but they are NOT dead code: they short-circuit the module-load chain pulled in via
 // `./useMigrationSegment` → `useViewMode`/`useGetAllSelectedWorkspaces` → `lib/logger` →
-// `@requestly/requestly-core` which accesses `document` at load time and crashes
+// `@thorn-http/core` which accesses `document` at load time and crashes
 // Vitest's Node env (no jsdom configured).
 vi.mock("features/apiClient/slices/workspaceView/hooks", () => ({
   useViewMode: vi.fn(),

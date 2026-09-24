@@ -1,8 +1,8 @@
 {
-  "name": "@requestly/browser-extension-mv3",
+  "name": "@thorn-http/browser-extension-mv3",
   "version": "26.7.27",
   "description": "Browser extension acting as Web Debugging Proxy to Intercept & Modify HTTP(s) Requests",
-  "homepage": "https://requestly.com",
+  "homepage": "https://thorn-http.dev",
   "private": true,
   "repository": {
     "type": "git",
@@ -10,12 +10,11 @@
     "directory": "browser-extension/mv3"
   },
   "bugs": {
-    "url": "https://github.com/requestly/interceptor/issues"
+    "url": "https://thorn-http.dev/issues"
   },
   "author": {
-    "name": "Requestly",
-    "email": "contact@requestly.io",
-    "url": "https://requestly.com/"
+    "name": "Thorn HTTP contributors",
+    "url": "https://thorn-http.dev"
   },
   "engines": {
     "node": ">=18.18.0",

@@ -3,7 +3,7 @@ import { HttpRuleImporterMethod, HttpRuleImporterOutput } from "@requestly/alter
 import { FilePicker } from "components/common/FilePicker";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Group, RecordType, Rule } from "@requestly/shared/types/entities/rules";
+import { Group, RecordType, Rule } from "@thorn-http/shared/types/entities/rules";
 import { CheckCircleOutlined, InfoCircleOutlined, LinkOutlined, WarningOutlined } from "@ant-design/icons";
 import { HiOutlineExternalLink } from "@react-icons/all-files/hi/HiOutlineExternalLink";
 import { Col, Row } from "antd";

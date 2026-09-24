@@ -7,7 +7,7 @@ import {
   RuleSourceFilter,
   RuleSourceKey,
   RuleSourceOperator,
-} from "@requestly/shared/types/entities/rules";
+} from "@thorn-http/shared/types/entities/rules";
 
 export const escapeForwardSlashes = (value: string): string => {
   return value.replace(/\//g, "\\/");

@@ -1,6 +1,6 @@
 import Logger from "lib/logger";
 import { clientStorageService } from "..";
-import { RecordType } from "@requestly/shared/types/entities/rules";
+import { RecordType } from "@thorn-http/shared/types/entities/rules";
 
 class ClientRuleStorageService {
   async saveRuleOrGroup(ruleOrGroup: any, options = {}) {

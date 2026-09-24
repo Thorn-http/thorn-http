@@ -3,7 +3,7 @@ import { Col, Select, Input } from "antd";
 import { capitalize } from "lodash";
 import { SessionRecordingPageSource } from "types";
 import "./index.scss";
-import { RulePairSource, RuleSourceKey, RuleSourceOperator } from "@requestly/shared/types/entities/rules";
+import { RulePairSource, RuleSourceKey, RuleSourceOperator } from "@thorn-http/shared/types/entities/rules";
 
 type Source = RulePairSource | SessionRecordingPageSource;
 

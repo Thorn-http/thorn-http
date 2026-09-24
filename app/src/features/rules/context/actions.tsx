@@ -28,7 +28,7 @@ import { RuleTableRecord } from "../screens/rulesList/components/RulesList/compo
 import { updateGroupOfSelectedRules } from "components/features/rules/ChangeRuleGroupModal/actions";
 import { getAllRulesOfGroup } from "utils/rules/misc";
 import { SOURCE } from "modules/analytics/events/common/constants";
-import { Group, RecordStatus, Rule, StorageRecord } from "@requestly/shared/types/entities/rules";
+import { Group, RecordStatus, Rule, StorageRecord } from "@thorn-http/shared/types/entities/rules";
 import { trackSignUpButtonClicked } from "modules/analytics/events/common/auth/signup";
 import { RULES_WITHOUT_LIMITS } from "../constants";
 import { isThornExtension } from "utils/EnvUtils";

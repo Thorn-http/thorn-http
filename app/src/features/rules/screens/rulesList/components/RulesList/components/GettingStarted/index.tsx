@@ -35,7 +35,7 @@ import { RuleSelectionListDrawer } from "../RuleSelectionListDrawer/RuleSelectio
 import { redirectToTeam } from "utils/RedirectionUtils";
 import { useIsRedirectFromCreateRulesRoute } from "../../hooks/useIsRedirectFromCreateRulesRoute";
 import "./gettingStarted.scss";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 import { ImportFromResourceOverrideModal } from "../ImporterComponents/ResourceOverrideImporter";
 import { ImporterType } from "features/rules/types/importers";
 import { getActiveWorkspaceId, isActiveWorkspaceShared } from "store/slices/workspaces/selectors";

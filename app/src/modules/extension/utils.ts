@@ -1,7 +1,7 @@
 import { parseDNRRules } from "./mv3RuleParser";
 import { isExtensionManifestVersion3 } from "actions/ExtensionActions";
 import { StorageService } from "init";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import Logger from "lib/logger";
 import * as semver from "semver";
 import {
@@ -11,7 +11,7 @@ import {
   RuleSourceKey,
   RuleSourceOperator,
   RuleType,
-} from "@requestly/shared/types/entities/rules";
+} from "@thorn-http/shared/types/entities/rules";
 
 const MV3_MIGRATION_DATA = "mv3MigrationData";
 

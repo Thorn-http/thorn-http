@@ -4,7 +4,7 @@ import { Row, Col, Button, Card } from "antd";
 import { Modal } from "antd";
 import { NavLink } from "react-router-dom";
 import APP_CONSTANTS from "config/constants";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { isExtensionVersionCompatible } from "actions/ExtensionActions";
 import { getAppMode } from "store/selectors";
 import { RightOutlined } from "@ant-design/icons";

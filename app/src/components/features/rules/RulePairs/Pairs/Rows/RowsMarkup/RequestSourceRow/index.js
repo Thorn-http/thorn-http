@@ -4,7 +4,7 @@ import { globalActions } from "store/slices/global/slice";
 import { getCurrentlySelectedRuleConfig, getCurrentlySelectedRuleData } from "store/selectors";
 import { Row, Col, Input, Badge, Menu, Typography, Tooltip, Button, Dropdown, Space } from "antd";
 import { ExperimentOutlined } from "@ant-design/icons";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import APP_CONSTANTS from "config/constants";
 import { DownOutlined } from "@ant-design/icons";
 import { RQDropdown } from "lib/design-system/components";

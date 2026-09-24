@@ -1,4 +1,4 @@
-import { HeaderRule } from "@requestly/shared/types/entities/rules";
+import { HeaderRule } from "@thorn-http/shared/types/entities/rules";
 import { Header, HeaderValue } from "../types";
 
 export const headersConfig = {

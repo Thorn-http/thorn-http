@@ -11,7 +11,7 @@ import { EmptyTestResultScreen } from "./components/EmptyTestResultScreen";
 import { toast } from "utils/Toast";
 import Logger from "lib/logger";
 //@ts-ignore
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { trackTestRuleReportDeleted, trackTestRuleReportGenerated } from "./analytics";
 import { TestRuleHeader } from "./components/TestRuleHeader";
 import "./TestThisRule.scss";

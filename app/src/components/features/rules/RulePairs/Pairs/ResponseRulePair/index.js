@@ -7,7 +7,7 @@ import ResponseBodyRow from "../Rows/RowsMarkup/ResponseBodyRow";
 import ResponseStatusCodeRow from "../Rows/RowsMarkup/ResponseStatusCodeRow";
 import GraphqlRequestPayload from "./GraphqlRequestPayload";
 import "./ResponseRulePair.css";
-import { ResponseRule } from "@requestly/shared/types/entities/rules";
+import { ResponseRule } from "@thorn-http/shared/types/entities/rules";
 
 const ResponseRulePair = ({ pair, pairIndex, ruleDetails, isInputDisabled }) => {
   const responseRuleResourceType = useSelector(getResponseRuleResourceType);

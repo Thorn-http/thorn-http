@@ -9,7 +9,7 @@ import { isValidUrl } from "utils/FormattingHelper";
 import { isEqual } from "lodash";
 import { SessionRecordingPageSource } from "types/sessionRecording";
 //@ts-ignore
-import { RULE_PROCESSOR } from "@requestly/requestly-core";
+import { RULE_PROCESSOR } from "@thorn-http/core";
 import LINKS from "config/constants/sub/links";
 import {
   trackURLConditionMatchingTried,
@@ -18,7 +18,7 @@ import {
   trackURLConditionSourceModified,
 } from "modules/analytics/events/features/testUrlModal";
 import "./index.scss";
-import { RulePairSource, RuleSourceOperator } from "@requestly/shared/types/entities/rules";
+import { RulePairSource, RuleSourceOperator } from "@thorn-http/shared/types/entities/rules";
 
 type Source = RulePairSource | SessionRecordingPageSource;
 

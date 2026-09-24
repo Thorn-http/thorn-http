@@ -1,4 +1,4 @@
-import { HeaderRule, QueryParamRule } from "@requestly/shared/types/entities/rules";
+import { HeaderRule, QueryParamRule } from "@thorn-http/shared/types/entities/rules";
 import { RewriteRuleActionType } from "./types";
 
 export const rewriteRuleActionTypes: Record<

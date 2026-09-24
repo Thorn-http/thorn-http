@@ -1,5 +1,5 @@
 import { isExtensionInstalled } from "actions/ExtensionActions";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import APP_CONSTANTS from "config/constants";
 import { toast } from "utils/Toast.js";
 import { getAttrFromFirebase, submitAttrUtil } from "./AnalyticsUtils";
@@ -8,7 +8,7 @@ import { trackDesktopAppInstalled } from "modules/analytics/events/misc/installa
 import { getValueAsPromise } from "actions/FirebaseActions";
 import { isEmailVerified } from "./AuthUtils";
 import moment from "moment";
-import { EmailType } from "@requestly/shared/types/common";
+import { EmailType } from "@thorn-http/shared/types/common";
 import { getEmailType } from "./mailCheckerUtils";
 
 const { APP_MODES } = GLOBAL_CONSTANTS;

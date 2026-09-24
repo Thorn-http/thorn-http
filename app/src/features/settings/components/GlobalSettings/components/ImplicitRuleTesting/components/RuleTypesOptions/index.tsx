@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Checkbox, Radio } from "antd";
 import { updateImplictRuleTestingWidgetConfig } from "../../utils";
 import RULE_TYPES_CONFIG from "config/constants/sub/rule-types";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import "./index.scss";
 
 interface RuleTypesOptionsProps {

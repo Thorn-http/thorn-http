@@ -10,7 +10,7 @@ import {
 } from "../store/selectors";
 import { getUserAuthDetails } from "store/slices/global/user/selectors";
 // CONSTANTS
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 // ACTIONS
 import { startBackgroundProcess, invokeAppDetectionInBackground } from "../actions/DesktopActions";
 import {

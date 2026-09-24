@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 import LINKS from "config/constants/sub/links";
 import { RuleTemplate } from "features/rules/types/rules";
 import { RuleDetails } from "views/features/rules/RuleEditor/components/RuleDetailsPanel/RuleDetailsPanel";

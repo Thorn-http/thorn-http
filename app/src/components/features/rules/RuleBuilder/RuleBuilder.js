@@ -8,7 +8,7 @@ import Body from "./Body";
 import ChangeRuleGroupModal from "../ChangeRuleGroupModal";
 import SpinnerCard from "../../../misc/SpinnerCard";
 import APP_CONSTANTS from "../../../../config/constants";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import {
   cleanup,
   getModeData,
@@ -36,7 +36,7 @@ import { RULE_DETAILS } from "views/features/rules/RuleEditor/components/RuleDet
 import { sampleRuleDetails } from "features/rules/screens/rulesList/components/RulesList/constants";
 import "./RuleBuilder.css";
 import clientRuleStorageService from "services/clientStorageService/features/rule";
-import { RecordType } from "@requestly/shared/types/entities/rules";
+import { RecordType } from "@thorn-http/shared/types/entities/rules";
 
 //CONSTANTS
 const { RULE_EDITOR_CONFIG, RULE_TYPES_CONFIG } = APP_CONSTANTS;

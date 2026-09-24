@@ -12,7 +12,7 @@ import { TooltipPlacement } from "antd/lib/tooltip";
 import { redirectToCreateNewRule } from "utils/RedirectionUtils";
 import { PaidFeatureNudgeViewedSource } from "modules/analytics/events/common/pricing";
 import "./RuleSelectionList.scss";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 
 export interface RuleSelectionListProps {
   /** Analytics event source */

@@ -1,4 +1,4 @@
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 
 export const RULES_WITHOUT_LIMITS = [RuleType.HEADERS];
 

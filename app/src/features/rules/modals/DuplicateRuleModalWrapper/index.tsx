@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DuplicateRecordModal from "components/features/rules/DuplicateRuleModal";
 import { useRulesModalsContext } from "features/rules/context/modals";
-import { StorageRecord } from "@requestly/shared/types/entities/rules";
+import { StorageRecord } from "@thorn-http/shared/types/entities/rules";
 
 export const DuplicateRecordModalWrapper: React.FC = () => {
   const { setOpenDuplicateRecordModalAction } = useRulesModalsContext();

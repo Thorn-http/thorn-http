@@ -1,6 +1,6 @@
 import RuleIcon from "components/common/RuleIcon";
 //CONSTANTS
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 //UTILS
 import { isDesktopMode } from "utils/AppUtils";
 import { isFeatureCompatible } from "utils/CompatibilityUtils";

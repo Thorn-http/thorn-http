@@ -6,7 +6,7 @@ import useFetchAndUpdateRules from "./hooks/useFetchAndUpdateRules";
 import { getAppMode, getIsExtensionEnabled, getIsRulesListLoading } from "store/selectors";
 import { getUserAuthDetails } from "store/slices/global/user/selectors";
 // @ts-ignore
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { GettingStarted } from "./components";
 import SpinnerColumn from "components/misc/SpinnerColumn";
 import FeatureLimiterBanner from "components/common/FeatureLimiterBanner/featureLimiterBanner";

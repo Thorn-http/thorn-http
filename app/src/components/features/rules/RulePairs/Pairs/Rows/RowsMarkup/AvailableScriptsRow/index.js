@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "antd";
 import ReactSelect from "react-select";
 //CONSTANTS
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import APP_CONSTANTS from "config/constants";
 //UTILS
 import { getCurrentlySelectedRuleData } from "../../../../../../../../store/selectors";

@@ -1,4 +1,4 @@
-import { HeaderRule } from "@requestly/shared/types/entities/rules";
+import { HeaderRule } from "@thorn-http/shared/types/entities/rules";
 import { ExtensionRule, ExtensionRuleAction, HeadersRuleOperation, ModifyHeaderInfo, RuleActionType } from "../types";
 import { parseConditionFromSource } from "./utils";
 

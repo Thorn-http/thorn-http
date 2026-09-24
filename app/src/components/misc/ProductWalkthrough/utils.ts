@@ -1,4 +1,4 @@
-import { Rule } from "@requestly/shared/types/entities/rules";
+import { Rule } from "@thorn-http/shared/types/entities/rules";
 import { CustomSteps, PointerPlacement } from "./types";
 
 export const getTourTarget = (tourId: string) => `[data-tour-id="${tourId}"]`;

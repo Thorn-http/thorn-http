@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import RULE_TYPES_CONFIG from "config/constants/sub/rule-types";
 import LINKS from "config/constants/sub/links";
 import { ExampleType, UseCaseExample } from "./types";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 
 export const RULE_DETAILS: Record<
   RuleType,

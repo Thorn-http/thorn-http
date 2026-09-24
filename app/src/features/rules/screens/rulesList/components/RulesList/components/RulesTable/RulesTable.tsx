@@ -32,7 +32,7 @@ import { useRulesActionContext } from "features/rules/context/actions";
 import { globalActions } from "store/slices/global/slice";
 import "./rulesTable.css";
 
-import { RecordType, RecordStatus, StorageRecord } from "@requestly/shared/types/entities/rules";
+import { RecordType, RecordStatus, StorageRecord } from "@thorn-http/shared/types/entities/rules";
 import { getActiveWorkspaceId } from "store/slices/workspaces/selectors";
 import { useRBAC } from "features/rbac";
 

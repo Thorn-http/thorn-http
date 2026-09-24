@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import DeleteRulesModal from "components/features/rules/DeleteRulesModal";
 import { useRulesModalsContext } from "features/rules/context/modals";
-import { StorageRecord } from "@requestly/shared/types/entities/rules";
+import { StorageRecord } from "@thorn-http/shared/types/entities/rules";
 
 interface Props {}
 

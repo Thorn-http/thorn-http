@@ -8,7 +8,7 @@ import ResponseRulePair from "./ResponseRulePair";
 import RequestRulePair from "./RequestRulePair";
 import UserAgentRulePair from "./UserAgentRulePair";
 import DelayRulePair from "./DelayRulePair";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 
 export const rulePairComponents = {
   [RuleType.REDIRECT]: RedirectRulePair,

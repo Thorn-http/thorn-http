@@ -2,7 +2,7 @@ import { RewriteRulePair, WhereToApplyRule } from "../types";
 import { rewriteRuleActionTypes } from "./constants";
 import { HeaderAction, QueryParamAction } from "./types";
 import { generateObjectId } from "utils/FormattingHelper";
-import { HeaderRule, QueryParamRule } from "@requestly/shared/types/entities/rules";
+import { HeaderRule, QueryParamRule } from "@thorn-http/shared/types/entities/rules";
 
 export const getWhereToApplyRule = (pair: RewriteRulePair): WhereToApplyRule => {
   if (pair.matchRequest && pair.matchResponse) {

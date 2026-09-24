@@ -1,4 +1,4 @@
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 
 export const getEventObject = (name: string, value: string) => ({
   target: { name, value },

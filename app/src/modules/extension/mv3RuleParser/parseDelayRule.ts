@@ -1,4 +1,4 @@
-import { DelayRule } from "@requestly/shared/types/entities/rules";
+import { DelayRule } from "@thorn-http/shared/types/entities/rules";
 import { ExtensionResourceType, ExtensionRule, RuleActionType } from "../types";
 import { parseConditionFromSource } from "./utils";
 

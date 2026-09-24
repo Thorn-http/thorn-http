@@ -1,11 +1,11 @@
 import { StorageService } from "init";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { setIdsOfSingleRulePairs } from "utils/rules/set-ids-of-rules-pairs";
 import { generateObjectId } from "utils/FormattingHelper";
 import Logger from "lib/logger";
 import { runRuleMigrations } from "utils/rules/ruleMigrations";
 import APP_CONSTANTS from "config/constants";
-import { RecordStatus } from "@requestly/shared/types/entities/rules";
+import { RecordStatus } from "@thorn-http/shared/types/entities/rules";
 import { migrateRuleToMV3 } from "modules/extension/utils";
 //CONSTANTS
 const { RULES_LIST_TABLE_CONSTANTS } = APP_CONSTANTS;

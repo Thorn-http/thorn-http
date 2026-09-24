@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { getAppMode } from "store/selectors";
 import SettingsItem from "../SettingsItem";
 import { RuleTypesOptions } from "./components/RuleTypesOptions";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { isFeatureCompatible } from "utils/CompatibilityUtils";
 import APP_CONSTANTS from "config/constants";
 import { getImplicitRuleTestingWidgetConfig, updateImplictRuleTestingWidgetConfig } from "./utils";

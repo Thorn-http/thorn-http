@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import PATHS from "config/constants/sub/paths";
 import { ExampleType, UseCaseExample } from "./types";
 import "./RuleDetailsPanel.scss";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 import { isThornExtension } from "utils/EnvUtils";
 
 export type RuleDetails = {

@@ -3,8 +3,8 @@ import { BlockListRule, CharlesRuleType, ParsedRule } from "../types";
 import { getNewRule } from "components/features/rules/RuleBuilder/actions";
 import RULE_TYPES_CONFIG from "config/constants/sub/rule-types";
 import { getGroupName, getSourcesData } from "../../utils";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
-import { CancelRule, RecordStatus, ResponseRule, Rule, RuleType } from "@requestly/shared/types/entities/rules";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
+import { CancelRule, RecordStatus, ResponseRule, Rule, RuleType } from "@thorn-http/shared/types/entities/rules";
 
 const generate403ResponseRule = (sourceUrl: string, status: boolean, operator: string) => {
   const rule = getNewRule(RuleType.RESPONSE) as ResponseRule.Record;

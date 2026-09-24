@@ -1,13 +1,13 @@
 {
-  "name": "thorn-http",
+  "name": "@thorn-http/core",
   "version": "1.1.1",
-  "description": "Thorn HTTP: free, local-first HTTP interceptor extension (fork of Requestly)",
-  "main": "dist/requestly-core.cjs.js",
-  "module": "dist/requestly-core.esm.js",
+  "description": "Thorn HTTP: free, local-first HTTP interceptor extension (fork of Thorn HTTP)",
+  "main": "dist/thorn-core.cjs.js",
+  "module": "dist/thorn-core.esm.js",
   "exports": {
     ".": {
-      "require": "./dist/requestly-core.cjs.js",
-      "import": "./dist/requestly-core.esm.js"
+      "require": "./dist/thorn-core.cjs.js",
+      "import": "./dist/thorn-core.esm.js"
     }
   },
   "scripts": {
@@ -29,7 +29,7 @@
     "npm": ">=8.0.0"
   },
   "bugs": {
-    "url": "https://github.com/requestly/interceptor/issues"
+    "url": "https://thorn-http.dev/issues"
   },
   "homepage": "https://thorn-http.dev",
   "devDependencies": {

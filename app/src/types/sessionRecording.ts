@@ -1,4 +1,4 @@
-import { RuleSourceKey, RuleSourceOperator } from "@requestly/shared/types/entities/rules";
+import { RuleSourceKey, RuleSourceOperator } from "@thorn-http/shared/types/entities/rules";
 
 export type SessionRecordingPageSource = {
   id?: string;

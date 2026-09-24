@@ -21,7 +21,7 @@ import { getAllRulesOfGroup } from "utils/rules/misc";
 import Logger from "lib/logger";
 import { globalActions } from "store/slices/global/slice";
 import "./duplicateRuleModal.scss";
-import { Group, RecordStatus, Rule, StorageRecord } from "@requestly/shared/types/entities/rules";
+import { Group, RecordStatus, Rule, StorageRecord } from "@thorn-http/shared/types/entities/rules";
 import { isGroup, isRule } from "features/rules";
 import { getActiveWorkspaceId, getAllWorkspaces } from "store/slices/workspaces/selectors";
 

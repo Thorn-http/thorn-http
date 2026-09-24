@@ -6,7 +6,7 @@ import {
 } from "modules/analytics/events/misc/extensionContextInvalidation";
 import PageScriptMessageHandler from "config/PageScriptMessageHandler";
 // @ts-ignore
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import "../common.scss";
 
 const ExtensionContextInvalidationNotice: React.FC = () => {

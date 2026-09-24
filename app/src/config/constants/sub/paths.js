@@ -1,5 +1,5 @@
 import RULE_EDITOR_CONFIG from "./rule-editor";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 
 const joinPaths = (path1, path2) => {
   return path1.concat(path2?.[0] !== "/" ? "/" + path2 : path2).replace(/\/\//g, "/");

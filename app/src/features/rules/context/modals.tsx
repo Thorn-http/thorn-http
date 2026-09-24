@@ -2,7 +2,7 @@
  * Contains all the common modals and state
  */
 
-import { Group, Rule, StorageRecord } from "@requestly/shared/types/entities/rules";
+import { Group, Rule, StorageRecord } from "@thorn-http/shared/types/entities/rules";
 import React, { createContext, useContext, useState } from "react";
 
 type RulesModalsContextType = {

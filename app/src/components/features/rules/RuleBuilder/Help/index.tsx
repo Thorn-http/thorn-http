@@ -19,7 +19,7 @@ import { RULE_DETAILS } from "views/features/rules/RuleEditor/components/RuleDet
 import { sampleRuleDetails } from "features/rules/screens/rulesList/components/RulesList/constants";
 import { getCurrentlySelectedRuleData } from "store/selectors";
 import { useSelector } from "react-redux";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 
 const externalLinks: ExternalLink[] = [
   {

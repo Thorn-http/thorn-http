@@ -3,7 +3,7 @@ import { getNewRule } from "components/features/rules/RuleBuilder/actions";
 import { generateObjectId } from "utils/FormattingHelper";
 import { CharlesRuleType, MapRemoteRule, MapRemoteRuleMappings, ParsedRule } from "../types";
 import { getGroupName, getLocation } from "../../utils";
-import { RecordStatus, RedirectRule, RuleType } from "@requestly/shared/types/entities/rules";
+import { RecordStatus, RedirectRule, RuleType } from "@thorn-http/shared/types/entities/rules";
 
 export const mapRemoteAdapter = (rules: MapRemoteRule): ParsedRule => {
   const mappings = get(rules, "map.mappings.mapMapping") as MapRemoteRuleMappings;

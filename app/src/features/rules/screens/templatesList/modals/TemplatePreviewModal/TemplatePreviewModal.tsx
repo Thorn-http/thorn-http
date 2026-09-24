@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { isExtensionInstalled } from "actions/ExtensionActions";
 import { snakeCase } from "lodash";
 import { trackTemplateImportCompleted, trackTemplateImportStarted } from "../../analytics";

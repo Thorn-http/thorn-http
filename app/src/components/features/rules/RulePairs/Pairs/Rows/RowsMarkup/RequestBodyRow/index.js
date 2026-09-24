@@ -1,11 +1,11 @@
 import React, { useRef, useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Row, Col, Radio, Tooltip } from "antd";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { globalActions } from "store/slices/global/slice";
 import { EditorLanguage } from "componentsV2/CodeEditor";
 import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 import Editor from "componentsV2/CodeEditor";
 
 const RequestBodyRow = ({ rowIndex, pair, pairIndex, ruleDetails, isInputDisabled }) => {

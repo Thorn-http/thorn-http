@@ -1,4 +1,4 @@
-import { QueryParamRule } from "@requestly/shared/types/entities/rules";
+import { QueryParamRule } from "@thorn-http/shared/types/entities/rules";
 import { ExtensionRule, ExtensionRuleAction, QueryParamRuleTransform, RuleActionType } from "../types";
 import { parseConditionFromSource } from "./utils";
 

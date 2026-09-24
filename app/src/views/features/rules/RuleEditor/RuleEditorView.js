@@ -3,7 +3,7 @@ import { BottomSheetFeatureContext } from "componentsV2/BottomSheet/types";
 import RuleEditor from "./RuleEditor";
 import { useSelector } from "react-redux";
 import { getAppMode } from "store/selectors";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { isExtensionInstalled, isSafariBrowser } from "actions/ExtensionActions";
 import InstallExtensionCTA from "components/misc/InstallExtensionCTA";
 import { SafariLimitedSupportView } from "componentsV2/SafariExtension/SafariLimitedSupportView";

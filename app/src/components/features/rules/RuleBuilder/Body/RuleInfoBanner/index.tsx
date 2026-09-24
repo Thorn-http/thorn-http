@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Alert, Col, Row, Typography } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 //@ts-ignore
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import "./ruleInfoBanner.css";
 import { trackMoreInfoClicked } from "modules/analytics/events/misc/moreInfo";
 import { isFeatureCompatible } from "utils/CompatibilityUtils";

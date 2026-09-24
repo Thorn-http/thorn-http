@@ -6,7 +6,7 @@ import CreatableReactSelect from "react-select/creatable";
 //SERVICES
 import { StorageService } from "../../../../init";
 //CONSTANTS
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 // REDUCER ACTIONS
 import { globalActions } from "store/slices/global/slice";
 import { getAppMode, getIsRefreshRulesPending } from "store/selectors";

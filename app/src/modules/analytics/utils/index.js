@@ -1,4 +1,4 @@
-import { EmailType } from "@requestly/shared/types/common";
+import { EmailType } from "@thorn-http/shared/types/common";
 
 export function buildBasicUserProperties(user) {
   if (user && user.uid && user.providerData && user.providerData.length > 0) {

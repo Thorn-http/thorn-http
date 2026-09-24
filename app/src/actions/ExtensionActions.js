@@ -1,5 +1,5 @@
 import PSMH from "../config/PageScriptMessageHandler";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import * as semver from "semver";
 import UAParser from "ua-parser-js";
 

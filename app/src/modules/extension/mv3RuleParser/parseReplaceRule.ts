@@ -8,7 +8,7 @@ import {
   parseRegex,
 } from "./utils";
 import Logger from "../../../../../common/logger";
-import { ReplaceRule, RuleSourceKey, RuleSourceOperator } from "@requestly/shared/types/entities/rules";
+import { ReplaceRule, RuleSourceKey, RuleSourceOperator } from "@thorn-http/shared/types/entities/rules";
 
 const getReplaceMatchingRegex = (rulePair: ReplaceRule.Pair): ExtensionRuleCondition => {
   if (!rulePair.source.value) {

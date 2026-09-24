@@ -1,6 +1,6 @@
 import { trackEvent } from "..";
 // @ts-ignore
-import { CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS } from "@thorn-http/core";
 import { RULES } from "./common/constants";
 
 interface Event {

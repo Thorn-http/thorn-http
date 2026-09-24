@@ -5,7 +5,7 @@ import { Modal } from "antd";
 import CreatableReactSelect from "react-select/creatable";
 import { toast } from "utils/Toast.js";
 //CONSTANTS
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 //REDUCER ACTIONS
 import { globalActions } from "store/slices/global/slice";
 import { getAllGroups, getAppMode, getCurrentlySelectedRuleData, getIsRefreshRulesPending } from "store/selectors";
@@ -15,7 +15,7 @@ import { updateGroupOfSelectedRules, createNewGroup } from "./actions";
 import { trackGroupChangedEvent } from "features/rules/analytics";
 import { setCurrentlySelectedRule } from "../RuleBuilder/actions";
 import Logger from "lib/logger";
-import { RecordType } from "@requestly/shared/types/entities/rules";
+import { RecordType } from "@thorn-http/shared/types/entities/rules";
 import clientRuleStorageService from "services/clientStorageService/features/rule";
 
 const ChangeRuleGroupModal = (props) => {

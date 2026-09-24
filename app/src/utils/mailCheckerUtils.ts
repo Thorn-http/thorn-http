@@ -1,4 +1,4 @@
-import { EmailType } from "@requestly/shared/types/common";
+import { EmailType } from "@thorn-http/shared/types/common";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import Logger from "lib/logger";
 

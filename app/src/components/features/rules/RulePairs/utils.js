@@ -1,4 +1,4 @@
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 
 export const sourceRuleOperatorPlaceholders = {
   [GLOBAL_CONSTANTS.RULE_KEYS.URL]: {

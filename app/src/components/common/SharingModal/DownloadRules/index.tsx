@@ -10,7 +10,7 @@ import { getFormattedDate } from "utils/DateTimeUtils";
 import { toast } from "utils/Toast";
 import { getAllRecords } from "store/features/rules/selectors";
 import "./DownloadRules.css";
-import { StorageRecord } from "@requestly/shared/types/entities/rules";
+import { StorageRecord } from "@thorn-http/shared/types/entities/rules";
 import { globalActions } from "store/slices/global/slice";
 
 interface DownloadRulesProps {

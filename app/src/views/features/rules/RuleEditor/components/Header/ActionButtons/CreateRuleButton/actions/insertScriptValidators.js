@@ -1,6 +1,6 @@
 import { parse } from "acorn";
 import { simple } from "acorn-walk";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 
 /* LOGICAL VALIDATORS - currently not being fully applied */
 export const SCRIPT_LOGICAL_ERRORS = {

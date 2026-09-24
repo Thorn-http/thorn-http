@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RenameGroupModal from "components/features/rules/RenameGroupModal";
-import { Group } from "@requestly/shared/types/entities/rules";
+import { Group } from "@thorn-http/shared/types/entities/rules";
 import { useRulesModalsContext } from "features/rules/context/modals";
 
 export const RenameGroupModalWrapper: React.FC = () => {

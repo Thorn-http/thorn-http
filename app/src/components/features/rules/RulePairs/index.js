@@ -9,7 +9,7 @@ import ResponseRuleResourceTypes from "./RequestResponseRuleResourceTypes";
 import { rulePairComponents } from "./Pairs";
 import { useRBAC } from "features/rbac";
 import "./RulePairs.css";
-import { RuleType } from "@requestly/shared/types/entities/rules";
+import { RuleType } from "@thorn-http/shared/types/entities/rules";
 import { isFeatureCompatible } from "utils/CompatibilityUtils";
 import FEATURES from "config/constants/sub/features";
 

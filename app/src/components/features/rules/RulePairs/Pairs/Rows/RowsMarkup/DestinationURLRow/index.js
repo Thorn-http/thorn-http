@@ -23,9 +23,9 @@ import { trackDesktopActionInterestCaptured } from "modules/analytics/events/mis
 import LINKS from "config/constants/sub/links";
 import { generatePlaceholderText } from "components/features/rules/RulePairs/utils";
 import { MdOutlineEdit } from "@react-icons/all-files/md/MdOutlineEdit";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import "./index.css";
-import { RedirectRule } from "@requestly/shared/types/entities/rules";
+import { RedirectRule } from "@thorn-http/shared/types/entities/rules";
 
 const DestinationURLRow = ({ rowIndex, pair, pairIndex, isInputDisabled }) => {
   const dispatch = useDispatch();

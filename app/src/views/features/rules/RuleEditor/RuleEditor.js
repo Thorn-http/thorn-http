@@ -11,7 +11,7 @@ import {
   getIsExtensionEnabled,
   getIsWorkspaceSwitchConfirmationActive,
 } from "store/selectors";
-import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import ExtensionDeactivationMessage from "components/misc/ExtensionDeactivationMessage";
 import EditorHeader from "./components/Header";
 import APP_CONSTANTS from "config/constants";
@@ -19,7 +19,7 @@ import { getModeData } from "components/features/rules/RuleBuilder/actions";
 import { BottomSheetLayout, useBottomSheetContext } from "componentsV2/BottomSheet";
 import { RuleEditorBottomSheet } from "./components/RuleEditorBottomSheet/RuleEditorBottomSheet";
 import { trackSampleRuleTested } from "features/rules/analytics";
-import { RecordStatus } from "@requestly/shared/types/entities/rules";
+import { RecordStatus } from "@thorn-http/shared/types/entities/rules";
 import { sampleRuleDetails } from "features/rules/screens/rulesList/components/RulesList/constants";
 import { SheetLayout } from "componentsV2/BottomSheet/types";
 import "./RuleEditor.scss";
