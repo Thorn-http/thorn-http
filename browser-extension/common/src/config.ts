@@ -19,7 +19,9 @@ export const PACKAGED_APP_PAGE = "app.html";
 
 export const isPackagedApp = (config as ExtensionConfig).WEB_URL === PACKAGED_APP_WEB_URL;
 
-if (isPackagedApp) {
+// Page scripts run in the page's MAIN world, where `chrome.runtime` doesn't exist; they import
+// this module indirectly (rule matching) and must not crash on load.
+if (isPackagedApp && typeof chrome !== "undefined" && chrome.runtime?.getURL) {
   (config as ExtensionConfig).WEB_URL = chrome.runtime.getURL(`${PACKAGED_APP_PAGE}#`);
 }
 

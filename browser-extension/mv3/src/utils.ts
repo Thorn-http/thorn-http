@@ -29,8 +29,11 @@ export const getAllSupportedAppOrigins = () => {
   const supportedOriginsSet = new Set([]);
 
   getAllSupportedWebURLs().forEach((url) => {
-    const origin = new URL(url).origin;
-    supportedOriginsSet.add(origin);
+    try {
+      supportedOriginsSet.add(new URL(url).origin);
+    } catch {
+      // Unresolved placeholder (e.g. WEB_URL "extension" inside page scripts): not an app origin.
+    }
   });
   return [...supportedOriginsSet];
 };

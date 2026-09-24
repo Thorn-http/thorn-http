@@ -95,7 +95,7 @@ export const initFetchInterceptor = (debug) => {
         });
       }
 
-      const responseRule = getMatchedResponseRule({
+      let responseRule = getMatchedResponseRule({
         url,
         requestData,
         method,
@@ -127,6 +127,11 @@ export const initFetchInterceptor = (debug) => {
           } else {
             fetchedResponse = await getOriginalResponse();
           }
+
+          // Rules are cached into the page right after navigation commits, so a fetch fired while
+          // the page is still parsing can start before they arrive. Look again once the response is
+          // back (XHR already matches at response time).
+          responseRule = responseRule || getMatchedResponseRule({ url, requestData, method });
 
           if (!responseRule) {
             return fetchedResponse;
