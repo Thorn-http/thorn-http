@@ -1,15 +1,11 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Radio, Row } from "antd";
+import { Radio } from "antd";
 import { getCurrentlySelectedRuleData, getRequestRuleResourceType, getResponseRuleResourceType } from "store/selectors";
 import { setCurrentlySelectedRule } from "../../RuleBuilder/actions";
 import APP_CONSTANTS from "config/constants";
 import { isDesktopMode } from "utils/AppUtils";
 import { omit, set } from "lodash";
-import { useFeatureLimiter } from "hooks/featureLimiter/useFeatureLimiter";
-import { FeatureLimitType } from "hooks/featureLimiter/types";
-import { PremiumIcon } from "components/common/PremiumIcon";
-import { PremiumFeature } from "features/pricing";
 import { ResponseRule, RuleType } from "@thorn-http/shared/types/entities/rules";
 import "./RequestResponseRuleResourceTypes.css";
 
@@ -22,7 +18,6 @@ const ResponseRuleResourceTypes: React.FC<{ ruleDetails: Record<string, unknown>
   const currentlySelectedRuleData = useSelector(getCurrentlySelectedRuleData);
   const isResponseRule = currentlySelectedRuleData?.ruleType === RuleType.RESPONSE;
   const ruleResourceType = useSelector(isResponseRule ? getResponseRuleResourceType : getRequestRuleResourceType);
-  const { getFeatureLimitValue } = useFeatureLimiter();
   const isSampleRule = currentlySelectedRuleData?.isSample;
 
   const requestPayloadFilter = currentlySelectedRuleData.pairs?.[0].source?.filters?.[0]?.requestPayload;
@@ -74,8 +69,6 @@ const ResponseRuleResourceTypes: React.FC<{ ruleDetails: Record<string, unknown>
     updateResourceType(type, clearGraphqlRequestPayload);
   };
 
-  const isPremiumFeature = !getFeatureLimitValue(FeatureLimitType.graphql_resource_type);
-
   return (isNewResponseRule || isNewRequestRule) && ruleResourceType !== ResponseRule.ResourceType.UNKNOWN ? (
     <div className="resource-types-container" data-tour-id="rule-editor-response-resource-type">
       <div className="subtitle">Select Resource Type</div>
@@ -83,26 +76,14 @@ const ResponseRuleResourceTypes: React.FC<{ ruleDetails: Record<string, unknown>
         <Radio.Group
           disabled={isSampleRule || disabled}
           value={ruleResourceType}
-          onChange={(e) => {
-            if (e.target.value !== ResponseRule.ResourceType.GRAPHQL_API) handleResourceTypeChange(e.target.value);
-          }}
+          // Every resource type is free in Thorn HTTP, so GraphQL is a plain option too. (It used to be
+          // wrapped in a PremiumFeature whose click handler didn't fire on the editor's first load.)
+          onChange={(e) => handleResourceTypeChange(e.target.value)}
         >
           <Radio value={ResponseRule.ResourceType.REST_API}>REST API</Radio>
-          <PremiumFeature
-            features={[FeatureLimitType.graphql_resource_type]}
-            featureName="GraphQL API"
-            popoverPlacement="top"
-            onContinue={() => {
-              handleResourceTypeChange(ResponseRule.ResourceType.GRAPHQL_API);
-            }}
-            source="graphql_resource_type"
-          >
-            <Radio value={ResponseRule.ResourceType.GRAPHQL_API} className="graphql-radio-item">
-              <Row align="middle">
-                GraphQL API {isPremiumFeature ? <PremiumIcon featureType="graphql_resource_type" /> : null}
-              </Row>
-            </Radio>
-          </PremiumFeature>
+          <Radio value={ResponseRule.ResourceType.GRAPHQL_API} className="graphql-radio-item">
+            GraphQL API
+          </Radio>
           {/* HTML / JS / CSS responses need the desktop proxy; not offered in the extension */}
           {isResponseRule && isDesktop && <Radio value={ResponseRule.ResourceType.STATIC}>HTML / JS / CSS</Radio>}
         </Radio.Group>
