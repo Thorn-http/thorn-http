@@ -1,6 +1,6 @@
 {
   "name": "@thorn-http/browser-extension-mv3",
-  "version": "26.7.27",
+  "version": "1.0.0",
   "description": "Browser extension acting as Web Debugging Proxy to Intercept & Modify HTTP(s) Requests",
   "homepage": "https://thorn-http.dev",
   "private": true,
@@ -32,9 +32,8 @@
     "start:firefox": "web-ext run -s dist",
     "test": "playwright test",
     "pretest": "npm run build",
-    "release": "sh scripts/release-extension.sh",
-    "prerelease": "sh ../install.sh",
-    "release:firefox": "sh scripts/release-firefox-extension.sh"
+    "release": "bash scripts/release-extension.sh",
+    "test:e2e": "playwright test --config e2e/playwright.config.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.44.1",
