@@ -289,7 +289,7 @@ export const localSampleRules: RuleTemplate[] = [
                 isCompressed: false,
                 loadTime: "afterPageLoad",
                 type: "code",
-                value: '\t  alert("This banner is injected on the page by Requestly")',
+                value: '\t  alert("This banner is injected on the page by Thorn HTTP")',
               },
             ],
             source: {

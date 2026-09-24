@@ -73,7 +73,7 @@ const ImportRulesModal = (props) => {
           });
         } catch (error) {
           Logger.log(error);
-          alert("Imported file doesn't match Requestly format. Please choose another file.");
+          alert("This file isn't a Thorn HTTP (or Requestly) rules export. Please choose another file.");
           trackRulesJsonParsed({
             successful: false,
           });
@@ -293,7 +293,7 @@ const ImportRulesModal = (props) => {
             <>
               <Row align="middle" justify="center">
                 <Button type="default" onClick={handleRegularRuleImportClick}>
-                  Import Requestly rules (JSON file)
+                  Import rules (Thorn HTTP or Requestly JSON file)
                 </Button>
               </Row>
               <center style={{ margin: "8px 0" }} className="text-gray">

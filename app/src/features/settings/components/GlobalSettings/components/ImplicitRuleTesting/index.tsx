@@ -72,7 +72,7 @@ export const ImplicitRuleTesting = () => {
     <>
       <div className="title-container">
         <MdInfoOutline className="icon" />
-        <span className="title">Hide Requestly widget</span>
+        <span className="title">Hide Thorn HTTP widget</span>
       </div>
       <div className="description">
         This widget shows rule executions. Some changes, such as response body and header modifications, are not visible

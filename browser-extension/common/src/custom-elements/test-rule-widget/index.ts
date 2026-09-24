@@ -94,7 +94,7 @@ export abstract class RQTestRuleWidget extends RQDraggableWidget {
         <div id="heading-container">
             <div id="logo-container">
                 <span id="heading-logo">${RQLogo}</span>
-                <span id="logo-text">requestly</span>
+                <span id="logo-text">thorn http</span>
             </div>
             <div id="actions-container">
                 <button id="settings-button" class="hidden" data-tooltip="Hide widget in app settings">${VisibilityIcon}</button>

@@ -180,9 +180,6 @@ const ResponseBodyRow = ({ rowIndex, pair, pairIndex, ruleDetails, isInputDisabl
                     <>
                       This rule cannot be executed using Extension because the request accesses a local file that cannot
                       be accessed by the browser.{" "}
-                      <a className="tooltip-link" href={LINKS.REQUESTLY_DOWNLOAD_PAGE} target="_blank" rel="noreferrer">
-                        Use this on Desktop App!
-                      </a>
                     </>
                   }
                 />
@@ -355,7 +352,7 @@ const ResponseBodyRow = ({ rowIndex, pair, pairIndex, ruleDetails, isInputDisabl
             <InfoIcon
               tooltipPlacement="right"
               showArrow={false}
-              text="When enabled, response is served directly from Requestly and hence Developer Tools won't show this request in network table."
+              text="When enabled, response is served directly from Thorn HTTP and hence Developer Tools won't show this request in network table."
               style={{
                 position: "relative",
                 top: "3px",

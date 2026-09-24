@@ -222,9 +222,6 @@ const DestinationURLRow = ({ rowIndex, pair, pairIndex, isInputDisabled }) => {
                 <>
                   This rule cannot be executed using Extension because the request redirects to a local file that cannot
                   be accessed by the browser.{" "}
-                  <a className="tooltip-link" href={LINKS.REQUESTLY_DOWNLOAD_PAGE} target="_blank" rel="noreferrer">
-                    Use this on Desktop App!
-                  </a>
                 </>
               }
             />

@@ -17,7 +17,7 @@ export const ChangePlanRequestConfirmationModal: React.FC<{
           <>
             <Typography.Title level={4}>Plan Change Request Submitted</Typography.Title>
             <Typography.Text>
-              The Requestly team has received your request. Please check your email for updates and further
+              The Thorn HTTP team has received your request. Please check your email for updates and further
               communication regarding this request.
             </Typography.Text>
           </>

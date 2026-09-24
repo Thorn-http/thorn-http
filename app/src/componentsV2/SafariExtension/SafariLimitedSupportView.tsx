@@ -26,7 +26,7 @@ export const SafariLimitedSupportView: React.FC = () => {
           <div>
             <Typography.Title level={5}>What's next</Typography.Title>
             <Row className="safari-limited-support-subheading">
-              You can access the full functionality of Requestly by using the
+              You can access the full functionality of Thorn HTTP by using the
               <br /> desktop app or switching to a supported browser like Chrome.
             </Row>
           </div>

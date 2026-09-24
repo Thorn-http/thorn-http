@@ -55,7 +55,7 @@ const RulesList: React.FC<Props> = () => {
         return (
           <InstallExtensionCTA
             heading="Install Browser extension to start modifying network requests"
-            subHeading="Requestly lets developers Modify Headers, Redirect URLs, Switch Hosts, Delay Network requests easily. Private and secure, works locally on your browser."
+            subHeading="Thorn HTTP lets developers Modify Headers, Redirect URLs, Switch Hosts, Delay Network requests easily. Private and secure, works locally on your browser."
             eventPage="rules_page"
           />
         );
@@ -113,7 +113,7 @@ const RulesList: React.FC<Props> = () => {
   return (
     <InstallExtensionCTA
       heading="Install Browser extension to start modifying network requests"
-      subHeading="Requestly lets developers Modify Headers, Redirect URLs, Switch Hosts, Delay Network requests easily. Private and secure, works locally on your browser."
+      subHeading="Thorn HTTP lets developers Modify Headers, Redirect URLs, Switch Hosts, Delay Network requests easily. Private and secure, works locally on your browser."
       eventPage="rules_page"
     />
   );

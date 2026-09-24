@@ -85,7 +85,7 @@ export const BlockList = () => {
       isActive={true}
       onChange={() => {}}
       title="Blocked Sites"
-      caption="HTTP rules and SessionBook won't work on these sites"
+      caption="HTTP rules won't work on these sites"
       settingsBody={
         <div className="blocklist-body">
           <Row align={"middle"} justify={"space-between"} className="header-row">

@@ -138,7 +138,7 @@ const HeadersRulePairV2 = ({ pair, pairIndex, isInputDisabled, ruleDetails }) =>
                       className="alert"
                       message={
                         <>
-                          Response Headers modification done by Requestly are not visible in Browsers devtool but they
+                          Response Headers modification done by Thorn HTTP are not visible in Browsers devtool but they
                           are actually modified.{" "}
                           <a target="_blank" href={LINKS.REQUESTLY_HEADERS_RULE_FAQ_LINK} rel="noreferrer">
                             click here
@@ -160,9 +160,8 @@ const HeadersRulePairV2 = ({ pair, pairIndex, isInputDisabled, ruleDetails }) =>
                       <Alert
                         message={
                           <span style={{ whiteSpace: "pre-wrap" }}>
-                            Request Headers modification done by Requestly are not visible in the Browsers devtool but
-                            they are actually modified. You can see the original headers in the Requestly Traffic
-                            logger.
+                            Request Headers modification done by Thorn HTTP are not visible in the Browsers devtool but
+                            they are actually modified.
                           </span>
                         }
                         type="info"

@@ -1,12 +1,10 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Radio, Row, Tooltip } from "antd";
+import { Radio, Row } from "antd";
 import { getCurrentlySelectedRuleData, getRequestRuleResourceType, getResponseRuleResourceType } from "store/selectors";
-import { QuestionCircleOutlined } from "@ant-design/icons";
 import { setCurrentlySelectedRule } from "../../RuleBuilder/actions";
 import APP_CONSTANTS from "config/constants";
 import { isDesktopMode } from "utils/AppUtils";
-import DesktopIcon from "assets/icons/desktop.svg?react";
 import { omit, set } from "lodash";
 import { useFeatureLimiter } from "hooks/featureLimiter/useFeatureLimiter";
 import { FeatureLimitType } from "hooks/featureLimiter/types";
@@ -14,17 +12,6 @@ import { PremiumIcon } from "components/common/PremiumIcon";
 import { PremiumFeature } from "features/pricing";
 import { ResponseRule, RuleType } from "@requestly/shared/types/entities/rules";
 import "./RequestResponseRuleResourceTypes.css";
-
-const DownloadDesktopAppLink: React.FC = () => (
-  <a
-    target="_blank"
-    rel="noreferrer"
-    className="download-desktop-app-link"
-    href={APP_CONSTANTS.LINKS.REQUESTLY_DESKTOP_APP}
-  >
-    <DesktopIcon /> <span>Download desktop app</span>
-  </a>
-);
 
 const ResponseRuleResourceTypes: React.FC<{ ruleDetails: Record<string, unknown>; disabled: boolean }> = ({
   disabled,
@@ -116,28 +103,8 @@ const ResponseRuleResourceTypes: React.FC<{ ruleDetails: Record<string, unknown>
               </Row>
             </Radio>
           </PremiumFeature>
-          {isResponseRule && (
-            <>
-              {isDesktop ? (
-                <Radio value={ResponseRule.ResourceType.STATIC}>HTML / JS / CSS</Radio>
-              ) : (
-                <Tooltip
-                  overlayClassName="response-rule-resource-type-tooltip"
-                  title={
-                    <span>
-                      This option is available only in desktop app due to technical constraints of chrome extension.{" "}
-                      <DownloadDesktopAppLink />
-                    </span>
-                  }
-                >
-                  <Radio disabled={!isDesktop || disabled} value={ResponseRule.ResourceType.STATIC}>
-                    HTML / JS / CSS
-                    <QuestionCircleOutlined className="resource-disable-option-info-icon" />
-                  </Radio>
-                </Tooltip>
-              )}
-            </>
-          )}
+          {/* HTML / JS / CSS responses need the desktop proxy; not offered in the extension */}
+          {isResponseRule && isDesktop && <Radio value={ResponseRule.ResourceType.STATIC}>HTML / JS / CSS</Radio>}
         </Radio.Group>
       </div>
     </div>

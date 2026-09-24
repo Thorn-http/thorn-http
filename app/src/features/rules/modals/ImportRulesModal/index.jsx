@@ -96,7 +96,7 @@ export const ImportRulesModal = ({ toggle: toggleModal, isOpen }) => {
           });
         } catch (error) {
           Logger.log(error);
-          alert("Imported file doesn't match Requestly format. Please choose another file.");
+          alert("This file isn't a Thorn HTTP (or Requestly) rules export. Please choose another file.");
           trackRulesJsonParsed({
             successful: false,
           });
