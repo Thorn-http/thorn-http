@@ -176,7 +176,12 @@ const Editor: React.FC<EditorProps> = ({
   const applyPrettification = useCallback(async () => {
     if (showOptions?.enablePrettify) {
       if (language === EditorLanguage.JSON || language === EditorLanguage.JAVASCRIPT) {
-        const prettified = await prettifyCode(value, language);
+        const original = value;
+        const prettified = await prettifyCode(original, language);
+        // Prettifying is async (the formatter is loaded on demand). If the user typed meanwhile,
+        // keep their text instead of overwriting it with the formatted initial value.
+        const currentDoc = editorRef.current?.view?.state?.doc?.toString();
+        if (currentDoc !== undefined && currentDoc !== (original ?? "")) return;
         setIsCodePrettified(true);
         handleEditorSilentUpdate(prettified.code);
       }
@@ -294,7 +299,15 @@ const Editor: React.FC<EditorProps> = ({
         width="100%"
         readOnly={isReadOnly}
         value={value ?? ""}
-        onKeyDown={() => (isUnsaveChange.current = true)}
+        onKeyDown={(event) => {
+          isUnsaveChange.current = true;
+          // Apply the pending change right away so a quick Ctrl/Cmd+S saves what was just typed.
+          if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
+            debouncedhandleEditorBodyChange.flush();
+          }
+        }}
+        // Clicking "Save rule" blurs the editor first: don't lose the last keystrokes.
+        onBlur={() => debouncedhandleEditorBodyChange.flush()}
         onChange={debouncedhandleEditorBodyChange}
         theme={vscodeDark}
         extensions={extensions}
