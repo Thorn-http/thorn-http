@@ -5,138 +5,128 @@ const LINKS = {
   /** DOCS */
 
   // Download
-  REQUESTLY_DOWNLOAD_PAGE: getLinkWithMetadata("https://requestly.com/downloads"),
+  REQUESTLY_DOWNLOAD_PAGE: "https://thorn-http.dev",
   // Pricing page
-  REQUESTLY_PRICING_PAGE: "https://requestly.com/pricing",
+  REQUESTLY_PRICING_PAGE: "https://thorn-http.dev",
   // Docs
-  REQUESTLY_DOCS: "https://docs.requestly.com/",
+  REQUESTLY_DOCS: "https://thorn-http.dev/docs",
   // Docs - Using Rules
-  REQUESTLY_DOCS_USING_RULES: "https://docs.requestly.com/general/http-rules/overview/",
+  REQUESTLY_DOCS_USING_RULES: "https://thorn-http.dev/docs",
   // Docs -Sharing Rules
-  REQUESTLY_DOCS_SHARING_RULES: "https://docs.requestly.com/general/http-rules/sharing",
+  REQUESTLY_DOCS_SHARING_RULES: "https://thorn-http.dev/docs",
   // Docs - File Service
-  REQUESTLY_DOCS_FILES_SERVICE: "https://docs.requestly.com/general/mock-server/overview",
+  REQUESTLY_DOCS_FILES_SERVICE: "https://thorn-http.dev/docs",
 
   // Docs - Premium Subscription
-  REQUESTLY_DOCS_PREMIUM_SUBSCRIPTION: "https://docs.requestly.com/general/team/team-collaboration",
+  REQUESTLY_DOCS_PREMIUM_SUBSCRIPTION: "https://thorn-http.dev/docs",
 
   // Docs - Premium Subscription
-  REQUESTLY_DOCS_TEAM_SUBSCRIPTION: "https://docs.requestly.com/general/team/team-collaboration",
+  REQUESTLY_DOCS_TEAM_SUBSCRIPTION: "https://thorn-http.dev/docs",
 
   // Docs - Mock Server
-  REQUESTLY_DOCS_MOCK_SERVER: "https://docs.requestly.com/general/mock-server/overview",
+  REQUESTLY_DOCS_MOCK_SERVER: "https://thorn-http.dev/docs",
 
   // Docs - Backup Data
-  REQUESTLY_DOCS_BACKUP_DATA: "https://docs.requestly.com/general/http-rules/sharing/download-rules",
+  REQUESTLY_DOCS_BACKUP_DATA: "https://thorn-http.dev/docs",
 
   // Docs - Extension Troubleshooting
-  REQUESTLY_EXTENSION_TROUBLESHOOTING: "https://docs.requestly.com/guides/troubleshooting/rules-not-working",
+  REQUESTLY_EXTENSION_TROUBLESHOOTING: "https://thorn-http.dev/docs",
 
-  REQUESTLY_EXTENSION_RULES_NOT_WORKING: "https://docs.requestly.com/guides/troubleshooting/rules-not-working",
+  REQUESTLY_EXTENSION_RULES_NOT_WORKING: "https://thorn-http.dev",
 
   // Docs - Mock GraphQL API response
-  REQUESTLY_DOCS_MOCK_GRAPHQL:
-    "https://docs.requestly.com/general/http-rules/advanced-usage/graphql-modify-request-response",
+  REQUESTLY_DOCS_MOCK_GRAPHQL: "https://thorn-http.dev/docs",
 
   // Docs - HTTP modifications
-  REQUESTLY_DOCS_HTTP_MODIFICATIONS: "https://docs.requestly.com/general/http-rules/overview",
+  REQUESTLY_DOCS_HTTP_MODIFICATIONS: "https://thorn-http.dev/docs",
 
   // Docs - Source Filters
-  REQUESTLY_DOCS_SOURCE_FILTERS: "https://docs.requestly.com/general/http-rules/advanced-usage/advance-targeting",
+  REQUESTLY_DOCS_SOURCE_FILTERS: "https://thorn-http.dev/docs",
 
   // Docs - Import rules from charles proxy
-  REQUESTLY_DOCS_IMPORT_SETTINGS_FROM_CHARLES: "https://docs.requestly.com/general/imports/charles-proxy",
+  REQUESTLY_DOCS_IMPORT_SETTINGS_FROM_CHARLES: "https://thorn-http.dev/docs",
 
   // Docs - Import Rules from resource override
-  REQUESTLY_DOCS_IMPORT_SETTINGS_FROM_RESOURCE_OVERRIDE: "https://docs.requestly.com/general/imports/resource-override",
+  REQUESTLY_DOCS_IMPORT_SETTINGS_FROM_RESOURCE_OVERRIDE: "https://thorn-http.dev/docs",
 
   // Docs - Test URL condition
-  REQUESTLY_DOCS_TEST_URL_CONDITION:
-    "https://docs.requestly.com/general/http-rules/others/http-rules-testing/test-url-condition",
+  REQUESTLY_DOCS_TEST_URL_CONDITION: "https://thorn-http.dev/docs",
 
-  REQUESTLY_DOCS_SESSION_RECORDING_ARCHITECTURE: "https://docs.requestly.com/security-privacy/sessions/",
+  REQUESTLY_DOCS_SESSION_RECORDING_ARCHITECTURE: "https://thorn-http.dev/docs",
 
-  REQUESTLY_DOCS_TEST_RULES: "https://docs.requestly.com/general/http-rules/advanced-usage/test-rules",
+  REQUESTLY_DOCS_TEST_RULES: "https://thorn-http.dev/docs",
 
-  REQUESTLY_API_DOCS: "https://docs.requestly.com/public-apis/overview/",
+  REQUESTLY_API_DOCS: "https://thorn-http.dev/docs",
 
-  REQUESTLY_REDIRECT_RULE_DOCS: "https://docs.requestly.com/general/http-rules/rule-types/redirect-rule",
-  REQUESTLY_CANCEL_RULE_DOCS: "https://docs.requestly.com/general/http-rules/rule-types/cancel-rule",
-  REQUESTLY_DELAY_RULE_DOCS: "https://docs.requestly.com/general/http-rules/rule-types/delay-network-requests",
-  REQUESTLY_HEADERS_RULE_DOCS: "https://docs.requestly.com/general/http-rules/rule-types/modify-headers/",
-  REQUESTLY_QUERYPARAM_RULE_DOCS: "https://docs.requestly.com/general/http-rules/rule-types/modify-query-params",
-  REQUESTLY_REPLACE_RULE_DOCS: "https://docs.requestly.com/general/http-rules/rule-types/replace-strings",
-  REQUESTLY_REQUEST_RULE_DOCS: "https://docs.requestly.com/general/http-rules/rule-types/modify-request-body",
-  REQUESTLY_RESPONSE_RULE_DOCS: "https://docs.requestly.com/general/http-rules/rule-types/modify-request-body",
-  REQUESTLY_SCRIPT_RULE_DOCS: "https://docs.requestly.com/general/http-rules/rule-types/insert-scripts",
-  REQUESTLY_USERAGENT_RULE_DOCS: "https://docs.requestly.com/general/http-rules/rule-types/modify-user-agents",
-  REQUESTLY_RUNTIME_VARIABLES_DOCS:
-    "https://docs.requestly.com/general/api-client/environments-and-variables/runtime-variables",
+  REQUESTLY_REDIRECT_RULE_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_CANCEL_RULE_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_DELAY_RULE_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_HEADERS_RULE_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_QUERYPARAM_RULE_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_REPLACE_RULE_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_REQUEST_RULE_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_RESPONSE_RULE_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_SCRIPT_RULE_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_USERAGENT_RULE_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_RUNTIME_VARIABLES_DOCS: "https://thorn-http.dev/docs",
 
-  REQUESTLY_HEADERS_RULE_FAQ_LINK:
-    "https://docs.requestly.com/general/http-rules-(modify-traffic)/rule-types/modify-headers#faqs",
+  REQUESTLY_HEADERS_RULE_FAQ_LINK: "https://thorn-http.dev/docs",
 
-  REQUESTLY_NETWORK_INSPECTOR_DOCS:
-    "https://docs.requestly.com/general/http-interceptor/browser-extension/browser-interception",
+  REQUESTLY_NETWORK_INSPECTOR_DOCS: "https://thorn-http.dev/docs",
 
   /** API Client docs */
-  REQUESTLY_API_CLIENT_DOCS: "https://docs.requestly.com/general/api-client/overview",
+  REQUESTLY_API_CLIENT_DOCS: "https://thorn-http.dev/docs",
 
   /** API Client Import docs */
-  REQUESTLY_API_CLIENT_IMPORT_POSTMAN_DOCS:
-    "https://docs.requestly.com/general/api-client/import-export/import-from-postman",
-  REQUESTLY_API_CLIENT_IMPORT_OPENAPI_DOCS:
-    "https://docs.requestly.com/general/api-client/import-export/import-openapi-spec",
-  REQUESTLY_API_CLIENT_IMPORT_COLLECTIONS_DOCS:
-    "https://docs.requestly.com/general/api-client/import-export/import-export-api-collections",
-  REQUESTLY_API_CLIENT_IMPORT_CURL_DOCS: "https://docs.requestly.com/general/api-client/import-export/import-from-curl",
+  REQUESTLY_API_CLIENT_IMPORT_POSTMAN_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_API_CLIENT_IMPORT_OPENAPI_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_API_CLIENT_IMPORT_COLLECTIONS_DOCS: "https://thorn-http.dev/docs",
+  REQUESTLY_API_CLIENT_IMPORT_CURL_DOCS: "https://thorn-http.dev/docs",
 
   /** LANDING PAGES **/
 
   // Home
-  REQUESTLY_LANDING_HOME: getLinkWithMetadata("https://requestly.com/"),
+  REQUESTLY_LANDING_HOME: "https://thorn-http.dev",
   //Blog
-  REQUESTLY_BLOG: getLinkWithMetadata("https://requestly.com/blog/"),
+  REQUESTLY_BLOG: "https://thorn-http.dev/docs",
   //Desktop App
-  REQUESTLY_DESKTOP_APP: getLinkWithMetadata("https://requestly.com/desktop"),
+  REQUESTLY_DESKTOP_APP: "https://thorn-http.dev",
   //Privacy Policy
-  REQUESTLY_PRIVACY_POLICY: getLinkWithMetadata("https://requestly.com/privacy"),
+  REQUESTLY_PRIVACY_POLICY: "https://thorn-http.dev/privacy",
   // Terms and Conditions
-  REQUESTLY_TERMS_AND_CONDITIONS: getLinkWithMetadata("https://requestly.com/terms/"),
+  REQUESTLY_TERMS_AND_CONDITIONS: "https://thorn-http.dev/terms",
   //Privacy Statement
-  REQUESTLY_PRIVACY_STATEMENT: getLinkWithMetadata("https://requestly.com/privacy/"),
+  REQUESTLY_PRIVACY_STATEMENT: "https://thorn-http.dev/privacy",
   //Contact Us
   CONTACT_US: "mailto:" + GLOBAL_CONSTANTS.COMPANY_INFO.SUPPORT_EMAIL,
   // Contact Us Page
-  CONTACT_US_PAGE: getLinkWithMetadata("https://requestly.com/contact-us/"),
+  CONTACT_US_PAGE: "https://thorn-http.dev",
   // Book A Demo
-  BOOK_A_DEMO: "https://www.browserstack.com/contact?utm_source=Requestly&utm_medium=redirect&utm_platform=external",
+  BOOK_A_DEMO: "https://thorn-http.dev",
 
   /** SUPPORT */
 
   //Github Issues
-  REQUESTLY_GITHUB_ISSUES: "https://github.com/requestly/interceptor/issues",
-  FEEDBACK: "https://feedback.requestly.io/",
+  REQUESTLY_GITHUB_ISSUES: "https://thorn-http.dev/issues",
+  FEEDBACK: "https://thorn-http.dev",
 
   /** EXTENSIONS */
 
   //Chrome
-  CHROME_EXTENSION:
-    "https://chromewebstore.google.com/detail/requestly-intercept-modif/mdnleldcmiljblolnjhpnblkcekpdkpa",
+  CHROME_EXTENSION: "https://thorn-http.dev",
 
   CHROME_STORE_REVIEWS: "https://rqst.ly/chrome-review",
   CHROME_STORE_REVIEW_FORM: "https://app.formbricks.com/s/cmd2qhh4vnxezyq01ailfaszm",
   //Firefox
-  FIREFOX_EXTENSION: "https://app.requestly.in/firefox/builds/requestly-latest.xpi",
+  FIREFOX_EXTENSION: "https://thorn-http.dev",
   //Edge
-  EDGE_EXTENSION:
-    "https://microsoftedge.microsoft.com/addons/detail/requestly-redirect-url-/ehghoapnlpepjmfbgaomdiilchcjemak",
+  EDGE_EXTENSION: "https://thorn-http.dev",
   /** GDPR */
   GDPR: {
-    GDPR_PAGE: "https://privacy.requestly.io/",
-    EXPORT_DATA: "https://privacy.requestly.io/data_requests",
-    DELETE_ACCOUNT: "https://privacy.requestly.io/data_requests",
-    SIGN_DPA: "https://privacy.requestly.io/dpa",
+    GDPR_PAGE: "https://thorn-http.dev/privacy",
+    EXPORT_DATA: "https://thorn-http.dev",
+    DELETE_ACCOUNT: "https://thorn-http.dev",
+    SIGN_DPA: "https://thorn-http.dev",
   },
 
   /** TUTORIALS */
@@ -158,17 +148,17 @@ const LINKS = {
   },
 
   CHANGELOG: "https://rqst.ly/change-logs",
-  PRODUCTLIFT_CHANGELOG: "https://requestly.productlift.dev/",
+  PRODUCTLIFT_CHANGELOG: "https://thorn-http.dev",
 
   ACCELERATOR_PROGRAM_FORM_LINK: "https://app.formbricks.com/s/cm1ewcpkt0000djs29ct7rpy2",
 
   GITHUB_STUDENT_PROGRAM_DOC: "https://rqst.ly/github-education",
 
-  GITHUB_EDUCATION_PACK_LP: "https://requestly.com/github-education/",
+  GITHUB_EDUCATION_PACK_LP: "https://thorn-http.dev/source",
 
-  API_CLIENT_LOCAL_FIRST_ANNOUNCEMENT: "https://github.com/requestly/requestly/issues/2629",
+  API_CLIENT_LOCAL_FIRST_ANNOUNCEMENT: "https://thorn-http.dev",
 
-  REQUESTLY_GITHUB: "https://github.com/requestly/interceptor",
+  REQUESTLY_GITHUB: "https://thorn-http.dev/source",
 
   OAUTH_REDIRECT_URL: `${process.env.VITE_BACKEND_BASE_URL}/oauth/authorize`,
 
@@ -178,18 +168,17 @@ const LINKS = {
 
   AUTOMATION_DOC: "https://rqst.ly/automation",
 
-  DOWNLOAD_CRX: "https://requestly.com/downloads/crx/",
+  DOWNLOAD_CRX: "https://thorn-http.dev",
 
   DOWNLOAD_CHROME_EXTENSION_ZIP: "https://rqst.ly/chrome/zip",
 
   SHARE_ON_LINKEDIN_FORM: "https://app.formbricks.com/s/gsfvea1k3n53is5fit337ibp",
 
-  NOTION_PAGE_FOR_PROMOTION:
-    "https://requestly.notion.site/Help-Us-Grow-Requestly-Get-4-Months-Free-25cd193f3c998015ad1dfab733e8cfd2?source=copy_link",
+  NOTION_PAGE_FOR_PROMOTION: "https://thorn-http.dev",
 
-  AI_DOC_LINK: "https://www.browserstack.com/support/faq/browserstack-ai",
+  AI_DOC_LINK: "https://thorn-http.dev/docs",
 
-  REQUESTLY_SECRETS_DOCS: "https://docs.requestly.com",
+  REQUESTLY_SECRETS_DOCS: "https://thorn-http.dev/docs",
 };
 
 export default LINKS;

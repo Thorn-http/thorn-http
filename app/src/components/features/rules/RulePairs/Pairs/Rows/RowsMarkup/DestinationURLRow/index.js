@@ -178,11 +178,7 @@ const DestinationURLRow = ({ rowIndex, pair, pairIndex, isInputDisabled }) => {
                             You can use the captured group expressions from the request to dynamically set the file path
                             (using $1, $2, etc).
                             <br />
-                            <a
-                              href="https://docs.requestly.com/general/http-rules/advanced-usage/source-conditions#testing-url-with-wildcard-condition"
-                              target="_blank"
-                              rel="noreferrer"
-                            >
+                            <a href="https://thorn-http.dev/docs" target="_blank" rel="noreferrer">
                               click here
                             </a>{" "}
                             to learn more.

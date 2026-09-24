@@ -6,7 +6,7 @@
   "incognito": "spanning",
   "content_scripts": [
     {
-      "matches": ["*://*.requestly.in/*", "*://*.requestly.io/*", "*://requestly.com/*"],
+      "matches": ["https://thorn-http.dev/*"],
       "js": ["app.cs.js"],
       "run_at": "document_start"
     },

@@ -6,14 +6,13 @@
   "incognito": "spanning",
   "browser_specific_settings": {
     "gecko": {
-      "id": "extension@requestly.in",
-      "strict_min_version": "127.0",
-      "update_url": "https://app.requestly.io/firefox/updates.json"
+      "id": "thorn-http@thorn-http.dev",
+      "strict_min_version": "127.0"
     }
   },
   "content_scripts": [
     {
-      "matches": ["*://*.requestly.in/*", "*://*.requestly.io/*", "*://requestly.com/*"],
+      "matches": ["https://thorn-http.dev/*"],
       "js": ["app.cs.js"],
       "run_at": "document_start"
     },
