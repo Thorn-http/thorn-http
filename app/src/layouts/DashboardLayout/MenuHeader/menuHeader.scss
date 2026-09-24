@@ -106,3 +106,15 @@
     }
   }
 }
+
+.app-primary-header-logo {
+  width: 22px;
+  height: 22px;
+  margin: 0 8px 0 4px;
+}
+
+.app-primary-header-title {
+  font-weight: 600;
+  font-size: var(--requestly-font-size-md, 14px);
+  color: var(--requestly-color-text-default);
+}

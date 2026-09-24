@@ -55,3 +55,12 @@
 .app-layout-footer .extension-version {
   color: var(--requestly-color-text-subtle);
 }
+
+.app-layout-footer .footer-link {
+  color: var(--requestly-color-text-subtle);
+  font-size: var(--requestly-font-size-xs, 12px);
+}
+
+.app-layout-footer .footer-link:hover {
+  color: var(--requestly-color-text-default);
+}
