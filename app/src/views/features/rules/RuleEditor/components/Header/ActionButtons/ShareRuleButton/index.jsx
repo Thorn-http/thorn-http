@@ -10,6 +10,7 @@ import { SOURCE } from "modules/analytics/events/common/constants";
 import APP_CONSTANTS from "config/constants";
 import { getModeData } from "../../../../../../../../components/features/rules/RuleBuilder/actions";
 import { RQButton } from "lib/design-system-v2/components";
+import { isThornExtension } from "utils/EnvUtils";
 
 const ShareRuleButton = ({ isRuleEditorModal }) => {
   const { MODE } = getModeData(window.location);
@@ -19,7 +20,7 @@ const ShareRuleButton = ({ isRuleEditorModal }) => {
 
   const shareRuleClickHandler = () => {
     trackShareButtonClicked("rule_editor");
-    if (user.loggedIn) {
+    if (user.loggedIn || isThornExtension()) {
       toggleSharingModal();
     } else {
       dispatch(

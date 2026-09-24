@@ -3,6 +3,7 @@ import { Row } from "antd";
 import { AuthConfirmationPopover } from "components/hoc/auth/AuthConfirmationPopover";
 import { PremiumIcon } from "components/common/PremiumIcon";
 import { RQButton, RQButtonProps } from "lib/design-system-v2/components";
+import { isThornExtension } from "utils/EnvUtils";
 
 interface Props {
   icon: React.ReactNode;
@@ -54,7 +55,7 @@ const AuthPopoverButton: React.FC<Props> = ({
             return;
           }
           if (hasPopconfirm) {
-            isLoggedIn && onClickHandler();
+            (isLoggedIn || isThornExtension()) && onClickHandler();
           } else {
             onClickHandler();
           }

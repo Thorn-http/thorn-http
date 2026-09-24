@@ -4,7 +4,6 @@ import { globalActions } from "store/slices/global/slice";
 import { isValidUrl } from "../../../../../../../../../utils/FormattingHelper";
 import { CONSTANTS as GLOBAL_CONSTANTS } from "@requestly/requestly-core";
 import { cloneDeep, inRange } from "lodash";
-import { getFunctions, httpsCallable } from "firebase/functions";
 import { parseHTMLString, getHTMLNodeName, validateHTMLTag, removeUrlAttribute } from "./insertScriptValidators";
 import { isFeatureCompatible } from "utils/CompatibilityUtils";
 import FEATURES from "config/constants/sub/features";
@@ -640,14 +639,8 @@ export const validateRule = (rule, dispatch, appMode) => {
   };
 };
 
-export const ruleModifiedAnalytics = (user) => {
-  if (user.loggedIn) {
-    const functions = getFunctions();
-    const usageMetrics = httpsCallable(functions, "usageMetrics");
-    const data = new Date().getTime();
-    usageMetrics(data);
-  }
-};
+// Usage metrics were sent to Requestly's backend; Thorn HTTP collects nothing.
+export const ruleModifiedAnalytics = (_user) => {};
 
 const checkUnsupportedRE2Features = (regexString) => {
   const unsupportedFeaturesRegex = {

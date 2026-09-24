@@ -17,6 +17,7 @@ import { generateObjectCreationDate } from "utils/DateTimeUtils";
 import { deleteTestReportByRuleId } from "../TestThisRule/utils/testReports";
 import { useFeatureIsOn } from "@growthbook/growthbook-react";
 import clientRuleStorageService from "services/clientStorageService/features/rule";
+import { isThornExtension } from "utils/EnvUtils";
 
 const UNGROUPED_GROUP_ID = APP_CONSTANTS.RULES_LIST_TABLE_CONSTANTS.UNGROUPED_GROUP_ID;
 
@@ -130,7 +131,7 @@ const UngroupOrDeleteRulesModal = ({ isOpen, toggle, groupIdToDelete, groupRules
 
   const deleteRulesAndThenGroup = () => {
     // Login is mandatory since we have move Rules to the Trash
-    if (!user.loggedIn) {
+    if (!user.loggedIn && !isThornExtension()) {
       promptUserToSignup(SOURCE.DELETE_RULE);
       return;
     }

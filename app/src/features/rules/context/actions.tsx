@@ -31,6 +31,7 @@ import { SOURCE } from "modules/analytics/events/common/constants";
 import { Group, RecordStatus, Rule, StorageRecord } from "@requestly/shared/types/entities/rules";
 import { trackSignUpButtonClicked } from "modules/analytics/events/common/auth/signup";
 import { RULES_WITHOUT_LIMITS } from "../constants";
+import { isThornExtension } from "utils/EnvUtils";
 
 // FIXME: Make all bulk actions async to handle loading state properly
 type RulesActionContextType = {
@@ -160,7 +161,7 @@ export const RulesActionContextProvider: React.FC<RulesProviderProps> = ({ child
     (records?: StorageRecord[], onSuccess?: Function) => {
       Logger.log("[DEBUG]", "recordsShareAction", records);
       trackShareButtonClicked(onSuccess ? "bulk_action_bar" : "rules_list");
-      if (user.loggedIn) {
+      if (user.loggedIn || isThornExtension()) {
         const rulesToShare = records.filter(isRule);
         const ruleIds = rulesToShare.map((rule) => rule.id);
 
@@ -368,7 +369,7 @@ export const RulesActionContextProvider: React.FC<RulesProviderProps> = ({ child
   const groupShareAction = useCallback(
     async (group: Group, onSuccess?: () => void) => {
       if (!group) return;
-      if (user.loggedIn) {
+      if (user.loggedIn || isThornExtension()) {
         const groupRules = await getAllRulesOfGroup(appMode, group.id);
         const ruleIds = groupRules.map((rule: Rule) => rule.id);
 

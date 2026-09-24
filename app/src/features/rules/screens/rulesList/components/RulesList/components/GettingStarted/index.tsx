@@ -41,6 +41,7 @@ import { ImporterType } from "features/rules/types/importers";
 import { getActiveWorkspaceId, isActiveWorkspaceShared } from "store/slices/workspaces/selectors";
 import { getLinkWithMetadata } from "modules/analytics/metadata";
 import { HeaderEditorImporterModal } from "../ImporterComponents/HeaderEditorImporter/HeaderEditorImporterModal";
+import { isThornExtension } from "utils/EnvUtils";
 
 const { PATHS } = APP_CONSTANTS;
 
@@ -267,7 +268,7 @@ export const GettingStarted: React.FC = () => {
                 onClick={() => {
                   trackRulesEmptyStateClicked("import_json");
                   trackUploadRulesButtonClicked(SOURCE.GETTING_STARTED);
-                  user?.details?.isLoggedIn && handleUploadRulesClick();
+                  (user?.details?.isLoggedIn || isThornExtension()) && handleUploadRulesClick();
                 }}
               >
                 Upload rules
