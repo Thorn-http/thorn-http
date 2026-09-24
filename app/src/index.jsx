@@ -9,6 +9,14 @@ import { PersistGate } from "redux-persist/integration/react";
 import { HotkeysProvider } from "react-hotkeys-hook";
 
 import "./init";
+// Bundled fonts (no Google Fonts requests; required inside the extension)
+import "@fontsource/inter/latin-300.css";
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-600.css";
+import "@fontsource/inter/latin-700.css";
+import "@fontsource/roboto-mono/latin-400.css";
+import "@fontsource/roboto-mono/latin-500.css";
 import "./assets/less/index.less";
 import "./styles/custom/custom.scss";
 
