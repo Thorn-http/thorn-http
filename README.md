@@ -6,7 +6,7 @@ Intercept, modify and mock HTTP(S) traffic straight from the browser: redirect U
 
 🌐 https://thorn-http.dev
 
-> **Status:** early development. See [ROADMAP.md](./ROADMAP.md).
+> **Status:** v1.0.0 ready for store submission. See [ROADMAP.md](./ROADMAP.md).
 
 ---
 
@@ -30,10 +30,16 @@ Also:
 - Import / export rules as JSON
 - Import from Charles Proxy, ModHeader and Resource Override
 - DevTools panel showing which rules ran on each request
+- Record a page's network traffic in the side panel and export it as HAR
 
 ## Development
 
-See [getting-started.md](./getting-started.md) for local setup.
+See [getting-started.md](./getting-started.md) for local setup:
+
+```sh
+bash install.sh && bash build.sh        # then load browser-extension/mv3/dist unpacked
+cd browser-extension/mv3 && npm run test:e2e
+```
 
 - `browser-extension/` — MV3 extension (Chrome, Edge, Firefox)
 - `app/` — React UI (rule editor)

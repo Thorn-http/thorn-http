@@ -1,124 +1,112 @@
 # Roadmap — Thorn HTTP
 
-Fork do Requestly HTTP Interceptor, relançado como **Thorn HTTP**: extensão gratuita, local-first, sem conta e sem backend.
+Fork do Requestly HTTP Interceptor, relançado como **Thorn HTTP**: extensão gratuita, local-first, sem conta, sem backend e sem telemetria.
 
-**Decisões fechadas**
+**Decisões**
 
 - Nome: Thorn HTTP (`thorn-http`). Domínio: `thorn-http.dev`.
-- Licença: AGPLv3, mantendo copyright da BrowserStack.
-- Grátis. Sem cadastro obrigatório (só link opcional de newsletter).
-- Foco: interceptor (regras). Cortar SessionBear/gravação de sessões, API Client e tudo que depende de backend.
-- Editor de regras: **empacotado dentro da extensão** por enquanto (revisitar depois).
-- Side panel de gravação de rede: **fica, 100% local**.
+- Licença: AGPLv3, mantendo o copyright da BrowserStack.
+- Grátis. Sem cadastro obrigatório (link opcional de newsletter no futuro).
+- Escopo: o interceptor (regras). SessionBear/gravação de sessão, API Client e tudo que depende de backend foram removidos.
+- Editor de regras: empacotado na extensão (`app.html`). Hospedar em `app.thorn-http.dev` pode ser reavaliado depois.
+- Side panel de gravação de rede: mantido, 100% local ("Record network" no popup + export HAR).
+- Navegadores: Chrome, Edge, Firefox. O código do Safari foi mantido, mas não é compilado (desativado).
 
-Legenda: `[x]` feito · `[ ]` pendente
+Legenda: `[x]` feito · `[ ]` pendente · 👤 depende de você (contas, jurídico, design)
 
 ---
 
-## Fase 0 — Rebrand base
+## Fase 0 — Rebrand ✅
 
-- [x] Nome/descrição da extensão (`browser-extension/mv3/_locales/en/messages.json`)
-- [x] Strings visíveis da extensão: popup, devtools, context menu, console, side panel
-- [x] Título da app e `app/public/manifest.json`
+- [x] Nome/descrição da extensão, popup, painel do DevTools, menu de contexto, side panel, texto do widget na página
+- [x] Título/manifest da app, header (logo + nome), footer (site + link do código-fonte)
+- [x] Textos "Requestly"/"SessionBook" restantes no código alcançável
 - [x] `LICENSE`: copyright Thorn HTTP + aviso de modificação e de não-afiliação
-- [x] `package.json` raiz: nome, descrição, autor, homepage
-- [x] `README.md` novo com atribuição ao Requestly
-- [x] Ícones placeholder (extensão em todos os estados, favicon, logos da app)
-- [ ] Logo e ícones definitivos
-- [ ] Trocar strings "Requestly" restantes na UI da app (~200 ocorrências em `app/src`). Fazer **depois** da Fase 1, para não renomear código que será apagado
-- [ ] Cor/tema da marca (opcional)
+- [x] README com atribuição ao Requestly (AGPLv3)
+- [x] Ícones placeholder (todos os estados do ícone, favicon, logos da app)
+- [ ] 👤 Logo e ícones definitivos (trocar `browser-extension/mv3/resources/images/*`, `app/src/assets/img/brand/*`, `app/public/favicon.png` e regenerar as imagens de `store/`)
 
-## Fase 1 — Cortes (remover o que não entra na v1)
+## Fase 1 — Cortes ✅
 
-- [ ] **SessionBear / sessões:** `browser-extension/sessionbear/`, `app/src/src-SessionBear/`, `app/src/features/sessionBook/`, `app/src/views/features/sessions/`, `app/src/backend/sessionRecording/`, gravação no popup (`SessionRecording/`), content script `sessionRecorder.ts`, page scripts `sessionRecorderHelper.js` e `networkBodyRecorder.js`
-- [ ] **API Client:** `app/src/features/apiClient/`, `app/src/backend/apiClient/`, popup `ApiClientContainer/`
-- [ ] **Conta e times:** auth, workspaces, RBAC, convites (`features/workspaces`, `features/rbac`, `backend/auth`, `backend/workspace`, `backend/user`)
-- [ ] **Billing/pricing:** `features/pricing`, `backend/billing`, gates de plano premium (liberar todas as features)
-- [ ] **Nuvem:** mocks na nuvem (`backend/mocks`), shared lists (`backend/sharedList`)
-- [ ] **AI / requestBot:** `features/ai`, `features/requestBot` (dependem de backend)
-- [ ] **Onboarding** atrelado a login (`features/onboarding`, `backend/onboarding`)
-- [ ] **Integração com desktop app do Requestly:** popup `DesktopAppProxy/`, telas de desktop na app
-- [ ] **Integração BrowserStack:** `externally_connectable` nos manifests e mensagens externas em `messageHandler/listener.ts` (`onMessageExternal`)
-- [x] **Analytics/tracking na app:** PostHog, feature flags, GrowthBook, geo lookup, Stripe auto-load, bot Writesonic, checagem de versão remota, botão GitHub — zero requisições externas no load
-- [ ] **Analytics/tracking restante:** `common/analytics-vendors/`, remover código morto (hoje são no-ops)
-- [ ] **Firebase:** `app/src/firebase.js`, SDK `firebase` nas dependências, `emulator.dockerfile`, script `deploy-beta`
-- [ ] **Docs do Requestly:** `documentation/` (254 MB, Mintlify). Apagar e escrever docs próprias enxutas
-- [ ] **Diversos:** `eligible-student-domains.md`, `.all-contributorsrc`, `.whitesource`, `.deepsource.toml`, `.hive/`, `docs/superpowers/`, workflows em `.github/` que apontam para infra da Requestly
+- [x] Rotas/navegação reduzidas a Regras + Settings; importadores sem exigir login
+- [x] SessionBear (app + extensão), gravação de sessão (serviço, content script, page script, widgets), upload da sessão de teste
+- [x] API Client (app, serviço de requisições da extensão, menu "Run cURL", listener de import de cURL)
+- [x] UI de conta/times/billing/pricing/onboarding, assistente de IA, shared lists, seletores de file server, empurrões para o app desktop
+- [x] Nuvem: listeners de sync, checagem remota de versão, block screen, usage metrics
+- [x] Analytics/tracking: PostHog, flags remotas do GrowthBook (agora padrões locais), auto-load do Stripe, geolocalização, Google Fonts, bot Writesonic, botão de estrelas do GitHub → **zero requisições a terceiros** (coberto por teste e2e)
+- [x] Integração BrowserStack (`externally_connectable`, mensagens externas)
+- [x] Proxy do app desktop e a permissão `proxy`
+- [x] Código inalcançável apagado com base no grafo de módulos do Vite (≈2.600 → ≈700 arquivos em `app/src`)
+- [x] Docs do Requestly (`documentation/`), workflows de deploy, CODEOWNERS, configs WhiteSource/DeepSource, zips antigos de release, chaves de dev do Requestly em `app/.env`
+- [x] 58 dependências sem uso e 175 assets públicos sem uso (pacote da extensão: 63 MB → 16 MB descompactado, ~5 MB em zip)
+- [ ] O SDK do Firebase ainda vai no bundle (estado de auth, alguns slices e módulos de backend continuam alcançáveis). Nunca é configurado com projeto real e não faz requisições; remover de vez exige refatorar o estado de usuário/auth — vale fazer, não bloqueia.
+- [ ] Componentes de `features/pricing` ainda alcançáveis via wrappers `PremiumFeature` (sempre liberados); dá para desembrulhar.
 
-## Fase 2 — Local-first
+## Fase 2 — Local-first ✅
 
-- [ ] Regras e grupos salvos só em `chrome.storage.local` (remover caminhos de sync)
-- [ ] Import/export de regras em JSON como forma de backup e compartilhamento
-- [ ] Remover telas/gates de login; app abre direto nas regras
-- [ ] Revisar limites do plano free (quantidade de regras etc.) e remover
-- [ ] Mock de resposta funcionando 100% local (regra Response), sem mock server
+- [x] Regras só em `chrome.storage.local`
+- [x] Export (download JSON) / import, inclusive exports do Requestly (regras importadas começam desativadas — comportamento original)
+- [x] Sem pedido de login para exportar, fazer upload ou apagar grupos
+- [x] Tudo liberado (sem planos/limites, sem selo premium)
 
-## Fase 3 — Onde roda a UI (editor de regras)
+## Fase 3 — Editor empacotado ✅
 
-Hoje o editor de regras é a web app hospedada em `app.requestly.io` (`WEB_URL` em `browser-extension/config/configs/env/*.json`); o popup só abre essa página.
+- [x] App compilada no modo `extension` (`app/app.html`, `app/.env.extension`), hash router, copiada para dentro da extensão
+- [x] `WEB_URL="extension"` → `chrome-extension://<id>/app.html#`; popup/devtools/widgets abrem o editor empacotado
+- [x] `app.html` carrega o `app.cs.js` direto como ponte app ↔ extensão
+- [x] CSP: sem scripts remotos, sem `eval` (html-validate carregado sob demanda, ver limitações)
+- [x] Links de docs/privacidade/termos/issues do Requestly → `thorn-http.dev` (`/docs`, `/privacy`, `/terms`, `/issues`, `/source`)
+- [x] Firefox: gecko id próprio `thorn-http@thorn-http.dev`, sem `update_url` próprio
+- [ ] (opcional) Trocar a ponte `postMessage` por chamadas diretas `chrome.runtime`/`chrome.storage`
 
-- [x] Decisão: empacotar a UI dentro da extensão (página da extensão, zero hospedagem). Hospedar em `app.thorn-http.dev` fica para reavaliar depois
-- [x] Build da `app/` no modo `extension` (`app/app.html`, `.env.extension`) copiado para dentro da extensão, com hash router
-- [x] Popup/devtools abrindo a página interna (`chrome.runtime.getURL`) no lugar de `WEB_URL`
-- [x] Ponte app ↔ extensão: `app.html` carrega `app.cs.js` direto (mesmo protocolo `postMessage`)
-- [ ] (opcional) Trocar a ponte por chamadas diretas `chrome.runtime`/`chrome.storage`
-- [x] Ajustar CSP da extensão para o bundle da app (sem scripts remotos, sem `eval`)
-- [x] `WEB_URL="extension"` (resolve para `chrome-extension://<id>/app.html#`), `OTHER_WEB_URLS`, `LANDING_PAGE_BASE_URL`, `SESSIONS_URL`
-- [x] Content script da app removido do manifest no build empacotado
-- [ ] Limpar `content_scripts.matches` (`*.requestly.io`) dos manifests-fonte
-- [ ] Firefox: novo `browser_specific_settings.gecko.id` (hoje `extension@requestly.in`) e remover `update_url`
-- [ ] Trocar links para `requestly.com`, `docs.requestly.com`, `get.requestly.com` por `thorn-http.dev`
+## Fase 3.1 — Gravação de rede (local) ✅
 
-## Fase 3.1 — Side panel de gravação de rede (local)
+- [x] "Record network" no popup (grava a página atual numa aba nova com o side panel)
+- [x] "Export HAR" no side panel (HAR 1.2)
+- [x] Dependência do BrowserStack Live removida
 
-Hoje a gravação só é iniciada por mensagem externa vinda do BrowserStack Live (`START_NETWORK_RECORDING` via `onMessageExternal`), e os dados voltam para a página deles. Sem o BrowserStack, não há como iniciar.
+## Fase 4 — Renomes internos ✅
 
-- [ ] Botão "Gravar rede" no popup (ou menu de contexto) chamando `startNetworkRecording` internamente
-- [ ] Exportar gravação como arquivo **HAR** (download local) — o `harBuilder.ts` já monta as entradas
-- [ ] Remover dependência de `fallbackUrl`/aba de origem do BrowserStack
-- [ ] Manter `@requestly/web-sdk` (Apache-2.0, npm) para captura de bodies, ou avaliar substituir
+- [x] Pacotes locais → `@thorn-http/*` (`shared`, `core`, `rule-processor`, `analytics-vendors`, pacotes da app e da extensão); metadados dos pacotes
+- [x] Docs de desenvolvimento reescritas: `claude.md`, `.cursorrules`, `getting-started.md`, `CONTRIBUTING.md`, README da app, guias da extensão, contato do código de conduta
+- [x] Decidido **não** renomear identificadores internos (namespaces `requestly:*`, prefixos `rq-`, `__REQUESTLY__`, chaves de storage): sem impacto para o usuário, e a lib `@requestly/web-sdk` depende de alguns
+- Pacotes npm de terceiros publicados pelo Requestly continuam como dependência (todos Apache-2.0/ISC): `@requestly/web-sdk`, `@requestly/alternative-importers`, `@requestly-ui/resource-table`
 
-## Fase 4 — Renomes internos
+## Fase 5 — Qualidade ✅
 
-Não quebra nada para o usuário, mas limpa o código. Como não há base de usuários antiga, não precisa migração de dados.
-
-- [ ] Pacotes `@requestly/*` → `@thorn-http/*` (`browser-extension/*/package.json`, `shared/`, `common/`)
-- [ ] Namespaces de mensagens (`requestly:client`, etc.) e chaves de storage
-- [ ] Prefixos de CSS/elementos customizados (`rq-*`), se valer o esforço
-- [ ] `main`/`module` do `package.json` (`requestly-core.*.js`)
-- [ ] `repository`/`bugs` nos `package.json` → repo novo no GitHub
-- [ ] Arquivos `claude.md`, `.cursorrules`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `getting-started.md`
-
-## Fase 5 — Qualidade e build
-
-- [x] Build completo passando (`bash build.sh`) e extensão carregando no Chromium
-- [x] Teste e2e manual: regra Redirect criada pela UI empacotada é aplicada numa página real
-- [x] Fontes empacotadas (Inter, Roboto Mono) em vez de Google Fonts
-- [ ] Transformar o smoke/e2e (Playwright) em teste versionado no repo
-- [ ] Validação de HTML do Insert Script: `html-validate` usa `new Function` (bloqueado pela CSP) e hoje é pulada — trocar por validação via `DOMParser`
-- [ ] Import de cURL usa tree-sitter WASM com `eval` no glue — verificar se funciona com a CSP
-
-- [ ] Build limpo da extensão (Chrome, Edge, Firefox) após os cortes
-- [ ] Rodar/ajustar testes (`browser-extension/mv3/tests`, Playwright) e testes da app
-- [ ] CI no GitHub Actions: lint, testes, build e zip para as lojas
-- [ ] Remover dependências não usadas após os cortes (tamanho do bundle)
-- [ ] Revisar permissões do manifest (`browsingData`, `proxy`, `sidePanel`… manter só o necessário — lojas reprovam permissão sobrando)
+- [x] Suíte e2e local (`cd browser-extension/mv3 && npm run test:e2e`, Playwright + servidor local, sem internet): regra Redirect pelo editor, pausa, export/apagar/import, gravação de rede + HAR, todos os editores renderizam, zero requisições a terceiros, settings visíveis
+- [x] Testes originais de regras (`tests/`) adaptados ao editor empacotado (ainda precisam de internet: usam `requestly.tech`/`example.com`)
+- [x] CI (GitHub Actions): install, build, e2e, zips das lojas, lint do Firefox
+- [x] Bugs encontrados e corrigidos no caminho:
+  - abas do app ficavam repassando `CLIENT_PAGE_LOADED` sem parar → service worker inundado e todas as abas travadas (introduzido ao empacotar o editor)
+  - a primeira pausa após instalar não desligava as regras (bug do upstream: mudança `CREATED` do storage ignorada)
+  - checagens de recurso comparavam com versões do upstream e escondiam recursos na versão 1.x
+- [x] Pacotes das lojas gerados e verificados: zip do Chrome passa na suíte e2e; zip do Firefox passa no `web-ext lint` (0 erros)
+- [ ] Teste manual no Firefox (`about:debugging` → carregar o zip) — o Playwright não carrega extensões no Firefox
+- [ ] Validação de HTML do Insert Script é pulada na extensão (`html-validate` precisa de `new Function`); trocar por uma checagem compatível com a CSP
+- [ ] 48 avisos do lint da AMO (`innerHTML`/`Function` dentro de bibliotecas empacotadas) — podem aparecer na revisão do Firefox
 
 ## Fase 6 — Lançamento
 
-- [ ] Checagem de marca "Thorn HTTP" no USPTO (classe 9) e INPI
-- [ ] Org `thorn-http` no GitHub, repo público (exigência da AGPL: código disponível)
-- [ ] Registrar `thornhttp.com` e redirecionar para `thorn-http.dev` (opcional)
-- [ ] Landing page em `thorn-http.dev` (HTTPS): features, link das lojas, link do código-fonte
-- [ ] Política de privacidade: "não coletamos dados" (obrigatória nas lojas)
-- [ ] Link opcional de newsletter (serviço externo, ex. Buttondown), sem backend próprio
-- [ ] Contas de desenvolvedor: Chrome Web Store (US$5 único), Edge Add-ons (grátis), Firefox AMO (grátis)
-- [ ] Listagem nas lojas: nome, descrição, screenshots, ícone, link do código-fonte
-- [ ] Safari: fica para depois (exige Apple Developer, US$99/ano)
+Pronto no repo:
+
+- [x] Site `site/` (landing, docs, privacidade, termos, redirects) — pode ir direto para Cloudflare Pages/Netlify
+- [x] Textos das lojas, justificativas de permissão, declarações de dados, promo tile, screenshots (`store/`)
+- [x] Processo de release e `npm run release` (`browser-extension/mv3/release-process.md`)
+
+Depende de você:
+
+- [ ] 👤 Busca de marca "Thorn HTTP" (USPTO classe 9, INPI)
+- [ ] 👤 Org/repo no GitHub (ex.: `thorn-http/thorn-http`), push e configurar como `origin`; se a URL for outra, atualizar `site/_redirects` e `repository` nos `package.json`
+- [ ] 👤 Publicar `site/` e apontar `thorn-http.dev` para ele (HTTPS é obrigatório em `.dev`)
+- [ ] 👤 (opcional) Registrar `thornhttp.com` e redirecionar
+- [ ] 👤 Contas de desenvolvedor: Chrome Web Store (US$5), Edge Add-ons, Firefox AMO
+- [ ] 👤 Enviar os zips do `npm run release` com o material de `store/`
+- [ ] 👤 (opcional) Link de newsletter (serviço externo, sem backend próprio)
 
 ## Depois da v1 (ideias)
 
-- [ ] Sync opcional via Google Drive/arquivo do usuário (sem backend próprio)
+- [ ] Sync opcional via Google Drive / arquivo do usuário (sem backend próprio)
 - [ ] Mais idiomas (`_locales/`)
-- [ ] Templates de regras prontos
+- [ ] Build do Safari
 - [ ] Cadastro/licença opcional, se a adoção justificar
