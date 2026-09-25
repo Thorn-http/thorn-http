@@ -8,6 +8,7 @@ export const APP_MESSAGES = {
 };
 
 export const EXTENSION_MESSAGES = {
+  OPEN_RULE_EDITOR_DRAFT: "openRuleEditorDraft",
   ALLOW_DELAYED_NAVIGATION: "allowDelayedNavigation",
   OPEN_RULE_LINK: "openRuleLink",
   GET_FULL_LOGS: "getFullLogs",

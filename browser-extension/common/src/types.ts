@@ -123,8 +123,8 @@ export interface RulePair {
   from?: string;
   modifications?: any;
   /** Modify API Response / Request Body rules */
-  response?: { type?: string; value?: string };
-  request?: { type?: string; value?: string };
+  response?: { type?: "static" | "code"; value?: string; statusCode?: string; resourceType?: string };
+  request?: { type?: "static" | "code"; value?: string };
 }
 
 export interface Rule extends Record<string, unknown> {

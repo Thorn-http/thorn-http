@@ -1,48 +1,16 @@
-import config from "../config";
 import { Rule } from "../types";
+import { openRuleEditorWith } from "../rules/openRuleEditor";
 import { ResourceTypeFilterValue } from "./components/ResourceTypeFilter";
 import { EVENT, sendEvent } from "./events";
 import { RuleEditorUrlFragment, ColorScheme, NetworkResourceType, NetworkEvent } from "./types";
 
-interface PostMessageData {
-  author: string;
-  action: string;
-  payload: {
-    ruleData: Rule;
-  };
-}
-
-const REQUESTLY_POST_MESSAGE_AUTHOR = "requestly";
-
 export const createRule = <T extends Rule>(
   ruleTypeUrlFragment: RuleEditorUrlFragment,
   initRuleData: (rule: T) => void,
-  inputSelectorToFocus?: string
+  _inputSelectorToFocus?: string
 ) => {
   sendEvent(EVENT.RULE_CREATION_WORKFLOW_STARTED, { rule_type: ruleTypeUrlFragment });
-  const editorUrl = `${config.WEB_URL}/rules/editor/create/${ruleTypeUrlFragment}?source=devtool`;
-  let editorWindow: Window;
-  const onMessageReceived = (event: MessageEvent<PostMessageData>) => {
-    const { author, action, payload } = event.data;
-    const { ruleData } = payload;
-    if (author === REQUESTLY_POST_MESSAGE_AUTHOR && action === "ruleEditor:ready") {
-      initRuleData(ruleData as T); // in-place update on ruleData
-      editorWindow?.postMessage(
-        {
-          author: REQUESTLY_POST_MESSAGE_AUTHOR,
-          action: "ruleEditor:loadData",
-          payload: {
-            ruleData,
-            inputSelectorToFocus,
-          },
-        },
-        config.WEB_URL
-      );
-      window.removeEventListener("message", onMessageReceived);
-    }
-  };
-  window.addEventListener("message", onMessageReceived);
-  editorWindow = window.open(editorUrl, "_blank");
+  openRuleEditorWith(ruleTypeUrlFragment, initRuleData);
 };
 
 export const getHostFromUrl = (url: string, includeScheme?: boolean): string => {

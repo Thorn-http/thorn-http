@@ -1,3 +1,4 @@
+import config from "common/config";
 import { CLIENT_MESSAGES, EXTENSION_MESSAGES } from "common/constants";
 import { checkIfNoRulesPresent, getRulesAndGroups } from "common/rulesStore";
 import { applyScriptRules } from "../scriptRuleHandler";
@@ -48,6 +49,15 @@ export const initMessageHandler = () => {
           () => sendResponse(false)
         );
         return true;
+
+      case EXTENSION_MESSAGES.OPEN_RULE_EDITOR_DRAFT:
+        // "Create mock" in the network recording / DevTools panels: only from our own pages.
+        if (sender.id === chrome.runtime.id && sender.url?.startsWith(chrome.runtime.getURL(""))) {
+          const ruleType = encodeURIComponent(String(message.ruleType));
+          const draftId = encodeURIComponent(String(message.draftId));
+          chrome.tabs.create({ url: `${config.WEB_URL}/rules/editor/create/${ruleType}?draft=${draftId}` });
+        }
+        break;
 
       case EXTENSION_MESSAGES.OPEN_RULE_LINK:
         openRuleLink(message.payload, sender);
