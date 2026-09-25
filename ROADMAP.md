@@ -173,7 +173,8 @@ Ideias que nenhuma extensão do segmento (Requestly, Tweak, ModHeader, Mokku) of
 
 ### Confiança e fluxo
 
-- [ ] **#1** ⭐ **Regras com validade e aviso na página**: timer por regra ("desligar em 1h") e faixa discreta na página ("Thorn está alterando 3 requisições aqui"). Resolve o clássico "esqueci a regra ligada e perdi horas depurando".
+- [x] **#1** ⭐ **Regras com validade e aviso na página**: timer por regra ("desligar em 1h") e faixa discreta na página ("Thorn está alterando 3 requisições aqui"). Resolve o clássico "esqueci a regra ligada e perdi horas depurando".
+  - Feito: seletor *Auto-disable* no editor (15 min / 1 h / 4 h / 1 dia), contagem na lista de regras, desligamento pelo service worker via `chrome.alarms`; aviso "Rules applied on this page" ligado por padrão (desligável em Settings), com nomes de regra escapados. e2e: `rule-expiry.spec.ts`
 - [ ] **#2** ⭐ **Regras versionadas no repositório**: sincronizar as regras com uma pasta local (ex.: `.thorn/rules.json`) via File System Access API. O time compartilha pelo git, sem conta e sem servidor.
 - [ ] **#3** ⭐ **Compartilhar regra por link**: a regra vai inteira no fragmento da URL (`thorn-http.dev/r#<base64>`), que nunca chega ao servidor. Quem abre importa com um clique; ótimo para issue, PR e Slack.
 - [ ] **#9** ⭐ **"Por que minha regra não aplicou?"**: o teste de regra explica a falha ("host bateu; path não: esperado `/api/v2`, recebido `/api/v1`"). Dor recorrente nas reviews.
