@@ -108,9 +108,43 @@ Depende de você:
 - [ ] 👤 Enviar os zips do `npm run release` com o material de `store/`
 - [ ] 👤 (opcional) Link de newsletter (serviço externo, sem backend próprio)
 
-## Depois da v1 (ideias)
+## Próximas versões — dores dos usuários
 
-- [ ] Sync opcional via Google Drive / arquivo do usuário (sem backend próprio)
-- [ ] Mais idiomas (`_locales/`)
-- [ ] Build do Safari
-- [ ] Cadastro/licença opcional, se a adoção justificar
+Levantamento de set/2026 (reviews da Chrome Web Store, issues do Requestly no GitHub, comparativos de alternativas). Contexto:
+
+- O Requestly passou a cobrar e as reviews recentes reclamam do paywall ("Ruined with paywall", "Too pricey").
+- O ModHeader foi marcado como malware em jul/2026 (coletava domínios visitados) e saiu da loja do Edge: ~1,6 mi de usuários procurando alternativa confiável.
+- O Resource Override morreu com o MV3; seus usuários queriam principalmente "mapear arquivo local".
+- Reclamações recorrentes: extensão deixa o Chrome lento ou quebra sites (Google Drive, Azure DevOps), e bugs antigos nas regras de corpo.
+
+### v1.1 — Desempenho e compatibilidade
+
+- [ ] **Interceptação de fetch/XHR configurável** (Settings): *Automático* (padrão) / *Sempre* / *Desligado*
+  - Automático: o page script só é registrado se houver regra **ativa** de Modify API Response, Modify Request Body ou Delay; entra/sai assim que essas regras mudam
+  - Aviso no editor ao salvar uma dessas regras com a interceptação desligada ("esta regra não terá efeito — [Ativar]"); aviso de que abas já abertas precisam de reload
+  - Pronto quando: e2e cobrindo os 3 modos; sem regras de corpo, nenhum site recebe o page script; nenhuma regressão na suíte atual
+- [ ] **"Não rodar neste site"** no popup: adiciona o domínio da aba atual aos Blocked Sites em um clique (e remove com outro)
+- [ ] **Bug herdado:** Modify Request Body não funciona com `application/x-www-form-urlencoded`
+- [ ] **Bug herdado:** Modify API Response/Request não funciona em GraphQL via GET (query na URL)
+- [ ] **Acessibilidade:** botões e abas sem rótulo para leitores de tela (popup e editor)
+
+### v1.2 — Migração e confiança
+
+- [ ] **Onboarding "Vindo de…"**: na primeira abertura, atalhos para importar do ModHeader, Requestly (JSON), Resource Override, Charles e Header Editor
+- [ ] **Perfis no popup**: ligar/desligar grupos direto do popup (o que usuários do ModHeader esperam)
+- [ ] **Map Local File na extensão**: enviar/colar um arquivo (JS, CSS, JSON, HTML) guardado localmente e servido no lugar da URL original (hoje só existe no app desktop do Requestly)
+- [ ] **Loja e site**: destacar "100% grátis, sem conta, sem coleta de dados, código aberto" e uma comparação honesta com as alternativas
+
+### v1.3 — Mock a partir do tráfego
+
+- [ ] **"Criar mock desta resposta"** em cada requisição do side panel de gravação: gera uma Modify API Response já preenchida com a resposta real
+- [ ] **Importar HAR → regras**: escolher requisições de um arquivo .har e gerar as regras de mock em lote
+- [ ] **Replace String com várias substituições** na mesma URL
+
+### v2 — Itens maiores
+
+- [ ] **WebSocket**: ver e alterar mensagens (issue mais votada do interceptor do Requestly)
+- [ ] **Regras só na aba atual** (via regras de sessão do DNR por aba)
+- [ ] **Regex acima do limite de 2 KB do DNR**: estudar alternativa (dividir em várias regras ou aplicar via page script)
+- [ ] **Sync opcional** via arquivo do usuário ou Google Drive (sem backend próprio)
+- [ ] Mais idiomas (`_locales/`) e build do Safari
