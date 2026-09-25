@@ -4,6 +4,7 @@ import { HiOutlineShare } from "@react-icons/all-files/hi/HiOutlineShare";
 import { PiWarningCircleBold } from "@react-icons/all-files/pi/PiWarningCircleBold";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { DownloadRules } from "./DownloadRules";
+import { ShareRuleLink } from "./ShareRuleLink";
 import "./index.css";
 
 interface ModalProps {
@@ -36,7 +37,10 @@ export const SharingModal: React.FC<ModalProps> = ({
           <HiOutlineShare /> Export rules
         </div>
         {selectedRules?.length ? (
-          <DownloadRules selectedRules={selectedRules} toggleModal={toggleModal} onRulesDownloaded={callback} />
+          <>
+            <DownloadRules selectedRules={selectedRules} toggleModal={toggleModal} onRulesDownloaded={callback} />
+            <ShareRuleLink selectedRules={selectedRules} />
+          </>
         ) : (
           <EmptySelectionView />
         )}
@@ -45,7 +49,7 @@ export const SharingModal: React.FC<ModalProps> = ({
         <div className="sharing-modal-footer">
           <InfoCircleOutlined className="sharing-modal-footer-icon" />
           <span className="sharing-modal-footer-text" style={{ maxWidth: "80%" }}>
-            Share the downloaded file with anyone. They can add the rules using "Import".
+            Share the file or the link. Either way, the rules are added with "Import", switched off.
           </span>
         </div>
       ) : null}

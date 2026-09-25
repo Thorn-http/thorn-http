@@ -1,0 +1,19 @@
+.share-rule-link {
+  padding-top: 0;
+}
+
+.share-rule-link-title {
+  margin-bottom: 8px;
+  color: var(--requestly-color-text-default);
+}
+
+.share-rule-link-row {
+  display: flex;
+  gap: 8px;
+}
+
+.share-rule-link-note {
+  margin-top: 8px;
+  color: var(--requestly-color-text-subtle);
+  font-size: var(--requestly-font-size-xs);
+}
