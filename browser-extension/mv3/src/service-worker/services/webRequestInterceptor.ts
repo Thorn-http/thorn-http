@@ -133,7 +133,12 @@ export const addListeners = () => {
 
   //@ts-ignore
   if (!chrome.webRequest.onHeadersReceived.hasListener(onHeadersReceived)) {
-    var onHeadersReceivedOptions = ["responseHeaders", "extraHeaders"];
+    // "extraHeaders" is Chrome-only: Firefox rejects the whole listener if it's passed.
+    const supportsExtraHeaders = Object.values(
+      ((chrome.webRequest as unknown) as { OnHeadersReceivedOptions?: Record<string, string> })
+        .OnHeadersReceivedOptions ?? {}
+    ).includes("extraHeaders");
+    var onHeadersReceivedOptions = supportsExtraHeaders ? ["responseHeaders", "extraHeaders"] : ["responseHeaders"];
 
     chrome.webRequest.onHeadersReceived.addListener(
       //@ts-ignore
