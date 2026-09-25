@@ -1,5 +1,5 @@
 import { RQTestRuleWidget } from "..";
-import { registerCustomElement, setInnerHTML, getRuleTypeIcon } from "../../utils";
+import { registerCustomElement, setInnerHTML, getRuleTypeIcon, escapeHTML } from "../../utils";
 import CheckIcon from "../../../../resources/icons/check.svg";
 import arrowRightIcon from "../../../../resources/icons/arrowRight.svg";
 import { RuleType } from "../../../types";
@@ -130,7 +130,7 @@ class RQImplicitTestRuleWidget extends RQTestRuleWidget {
         <div class="applied-rule-list-item">
           <div class="applied-rule-item-details">
             <span class="applied-rule-icon">${getRuleTypeIcon(rule.ruleType)}</span>
-            <span class="applied-rule-name">${rule.ruleName}</span>
+            <span class="applied-rule-name">${escapeHTML(rule.ruleName)}</span>
           </div>
          <span class="applied-rule-arrow-icon">${arrowRightIcon}</span>
         </div>`;

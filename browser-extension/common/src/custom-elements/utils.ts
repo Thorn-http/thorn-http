@@ -28,6 +28,10 @@ export const setInnerHTML = (element: InnerHTML, content: string) => {
   }
 };
 
+/** For user-provided text (e.g. rule names) placed into widget markup. */
+export const escapeHTML = (text: string) =>
+  String(text ?? "").replace(/[&<>"']/g, (char) => `&#${char.charCodeAt(0)};`);
+
 export const getEpochToMMSSFormat = (epochTime: number) => {
   const date = new Date(epochTime);
   const minutes = date.getUTCMinutes().toString().padStart(2, "0");
