@@ -39,9 +39,24 @@ const processManifest = (content) => {
   if (isPackagedApp) {
     // app.cs.js is loaded directly by app.html, so the app content script entry is not needed.
     manifestJson.content_scripts = contentScripts.slice(1);
-    // The app uses WebAssembly (tree-sitter for cURL import).
-    manifestJson.content_security_policy.extension_pages =
-      "script-src 'self' 'wasm-unsafe-eval'; script-src-elem 'self'; object-src 'self'";
+    // Extension pages (editor, popup, DevTools panel, side panel, delay page) may only use what is
+    // packaged: no connections, images, fonts, frames or scripts from anywhere else, so nothing
+    // (including code inherited from upstream) can reach a server. The app uses WebAssembly
+    // (tree-sitter for cURL import) and inline styles (antd).
+    manifestJson.content_security_policy.extension_pages = [
+      "default-src 'self'",
+      "script-src 'self' 'wasm-unsafe-eval'",
+      "script-src-elem 'self'",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob:",
+      "font-src 'self' data:",
+      "media-src 'self' data: blob:",
+      "connect-src 'self' data: blob:",
+      "frame-src 'self'",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'none'",
+    ].join("; ");
   } else {
     const webURLPatterns = [WEB_URL, ...OTHER_WEB_URLS]
       .map((pattern) => generateUrlPattern(pattern, browser === "chrome"))
