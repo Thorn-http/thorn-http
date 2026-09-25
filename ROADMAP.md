@@ -171,7 +171,8 @@ Levantamento de set/2026 (reviews da Chrome Web Store, issues do Requestly no Gi
 
 ### v1.3 — Mock a partir do tráfego
 
-- [ ] ⭐ **Mock com um clique a partir do tráfego**: botão "Criar mock desta resposta" em cada requisição do **side panel de gravação** e do **painel do DevTools**; gera uma Modify API Response já preenchida com a resposta real, pronta para editar (Mokku)
+- [x] ⭐ **Mock com um clique a partir do tráfego**: botão "Criar mock desta resposta" em cada requisição do **side panel de gravação** e do **painel do DevTools**; gera uma Modify API Response já preenchida com a resposta real, pronta para editar (Mokku)
+  - Feito: botão **Mock** em cada fetch/XHR do painel de gravação e "Create mock" no painel do DevTools abrem uma Modify API Response com URL (sem query), método, status (se não for 200), operação GraphQL e a resposta real formatada. A regra vai por `chrome.storage` (não por `postMessage`; o canal antigo aceitava mensagens de qualquer extensão e foi removido). Testes: `mock-from-traffic.spec.ts`
 - [ ] ⭐ **Editar um campo do JSON sem código**: modo "alterar campos" na Modify API Response (ex.: `user.plan` = `"pro"`), aplicado sobre a resposta real — sem colar o JSON inteiro nem escrever JavaScript (HTTP Toolkit "patch JSON")
 - [ ] **Procurar e substituir no corpo da resposta** (texto ou regex), sem mock completo (HTTP Toolkit, Charles, Fiddler)
 - [ ] **Variáveis e dados fake nos mocks**: variáveis globais (`{{baseUrl}}`) reutilizáveis entre regras e geradores (`{{nome}}`, `{{email}}`, `{{uuid}}`, `{{numero}}`) (Tweak)

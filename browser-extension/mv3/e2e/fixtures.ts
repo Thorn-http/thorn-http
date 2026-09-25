@@ -79,6 +79,22 @@ const createServer = () =>
       res.end(`<html><body id="page">CSP</body><script>document.body.dataset.ran = "1"</script></html>`);
       return;
     }
+    if (url.startsWith("/missing.json")) {
+      res.statusCode = 404;
+      res.setHeader("content-type", "application/json");
+      res.end(JSON.stringify({ error: "not found" }));
+      return;
+    }
+    if (url.startsWith("/traffic")) {
+      // A GET, a POST and a failing GET, made with fetch, for "Create mock" from recorded traffic.
+      res.setHeader("content-type", "text/html");
+      res.end(`<html><body id="page">TRAFFIC</body><script>
+        fetch("/post.json?t=" + Date.now());
+        fetch("/echo", { method: "POST", body: JSON.stringify({ hello: "world" }) });
+        fetch("/missing.json");
+      </script></html>`);
+      return;
+    }
     if (url.startsWith("/slow.js")) {
       res.setHeader("content-type", "text/javascript");
       res.end("window.scriptRanAt = performance.now();");
