@@ -102,6 +102,10 @@ export const test = base.extend<Fixtures>({
         `--load-extension=${EXTENSION_PATH}`,
         // A real-looking domain for the local server (e.g. the block list only accepts domains).
         "--host-resolver-rules=MAP thorn.test 127.0.0.1",
+        // No GPU: when the host's GPU driver misbehaves, canvas work (e.g. chrome.action.setIcon
+        // decoding the toolbar icon) hangs the extension process and every extension page with it.
+        "--disable-gpu",
+        "--disable-software-rasterizer",
       ],
     });
     await use(context);
