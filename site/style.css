@@ -165,3 +165,38 @@ footer .wrap {
 footer a {
   color: var(--muted);
 }
+.rule-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 24px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.rule-list li {
+  display: flex;
+  gap: 16px;
+  padding: 10px 16px;
+  overflow-wrap: anywhere;
+}
+.rule-list li + li {
+  border-top: 1px solid var(--border);
+}
+.rule-type {
+  flex: 0 0 170px;
+  color: var(--muted);
+}
+.error {
+  color: #e5484d;
+}
+button.btn {
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+button.btn.primary {
+  background: var(--accent-strong);
+}
+[hidden] {
+  display: none !important;
+}
