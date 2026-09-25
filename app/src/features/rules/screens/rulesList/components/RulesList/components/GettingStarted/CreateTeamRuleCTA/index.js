@@ -58,7 +58,7 @@ export const CreateTeamRuleCTA = () => {
               <p className="lead">
                 Rules created here can be accessed by your teammates. To manage your teammates click{" "}
                 <a
-                  href={getLinkWithMetadata("https://requestly.com/")}
+                  href={getLinkWithMetadata("https://thorn-http.dev")}
                   className="cursor-pointer"
                   onClick={(e) => {
                     e.preventDefault();

@@ -480,7 +480,7 @@ export const redirectToDesktopApp = (route, redirectToSetappBuild = false) => {
 // Discord Community
 export const redirectToDiscord = (navigate, { newTab = true }) => {
   if (newTab) {
-    window.open("https://discord.gg/SumMHwuaZv", "_blank");
+    window.open("https://thorn-http.dev/issues", "_blank");
   }
 };
 

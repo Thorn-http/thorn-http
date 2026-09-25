@@ -163,7 +163,7 @@ export const GettingStarted: React.FC = () => {
               <div className="lead">
                 Rules created here can be accessed by your teammates. To manage your teammates{" "}
                 <a
-                  href={getLinkWithMetadata("https://requestly.com/")}
+                  href={getLinkWithMetadata("https://thorn-http.dev")}
                   className="cursor-pointer"
                   onClick={(e) => {
                     e.preventDefault();

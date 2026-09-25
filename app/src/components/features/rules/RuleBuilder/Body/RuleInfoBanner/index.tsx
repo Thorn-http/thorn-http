@@ -33,7 +33,7 @@ const RuleInfoBanner: React.FC<{ ruleType: string; appMode: string }> = ({ ruleT
             <a
               target="_blank"
               rel="noreferrer"
-              href={"https://github.com/requestly/requestly/issues/1208#issuecomment-1801505984"}
+              href={"https://thorn-http.dev/docs"}
               onClick={() =>
                 trackMoreInfoClicked("authorization_header_not_forwarding", GLOBAL_CONSTANTS.RULE_TYPES.REDIRECT)
               }
@@ -53,7 +53,7 @@ const RuleInfoBanner: React.FC<{ ruleType: string; appMode: string }> = ({ ruleT
             <a
               target="_blank"
               rel="noreferrer"
-              href={"https://github.com/requestly/requestly/issues/1208#issuecomment-1801505984"}
+              href={"https://thorn-http.dev/docs"}
               onClick={() =>
                 trackMoreInfoClicked("authorization_header_not_forwarding", GLOBAL_CONSTANTS.RULE_TYPES.REPLACE)
               }

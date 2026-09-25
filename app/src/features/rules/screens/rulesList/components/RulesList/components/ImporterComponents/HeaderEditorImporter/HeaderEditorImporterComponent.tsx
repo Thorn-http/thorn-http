@@ -9,8 +9,8 @@ export const HeaderEditorImporter: React.FC<{}> = (props) => {
       productName="Header Editor"
       supportedFileTypes={["text/plain"]}
       importer={importHeaderEditor}
-      docsLink="https://docs.requestly.com/general/imports/header-editor"
-      shareLink="https://app.requestly.io/import-from-header-editor"
+      docsLink="https://thorn-http.dev/docs"
+      shareLink="https://thorn-http.dev/docs"
     />
   );
 };

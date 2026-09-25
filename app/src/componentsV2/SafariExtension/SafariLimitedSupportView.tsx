@@ -31,8 +31,8 @@ export const SafariLimitedSupportView: React.FC = () => {
             </Row>
           </div>
           <Space>
-            <RQButton onClick={() => window.open("https://requestly.com/downloads/", "__blank")}>Download app</RQButton>
-            <RQButton type="primary" onClick={() => window.open("https://rqst.ly/chrome-store", "__blank")}>
+            <RQButton onClick={() => window.open("https://thorn-http.dev", "__blank")}>Download app</RQButton>
+            <RQButton type="primary" onClick={() => window.open("https://thorn-http.dev", "__blank")}>
               Chrome Extension
             </RQButton>
           </Space>

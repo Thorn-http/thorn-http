@@ -58,7 +58,7 @@ const AnalyticsInspectorContainer: React.FC = () => {
             <div
               className="add-vendor-link"
               onClick={() => {
-                window.open("https://github.com/requestly/requestly/issues/2179", "_blank", "noopener,noreferrer");
+                window.open("https://thorn-http.dev/docs", "_blank", "noopener,noreferrer");
               }}
             >
               Is your platform missing? Request to add your analytics provider.

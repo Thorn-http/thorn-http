@@ -115,8 +115,8 @@ const LINKS = {
   //Chrome
   CHROME_EXTENSION: "https://thorn-http.dev",
 
-  CHROME_STORE_REVIEWS: "https://rqst.ly/chrome-review",
-  CHROME_STORE_REVIEW_FORM: "https://app.formbricks.com/s/cmd2qhh4vnxezyq01ailfaszm",
+  CHROME_STORE_REVIEWS: "https://thorn-http.dev",
+  CHROME_STORE_REVIEW_FORM: "https://thorn-http.dev",
   //Firefox
   FIREFOX_EXTENSION: "https://thorn-http.dev",
   //Edge
@@ -130,29 +130,29 @@ const LINKS = {
   },
 
   /** TUTORIALS */
-  YOUTUBE_TUTORIALS: "https://rqst.ly/http-rules-yt-tutorials",
-  YOUTUBE_API_CLIENT_TUTORIALS: "https://rqst.ly/tutorials",
+  YOUTUBE_TUTORIALS: "https://thorn-http.dev",
+  YOUTUBE_API_CLIENT_TUTORIALS: "https://thorn-http.dev",
 
   TUTORIALS: {
-    REDIRECT_RULE: "https://rqst.ly/redirect-rule-yt",
+    REDIRECT_RULE: "https://thorn-http.dev",
   },
 
   DEMO_VIDEOS: {
-    TEAM_WORKSPACES: "https://rqst.ly/team-collaboration-yt-tutorial",
+    TEAM_WORKSPACES: "https://thorn-http.dev",
   },
 
   DOWNLOAD_DESKTOP_APP: {
-    MACOS: "https://bit.ly/rq-mac",
-    WINDOWS: "https://bit.ly/rq-windows",
-    LINUX: "https://bit.ly/rq-linux",
+    MACOS: "https://thorn-http.dev",
+    WINDOWS: "https://thorn-http.dev",
+    LINUX: "https://thorn-http.dev",
   },
 
-  CHANGELOG: "https://rqst.ly/change-logs",
+  CHANGELOG: "https://thorn-http.dev",
   PRODUCTLIFT_CHANGELOG: "https://thorn-http.dev",
 
-  ACCELERATOR_PROGRAM_FORM_LINK: "https://app.formbricks.com/s/cm1ewcpkt0000djs29ct7rpy2",
+  ACCELERATOR_PROGRAM_FORM_LINK: "https://thorn-http.dev",
 
-  GITHUB_STUDENT_PROGRAM_DOC: "https://rqst.ly/github-education",
+  GITHUB_STUDENT_PROGRAM_DOC: "https://thorn-http.dev",
 
   GITHUB_EDUCATION_PACK_LP: "https://thorn-http.dev/source",
 
@@ -162,17 +162,17 @@ const LINKS = {
 
   OAUTH_REDIRECT_URL: `${process.env.VITE_BACKEND_BASE_URL}/oauth/authorize`,
 
-  ACQUISITION_DETAILS: "https://rqst.ly/rq-bstack-acq",
+  ACQUISITION_DETAILS: "https://thorn-http.dev",
 
-  API_KEY_FORM: "https://app.formbricks.com/s/clryn62s316gjdeho9j03t7oa",
+  API_KEY_FORM: "https://thorn-http.dev",
 
-  AUTOMATION_DOC: "https://rqst.ly/automation",
+  AUTOMATION_DOC: "https://thorn-http.dev",
 
   DOWNLOAD_CRX: "https://thorn-http.dev",
 
-  DOWNLOAD_CHROME_EXTENSION_ZIP: "https://rqst.ly/chrome/zip",
+  DOWNLOAD_CHROME_EXTENSION_ZIP: "https://thorn-http.dev",
 
-  SHARE_ON_LINKEDIN_FORM: "https://app.formbricks.com/s/gsfvea1k3n53is5fit337ibp",
+  SHARE_ON_LINKEDIN_FORM: "https://thorn-http.dev",
 
   NOTION_PAGE_FOR_PROMOTION: "https://thorn-http.dev",
 

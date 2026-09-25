@@ -297,7 +297,7 @@
     "isScanned": false,
     "comingSoon": false,
     "isAvailable": true,
-    "isDocAvailable": "https://docs.requestly.com/general/http-interceptor/terminal"
+    "isDocAvailable": "https://thorn-http.dev/docs"
   },
   "system-wide": {
     "id": "system-wide",

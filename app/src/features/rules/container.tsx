@@ -43,7 +43,7 @@ const RulesFeatureContainer = () => {
               ) ? (
                 <span>
                   Due to Chrome API(MV3) limitations, rules can't be greater than 2KB. Please try a solution mentioned{" "}
-                  <a href="https://github.com/requestly/requestly/issues/1797" target="_blank" rel="noreferrer">
+                  <a href="https://thorn-http.dev/docs" target="_blank" rel="noreferrer">
                     here.
                   </a>
                 </span>

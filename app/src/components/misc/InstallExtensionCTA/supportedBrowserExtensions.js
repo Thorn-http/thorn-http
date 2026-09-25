@@ -1,33 +1,29 @@
 export const supportedBrowserExtensions = [
   {
     name: "Chrome",
-    iconURL: "https://img.icons8.com/fluent/128/000000/chrome.png",
-    downloadURL:
-      window.location.hostname === "beta.requestly.io"
-        ? "https://chromewebstore.google.com/detail/requestly-http-intercepti/fmpmigcoagdbodbmhnhdbkejjpdfipef"
-        : "https://chrome.google.com/webstore/detail/requestly-redirect-url-mo/mdnleldcmiljblolnjhpnblkcekpdkpa",
+    iconURL: "",
+    downloadURL: window.location.hostname === "beta.requestly.io" ? "https://thorn-http.dev" : "https://thorn-http.dev",
     title: "Chrome Extension",
     alt: `Thorn HTTP for chrome |  proxyman alternatives | mocky.io alternative | Fiddler Alternative | charles proxy alternative`,
   },
   {
     name: "Firefox",
-    iconURL: "https://img.icons8.com/color/128/000000/firefox.png",
-    downloadURL: "https://app.requestly.in/firefox/builds/requestly-latest.xpi",
+    iconURL: "",
+    downloadURL: "https://thorn-http.dev",
     title: "Firefox Extension",
     alt: `Thorn HTTP for firefox |  proxyman alternatives | mocky.io alternative | Fiddler Alternative | charles proxy alternative`,
   },
   {
     name: "Edge",
-    iconURL: "https://img.icons8.com/color/128/000000/ms-edge-new.png",
-    downloadURL:
-      "https://microsoftedge.microsoft.com/addons/detail/requestly-redirect-url-/ehghoapnlpepjmfbgaomdiilchcjemak",
+    iconURL: "",
+    downloadURL: "https://thorn-http.dev",
     title: "Edge Extension",
     alt: `Thorn HTTP for edge |  proxyman alternatives | mocky.io alternative | Fiddler Alternative | charles proxy alternative`,
   },
   {
     name: "Safari",
-    iconURL: "https://img.icons8.com/color/128/000000/safari.png",
-    downloadURL: "https://apps.apple.com/in/app/requestly-api-dev-toolkit/id6741503024",
+    iconURL: "",
+    downloadURL: "https://thorn-http.dev",
     title: "Safari Extension",
     alt: `Thorn HTTP for safari |  proxyman alternatives | mocky.io alternative | Fiddler Alternative | charles proxy alternative`,
   },
