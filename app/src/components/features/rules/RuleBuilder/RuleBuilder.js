@@ -24,7 +24,7 @@ import {
   getIsCurrentlySelectedRuleDetailsPanelShown,
 } from "../../../../store/selectors";
 import * as RedirectionUtils from "../../../../utils/RedirectionUtils";
-import useExternalRuleCreation from "./useExternalRuleCreation";
+import useRuleEditorDraft from "./useRuleEditorDraft";
 import Logger from "lib/logger";
 import { trackDesktopRuleViewedOnExtension, trackDocsSidebarViewed } from "modules/analytics/events/common/rules";
 import { getRuleConfigInEditMode, isDesktopOnlyRule } from "utils/rules/misc";
@@ -74,7 +74,7 @@ const RuleBuilder = (props) => {
     return enableDocs && showDocs;
   }, [enableDocs, showDocs]);
 
-  useExternalRuleCreation(MODE);
+  useRuleEditorDraft(MODE);
 
   useEffect(() => {
     if (isDocsVisible) {
