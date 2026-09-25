@@ -579,7 +579,7 @@ export const validateRule = (rule, dispatch, appMode) => {
           error: "delay is not number",
         };
       }
-      // Delay between 1 & 5000
+      // Delay between 1 ms and 10 minutes
       else if (
         parseInt(delay) === 0 ||
         (appMode !== GLOBAL_CONSTANTS.APP_MODES.DESKTOP &&
@@ -591,7 +591,7 @@ export const validateRule = (rule, dispatch, appMode) => {
       ) {
         output = {
           result: false,
-          message: `Delay should lie between ${GLOBAL_CONSTANTS.DELAY_REQUEST_CONSTANTS.MIN_DELAY_VALUE} and ${GLOBAL_CONSTANTS.DELAY_REQUEST_CONSTANTS.MAX_DELAY_VALUE_NON_XHR}`,
+          message: `Delay should lie between ${GLOBAL_CONSTANTS.DELAY_REQUEST_CONSTANTS.MIN_DELAY_VALUE} and ${GLOBAL_CONSTANTS.DELAY_REQUEST_CONSTANTS.MAX_DELAY_VALUE_NON_XHR} ms (10 minutes)`,
           error: "delay not in range",
         };
       }

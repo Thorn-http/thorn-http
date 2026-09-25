@@ -70,8 +70,9 @@ CONSTANTS.DELAY_REQUEST_CONSTANTS = {
   DELAY_PARAM_NAME: "delay", // string to add as query paramName
   DELAY_PARAM_VALUE: "true", // string to add as query paramValue
   MIN_DELAY_VALUE: 1,
-  MAX_DELAY_VALUE_NON_XHR: 10000,
-  MAX_DELAY_VALUE_XHR: 5000,
+  // Delays run locally for every request type (see the Delay rule notes), up to 10 minutes.
+  MAX_DELAY_VALUE_NON_XHR: 600000,
+  MAX_DELAY_VALUE_XHR: 600000,
   DELAY_TYPE: {
     CLIENT_SIDE: "clientSideDelay",
     SERVER_SIDE: "serverSideDelay",
