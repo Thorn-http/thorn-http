@@ -29,6 +29,10 @@
     {
       "resources": ["resources/images/128x128.png"],
       "matches": ["<all_urls>"]
+    },
+    {
+      "resources": ["resources/delay/index.html"],
+      "matches": ["<all_urls>"]
     }
   ],
   "action": {
@@ -47,11 +51,6 @@
   },
   "declarative_net_request": {
     "rule_resources": [
-      {
-        "id": "delay_rules",
-        "enabled": true,
-        "path": "resources/static-rules/delayRules.json"
-      },
       {
         "id": "header_rules",
         "enabled": true,
@@ -76,5 +75,6 @@
     "webRequest"
   ],
   "host_permissions": ["<all_urls>"],
-  "commands": {}
+  "commands": {},
+  "optional_permissions": ["debugger"]
 }

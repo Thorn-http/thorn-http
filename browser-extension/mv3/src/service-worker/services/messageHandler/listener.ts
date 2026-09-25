@@ -24,6 +24,7 @@ import {
   reopenNetworkRecordingPanel,
 } from "../networkRecording";
 import { openRuleLink } from "../ruleLink";
+import { allowDelayedNavigation } from "../delayedNavigation";
 import rulesStorageService from "../../../rulesStorageService";
 
 const getSenderOrigin = (sender: chrome.runtime.MessageSender) =>
@@ -40,6 +41,13 @@ export const initMessageHandler = () => {
           applyScriptRules(sender.tab?.id, sender.frameId, sender.url, sender.tab?.url);
         });
         break;
+
+      case EXTENSION_MESSAGES.ALLOW_DELAYED_NAVIGATION:
+        allowDelayedNavigation(message.url, sender).then(
+          () => sendResponse(true),
+          () => sendResponse(false)
+        );
+        return true;
 
       case EXTENSION_MESSAGES.OPEN_RULE_LINK:
         openRuleLink(message.payload, sender);

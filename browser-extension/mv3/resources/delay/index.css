@@ -1,0 +1,46 @@
+:root {
+  color-scheme: light dark;
+  --accent: #2fae6b;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+main {
+  max-width: 560px;
+  padding: 24px;
+}
+h1 {
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+.countdown {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 12px 0;
+}
+.url {
+  font-family: monospace;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  opacity: 0.8;
+}
+button {
+  font: inherit;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+.note {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-top: 20px;
+}

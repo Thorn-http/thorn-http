@@ -6,6 +6,8 @@ import { debounce, getBlockedDomains, isExtensionEnabled, onBlockListChange } fr
 import { TAB_SERVICE_DATA, tabService } from "./tabService";
 import { SessionRuleType } from "./requestProcessor/types";
 import { EXTENSION_MESSAGES } from "common/constants";
+import { RuleType } from "common/types";
+import { getDelayPageRule } from "./delayedNavigation";
 import { UpdateDynamicRuleOptions } from "common/types";
 import { sendMessageToApp } from "./messageHandler/sender";
 
@@ -115,12 +117,19 @@ const addExtensionRules = async (): Promise<void> => {
 
         parsedExtensionRules.push({
           ...extensionRule,
+          // Delay rules stay lowest, so the one-off "allow" of a delayed page (priority 2) lets the
+          // page through without also switching off the user's other rules for it.
+          priority: rule.ruleType === RuleType.DELAY ? extensionRule.priority : (extensionRule.priority ?? 1) + 2,
           id: ruleId,
           rqRuleId: rule.id,
         });
       });
     }
   });
+
+  if (enabledRules.some((rule) => rule.ruleType === RuleType.DELAY)) {
+    parsedExtensionRules.push(getDelayPageRule(parsedExtensionRules.length + 1));
+  }
 
   if (config.logLevel === "debug") {
     console.log("Setting extension rules from requestly rules", parsedExtensionRules, enabledRules);
@@ -195,6 +204,7 @@ export const updateRequestSpecificRules = async (
     addRules: [
       {
         id: ruleId,
+        priority: 3, // above the one-off allow of a delayed page (see delayedNavigation)
         ...ruleDetails,
       },
     ],
