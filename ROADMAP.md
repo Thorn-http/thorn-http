@@ -178,7 +178,8 @@ Ideias que nenhuma extensão do segmento (Requestly, Tweak, ModHeader, Mokku) of
 - [ ] **#2** ⭐ **Regras versionadas no repositório**: sincronizar as regras com uma pasta local (ex.: `.thorn/rules.json`) via File System Access API. O time compartilha pelo git, sem conta e sem servidor.
 - [x] **#3** ⭐ **Compartilhar regra por link**: a regra vai inteira no fragmento da URL (`thorn-http.dev/r#<base64>`), que nunca chega ao servidor. Quem abre importa com um clique; ótimo para issue, PR e Slack.
   - Feito: "Or share as a link" no modal de export; página `site/r.html` com prévia (e download como arquivo sem a extensão); content script só em `thorn-http.dev/r` abre a tela *Import shared rules* do editor (também dá para colar o link pelo Import). Regras entram desligadas, com ids novos, e Insert Script gera aviso. Testes: `ruleLink.test.ts` (vitest) e `rule-link.spec.ts` (e2e)
-- [ ] **#9** ⭐ **"Por que minha regra não aplicou?"**: o teste de regra explica a falha ("host bateu; path não: esperado `/api/v2`, recebido `/api/v1`"). Dor recorrente nas reviews.
+- [x] **#9** ⭐ **"Por que minha regra não aplicou?"**: o teste de regra explica a falha ("host bateu; path não: esperado `/api/v2`, recebido `/api/v1`"). Dor recorrente nas reviews.
+  - Feito: o botão "Test" (agora "Test URL" para todo operador) abre um checklist com ✓/✗ e dica: extensão pausada, regra/grupo desligado, site bloqueado, condição de URL (maiúsculas, barra final, query string, http/https, regex inválida, URL completa em condição de host), filtros de método/tipo/página e limites do tipo de regra (Modify Response/Request só fetch/XHR; DevTools mostra a resposta original). Corrigido bug herdado: o modal abria com a condição antiga. Testes: `explainRuleMatch.test.ts` (vitest) e `rule-explain.spec.ts` (e2e)
 
 ### Mocks
 

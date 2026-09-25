@@ -99,7 +99,10 @@ test("a rule link can be pasted into the editor, and broken links are refused", 
 test("without the extension, the website offers the shared rules as a file", async ({ openApp, server }, testInfo) => {
   const { link } = await createAndShareRule(openApp, server, "file fallback");
 
-  const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined });
+  const browser = await chromium.launch({
+    executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined,
+    args: ["--disable-gpu", "--disable-software-rasterizer"], // same as the fixture's browser
+  });
   const context = await browser.newContext({ acceptDownloads: true });
   await serveWebsite(context);
   const site = await context.newPage();
