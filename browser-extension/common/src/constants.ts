@@ -8,6 +8,7 @@ export const APP_MESSAGES = {
 };
 
 export const EXTENSION_MESSAGES = {
+  OPEN_RULE_LINK: "openRuleLink",
   GET_FULL_LOGS: "getFullLogs",
   CLEAR_LOGS_FOR_TAB: "clearLogsForTab",
   CLEAR_LOGS_FOR_DOMAIN: "clearLogsForDomain",

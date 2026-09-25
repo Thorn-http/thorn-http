@@ -21,6 +21,11 @@
       "js": ["client.cs.js"],
       "run_at": "document_start",
       "all_frames": true
+    },
+    {
+      "matches": ["https://thorn-http.dev/r", "https://thorn-http.dev/r/", "https://thorn-http.dev/r.html"],
+      "js": ["ruleLink.cs.js"],
+      "run_at": "document_start"
     }
   ],
   "background": {

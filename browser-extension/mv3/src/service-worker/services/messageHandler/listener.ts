@@ -23,6 +23,7 @@ import {
   onBodyRecorderReady,
   reopenNetworkRecordingPanel,
 } from "../networkRecording";
+import { openRuleLink } from "../ruleLink";
 
 export const initMessageHandler = () => {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -34,6 +35,10 @@ export const initMessageHandler = () => {
           initCustomWidgets(sender.tab?.id, sender.frameId);
           applyScriptRules(sender.tab?.id, sender.frameId, sender.url, sender.tab?.url);
         });
+        break;
+
+      case EXTENSION_MESSAGES.OPEN_RULE_LINK:
+        openRuleLink(message.payload, sender);
         break;
 
       case EXTENSION_MESSAGES.CLIENT_PAGE_LOADED:

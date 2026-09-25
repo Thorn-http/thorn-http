@@ -150,6 +150,15 @@ export default [
   },
   {
     ...commonConfig,
+    input: "src/content-scripts/ruleLink/index.ts",
+    output: {
+      file: `${OUTPUT_DIR}/ruleLink.cs.js`,
+      format: "iife",
+    },
+    plugins: commonPlugins,
+  },
+  {
+    ...commonConfig,
     input: "src/content-scripts/client/index.ts",
     output: {
       file: `${OUTPUT_DIR}/client.cs.js`,
