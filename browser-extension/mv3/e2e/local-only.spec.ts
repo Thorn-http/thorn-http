@@ -36,10 +36,15 @@ const trackExternalTraffic = async (context: BrowserContext) => {
       return route.abort();
     }
   );
-  const watchPage = (page: Page) =>
+  const watchPage = (page: Page) => {
     page.on("framenavigated", (frame) => {
       if (frame.url() && isExternal(frame.url())) external.push(`tab: ${frame.url()}`);
     });
+    // Extension pages block other servers with their CSP: a blocked load means something tried.
+    page.on("console", (message) => {
+      if (/Refused to (connect|load|frame)/.test(message.text())) external.push(`CSP: ${message.text()}`);
+    });
+  };
   context.pages().forEach(watchPage);
   context.on("page", watchPage);
   return external;
@@ -134,6 +139,13 @@ test("every screen of the extension stays local", async ({ context, openApp, ext
     await app.evaluate((hash) => (location.hash = hash), `#${path}`);
     await app.waitForTimeout(1000);
   }
+
+  // The Delay rule's explanation of the optional debugger permission.
+  await app.evaluate(() => (location.hash = "#/rules/editor/create/Delay"));
+  await app.waitForTimeout(800);
+  await app.getByRole("button", { name: "Review and allow…" }).click();
+  await app.waitForTimeout(500);
+  await app.getByRole("button", { name: "Not now" }).click();
 
   // Template previews render example rules, with images and links.
   await app.evaluate(() => (location.hash = "#/rules/templates"));
