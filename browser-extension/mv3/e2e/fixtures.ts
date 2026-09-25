@@ -1,11 +1,15 @@
 import { BrowserContext, Page, test as base, chromium } from "@playwright/test";
+import fs from "fs";
 import http from "http";
 import { AddressInfo } from "net";
+import os from "os";
 import path from "path";
 
 const EXTENSION_PATH = path.join(__dirname, "..", "dist");
 
 type Fixtures = {
+  /** Load a copy of the extension with the optional "debugger" permission already granted. */
+  grantDebugger: boolean;
   context: BrowserContext;
   extensionId: string;
   server: { origin: string; domainOrigin: string };
@@ -75,6 +79,16 @@ const createServer = () =>
       res.end(`<html><body id="page">CSP</body><script>document.body.dataset.ran = "1"</script></html>`);
       return;
     }
+    if (url.startsWith("/slow.js")) {
+      res.setHeader("content-type", "text/javascript");
+      res.end("window.scriptRanAt = performance.now();");
+      return;
+    }
+    if (url.startsWith("/script-page")) {
+      res.setHeader("content-type", "text/html");
+      res.end(`<html><body id="page">SCRIPT</body><script src="/slow.js"></script></html>`);
+      return;
+    }
     if (url.startsWith("/with-fetch")) {
       res.end(
         `<html><body id="page">FETCH</body><script>fetch("/api").then(r=>r.text()).then(t=>{document.body.dataset.api=t})</script></html>`
@@ -96,8 +110,18 @@ export const test = base.extend<Fixtures>({
     server.close();
   },
 
-  // eslint-disable-next-line no-empty-pattern
-  context: async ({}, use) => {
+  grantDebugger: [false, { option: true }],
+
+  context: async ({ grantDebugger }, use) => {
+    let extensionPath = EXTENSION_PATH;
+    if (grantDebugger) {
+      extensionPath = fs.mkdtempSync(path.join(os.tmpdir(), "thorn-ext-"));
+      fs.cpSync(EXTENSION_PATH, extensionPath, { recursive: true });
+      const manifestPath = path.join(extensionPath, "manifest.json");
+      const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+      manifest.permissions.push("debugger");
+      fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+    }
     const context = await chromium.launchPersistentContext("", {
       // Set PLAYWRIGHT_CHROMIUM_EXECUTABLE to reuse an already installed Chromium.
       executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined,
@@ -105,8 +129,8 @@ export const test = base.extend<Fixtures>({
       viewport: { width: 1400, height: 900 },
       acceptDownloads: true,
       args: [
-        `--disable-extensions-except=${EXTENSION_PATH}`,
-        `--load-extension=${EXTENSION_PATH}`,
+        `--disable-extensions-except=${extensionPath}`,
+        `--load-extension=${extensionPath}`,
         // A real-looking domain for the local server (e.g. the block list only accepts domains).
         "--host-resolver-rules=MAP thorn.test 127.0.0.1",
         // No GPU: when the host's GPU driver misbehaves, canvas work (e.g. chrome.action.setIcon
@@ -117,6 +141,7 @@ export const test = base.extend<Fixtures>({
     });
     await use(context);
     await context.close();
+    if (extensionPath !== EXTENSION_PATH) fs.rmSync(extensionPath, { recursive: true, force: true });
   },
 
   extensionId: async ({ context }, use) => {
