@@ -34,7 +34,9 @@ const RequestSourceRow = ({ rowIndex, pair, pairIndex, ruleDetails, isInputDisab
   const [isTestURLModalVisible, setIsTestURLModalVisible] = useState(false);
   const [ruleFilterActiveWithPairIndex, setRuleFilterActiveWithPairIndex] = useState(false);
   const [testURL, setTestURL] = useState("");
-  const [sourceConfig, setSourceConfig] = useState(pair.source);
+  // Only set by the sample regex menu; otherwise the modal tests the current condition. (It used to
+  // start as the condition at mount time, so the modal showed a stale, often empty, condition.)
+  const [sourceConfig, setSourceConfig] = useState(null);
   const { MODE } = getModeData(window.location);
 
   const isSourceFilterFormatUpgraded = useCallback((pairIndex, rule) => {
@@ -315,8 +317,8 @@ const RequestSourceRow = ({ rowIndex, pair, pairIndex, ruleDetails, isInputDisab
             />
           </Col>
 
-          {(pair.source.operator === GLOBAL_CONSTANTS.RULE_OPERATORS.MATCHES ||
-            pair.source.operator === GLOBAL_CONSTANTS.RULE_OPERATORS.WILDCARD_MATCHES) && (
+          {/* Every condition can be tested: the modal explains why a request does or doesn't match. */}
+          {
             <Tooltip
               overlayClassName="rq-tooltip"
               title={"Enter the source condition first"}
@@ -333,11 +335,15 @@ const RequestSourceRow = ({ rowIndex, pair, pairIndex, ruleDetails, isInputDisab
                   }}
                 >
                   <ExperimentOutlined /> Test{" "}
-                  {pair.source.operator === GLOBAL_CONSTANTS.RULE_OPERATORS.MATCHES ? "regex" : "wildcard"}
+                  {pair.source.operator === GLOBAL_CONSTANTS.RULE_OPERATORS.MATCHES
+                    ? "regex"
+                    : pair.source.operator === GLOBAL_CONSTANTS.RULE_OPERATORS.WILDCARD_MATCHES
+                    ? "wildcard"
+                    : "URL"}
                 </Button>
               </span>
             </Tooltip>
-          )}
+          }
         </Row>
         {shouldShowFilterIcon ? (
           <Col

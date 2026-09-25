@@ -51,6 +51,12 @@
       margin: 0 4px;
     }
   }
+  .test-url-request-details {
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: 110px 150px minmax(0, 1fr);
+    gap: 8px;
+  }
   .group-match-wrapper {
     margin-top: 10px;
     display: flex;
