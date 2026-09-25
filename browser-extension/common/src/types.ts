@@ -122,6 +122,9 @@ export interface RulePair {
   to?: string;
   from?: string;
   modifications?: any;
+  /** Modify API Response / Request Body rules */
+  response?: { type?: string; value?: string };
+  request?: { type?: string; value?: string };
 }
 
 export interface Rule extends Record<string, unknown> {

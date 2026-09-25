@@ -24,6 +24,10 @@ import {
   reopenNetworkRecordingPanel,
 } from "../networkRecording";
 import { openRuleLink } from "../ruleLink";
+import rulesStorageService from "../../../rulesStorageService";
+
+const getSenderOrigin = (sender: chrome.runtime.MessageSender) =>
+  sender.origin ?? (sender.url ? new URL(sender.url).origin : undefined);
 
 export const initMessageHandler = () => {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -109,12 +113,16 @@ export const initMessageHandler = () => {
           });
         return true;
 
+      // These two come from the page script, relayed from the page, so the page controls their
+      // content: the initiator is always taken from the sender instead.
       case EXTENSION_MESSAGES.ON_BEFORE_AJAX_REQUEST:
-        requestProcessor.onBeforeAJAXRequest(sender.tab.id, message.requestDetails).then(sendResponse);
+        requestProcessor
+          .onBeforeAJAXRequest(sender.tab.id, { ...message.requestDetails, initiator: getSenderOrigin(sender) })
+          .then(sendResponse);
         return true;
 
       case EXTENSION_MESSAGES.ON_ERROR_OCCURRED:
-        requestProcessor.onErrorOccurred(sender.tab.id, message.requestDetails).then(sendResponse);
+        requestProcessor.onErrorOccurred(sender.tab.id, getSenderOrigin(sender)).then(sendResponse);
         return true;
 
       case EXTENSION_MESSAGES.TEST_RULE_ON_URL:
@@ -126,8 +134,12 @@ export const initMessageHandler = () => {
         break;
 
       case EXTENSION_MESSAGES.RULE_EXECUTED:
-        const requestDetails = { ...message.requestDetails, tabId: message.requestDetails?.tabId || sender.tab?.id };
-        ruleExecutionHandler.onRuleExecuted(message.rule, requestDetails);
+        // Also relayed from the page: only report rules that exist and are enabled, as stored.
+        rulesStorageService.getEnabledRules().then((enabledRules) => {
+          const rule = enabledRules.find((enabledRule) => enabledRule.id === message.rule?.id);
+          if (!rule || !sender.tab) return;
+          ruleExecutionHandler.onRuleExecuted(rule, { ...message.requestDetails, tabId: sender.tab.id });
+        });
         break;
 
       case EXTENSION_MESSAGES.IS_EXTENSION_BLOCKED_ON_TAB: {
