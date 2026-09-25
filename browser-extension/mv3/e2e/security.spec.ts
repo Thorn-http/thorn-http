@@ -30,7 +30,7 @@ const dynamicResponseRule = {
 
 /** What the page script sends when a page's CSP blocks a dynamic rule; a page can send it too. */
 const postFromPage = (page: Page, data: Record<string, unknown>) =>
-  page.evaluate((message) => window.postMessage({ source: "requestly:client", ...message }, "*"), data);
+  page.evaluate((message) => window.postMessage({ source: "thorn:client", ...message }, "*"), data);
 
 const scriptRanOn = async (context: BrowserContext, page: Page, url: string) => {
   await page.goto(url);
@@ -121,7 +121,7 @@ test("blocked sites don't receive the rules", async ({ context, openApp, server 
     await page.goto(url);
     await page.waitForTimeout(800);
     const names = await page.evaluate(() =>
-      ((window as any).__REQUESTLY__?.responseRules || []).map((rule: { name: string }) => rule.name)
+      ((window as any).__THORN_HTTP__?.responseRules || []).map((rule: { name: string }) => rule.name)
     );
     await page.close();
     return names;

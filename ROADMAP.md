@@ -118,8 +118,11 @@ Auditoria de set/2026 (build 1.0.0). Corrigido, com testes em `e2e/security.spec
 - [x] Sites bloqueados recebiam as regras em `window.__REQUESTLY__`; e `isUrlInBlockList` ignorava sites com porta (ex.: `localhost:3000`).
 - [x] Nome de regra entrava sem escape no aviso da página (XSS com regra importada).
 
+- [x] **Erro no cliente "Cannot redefine property: timeout"** (quebrava todo XHR da página, ex.: banner OneTrust) quando o interceptor rodava duas vezes ou junto com outra extensão do mesmo código (Requestly). Agora o patch roda uma vez por janela, tolera propriedades já redefinidas, e usa nomes próprios (`__THORN_HTTP__`, mensagens `thorn:*`), para o Thorn e o Requestly não lerem as regras um do outro. Testes: `e2e/coexistence.spec.ts`.
+
 Pendente:
 
+- [ ] **Mock de XHR com dois interceptores ativos:** com Requestly (ou outro interceptor do mesmo código) também ativo, um mock do Thorn para uma requisição XHR não completa (fetch e XHRs sem mock funcionam). Os wrappers herdados não se compõem; estudar criar o proxy com o XMLHttpRequest nativo, ou avisar no popup quando outro interceptor for detectado.
 - [ ] **Regras visíveis para as páginas:** regras ativas de Modify Response, Request Body e Delay ficam em `window.__REQUESTLY__` (necessário para o page script do fetch/XHR); qualquer site lê mocks e condições. Mitigar com a interceptação "Automático" da v1.1, limitar pelo filtro de página quando houver, e avisar no editor para não colocar segredos nesses mocks.
 - [ ] **Dependências do app** (`npm audit --omit=dev`: 2 críticas, 12 altas): quase todas do Firebase SDK (protobufjs, grpc, websocket-driver; inerte, sem backend) e de ferramentas de build. Remover o Firebase SDK e atualizar `react-router-dom` e `lodash`.
 - [ ] Strings e links herdados sem uso (Stripe, GrowthBook, formbricks, `requestly.tech` mock server): código não executa (CSP `script-src 'self'` bloqueia scripts remotos), mas remover com o Firebase.
