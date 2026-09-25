@@ -1,0 +1,50 @@
+.match-checklist ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.match-verdict {
+  font-weight: 600;
+}
+
+.match-verdict.pass {
+  color: var(--requestly-color-success);
+}
+
+.match-verdict.fail {
+  color: var(--requestly-color-error);
+}
+
+.match-check {
+  display: flex;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.match-check-icon {
+  margin-top: 4px;
+}
+
+.match-check-icon.pass {
+  color: var(--requestly-color-success);
+}
+
+.match-check-icon.fail {
+  color: var(--requestly-color-error);
+}
+
+.match-check-icon.info {
+  color: var(--requestly-color-text-subtle);
+}
+
+.match-check-title {
+  color: var(--requestly-color-text-default);
+  overflow-wrap: anywhere;
+}
+
+.match-check-detail {
+  color: var(--requestly-color-text-subtle);
+  font-size: var(--requestly-font-size-sm);
+  overflow-wrap: anywhere;
+}
