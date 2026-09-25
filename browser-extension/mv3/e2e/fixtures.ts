@@ -68,6 +68,13 @@ const createServer = () =>
       </script></body></html>`);
       return;
     }
+    if (url.startsWith("/csp")) {
+      // Inline scripts are blocked by the CSP; body[data-ran] shows whether the CSP was lifted.
+      res.setHeader("content-type", "text/html");
+      res.setHeader("content-security-policy", "script-src 'none'");
+      res.end(`<html><body id="page">CSP</body><script>document.body.dataset.ran = "1"</script></html>`);
+      return;
+    }
     if (url.startsWith("/with-fetch")) {
       res.end(
         `<html><body id="page">FETCH</body><script>fetch("/api").then(r=>r.text()).then(t=>{document.body.dataset.api=t})</script></html>`

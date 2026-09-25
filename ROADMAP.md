@@ -108,6 +108,22 @@ Depende de você:
 - [ ] 👤 Enviar os zips do `npm run release` com o material de `store/`
 - [ ] 👤 (opcional) Link de newsletter (serviço externo, sem backend próprio)
 
+## Segurança
+
+Auditoria de set/2026 (build 1.0.0). Corrigido, com testes em `e2e/security.spec.ts` (falham no código antigo):
+
+- [x] **Qualquer site podia remover a CSP de outros sites** na mesma aba (mensagem forjada `onErrorOccurred`, herdada do upstream). Agora a origem vem do remetente real e só a própria página, com uma regra de JavaScript dinâmico ativa, tem a CSP liberada.
+- [x] `rq_request_initiator_origin()` usava a origem informada pela página; agora usa a do remetente.
+- [x] Páginas podiam registrar regras desligadas ou inexistentes como "aplicadas" (popup, DevTools, aviso); agora só regras ativas, como estão salvas.
+- [x] Sites bloqueados recebiam as regras em `window.__REQUESTLY__`; e `isUrlInBlockList` ignorava sites com porta (ex.: `localhost:3000`).
+- [x] Nome de regra entrava sem escape no aviso da página (XSS com regra importada).
+
+Pendente:
+
+- [ ] **Regras visíveis para as páginas:** regras ativas de Modify Response, Request Body e Delay ficam em `window.__REQUESTLY__` (necessário para o page script do fetch/XHR); qualquer site lê mocks e condições. Mitigar com a interceptação "Automático" da v1.1, limitar pelo filtro de página quando houver, e avisar no editor para não colocar segredos nesses mocks.
+- [ ] **Dependências do app** (`npm audit --omit=dev`: 2 críticas, 12 altas): quase todas do Firebase SDK (protobufjs, grpc, websocket-driver; inerte, sem backend) e de ferramentas de build. Remover o Firebase SDK e atualizar `react-router-dom` e `lodash`.
+- [ ] Strings e links herdados sem uso (Stripe, GrowthBook, formbricks, `requestly.tech` mock server): código não executa (CSP `script-src 'self'` bloqueia scripts remotos), mas remover com o Firebase.
+
 ## Próximas versões — dores dos usuários
 
 Levantamento de set/2026 (reviews da Chrome Web Store, issues do Requestly no GitHub, comparativos de alternativas). Contexto:
