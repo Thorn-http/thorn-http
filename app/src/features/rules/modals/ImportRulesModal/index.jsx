@@ -17,6 +17,7 @@ import { globalActions } from "store/slices/global/slice";
 import { processDataToImport, addRulesAndGroupsToStorage } from "./actions";
 import { RQButton } from "lib/design-system/components";
 import { FilePicker } from "components/common/FilePicker";
+import { PasteRuleLinkHint } from "features/rules/screens/importLink";
 import { FeatureLimitType } from "hooks/featureLimiter/types";
 import { RULE_IMPORT_TYPE } from "features/rules";
 import Logger from "lib/logger";
@@ -111,12 +112,15 @@ export const ImportRulesModal = ({ toggle: toggleModal, isOpen }) => {
 
   const renderFilePicker = () => {
     return (
-      <FilePicker
-        onFilesDrop={onDrop}
-        loaderMessage="Processing rules..."
-        isProcessing={processingDataToImport}
-        title="Drag and drop your rules JSON file."
-      />
+      <>
+        <FilePicker
+          onFilesDrop={onDrop}
+          loaderMessage="Processing rules..."
+          isProcessing={processingDataToImport}
+          title="Drag and drop your rules JSON file."
+        />
+        <PasteRuleLinkHint onNavigate={toggleModal} />
+      </>
     );
   };
 

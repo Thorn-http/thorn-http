@@ -23,6 +23,7 @@ import {
   trackCharlesSettingsImportStarted,
 } from "modules/analytics/events/features/rules";
 import { FilePicker } from "components/common/FilePicker";
+import { PasteRuleLinkHint } from "features/rules/screens/importLink";
 
 const ImportRulesModal = (props) => {
   const { toggle: toggleModal, isOpen } = props;
@@ -88,12 +89,15 @@ const ImportRulesModal = (props) => {
 
   const renderFilePicker = () => {
     return (
-      <FilePicker
-        onFilesDrop={onDrop}
-        loaderMessage="Processing rules..."
-        isProcessing={processingDataToImport}
-        title="Drag and drop your JSON file"
-      />
+      <>
+        <FilePicker
+          onFilesDrop={onDrop}
+          loaderMessage="Processing rules..."
+          isProcessing={processingDataToImport}
+          title="Drag and drop your JSON file"
+        />
+        <PasteRuleLinkHint onNavigate={toggleModal} />
+      </>
     );
   };
 

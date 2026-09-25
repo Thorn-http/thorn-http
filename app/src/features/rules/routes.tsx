@@ -8,6 +8,7 @@ import { joinPaths } from "utils/PathUtils";
 import RulesContainerV2 from "./container";
 import { RulesListScreen } from "./screens/rulesList";
 import { TemplatesList } from "./screens/templatesList";
+import { ImportRuleLink } from "./screens/importLink";
 
 export const ruleRoutes: RouteObject[] = [
   {
@@ -67,6 +68,16 @@ export const ruleRoutes: RouteObject[] = [
         handle: {
           breadcrumb: {
             label: "Create rule",
+            disabled: true,
+          },
+        },
+      },
+      {
+        path: PATHS.RULES.IMPORT_LINK.RELATIVE,
+        element: <ImportRuleLink />,
+        handle: {
+          breadcrumb: {
+            label: "Import link",
             disabled: true,
           },
         },
