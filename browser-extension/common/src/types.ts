@@ -136,6 +136,8 @@ export interface Rule extends Record<string, unknown> {
   description?: string;
   isFavourite?: boolean;
   modificationDate?: number;
+  /** Epoch ms after which the rule switches itself off (see ruleExpiryManager). */
+  expiresAt?: number;
 }
 
 export interface Group extends Record<string, unknown> {

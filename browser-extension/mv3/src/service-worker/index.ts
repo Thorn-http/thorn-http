@@ -5,6 +5,7 @@ import { initDevtoolsListener } from "./services/devtools";
 import { handleInstallUninstall } from "./services/installUninstall";
 import { initMessageHandler } from "./services/messageHandler/listener";
 import { initRulesManager } from "./services/rulesManager";
+import { initRuleExpiryManager } from "./services/ruleExpiryManager";
 import { initWebRequestInterceptor } from "./services/webRequestInterceptor";
 import {
   initNetworkRecordingPort,
@@ -19,6 +20,7 @@ import {
   registerCommands();
   handleInstallUninstall();
   initRulesManager();
+  initRuleExpiryManager();
   initMessageHandler();
   initContextMenu();
   initWebRequestInterceptor();

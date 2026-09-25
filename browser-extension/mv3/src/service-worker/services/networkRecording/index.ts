@@ -183,7 +183,7 @@ if (sidePanelApi) {
 // Accepted edge case: the SW can still be killed abruptly on OS sleep/wake regardless of the ping.
 // While asleep nothing is being recorded, so a max-duration "overrun" is meaningless; on wake the
 // next network event (onCompleted's inline isOverMaxDuration check) or the next ping stops it — a
-// few seconds' delay on a fully idle tab, never lost data. Not worth an alarms permission to cover.
+// few seconds' delay on a fully idle tab, never lost data. Not worth an alarm to cover.
 const KEEPALIVE_PING_MS = 20_000;
 const CORRELATION_TTL_MS = 60_000;
 let keepalivePingId: ReturnType<typeof setInterval> | undefined;

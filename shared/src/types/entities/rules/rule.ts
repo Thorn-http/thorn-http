@@ -6,6 +6,8 @@ export interface BaseRule extends BaseItem {
   ruleType: RuleType;
   groupId?: string;
   schemaVersion?: string;
+  /** Epoch ms after which the extension switches the rule off by itself. */
+  expiresAt?: number;
 
   // Determines if the rule is imported
   isModHeaderImport?: boolean;

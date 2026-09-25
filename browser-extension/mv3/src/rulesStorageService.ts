@@ -1,4 +1,4 @@
-import { getGroups, getRules, onRuleOrGroupChange } from "common/rulesStore";
+import { getGroups, getRules, isRuleExpired, onRuleOrGroupChange } from "common/rulesStore";
 import { Group, Rule, RuleType, Status } from "common/types";
 
 class RulesStorageService {
@@ -60,7 +60,7 @@ class RulesStorageService {
     const groups = await this.getAllGroups();
 
     return rules.filter((rule) => {
-      if (!rule.status || rule.status === Status.INACTIVE) {
+      if (!rule.status || rule.status === Status.INACTIVE || isRuleExpired(rule)) {
         return false;
       }
 
@@ -74,7 +74,7 @@ class RulesStorageService {
 
       const group = groups.find((group) => group.id === rule.groupId);
 
-      if (group.status === Status.ACTIVE) {
+      if (group?.status === Status.ACTIVE) {
         return true;
       }
 

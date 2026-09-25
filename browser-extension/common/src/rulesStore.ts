@@ -9,6 +9,11 @@ const isGroup = (record: unknown): boolean => {
   return record && (record as Group).objectType === ObjectType.GROUP;
 };
 
+/** A rule whose auto-disable time has passed is treated as inactive, even before storage catches up. */
+export const isRuleExpired = (rule: Rule, now = Date.now()): boolean => {
+  return typeof rule.expiresAt === "number" && rule.expiresAt <= now;
+};
+
 export const getRules = async (): Promise<Rule[]> => {
   const records = await getAllRecords();
   return records.filter(isRule) as Rule[];
@@ -28,7 +33,7 @@ export const getEnabledRules = async (ruleType?: RuleType): Promise<Rule[]> => {
   const groups = await getGroups();
 
   return rules.filter((rule) => {
-    if (!rule.status || rule.status === Status.INACTIVE) {
+    if (!rule.status || rule.status === Status.INACTIVE || isRuleExpired(rule)) {
       return false;
     }
 
@@ -42,7 +47,7 @@ export const getEnabledRules = async (ruleType?: RuleType): Promise<Rule[]> => {
 
     const group = groups.find((group) => group.id === rule.groupId);
 
-    if (group.status === Status.ACTIVE) {
+    if (group?.status === Status.ACTIVE) {
       return true;
     }
 
