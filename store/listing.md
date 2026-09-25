@@ -67,7 +67,9 @@ Intercept and modify the browser's HTTP(S) requests and responses according to r
 | `contextMenus` | "Activate / Deactivate" item on the toolbar icon. |
 | `sidePanel` | Shows the live network recording next to the page. |
 | `browsingData` | Optional "disable cache" for network recordings, so the first load hits the network. Only used when the user asks for it. |
+| `alarms` | Switches rules off at the time the user set ("auto-disable"). |
 | Host permission `<all_urls>` | Rules can target any site the user chooses. |
+| Optional: `debugger` | Not requested at install. Only if the user allows it after reading an explanation in the Delay rule editor: pauses the scripts, styles, images and fonts that the user's Delay rules match, and continues them after the delay (Chrome DevTools Protocol, Fetch domain). Attached only while such a rule is on; removable at any time in Settings. No data is read, stored or sent. |
 | Remote code | None. All code is bundled in the package. |
 
 ## Data usage disclosures (Chrome)
