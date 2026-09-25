@@ -118,3 +118,22 @@ test("User-Agent overrides the browser user agent", async ({ context, openApp, s
   const echo = await readEcho(context, `${server.origin}/echo`);
   expect(echo.headers["user-agent"]).toMatch(/iPhone/);
 });
+
+test("fetch/XHR rules also apply to requests made while the page is loading", async ({ context, openApp, server }) => {
+  const editor = await newRule(openApp, "Delay", "early delay", "/echo");
+  await editor.fill('[data-selectionid="delay-value"]', "1500");
+  await saveRule(editor);
+
+  const page = await context.newPage();
+  await page.goto(`${server.origin}/timed`);
+  await expect(page.locator("#elapsed")).not.toBeEmpty({ timeout: 10_000 });
+  expect(Number(await page.locator("#elapsed").textContent())).toBeGreaterThanOrEqual(1400);
+});
+
+test("requests are not held up without matching rules", async ({ context, server }) => {
+  const page = await context.newPage();
+  await page.goto(`${server.origin}/timed`);
+  await expect(page.locator("#elapsed")).not.toBeEmpty();
+  // Used to wait ~2s for an acknowledgement from a content script listener registered too late.
+  expect(Number(await page.locator("#elapsed").textContent())).toBeLessThan(1000);
+});

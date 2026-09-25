@@ -49,6 +49,15 @@ const createServer = () =>
       res.end(JSON.stringify({ title: "original" }));
       return;
     }
+    if (url.startsWith("/timed")) {
+      // Fetches immediately while parsing and records how long it took.
+      res.setHeader("content-type", "text/html");
+      res.end(`<html><body><pre id="elapsed"></pre><script>
+        const t0 = performance.now();
+        fetch("/echo").then(() => (document.getElementById("elapsed").textContent = String(Math.round(performance.now() - t0))));
+      </script></body></html>`);
+      return;
+    }
     if (url.startsWith("/blog")) {
       // Fetches the JSON immediately (while parsing), later, and via XHR.
       res.setHeader("content-type", "text/html");
