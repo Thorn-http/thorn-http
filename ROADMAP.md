@@ -116,6 +116,9 @@ Levantamento de set/2026 (reviews da Chrome Web Store, issues do Requestly no Gi
 - O ModHeader foi marcado como malware em jul/2026 (coletava domínios visitados) e saiu da loja do Edge: ~1,6 mi de usuários procurando alternativa confiável.
 - O Resource Override morreu com o MV3; seus usuários queriam principalmente "mapear arquivo local".
 - Reclamações recorrentes: extensão deixa o Chrome lento ou quebra sites (Google Drive, Azure DevOps), e bugs antigos nas regras de corpo.
+- Recursos das alternativas que o Thorn ainda não tem (Tweak, Mokku, ModHeader, ModResponse, HTTP Toolkit, Charles, Fiddler) estão distribuídos nas versões abaixo. ⭐ = destaque.
+
+> **Licença ao implementar:** ideias e funcionalidades são livres; **não copiar código** de ferramentas fechadas (Tweak, ModHeader). Código aberto pode ser reaproveitado respeitando a licença (HTTP Toolkit é AGPLv3; Mokku é MIT — manter os avisos). Não clonar a interface nem usar marcas de forma confusa. Todo código novo do Thorn segue AGPLv3.
 
 ### v1.1 — Desempenho e compatibilidade
 
@@ -134,17 +137,30 @@ Levantamento de set/2026 (reviews da Chrome Web Store, issues do Requestly no Gi
 - [ ] **Perfis no popup**: ligar/desligar grupos direto do popup (o que usuários do ModHeader esperam)
 - [ ] **Map Local File na extensão**: enviar/colar um arquivo (JS, CSS, JSON, HTML) guardado localmente e servido no lugar da URL original (hoje só existe no app desktop do Requestly)
 - [ ] **Loja e site**: destacar "100% grátis, sem conta, sem coleta de dados, código aberto" e uma comparação honesta com as alternativas
+- [ ] ⭐ **Desligar CSP com um clique** (popup, por site): remove a Content-Security-Policy da página atual — hoje só existe como template (ModHeader)
+- [ ] **Editor de cookies**: tela própria para editar `Cookie` e `Set-Cookie`, com atributos (SameSite, Secure, HttpOnly, expiração) (ModHeader)
 
 ### v1.3 — Mock a partir do tráfego
 
-- [ ] **"Criar mock desta resposta"** em cada requisição do side panel de gravação: gera uma Modify API Response já preenchida com a resposta real
+- [ ] ⭐ **Mock com um clique a partir do tráfego**: botão "Criar mock desta resposta" em cada requisição do **side panel de gravação** e do **painel do DevTools**; gera uma Modify API Response já preenchida com a resposta real, pronta para editar (Mokku)
+- [ ] ⭐ **Editar um campo do JSON sem código**: modo "alterar campos" na Modify API Response (ex.: `user.plan` = `"pro"`), aplicado sobre a resposta real — sem colar o JSON inteiro nem escrever JavaScript (HTTP Toolkit "patch JSON")
+- [ ] **Procurar e substituir no corpo da resposta** (texto ou regex), sem mock completo (HTTP Toolkit, Charles, Fiddler)
+- [ ] **Variáveis e dados fake nos mocks**: variáveis globais (`{{baseUrl}}`) reutilizáveis entre regras e geradores (`{{nome}}`, `{{email}}`, `{{uuid}}`, `{{numero}}`) (Tweak)
+- [ ] **Simular timeout / conexão caída**: além de bloquear, deixar a requisição pendurada até o timeout ou falhar no meio (HTTP Toolkit)
 - [ ] **Importar HAR → regras**: escolher requisições de um arquivo .har e gerar as regras de mock em lote
 - [ ] **Replace String com várias substituições** na mesma URL
+
+### v1.4 — Debug em tempo real
+
+- [ ] ⭐ **Breakpoints**: pausar uma requisição ou resposta (fetch/XHR) que bate com a regra e editar URL, headers, corpo e status antes de seguir — recurso pago no Tweak e presente em HTTP Toolkit/Charles/Fiddler; nenhuma extensão gratuita oferece
+  - Pronto quando: pausa/continua/edita pela UI (DevTools ou janela própria), com timeout de segurança para não travar a página; e2e cobrindo request e response
+- [ ] ⭐ **Logpoints**: registrar no console (e no painel do DevTools) requisição e resposta quando batem com a regra, sem alterar nada (Tweak)
+- [ ] **Casar regra por header ou corpo da requisição** (além de URL, método, tipo de recurso e página) (HTTP Toolkit)
 
 ### v2 — Itens maiores
 
 - [ ] **WebSocket**: ver e alterar mensagens (issue mais votada do interceptor do Requestly)
-- [ ] **Regras só na aba atual** (via regras de sessão do DNR por aba)
+- [ ] **Regras só na aba atual** e filtros por janela e grupo de abas (via regras de sessão do DNR por aba) (ModHeader)
 - [ ] **Regex acima do limite de 2 KB do DNR**: estudar alternativa (dividir em várias regras ou aplicar via page script)
 - [ ] **Sync opcional** via arquivo do usuário ou Google Drive (sem backend próprio)
 - [ ] Mais idiomas (`_locales/`) e build do Safari
