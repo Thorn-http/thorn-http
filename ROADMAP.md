@@ -120,8 +120,18 @@ Auditoria de set/2026 (build 1.0.0). Corrigido, com testes em `e2e/security.spec
 
 - [x] **Erro no cliente "Cannot redefine property: timeout"** (quebrava todo XHR da página, ex.: banner OneTrust) quando o interceptor rodava duas vezes ou junto com outra extensão do mesmo código (Requestly). Agora o patch roda uma vez por janela, tolera propriedades já redefinidas, e usa nomes próprios (`__THORN_HTTP__`, mensagens `thorn:*`), para o Thorn e o Requestly não lerem as regras um do outro. Testes: `e2e/coexistence.spec.ts`.
 
+- [x] **Varredura "tudo local"** (a anterior só lia JS/HTML e só navegava por 4 telas). Agora `e2e/build-audit.spec.ts` lê todos os arquivos do build (JSON, CSS, SVG...) e `e2e/local-only.spec.ts` usa as features (regras numa página, gravação start/stop, todas as telas, templates, consentimento do Delay) e falha em qualquer requisição, aba ou bloqueio de CSP para fora da máquina. Encontrado e corrigido:
+  - **Delay mandava a URL completa para `app.requestly.io/delay`** (regra estática em `delayRules.json`). Agora é local: fetch/XHR na página; página/iframe numa página de contagem da extensão; scripts/CSS/imagens/fontes pelo `chrome.debugger`, permissão **opcional**, pedida com explicação completa no editor e em Settings. Máximo de 10 minutos.
+  - **Parar uma gravação iniciada pelo popup abria `www.browserstack.com`.**
+  - Painel de ajuda (já oculto) baixava docs do Notion (`notion-api.splitbee.io`) e de `requestly.dev`: código removido.
+  - Links para rqst.ly, formbricks, bit.ly, lojas/docs/Discord/GitHub do Requestly: apontam para thorn-http.dev.
+  - CSP das páginas da extensão bloqueia qualquer conexão, imagem, fonte ou frame externo.
+  - Bug herdado: só a primeira regra de Delay valia para fetch/XHR.
+
 Pendente:
 
+- [ ] **Código herdado inerte** ainda no pacote (bloqueado pela CSP, sem uso): SDKs do Firebase, GrowthBook e Stripe; presets de bibliotecas do Insert Script via CDN (o service worker nem os usa); dados de exemplo com URLs do Requestly. Remover.
+- [ ] **Delay de scripts/CSS/imagens no Firefox:** sem `chrome.debugger`; usar `webRequest` bloqueante (suportado no Firefox MV3).
 - [ ] **Mock de XHR com dois interceptores ativos:** com Requestly (ou outro interceptor do mesmo código) também ativo, um mock do Thorn para uma requisição XHR não completa (fetch e XHRs sem mock funcionam). Os wrappers herdados não se compõem; estudar criar o proxy com o XMLHttpRequest nativo, ou avisar no popup quando outro interceptor for detectado.
 - [ ] **Regras visíveis para as páginas:** regras ativas de Modify Response, Request Body e Delay ficam em `window.__REQUESTLY__` (necessário para o page script do fetch/XHR); qualquer site lê mocks e condições. Mitigar com a interceptação "Automático" da v1.1, limitar pelo filtro de página quando houver, e avisar no editor para não colocar segredos nesses mocks.
 - [ ] **Dependências do app** (`npm audit --omit=dev`: 2 críticas, 12 altas): quase todas do Firebase SDK (protobufjs, grpc, websocket-driver; inerte, sem backend) e de ferramentas de build. Remover o Firebase SDK e atualizar `react-router-dom` e `lodash`.
