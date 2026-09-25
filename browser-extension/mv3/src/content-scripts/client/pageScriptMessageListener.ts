@@ -2,21 +2,18 @@ import { CLIENT_MESSAGES, EXTENSION_MESSAGES } from "common/constants";
 
 export const initPageScriptMessageListener = () => {
   // SW → page relay for Network Interceptor v2 body capture start/stop control signals.
-  // The page script (networkBodyRecorder, MAIN world) listens for source "requestly:extension".
+  // The page script (networkBodyRecorder, MAIN world) listens for source "thorn:extension".
   chrome.runtime.onMessage.addListener((message) => {
     if (
       message?.action === EXTENSION_MESSAGES.START_NETWORK_BODY_CAPTURE ||
       message?.action === EXTENSION_MESSAGES.STOP_NETWORK_BODY_CAPTURE
     ) {
-      window.postMessage(
-        { source: "requestly:extension", action: message.action, payload: message.payload },
-        window.location.href
-      );
+      window.postMessage({ source: "thorn:extension", action: message.action, payload: message.payload }, "/");
     }
   });
 
   window.addEventListener("message", function (event) {
-    if (event.source !== window || event.data.source !== "requestly:client") {
+    if (event.source !== window || event.data.source !== "thorn:client") {
       return;
     }
 
@@ -34,10 +31,10 @@ export const initPageScriptMessageListener = () => {
         chrome.runtime.sendMessage(event.data, () => {
           window.postMessage(
             {
-              source: "requestly:client",
+              source: "thorn:client",
               action: CLIENT_MESSAGES.ON_BEFORE_AJAX_REQUEST_PROCESSED,
             },
-            window.location.href
+            "/"
           );
         });
         break;
@@ -45,10 +42,10 @@ export const initPageScriptMessageListener = () => {
         chrome.runtime.sendMessage(event.data, () => {
           window.postMessage(
             {
-              source: "requestly:client",
+              source: "thorn:client",
               action: CLIENT_MESSAGES.ON_ERROR_OCCURRED_PROCESSED,
             },
-            window.location.href
+            "/"
           );
         });
         break;

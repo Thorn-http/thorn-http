@@ -607,7 +607,7 @@ const sendBodyCaptureSignal = (tabId: number, action: string) => {
     action === EXTENSION_MESSAGES.START_NETWORK_BODY_CAPTURE
       ? { maxPayloadSize: recording?.config.maxPayloadSize, ignoreMediaResponse: true }
       : undefined;
-  // Relayed by the client content script → page (source "requestly:extension").
+  // Relayed by the client content script → page (source "thorn:extension").
   chrome.tabs.sendMessage(tabId, { action, payload }).catch(() => {});
 };
 

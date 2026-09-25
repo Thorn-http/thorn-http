@@ -18,4 +18,10 @@ const initAjaxRequestInterceptor = () => {
   }
 };
 
-initAjaxRequestInterceptor();
+// Patch fetch/XHR once per window, even if the script is injected again (wrapping our own wrappers
+// breaks XHR). A global symbol, so separate copies of the script see the same flag.
+const PATCHED = Symbol.for("thorn-http.ajaxRequestInterceptor");
+if (!window[PATCHED]) {
+  Object.defineProperty(window, PATCHED, { value: true });
+  initAjaxRequestInterceptor();
+}

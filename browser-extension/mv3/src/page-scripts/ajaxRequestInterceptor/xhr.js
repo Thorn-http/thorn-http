@@ -17,10 +17,13 @@ import {
   waitForRulesCache,
 } from "./utils";
 
+// Our proxy of each page XHR, under a key no other interceptor uses.
+const PROXY_XHR = Symbol("thornProxyXhr");
+
 export const initXhrInterceptor = (debug) => {
   // XHR Implementation
   const updateXhrReadyState = (xhr, readyState) => {
-    Object.defineProperty(xhr, "readyState", { writable: true });
+    Object.defineProperty(xhr, "readyState", { writable: true, configurable: true });
     // @ts-ignore
     xhr.readyState = readyState;
     xhr.dispatchEvent(new CustomEvent("readystatechange"));
@@ -85,15 +88,19 @@ export const initXhrInterceptor = (debug) => {
 
         Object.defineProperties(actualXhr, {
           status: {
+            configurable: true,
             get: () => responseStatus,
           },
           statusText: {
+            configurable: true,
             get: () => responseStatusText,
           },
           getResponseHeader: {
+            configurable: true,
             value: this.getResponseHeader.bind(this),
           },
           getAllResponseHeaders: {
+            configurable: true,
             value: this.getAllResponseHeaders.bind(this),
           },
         });
@@ -149,6 +156,7 @@ export const initXhrInterceptor = (debug) => {
           customResponse = JSON.stringify(customResponse);
         }
         Object.defineProperty(actualXhr, "response", {
+          configurable: true,
           get: function () {
             if (responseModification.type === "static" && responseType === "json") {
               if (typeof customResponse === "object") {
@@ -164,6 +172,7 @@ export const initXhrInterceptor = (debug) => {
 
         if (responseType === "" || responseType === "text") {
           Object.defineProperty(actualXhr, "responseText", {
+            configurable: true,
             get: function () {
               return customResponse;
             },
@@ -175,16 +184,19 @@ export const initXhrInterceptor = (debug) => {
 
         Object.defineProperties(actualXhr, {
           responseType: {
+            configurable: true,
             get: function () {
               return responseType;
             },
           },
           responseURL: {
+            configurable: true,
             get: function () {
               return responseURL;
             },
           },
           responseXML: {
+            configurable: true,
             get: function () {
               return responseXML;
             },
@@ -226,37 +238,31 @@ export const initXhrInterceptor = (debug) => {
     xhr.addEventListener("loadstart", dispatchEventToActualXHR.bind(xhr, "loadstart"), false);
     xhr.addEventListener("progress", dispatchEventToActualXHR.bind(xhr, "progress"), false);
 
-    const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), "timeout");
-
-    // FIXME: This is breaking for some websites.
-    // https://linear.app/requestly/issue/ENGG-1823
-    if (descriptor) {
-      Object.defineProperty(actualXhr, "timeout", {
+    // Keep timeout and withCredentials in sync with the proxy XHR. Other interceptors patching XHR
+    // the same way (e.g. Requestly, which this code comes from) may already have wrapped them: chain
+    // onto their accessors, and never redefine a property that can't be (that threw "Cannot
+    // redefine property: timeout" and broke the page's XHR).
+    const forwardToProxyXhr = (name) => {
+      const own = Object.getOwnPropertyDescriptor(actualXhr, name);
+      const accessor = own ?? Object.getOwnPropertyDescriptor(Object.getPrototypeOf(actualXhr), name);
+      if (!accessor?.get || !accessor?.set || (own && !own.configurable)) {
+        return;
+      }
+      Object.defineProperty(actualXhr, name, {
+        configurable: true,
         get: function () {
-          return descriptor.get.call(this);
+          return accessor.get.call(this);
         },
         set: function (value) {
-          xhr.timeout = value;
-          descriptor.set.call(this, value);
+          xhr[name] = value;
+          accessor.set.call(this, value);
         },
       });
-    }
+    };
+    forwardToProxyXhr("timeout");
+    forwardToProxyXhr("withCredentials"); // https://github.com/requestly/requestly/issues/2936
 
-    // https://github.com/requestly/requestly/issues/2936
-    const credentialsDescriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), "withCredentials");
-    if (credentialsDescriptor) {
-      Object.defineProperty(actualXhr, "withCredentials", {
-        get: function () {
-          return credentialsDescriptor.get.call(this);
-        },
-        set: function (value) {
-          xhr.withCredentials = value;
-          credentialsDescriptor.set.call(this, value);
-        },
-      });
-    }
-
-    this.rqProxyXhr = xhr;
+    this[PROXY_XHR] = xhr;
   };
 
   XMLHttpRequest = function () {
@@ -274,12 +280,12 @@ export const initXhrInterceptor = (debug) => {
   XMLHttpRequest.prototype.open = function (method, url, async = true) {
     open.apply(this, arguments);
     try {
-      this.rqProxyXhr._method = method;
-      this.rqProxyXhr._requestURL = getAbsoluteUrl(url);
-      this.rqProxyXhr._async = async;
-      open.apply(this.rqProxyXhr, arguments);
+      this[PROXY_XHR]._method = method;
+      this[PROXY_XHR]._requestURL = getAbsoluteUrl(url);
+      this[PROXY_XHR]._async = async;
+      open.apply(this[PROXY_XHR], arguments);
     } catch (err) {
-      debug && console.log("[rqProxyXhr.open] error", err);
+      debug && console.log("[proxyXhr.open] error", err);
     }
   };
 
@@ -288,10 +294,10 @@ export const initXhrInterceptor = (debug) => {
     debug && console.log("abort called");
     abort.apply(this, arguments);
     try {
-      this.rqProxyXhr._abort = true;
-      abort.apply(this.rqProxyXhr, arguments);
+      this[PROXY_XHR]._abort = true;
+      abort.apply(this[PROXY_XHR], arguments);
     } catch (err) {
-      debug && console.log("[rqProxyXhr.abort] error", err);
+      debug && console.log("[proxyXhr.abort] error", err);
     }
   };
 
@@ -299,29 +305,29 @@ export const initXhrInterceptor = (debug) => {
   XMLHttpRequest.prototype.setRequestHeader = function (header, value) {
     setRequestHeader.apply(this, arguments);
     try {
-      this.rqProxyXhr._requestHeaders = this.rqProxyXhr._requestHeaders || {};
-      this.rqProxyXhr._requestHeaders[header] = value;
-      setRequestHeader.apply(this.rqProxyXhr, arguments);
+      this[PROXY_XHR]._requestHeaders = this[PROXY_XHR]._requestHeaders || {};
+      this[PROXY_XHR]._requestHeaders[header] = value;
+      setRequestHeader.apply(this[PROXY_XHR], arguments);
     } catch (err) {
-      debug && console.log("[rqProxyXhr.setRequestHeader] error", err);
+      debug && console.log("[proxyXhr.setRequestHeader] error", err);
     }
   };
 
   const send = XMLHttpRequest.prototype.send;
   XMLHttpRequest.prototype.send = async function (data) {
     try {
-      if (!this.rqProxyXhr._async) {
+      if (!this[PROXY_XHR]._async) {
         debug && console.log("Async disabled");
         return send.call(this, data);
       }
 
-      this.rqProxyXhr._requestData = data;
+      this[PROXY_XHR]._requestData = data;
 
       await waitForRulesCache();
 
       const matchedDelayRulePair = getMatchedDelayRule({
-        url: this.rqProxyXhr._requestURL,
-        method: this.rqProxyXhr._method,
+        url: this[PROXY_XHR]._requestURL,
+        method: this[PROXY_XHR]._method,
         type: "xmlhttprequest",
         initiator: location.origin, // initiator=origin. Should now contain port and protocol
       });
@@ -331,8 +337,8 @@ export const initXhrInterceptor = (debug) => {
       }
 
       const requestRule = getMatchedRequestRule({
-        url: this.rqProxyXhr._requestURL,
-        method: this.rqProxyXhr._method,
+        url: this[PROXY_XHR]._requestURL,
+        method: this[PROXY_XHR]._method,
         type: "xmlhttprequest",
         initiator: location.origin, // initiator=origin. Should now contain port and protocol
         requestData: jsonifyValidJSONString(data),
@@ -340,9 +346,9 @@ export const initXhrInterceptor = (debug) => {
 
       if (requestRule) {
         debug && console.log("[xhrInterceptor] matchedRequestRule", { requestRule });
-        this.rqProxyXhr._requestData = getCustomRequestBody(requestRule, {
-          method: this.rqProxyXhr._method,
-          url: this.rqProxyXhr._requestURL,
+        this[PROXY_XHR]._requestData = getCustomRequestBody(requestRule, {
+          method: this[PROXY_XHR]._method,
+          url: this[PROXY_XHR]._requestURL,
           body: data,
           bodyAsJson: jsonifyValidJSONString(data, true),
         });
@@ -350,8 +356,8 @@ export const initXhrInterceptor = (debug) => {
         notifyRequestRuleApplied({
           ruleDetails: requestRule,
           requestDetails: {
-            url: this.rqProxyXhr._requestURL,
-            method: this.rqProxyXhr._method,
+            url: this[PROXY_XHR]._requestURL,
+            method: this[PROXY_XHR]._method,
             type: "xmlhttprequest",
             timeStamp: Date.now(),
           },
@@ -359,34 +365,34 @@ export const initXhrInterceptor = (debug) => {
       }
 
       await notifyOnBeforeRequest({
-        url: this.rqProxyXhr._requestURL,
-        method: this.rqProxyXhr._method,
+        url: this[PROXY_XHR]._requestURL,
+        method: this[PROXY_XHR]._method,
         type: "xmlhttprequest",
         initiator: location.origin,
-        requestHeaders: this.rqProxyXhr._requestHeaders ?? {},
+        requestHeaders: this[PROXY_XHR]._requestHeaders ?? {},
       });
 
       this.responseRule = getMatchedResponseRule({
-        url: this.rqProxyXhr._requestURL,
-        requestData: jsonifyValidJSONString(this.rqProxyXhr._requestData),
-        method: this.rqProxyXhr._method,
+        url: this[PROXY_XHR]._requestURL,
+        requestData: jsonifyValidJSONString(this[PROXY_XHR]._requestData),
+        method: this[PROXY_XHR]._method,
       });
-      this.rqProxyXhr.responseRule = this.responseRule;
+      this[PROXY_XHR].responseRule = this.responseRule;
 
       if (this.responseRule) {
         debug && console.log("[xhrInterceptor]", "send and response rule matched", this.responseRule);
         if (shouldServeResponseWithoutRequest(this.responseRule)) {
           debug && console.log("[xhrInterceptor]", "send and response rule matched and serveWithoutRequest is true");
-          resolveXHR(this.rqProxyXhr, this.responseRule.pairs[0].response.value);
+          resolveXHR(this[PROXY_XHR], this.responseRule.pairs[0].response.value);
         } else {
-          send.call(this.rqProxyXhr, this.rqProxyXhr._requestData);
+          send.call(this[PROXY_XHR], this[PROXY_XHR]._requestData);
         }
         return;
       }
 
-      send.call(this, this.rqProxyXhr._requestData);
+      send.call(this, this[PROXY_XHR]._requestData);
     } catch (err) {
-      debug && console.log("[rqProxyXhr.send] error", err);
+      debug && console.log("[proxyXhr.send] error", err);
       send.call(this, data);
     }
   };

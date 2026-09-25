@@ -70,14 +70,16 @@ export const getCustomRequestBody = (requestRule, args) => {
   return JSON.stringify(requestBody);
 };
 
+// Messages to our own window use the target origin "/" (same origin): location.href is rejected
+// on about:blank, whose origin is opaque.
 const postMessageAndWaitForAck = async (message, action) => {
   window.postMessage(
     {
       ...message,
       action,
-      source: "requestly:client",
+      source: "thorn:client",
     },
-    window.location.href
+    "/"
   );
 
   let ackHandler;
@@ -150,35 +152,35 @@ export const isJSON = (data) => {
 export const notifyResponseRuleApplied = (message) => {
   window.top.postMessage(
     {
-      source: "requestly:client",
+      source: "thorn:client",
       action: "response_rule_applied",
       rule: message.ruleDetails,
       requestDetails: message["requestDetails"],
     },
-    window.location.href
+    "/"
   );
 };
 
 export const notifyRequestRuleApplied = (message) => {
   window.top.postMessage(
     {
-      source: "requestly:client",
+      source: "thorn:client",
       action: "request_rule_applied",
       rule: message.ruleDetails,
       requestDetails: message["requestDetails"],
     },
-    window.location.href
+    "/"
   );
 };
 
 export const sendCacheSharedStateMessage = () => {
   window.top.postMessage(
     {
-      source: "requestly:client",
+      source: "thorn:client",
       action: EXTENSION_MESSAGES.CACHE_SHARED_STATE,
       sharedState: window[PUBLIC_NAMESPACE]?.sharedState,
     },
-    window.location.href
+    "/"
   );
 };
 

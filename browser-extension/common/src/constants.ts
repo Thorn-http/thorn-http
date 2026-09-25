@@ -90,7 +90,7 @@ export const CLIENT_MESSAGES = {
 
 export const STORAGE_TYPE = "local";
 
-export const PUBLIC_NAMESPACE = "__REQUESTLY__";
+export const PUBLIC_NAMESPACE = "__THORN_HTTP__";
 
 export const RULE_TITLES = {
   REDIRECT: "Redirect request",

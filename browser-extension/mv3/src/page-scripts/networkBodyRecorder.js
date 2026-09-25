@@ -93,7 +93,7 @@ const applyCaps = (data, cfg) => {
   const MAX_BUFFERED_ENTRIES = 100;
 
   const postToExtension = (action, payload) => {
-    window.postMessage({ source: "requestly:client", action, payload }, window.location.href);
+    window.postMessage({ source: "thorn:client", action, payload }, "/");
   };
 
   const emit = (data) => postToExtension(CLIENT_MESSAGES.NETWORK_BODY_CAPTURED, applyCaps(data, cfg));
@@ -196,7 +196,7 @@ const applyCaps = (data, cfg) => {
   }
 
   window.addEventListener("message", (event) => {
-    if (event.source !== window || event.data?.source !== "requestly:extension") return;
+    if (event.source !== window || event.data?.source !== "thorn:extension") return;
 
     if (event.data.action === EXTENSION_MESSAGES.START_NETWORK_BODY_CAPTURE) {
       const incoming = event.data.payload || {};

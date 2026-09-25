@@ -111,7 +111,7 @@ const updateCache = (obj: Record<string, any>) => {
   // Reference: https://developer.chrome.com/docs/extensions/reference/api/scripting#:~:text=A%20JavaScript%20function%20to%20inject.,or%20func%20must%20be%20specified.
 
   // console.log("[updateCache]", { obj });
-  const PUBLIC_NAMESPACE = "__REQUESTLY__";
+  const PUBLIC_NAMESPACE = "__THORN_HTTP__";
   window[PUBLIC_NAMESPACE] = window[PUBLIC_NAMESPACE] || {};
   Object.keys(obj).map((key) => {
     window[PUBLIC_NAMESPACE][key] = obj[key];
