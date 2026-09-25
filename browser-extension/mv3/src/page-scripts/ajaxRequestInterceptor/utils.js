@@ -215,7 +215,10 @@ export const getMatchedDelayRule = (requestDetails) => {
   for (const rule of window[PUBLIC_NAMESPACE]?.delayRules) {
     const { isApplied, matchedPair } = matchRuleWithRequest(rule, requestDetails);
 
-    return matchedPair;
+    // (It returned here for the first rule even when it didn't match, so other rules never ran.)
+    if (isApplied) {
+      return matchedPair;
+    }
   }
 
   return null;
