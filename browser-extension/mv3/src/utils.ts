@@ -124,17 +124,20 @@ export const getBlockedDomains = async () => {
   return cachedBlockedDomains;
 };
 
+/** A blocked domain covers its subdomains; it matches with or without the URL's port. */
 export const isUrlInBlockList = async (url: string) => {
+  let hostname: string;
+  let host: string;
+  try {
+    ({ hostname, host } = new URL(url));
+  } catch {
+    return false;
+  }
+
   const blockedDomains = await getBlockedDomains();
-  return blockedDomains?.some((domain) => {
-    return matchSourceUrl(
-      {
-        key: SourceKey.HOST,
-        value: `/^(.+\.)?${domain}$/i`, // to match the domain and all its subdomains
-        operator: SourceOperator.MATCHES,
-      },
-      url
-    );
+  return !!blockedDomains?.some((domain) => {
+    const blocked = domain.toLowerCase();
+    return blocked === host || blocked === hostname || hostname.endsWith(`.${blocked}`);
   });
 };
 

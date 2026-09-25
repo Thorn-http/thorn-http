@@ -1,4 +1,10 @@
-import { generateUrlPattern, getBlockedDomains, isExtensionEnabled, onBlockListChange } from "../../utils";
+import {
+  generateUrlPattern,
+  getBlockedDomains,
+  isExtensionEnabled,
+  isUrlInBlockList,
+  onBlockListChange,
+} from "../../utils";
 import { ChangeType } from "common/storage";
 import { WEB_URL, OTHER_WEB_URLS } from "../../../../config/dist/config.build.json";
 import { onVariableChange, Variable } from "../variable";
@@ -137,10 +143,13 @@ const updateTabCache = async (tabId: number, obj: Record<string, any>, frameId?:
   );
 };
 
-const updateTabRuleCache = async (tabId: number, frameId?: number) => {
-  const requestRules = await rulesStorageService.getEnabledRules(RuleType.REQUEST);
-  const responseRules = await rulesStorageService.getEnabledRules(RuleType.RESPONSE);
-  const delayRules = await rulesStorageService.getEnabledRules(RuleType.DELAY);
+const updateTabRuleCache = async (tabId: number, frameId?: number, url?: string) => {
+  // The cache lives in the page's own JavaScript world, where the page can read it: never hand the
+  // rules to blocked sites. (Empty lists, so the page script doesn't wait for rules either.)
+  const isBlocked = !!url && (await isUrlInBlockList(url));
+  const requestRules = isBlocked ? [] : await rulesStorageService.getEnabledRules(RuleType.REQUEST);
+  const responseRules = isBlocked ? [] : await rulesStorageService.getEnabledRules(RuleType.RESPONSE);
+  const delayRules = isBlocked ? [] : await rulesStorageService.getEnabledRules(RuleType.DELAY);
 
   updateTabCache(
     tabId,
@@ -171,7 +180,7 @@ export const initClientSideCaching = async () => {
     // recorded URL (see startNetworkRecording's about:blank hack).
     if (navigatedTabData.url && !/^https?:\/\//.test(navigatedTabData.url)) return;
     if (isExtensionStatusEnabled) {
-      updateTabRuleCache(navigatedTabData.tabId, navigatedTabData.frameId);
+      updateTabRuleCache(navigatedTabData.tabId, navigatedTabData.frameId, navigatedTabData.url);
       globalStateManager.initSharedStateCaching(navigatedTabData.tabId);
     }
   });
@@ -180,7 +189,7 @@ export const initClientSideCaching = async () => {
     if (isExtensionStatusEnabled) {
       chrome.tabs.query({}, (tabs) => {
         tabs.forEach((tab) => {
-          updateTabRuleCache(tab.id, undefined);
+          updateTabRuleCache(tab.id, undefined, tab.url);
         });
       });
     }
