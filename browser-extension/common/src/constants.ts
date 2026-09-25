@@ -115,5 +115,5 @@ export const STORAGE_KEYS = {
 };
 
 export const LINKS = {
-  REQUESTLY_EXTENSION_TROUBLESHOOTING: "https://docs.requestly.com/guides/troubleshooting/rules-not-working",
+  REQUESTLY_EXTENSION_TROUBLESHOOTING: "https://thorn-http.dev/docs/",
 };

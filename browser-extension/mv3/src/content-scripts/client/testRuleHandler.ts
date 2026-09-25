@@ -81,7 +81,7 @@ const setWidgetInfoText = (testRuleWidget: HTMLElement, ruleDetails: Rule) => {
     case RuleType.RESPONSE:
       testRuleWidget.setAttribute(
         INFO_TEXT_ATTRIBUTE,
-        `The responses are modified, but won't show in DevTools due to technical constraints. See <a class="link" target="_blank" href="https://docs.requestly.com/general/http-rules/advanced-usage/test-rules">docs</a> for details.`
+        `The responses are modified, but won't show in DevTools due to technical constraints. See <a class="link" target="_blank" href="https://thorn-http.dev/docs/">docs</a> for details.`
       );
       break;
     case RuleType.HEADERS:
@@ -91,7 +91,7 @@ const setWidgetInfoText = (testRuleWidget: HTMLElement, ruleDetails: Rule) => {
       responseHeaderExists &&
         testRuleWidget.setAttribute(
           INFO_TEXT_ATTRIBUTE,
-          `Response Header Modifications will not show up in the browser network devtools due to technical constraints. Checkout docs for more <a target="_blank" href="https://docs.requestly.com/general/http-rules/rule-types/modify-headers">details</a>.`
+          `Response Header Modifications will not show up in the browser network devtools due to technical constraints. Checkout docs for more <a target="_blank" href="https://thorn-http.dev/docs/">details</a>.`
         );
       break;
     default:
