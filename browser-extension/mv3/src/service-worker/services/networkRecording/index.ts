@@ -16,8 +16,6 @@ import {
 // - maxDuration: time cap (no cap when omitted; see isOverMaxDuration).
 // - maxPayloadSize: per-body cap (bytes) applied to SDK-captured request/response bodies (v2);
 //   defaults to DEFAULT_MAX_PAYLOAD_SIZE when omitted.
-// - fallbackUrl: where to send the user on stop if the originating LTS tab+window are both gone;
-//   defaults to DEFAULT_FALLBACK_URL when omitted.
 // --- Advanced settings (Chrome/Edge only; mirror the classic LTS recorder's advanced options) ---
 // - disableCache: when true, wipe the HTTP cache at record start so the first load is cold and
 //   requests actually hit the network (no 304/from-cache skeleton entries). The exact equivalent of
@@ -58,7 +56,6 @@ export enum OpenMode {
 export interface NetworkRecordingConfig {
   maxDuration?: number;
   maxPayloadSize?: number;
-  fallbackUrl?: string;
   disableCache?: boolean;
   wipeServiceWorkers?: boolean;
   recordAjax?: boolean;
@@ -95,11 +92,6 @@ interface NetworkRecordingState {
   // Resolved open mode, mirrored from config so the stop-time close branch is self-contained.
   openMode?: OpenMode;
 }
-
-// Opened only when the originating LTS tab AND its window are both gone at stop time, so the user
-// lands back in an LTS context. LTS can override per-recording via config.fallbackUrl (e.g. a
-// session-specific deep link); this is the default when it doesn't.
-const DEFAULT_FALLBACK_URL = "https://www.browserstack.com";
 
 const activeRecordings = new Map<number, NetworkRecordingState>();
 const recordingEntries = new Map<number, NetworkHarEntry[]>();
@@ -924,41 +916,28 @@ const buildSummary = (recording: NetworkRecordingState, totalCount: number): Rec
   };
 };
 
-// Return the user to where they came from after a recording ends. Cascade:
-//   1. the originating LTS tab, if it still exists
-//   2. else its window (LTS tab closed but window alive), focusing it
-//   3. else open the LTS fallback URL in a new tab (tab + window both gone)
-// Each step is guarded; failures fall through to the next.
+// Return the user to where they came from after a recording ends: the originating tab if it still
+// exists, else its window. With neither left (e.g. started from the popup, which has no tab), do
+// nothing. (Upstream opened browserstack.com here.)
 const returnFocusToSender = (recording: NetworkRecordingState) => {
   const { senderTabId, senderWindowId } = recording;
 
-  const openFallback = () => {
-    chrome.tabs.create({ url: recording.config.fallbackUrl || DEFAULT_FALLBACK_URL }).catch(() => {});
-  };
-
-  const tryWindowThenFallback = () => {
+  const focusSenderWindow = () => {
     if (senderWindowId === undefined) {
-      openFallback();
       return;
     }
-    chrome.windows.update(senderWindowId, { focused: true }).then(
-      () => {},
-      () => openFallback()
-    );
+    chrome.windows.update(senderWindowId, { focused: true }).catch(() => {});
   };
 
   if (senderTabId === undefined) {
-    tryWindowThenFallback();
+    focusSenderWindow();
     return;
   }
 
-  // tabs.get rejects if the tab is gone -> fall through to window, then fallback.
+  // tabs.get rejects if the tab is gone -> fall back to its window.
   chrome.tabs
     .get(senderTabId)
-    .then(
-      () => chrome.tabs.update(senderTabId, { active: true }).then(() => {}, tryWindowThenFallback),
-      tryWindowThenFallback
-    );
+    .then(() => chrome.tabs.update(senderTabId, { active: true }).then(() => {}, focusSenderWindow), focusSenderWindow);
 };
 
 // Close the recording surface on a user-stop with config.closeOnStop, THEN return focus to the LTS
