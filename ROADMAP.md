@@ -147,7 +147,7 @@ Levantamento de set/2026 (reviews da Chrome Web Store, issues do Requestly no Gi
 - [ ] **Procurar e substituir no corpo da resposta** (texto ou regex), sem mock completo (HTTP Toolkit, Charles, Fiddler)
 - [ ] **Variáveis e dados fake nos mocks**: variáveis globais (`{{baseUrl}}`) reutilizáveis entre regras e geradores (`{{nome}}`, `{{email}}`, `{{uuid}}`, `{{numero}}`) (Tweak)
 - [ ] **Simular timeout / conexão caída**: além de bloquear, deixar a requisição pendurada até o timeout ou falhar no meio (HTTP Toolkit)
-- [ ] **Importar HAR → regras**: escolher requisições de um arquivo .har e gerar as regras de mock em lote
+- [ ] **Importar HAR → regras**: escolher requisições de um arquivo .har e gerar as regras de mock em lote (primeiro passo do ⭐ Replay de HAR, em *Diferenciais*)
 - [ ] **Replace String com várias substituições** na mesma URL
 
 ### v1.4 — Debug em tempo real
@@ -162,5 +162,41 @@ Levantamento de set/2026 (reviews da Chrome Web Store, issues do Requestly no Gi
 - [ ] **WebSocket**: ver e alterar mensagens (issue mais votada do interceptor do Requestly)
 - [ ] **Regras só na aba atual** e filtros por janela e grupo de abas (via regras de sessão do DNR por aba) (ModHeader)
 - [ ] **Regex acima do limite de 2 KB do DNR**: estudar alternativa (dividir em várias regras ou aplicar via page script)
-- [ ] **Sync opcional** via arquivo do usuário ou Google Drive (sem backend próprio)
+- [ ] **Sync opcional** via Google Drive (sem backend próprio); a sincronia por arquivo/pasta está em *Diferenciais* (regras no repositório)
 - [ ] Mais idiomas (`_locales/`) e build do Safari
+
+## Diferenciais — o que ninguém tem
+
+Ideias que nenhuma extensão do segmento (Requestly, Tweak, ModHeader, Mokku) oferece hoje. Todas funcionam sem backend. ⭐ = prioridade.
+
+**Ordem sugerida:** ganho rápido → 1, 3, 9 · diferencial forte → 2, 4, 13 · efeito "uau" em demo → 5, 6, 8.
+
+### Confiança e fluxo
+
+1. [ ] ⭐ **Regras com validade e aviso na página**: timer por regra ("desligar em 1h") e faixa discreta na página ("Thorn está alterando 3 requisições aqui"). Resolve o clássico "esqueci a regra ligada e perdi horas depurando".
+2. [ ] ⭐ **Regras versionadas no repositório**: sincronizar as regras com uma pasta local (ex.: `.thorn/rules.json`) via File System Access API. O time compartilha pelo git, sem conta e sem servidor.
+3. [ ] ⭐ **Compartilhar regra por link**: a regra vai inteira no fragmento da URL (`thorn-http.dev/r#<base64>`), que nunca chega ao servidor. Quem abre importa com um clique; ótimo para issue, PR e Slack.
+9. [ ] ⭐ **"Por que minha regra não aplicou?"**: o teste de regra explica a falha ("host bateu; path não: esperado `/api/v2`, recebido `/api/v1`"). Dor recorrente nas reviews.
+
+### Mocks
+
+4. [ ] ⭐ **Mock com estado (CRUD fake)**: declarar `/api/todos` como coleção; POST adiciona, GET lista, PUT/PATCH atualiza, DELETE remove, tudo guardado no storage da extensão. Dá para fazer o frontend inteiro sem backend pronto (o Mockoon faz isso no desktop; no navegador, ninguém).
+11. [ ] **IA local (Gemini Nano do Chrome, Prompt API)**: gerar dados fake realistas a partir de uma resposta de exemplo, ou criar uma regra a partir de uma frase ("mocka o login retornando erro"). Sem backend nem custo; só aparece se o navegador suportar.
+13. [ ] ⭐ **Replay de HAR** (evolui o "Importar HAR → regras" da v1.3):
+    - **Fontes:** HAR do DevTools, do side panel do Thorn, do Charles, do Proxyman ou do HTTP Toolkit. Formato do LogRocket como bônus: a exportação dele não traz corpos, só status e headers.
+    - **Agrupamento:** método + URL (+ `operationName` no GraphQL), com checkbox para escolher o que vira mock.
+    - **Modos:** *parcial* (só os endpoints marcados vêm do HAR) e *offline total* (tudo vem do HAR; o resto é bloqueado ou devolve 404).
+    - **Sequência:** chamadas repetidas à mesma URL (polling, paginação) devolvem as respostas na ordem gravada. Usa o motor do mock com estado.
+    - **Timing opcional:** reaproveitar os tempos do HAR para simular a latência real.
+    - **Parâmetros voláteis:** ignorar `_t`, `nonce`, tokens etc. na comparação.
+    - **Limites do MV3:** fetch/XHR pelo page script. JS/CSS/imagem/HTML só com `chrome.debugger` (API Fetch), como opção, porque o Chrome mostra a faixa "está sendo depurado". Cookies HttpOnly/Set-Cookie e WebSocket ficam de fora.
+    - **Privacidade:** aviso ao importar e opção de remover `Authorization` e `Cookie`.
+
+### Testes e diagnóstico
+
+5. [ ] **Modo caos**: falhas e latência aleatórias por padrão de URL ("10% de `/api/*` com 500, 20% com 2–5 s de atraso") para testar loading, retry e tratamento de erro.
+6. [ ] **Detector de mudança de contrato**: aprende o schema das respostas JSON por endpoint e avisa quando um campo some, muda de tipo ou vira `null` ("`/api/user` perdeu `address.zip`").
+7. [ ] **Comparar ambientes**: disparar a mesma requisição para produção e staging e mostrar a diferença lado a lado (status, headers, corpo).
+8. [ ] **Painel de feature flags**: detectar o tráfego de LaunchDarkly, GrowthBook, Unleash, Optimizely e Split, listar as flags e ligar/desligar cada uma reescrevendo a resposta.
+10. [ ] **Ferramentas de JWT**: decodificar o token direto no header e forçar 401 na N-ésima requisição para testar o fluxo de refresh.
+12. [ ] **Pacote de reprodução de bug**: exportar regras + HAR num arquivo só. Um colega importa e vê exatamente o mesmo estado. É a parte útil do SessionBear, só que local.
