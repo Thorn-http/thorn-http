@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { RQNetworkEvent, RuleEditorUrlFragment } from "../../../../types";
-import { createRule, generateRuleName, getBaseUrl, isContentBodyEditable } from "../../../../utils";
+import { createRule, isContentBodyEditable } from "../../../../utils";
+import { fillMockFromTraffic } from "../../../../../rules/mockFromTraffic";
 import { Button, Collapse, Tooltip } from "antd";
-import { SourceKey, SourceOperator } from "../../../../../types";
 import { EditOutlined } from "@ant-design/icons";
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
@@ -57,41 +57,14 @@ const ResponseTabContent: React.FC<Props> = ({ networkEvent }) => {
   const editResponseBody = useCallback(() => {
     createRule(
       RuleEditorUrlFragment.RESPONSE,
-      (rule) => {
-        const baseUrl = getBaseUrl(networkEvent.request.url);
-        rule.pairs[0].source = {
-          key: SourceKey.URL,
-          operator: SourceOperator.CONTAINS,
-          value: baseUrl,
-        };
-        // @ts-ignore
-        rule.pairs[0].response = {
-          type: "static",
-          value: response || "{}",
-          resourceType: "restApi",
-          statusCode: "",
-        };
-
-        if (networkEvent?.metadata?.graphQLDetails) {
-          const { operationName } = networkEvent.metadata.graphQLDetails;
-
-          rule.pairs[0].source.filters = [
-            // @ts-ignore
-            {
-              requestPayload: {
-                key: "operationName",
-                value: operationName,
-              },
-            },
-          ];
-
-          // @ts-ignore
-          rule.pairs[0].response.resourceType = "graphqlApi";
-        }
-
-        rule.name = generateRuleName("Modify Response Body");
-        rule.description = `Modify Response Body of ${baseUrl}`;
-      },
+      (rule) =>
+        fillMockFromTraffic(rule, {
+          url: networkEvent.request.url,
+          method: networkEvent.request.method,
+          status: networkEvent.response.status,
+          responseBody: response,
+          requestBody: networkEvent.request.postData?.text,
+        }),
       ""
     );
   }, [networkEvent, response]);
@@ -106,7 +79,7 @@ const ResponseTabContent: React.FC<Props> = ({ networkEvent }) => {
           }}
           icon={<EditOutlined />}
         >
-          Edit Response Body
+          Create mock
         </Button>
       );
     }
@@ -114,7 +87,7 @@ const ResponseTabContent: React.FC<Props> = ({ networkEvent }) => {
     return (
       <Tooltip title="Only XHR/Fetch requests can be modified">
         <Button disabled icon={<EditOutlined />}>
-          Edit Response Body
+          Create mock
         </Button>
       </Tooltip>
     );

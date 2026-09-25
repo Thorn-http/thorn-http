@@ -391,3 +391,25 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.mock-btn {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 1px 8px;
+  font-size: 11px;
+  border-radius: 4px;
+  border: 1px solid #2fae6b;
+  background: transparent;
+  color: #2fae6b;
+  cursor: pointer;
+}
+
+.mock-btn:hover:not(:disabled) {
+  background: #2fae6b;
+  color: #fff;
+}
+
+.mock-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

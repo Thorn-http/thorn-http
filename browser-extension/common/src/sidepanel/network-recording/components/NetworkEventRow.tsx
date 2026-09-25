@@ -32,9 +32,11 @@ interface NetworkEventRowProps {
   entry: NetworkEntry;
   typeDisplay: string;
   formatSize: (bytes: number | undefined) => string;
+  /** fetch/XHR only: opens a Modify API Response rule filled with this response. */
+  onCreateMock?: (entry: NetworkEntry) => void;
 }
 
-const NetworkEventRow: React.FC<NetworkEventRowProps> = ({ entry, typeDisplay, formatSize }) => {
+const NetworkEventRow: React.FC<NetworkEventRowProps> = ({ entry, typeDisplay, formatSize, onCreateMock }) => {
   const { method, url } = entry.request;
   const { status } = entry.response;
   const error = (entry as { _error?: string })._error;
@@ -50,6 +52,22 @@ const NetworkEventRow: React.FC<NetworkEventRowProps> = ({ entry, typeDisplay, f
         <span className="row-url" title={url}>
           {path}
         </span>
+        {onCreateMock && (
+          <button
+            type="button"
+            className="mock-btn"
+            data-testid="create-mock"
+            disabled={entry.response.content.text === undefined}
+            title={
+              entry.response.content.text === undefined
+                ? "The response body wasn't recorded"
+                : "Create a Modify API Response rule from this response"
+            }
+            onClick={() => onCreateMock(entry)}
+          >
+            Mock
+          </button>
+        )}
       </div>
       <div className="row-details">
         {host && (

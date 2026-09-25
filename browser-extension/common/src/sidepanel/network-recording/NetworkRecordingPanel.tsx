@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
 import { NetworkEntry } from "./types";
 import NetworkEventRow from "./components/NetworkEventRow";
 import FilterBar from "./components/FilterBar";
+import { openRuleEditorWith } from "../../rules/openRuleEditor";
+import { fillMockFromTraffic } from "../../rules/mockFromTraffic";
 
 // Maps the HAR _resourceType (DevTools enum) to the short label shown in the list.
 const RESOURCE_TYPE_DISPLAY: Record<string, string> = {
@@ -15,6 +17,28 @@ const RESOURCE_TYPE_DISPLAY: Record<string, string> = {
   xhr: "xhr",
   other: "other",
 };
+
+const readResponseBody = (entry: NetworkEntry) => {
+  const { text = "", encoding } = entry.response.content;
+  if (encoding !== "base64") return text;
+  try {
+    return new TextDecoder().decode(Uint8Array.from(atob(text), (char) => char.charCodeAt(0)));
+  } catch {
+    return "";
+  }
+};
+
+/** Opens the rule editor with a Modify API Response rule made from this recorded response. */
+const createMockFromEntry = (entry: NetworkEntry) =>
+  openRuleEditorWith("Response", (rule) =>
+    fillMockFromTraffic(rule, {
+      url: entry.request.url,
+      method: entry.request.method,
+      status: entry.response.status,
+      responseBody: readResponseBody(entry),
+      requestBody: entry.request.postData?.text,
+    })
+  );
 
 const formatTime = (ms: number): string => {
   const totalSeconds = Math.floor(ms / 1000);
@@ -246,6 +270,7 @@ const NetworkRecordingPanel: React.FC = () => {
               RESOURCE_TYPE_DISPLAY[entry._resourceType as string] || (entry._resourceType as string) || "other"
             }
             formatSize={formatSize}
+            onCreateMock={entry._resourceType === "xhr" ? createMockFromEntry : undefined}
           />
         ))}
         {filteredEntries.length === 0 && (
