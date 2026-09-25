@@ -14,6 +14,7 @@ import {
   notifyRequestRuleApplied,
   notifyResponseRuleApplied,
   shouldServeResponseWithoutRequest,
+  waitForRulesCache,
 } from "./utils";
 
 export const initXhrInterceptor = (debug) => {
@@ -315,6 +316,8 @@ export const initXhrInterceptor = (debug) => {
       }
 
       this.rqProxyXhr._requestData = data;
+
+      await waitForRulesCache();
 
       const matchedDelayRulePair = getMatchedDelayRule({
         url: this.rqProxyXhr._requestURL,

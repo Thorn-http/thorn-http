@@ -99,6 +99,18 @@ const postMessageAndWaitForAck = async (message, action) => {
   });
 };
 
+/**
+ * The extension caches the rules into the page right after navigation commits. Requests fired
+ * before that (e.g. by inline scripts while the page is parsing) wait briefly for them, otherwise
+ * delay and request body rules would miss them.
+ */
+export const waitForRulesCache = async (timeoutMs = 500) => {
+  const start = Date.now();
+  while (!window[PUBLIC_NAMESPACE]?.responseRules && Date.now() - start < timeoutMs) {
+    await new Promise((resolve) => setTimeout(resolve, 10));
+  }
+};
+
 export const notifyOnBeforeRequest = async (requestDetails) => {
   return postMessageAndWaitForAck({ requestDetails }, "onBeforeAjaxRequest");
 };

@@ -14,6 +14,7 @@ import {
   notifyRequestRuleApplied,
   notifyResponseRuleApplied,
   shouldServeResponseWithoutRequest,
+  waitForRulesCache,
 } from "./utils";
 
 export const initFetchInterceptor = (debug) => {
@@ -22,6 +23,7 @@ export const initFetchInterceptor = (debug) => {
     const [resource, initOptions = {}] = args;
     const getOriginalResponse = () => _fetch(...args);
     try {
+      await waitForRulesCache();
       let request;
 
       if (resource instanceof Request) {
