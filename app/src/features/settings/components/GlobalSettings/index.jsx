@@ -7,6 +7,8 @@ import { isFeatureCompatible } from "../../../../utils/CompatibilityUtils";
 import { ImplicitRuleTesting } from "./components/ImplicitRuleTesting";
 import "./index.scss";
 import { BlockList } from "./components/BlockListSettings/BlockListSettings";
+import SettingsItem from "./components/SettingsItem";
+import { SubresourceDelayConsent } from "features/rules/components/SubresourceDelayConsent";
 
 export const GlobalSettings = () => {
   const appMode = useSelector(getAppMode);
@@ -27,6 +29,16 @@ export const GlobalSettings = () => {
           <ImplicitRuleTesting />
         ) : null}
         {isFeatureCompatible(APP_CONSTANTS.FEATURES.BLOCK_LIST) && <BlockList />}
+        {appMode === GLOBAL_CONSTANTS.APP_MODES.EXTENSION ? (
+          <SettingsItem
+            title="Delay scripts, styles, images and fonts"
+            caption="Delay rules hold these requests through Chrome's debugger, only if you allow it."
+            isActive={false}
+            isTogglable={false}
+            onChange={() => {}}
+            settingsBody={<SubresourceDelayConsent compact />}
+          />
+        ) : null}
       </div>
     </div>
   );

@@ -1,0 +1,19 @@
+.subresource-delay-consent {
+  margin: 12px 0;
+}
+
+.subresource-delay-consent .ant-alert-action {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.subresource-delay-explanation h4 {
+  margin: 14px 0 4px;
+  font-weight: 600;
+}
+
+.subresource-delay-explanation p {
+  margin: 0;
+  color: var(--requestly-color-text-subtle);
+}

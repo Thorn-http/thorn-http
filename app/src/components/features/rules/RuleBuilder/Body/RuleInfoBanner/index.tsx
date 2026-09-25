@@ -16,12 +16,11 @@ const RuleInfoBanner: React.FC<{ ruleType: string; appMode: string }> = ({ ruleT
     () => ({
       [GLOBAL_CONSTANTS.RULE_TYPES.DELAY]: {
         appMode: [GLOBAL_CONSTANTS.APP_MODES.EXTENSION],
-        title: "On browser extension, delay is capped automatically to avoid browsing performance degradation.",
+        title: "Delays run in your browser, up to 10 minutes. Nothing goes through a server.",
         description: (
           <div>
-            For XHR/Fetch, max delay is {GLOBAL_CONSTANTS.DELAY_REQUEST_CONSTANTS.MAX_DELAY_VALUE_XHR} ms & for other
-            resources (JS, CSS, Images etc), max delay is{" "}
-            {GLOBAL_CONSTANTS.DELAY_REQUEST_CONSTANTS.MAX_DELAY_VALUE_NON_XHR} ms.
+            fetch/XHR requests wait inside the page. Page and iframe loads show a Thorn HTTP countdown, then load.
+            Scripts, styles, images and fonts need your permission to use Chrome's debugger (below).
           </div>
         ),
       },

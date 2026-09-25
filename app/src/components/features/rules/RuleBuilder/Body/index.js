@@ -5,10 +5,12 @@ import { Row, Col } from "antd";
 import RulePairs from "../../RulePairs";
 import AddPairButton from "./Columns/AddPairButton";
 import APP_CONSTANTS from "../../../../../config/constants";
+import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import { getAppMode, getCurrentlySelectedRuleErrors } from "store/selectors";
 import { RQEditorTitle } from "lib/design-system/components/RQEditorTitle";
 import { onChangeHandler } from "./actions";
 import RuleInfoBanner from "./RuleInfoBanner";
+import { SubresourceDelayConsent } from "features/rules/components/SubresourceDelayConsent";
 import { useRBAC } from "features/rbac";
 import "./RuleBuilderBody.css";
 
@@ -82,6 +84,7 @@ const Body = ({ mode, showDocs, currentlySelectedRuleData, currentlySelectedRule
           <CardBody>
             {/* Info for some specific rule types */}
             <RuleInfoBanner appMode={appMode} ruleType={currentlySelectedRuleConfig.TYPE} />
+            {currentlySelectedRuleConfig.TYPE === GLOBAL_CONSTANTS.RULE_TYPES.DELAY && <SubresourceDelayConsent />}
 
             <RulePairs mode={mode} currentlySelectedRuleConfig={currentlySelectedRuleConfig} />
 
