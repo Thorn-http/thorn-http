@@ -111,6 +111,8 @@ export const STORAGE_KEYS = {
   LAST_UPDATED_TS: "last-updated-ts",
   TEST_REPORTS: "testReports",
   IMPLICIT_RULE_TESTING_WIDGET_CONFIG: "implicit_rule_testing_widget_config",
+  /** chrome.storage.session: the user closed Chrome's debugging bar (see subresourceDelay). */
+  SUBRESOURCE_DELAY_PAUSED: "subresource_delay_paused",
   BLOCKED_DOMAINS: "blocked_domains",
   POPUP_CONFIG: "popup_config",
 };

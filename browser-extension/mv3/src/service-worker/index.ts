@@ -6,6 +6,7 @@ import { handleInstallUninstall } from "./services/installUninstall";
 import { initMessageHandler } from "./services/messageHandler/listener";
 import { initRulesManager } from "./services/rulesManager";
 import { initRuleExpiryManager } from "./services/ruleExpiryManager";
+import { initSubresourceDelay } from "./services/subresourceDelay";
 import { initWebRequestInterceptor } from "./services/webRequestInterceptor";
 import {
   initNetworkRecordingPort,
@@ -21,6 +22,7 @@ import {
   handleInstallUninstall();
   initRulesManager();
   initRuleExpiryManager();
+  initSubresourceDelay();
   initMessageHandler();
   initContextMenu();
   initWebRequestInterceptor();
