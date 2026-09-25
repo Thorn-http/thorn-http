@@ -1,0 +1,6 @@
+.rule-expiry-indicator {
+  margin-left: 8px;
+  font-size: var(--requestly-font-size-xs);
+  color: var(--requestly-color-warning);
+  white-space: nowrap;
+}

@@ -42,6 +42,12 @@ export const saveRule = async (appMode, dispatch, ruleObject) => {
   // TODO: Remove above and uncomment below after all users migrated to MV3. This is just to maintain backward compatibility for path URL filter
   // ruleToSave.extensionRules = parseDNRRules(ruleToSave);
 
+  // An auto-disable time that already passed (e.g. an editor left open) would switch the rule off
+  // right after saving it; saving means the user wants the rule as shown, so drop the stale timer.
+  if (typeof ruleToSave.expiresAt === "number" && ruleToSave.expiresAt <= Date.now()) {
+    delete ruleToSave.expiresAt;
+  }
+
   //Set the modification date of rule
   ruleToSave.modificationDate = generateObjectCreationDate();
 

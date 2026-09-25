@@ -1,0 +1,16 @@
+.rule-editor-auto-disable {
+  display: flex;
+  align-items: center;
+}
+
+.rule-editor-auto-disable-icon {
+  color: var(--requestly-color-text-subtle);
+}
+
+.rule-editor-auto-disable-icon.active {
+  color: var(--requestly-color-warning);
+}
+
+.rule-editor-auto-disable .ant-select {
+  font-size: var(--requestly-font-size-sm);
+}

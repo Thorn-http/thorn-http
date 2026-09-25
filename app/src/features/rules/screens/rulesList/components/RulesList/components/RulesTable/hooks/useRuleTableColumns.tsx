@@ -27,6 +27,7 @@ import { ImUngroup } from "@react-icons/all-files/im/ImUngroup";
 import RuleNameColumn from "../components/RulesColumn/RulesColumn";
 import { getActiveWorkspaceId, isActiveWorkspaceShared } from "store/slices/workspaces/selectors";
 import { RoleBasedComponent } from "features/rbac";
+import { RuleExpiryIndicator } from "../components/RuleExpiryIndicator";
 
 const useRuleTableColumns = (options: Record<string, boolean>) => {
   const isSharedWorkspaceMode = useSelector(isActiveWorkspaceShared);
@@ -193,25 +194,28 @@ const useRuleTableColumns = (options: Record<string, boolean>) => {
             );
           } else {
             return (
-              <PremiumFeature
-                disabled={record.status === RecordStatus.ACTIVE || record.isSample}
-                features={
-                  PREMIUM_RULE_TYPES.includes(record.ruleType)
-                    ? [FeatureLimitType.num_active_rules, FeatureLimitType.response_rule]
-                    : [FeatureLimitType.num_active_rules]
-                }
-                featureName={`${APP_CONSTANTS.RULE_TYPES_CONFIG[record.ruleType as any]?.NAME} rule`}
-                popoverPlacement="left"
-                onContinue={() => recordStatusToggleAction(normalizeRecord(record))}
-                source="rule_list_status_switch"
-                onClickCallback={() => trackRuleToggleAttempted(record.status)}
-              >
-                <Switch
-                  size="small"
-                  checked={record.status === RecordStatus.ACTIVE}
-                  data-tour-id={index === 0 ? "rule-table-switch-status" : null}
-                />
-              </PremiumFeature>
+              <>
+                <PremiumFeature
+                  disabled={record.status === RecordStatus.ACTIVE || record.isSample}
+                  features={
+                    PREMIUM_RULE_TYPES.includes(record.ruleType)
+                      ? [FeatureLimitType.num_active_rules, FeatureLimitType.response_rule]
+                      : [FeatureLimitType.num_active_rules]
+                  }
+                  featureName={`${APP_CONSTANTS.RULE_TYPES_CONFIG[record.ruleType as any]?.NAME} rule`}
+                  popoverPlacement="left"
+                  onContinue={() => recordStatusToggleAction(normalizeRecord(record))}
+                  source="rule_list_status_switch"
+                  onClickCallback={() => trackRuleToggleAttempted(record.status)}
+                >
+                  <Switch
+                    size="small"
+                    checked={record.status === RecordStatus.ACTIVE}
+                    data-tour-id={index === 0 ? "rule-table-switch-status" : null}
+                  />
+                </PremiumFeature>
+                {record.status === RecordStatus.ACTIVE && <RuleExpiryIndicator rule={record} />}
+              </>
             );
           }
         } else {

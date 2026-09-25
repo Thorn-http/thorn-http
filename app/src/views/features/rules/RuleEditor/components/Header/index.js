@@ -8,6 +8,7 @@ import {
 } from "store/selectors";
 import { globalActions } from "store/slices/global/slice";
 import Status from "./ActionButtons/Status";
+import AutoDisable from "./ActionButtons/AutoDisable";
 import ActionButtons from "./ActionButtons";
 import PinButton from "./ActionButtons/PinButton";
 import EditorGroupDropdown from "./EditorGroupDropdown";
@@ -150,6 +151,8 @@ const Header = ({ mode, handleSeeLiveRuleDemoClick = () => {}, showEnableRuleToo
                 <HelpButton />
 
                 <Status mode={mode} />
+
+                <AutoDisable />
 
                 {isRuleGroupDisabled && (
                   <div className="rule-editor-header-disabled-group-warning">
