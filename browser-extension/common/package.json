@@ -6,7 +6,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/requestly/interceptor.git",
+    "url": "git+https://github.com/cleberpereiradasilva/thorn-request.git",
     "directory": "browser-extension/common"
   },
   "author": {
