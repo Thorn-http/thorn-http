@@ -41,13 +41,13 @@ Privacy
 Thorn HTTP stores your rules only in your browser and sends no data anywhere.
 
 Open source
-Thorn HTTP is free software under the GNU AGPLv3, based on Requestly HTTP Interceptor. Source code: https://thorn-http.dev/source
+Thorn HTTP is free software under the GNU AGPLv3, based on Requestly HTTP Interceptor. Source code: https://github.com/Thorn-http/thorn-http
 "Requestly" is a trademark of its respective owner; Thorn HTTP is not affiliated with or endorsed by BrowserStack Inc.
 
 ## Links
 
 - Website: https://thorn-http.dev
-- Support: https://thorn-http.dev/issues
+- Support: https://github.com/Thorn-http/thorn-http/issues
 - Privacy policy: https://thorn-http.dev/privacy
 
 ## Single purpose (Chrome)

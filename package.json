@@ -29,7 +29,7 @@
     "npm": ">=8.0.0"
   },
   "bugs": {
-    "url": "https://thorn-http.dev/issues"
+    "url": "https://github.com/Thorn-http/thorn-http/issues"
   },
   "homepage": "https://thorn-http.dev",
   "devDependencies": {

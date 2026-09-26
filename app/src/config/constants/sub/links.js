@@ -107,7 +107,7 @@ const LINKS = {
   /** SUPPORT */
 
   //Github Issues
-  REQUESTLY_GITHUB_ISSUES: "https://thorn-http.dev/issues",
+  REQUESTLY_GITHUB_ISSUES: "https://github.com/Thorn-http/thorn-http/issues",
   FEEDBACK: "https://thorn-http.dev",
 
   /** EXTENSIONS */
@@ -154,11 +154,11 @@ const LINKS = {
 
   GITHUB_STUDENT_PROGRAM_DOC: "https://thorn-http.dev",
 
-  GITHUB_EDUCATION_PACK_LP: "https://thorn-http.dev/source",
+  GITHUB_EDUCATION_PACK_LP: "https://github.com/Thorn-http/thorn-http",
 
   API_CLIENT_LOCAL_FIRST_ANNOUNCEMENT: "https://thorn-http.dev",
 
-  REQUESTLY_GITHUB: "https://thorn-http.dev/source",
+  REQUESTLY_GITHUB: "https://github.com/Thorn-http/thorn-http",
 
   OAUTH_REDIRECT_URL: `${process.env.VITE_BACKEND_BASE_URL}/oauth/authorize`,
 

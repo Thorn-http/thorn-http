@@ -12,7 +12,7 @@ const PAGES_WITHOUT_FOOTER = [PATHS.SETTINGS.RELATIVE];
 
 export const THORN_LINKS = {
   WEBSITE: "https://thorn-http.dev",
-  SOURCE_CODE: "https://thorn-http.dev/source",
+  SOURCE_CODE: "https://github.com/Thorn-http/thorn-http",
 };
 
 const AppFooter: React.FC = () => {

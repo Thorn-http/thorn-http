@@ -19,7 +19,7 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://thorn-http.dev/issues"
+    "url": "https://github.com/Thorn-http/thorn-http/issues"
   },
   "scripts": {
     "preinstall": "sh ./scripts/build-analytics-vendor.sh",

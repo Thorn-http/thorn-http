@@ -10,7 +10,7 @@
     "directory": "browser-extension/config"
   },
   "bugs": {
-    "url": "https://thorn-http.dev/issues"
+    "url": "https://github.com/Thorn-http/thorn-http/issues"
   },
   "author": {
     "name": "Thorn HTTP contributors",
