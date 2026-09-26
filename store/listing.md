@@ -47,8 +47,10 @@ Thorn HTTP is free software under the GNU AGPLv3, based on Requestly HTTP Interc
 ## Links
 
 - Website: https://thorn-http.dev
-- Support: https://github.com/Thorn-http/thorn-http/issues
-- Privacy policy: https://thorn-http.dev/privacy
+- Support: https://thorn-http.dev/report/ (issues: https://github.com/Thorn-http/thorn-http/issues)
+- Support email: contact@thorn-http.dev
+- Privacy policy: https://thorn-http.dev/privacy/
+- License: GNU AGPLv3 (https://thorn-http.dev/license/)
 
 ## Single purpose (Chrome)
 
@@ -79,8 +81,25 @@ Intercept and modify the browser's HTTP(S) requests and responses according to r
 
 ## Firefox (AMO) reviewer notes
 
-- Build from source: `bash install.sh && cd browser-extension/config && BROWSER=firefox ENV=prod npm run build && cd ../.. && bash build.sh`, output in `browser-extension/mv3/dist`.
-- Bundled third-party libraries (React, Ant Design, CodeMirror, ...) account for the `innerHTML`/`Function` lint warnings; the extension does not evaluate remote code.
+Paste into "Notes to Reviewer":
+
+```
+Source code: the attached source zip (the same tree as https://github.com/Thorn-http/thorn-http at the release commit).
+
+Build (Linux or macOS, bash, Node.js 22, npm 10, network access to the npm registry):
+  bash browser-extension/mv3/scripts/build-firefox.sh
+The unpacked add-on is written to browser-extension/mv3/dist/ and the zip to
+browser-extension/mv3/builds/firefox/. It matches the submitted package.
+
+The add-on makes no network requests of its own: no analytics, no remote code, no remote
+configuration. Rules are stored in browser.storage.local only.
+
+Lint warnings (innerHTML / Function) come from bundled third-party libraries (React,
+Ant Design, CodeMirror and their dependencies); the add-on never evaluates remote code.
+
+To test: open the add-on's popup, click "Open app", create a Redirect rule
+(e.g. URL contains "example.com/a" -> "https://example.com/b"), then open https://example.com/a.
+```
 
 ## Images
 
