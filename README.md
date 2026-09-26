@@ -328,7 +328,17 @@ Changes between versions are listed in the [CHANGELOG](./CHANGELOG.md).
 
 ## Support the project
 
-Thorn HTTP is built and maintained by an independent developer. It's free and will stay free. Donation options are coming soon; donations will be personal support for the maintainer and won't buy features, priority or support.
+Thorn HTTP is built and maintained by an independent developer. It's free and will stay free. If it saves you time, you can support the work. Donations are personal support for the maintainer and don't buy features, priority or support.
+
+| Coin | Network | Address |
+| --- | --- | --- |
+| Bitcoin | Bitcoin | `bc1qf6zqrp94p56j948yq2e87mtqrudc4cw33m02wd` |
+| USDC or USDT | Solana | `FJLjmwBzGdA3KYYEdVfHoTLgxRavWHmEC7eUGcPmdzys` |
+
+> [!WARNING]
+> Send only on the network shown. Coins sent on another network may be lost.
+
+The same addresses, with QR codes, are on [thorn-http.dev](https://thorn-http.dev/#support). If they ever differ, trust this file.
 
 Starring the repository and sharing the project also help a lot. ⭐
 
