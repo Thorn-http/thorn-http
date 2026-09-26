@@ -330,6 +330,10 @@ Changes between versions are listed in the [CHANGELOG](./CHANGELOG.md).
 
 THorn HTTP is built and maintained by an independent developer. It's free and will stay free. If it saves you time, you can support the work. Donations are personal support for the maintainer and don't buy features, priority or support.
 
+[![Support on Ko-fi](https://img.shields.io/badge/Support%20on-Ko--fi-2fae6b?logo=kofi&logoColor=white)](https://ko-fi.com/T6U727PTA5)
+
+Card or PayPal, one-time or monthly. Crypto:
+
 | Coin | Network | Address |
 | --- | --- | --- |
 | USDC or ETH | Base | `0x20328c74AC8E976e2021B764C9D76F969f5Edd1c` |
