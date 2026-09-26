@@ -89,6 +89,10 @@ const config = async ({ mode }) => {
       outDir: "build",
       target: "esnext",
       sourcemap: generateSourcemap,
+      // Reproducible builds (Firefox Add-ons rebuilds the source and compares): with the default
+      // strictRequires "auto", which CommonJS modules get wrapped depends on the order files finish
+      // loading, so two builds of the same code could differ.
+      commonjsOptions: { strictRequires: true },
       // Extension build: app.html is the entry (no inline/remote scripts, see app.html)
       ...(mode === "extension" && { rollupOptions: { input: "app.html" } }),
     },
