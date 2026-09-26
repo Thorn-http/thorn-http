@@ -1,7 +1,6 @@
 import PSMH from "../config/PageScriptMessageHandler";
 import { CONSTANTS as GLOBAL_CONSTANTS } from "@thorn-http/core";
 import * as semver from "semver";
-import UAParser from "ua-parser-js";
 import { isThornExtension } from "utils/EnvUtils";
 
 export function getExtensionVersion() {
@@ -19,18 +18,6 @@ export function isExtensionManifestVersion3() {
 export function isExtensionInstalled() {
   return !!getExtensionVersion();
 }
-
-export const isSafariBrowser = () => {
-  const parser = new UAParser(window.navigator.userAgent);
-  const result = parser.getResult();
-  const browser = result.browser.name;
-
-  return browser === "Safari";
-};
-
-export const isSafariExtension = () => {
-  return isSafariBrowser() && isExtensionInstalled();
-};
 
 export function isSessionBearExtensionInstalled() {
   return document.documentElement.getAttribute("rq-ext-name") === GLOBAL_CONSTANTS.APP_FLAVOURS.SESSIONBEAR;

@@ -1,4 +1,4 @@
-Manifest V3 browser extension for Chrome, Edge and Firefox (Safari sources are kept but not built). Uses `chrome.declarativeNetRequest` for rule-based request interception and `chrome.webRequest` for observational tracking (execution logging, not blocking).
+Manifest V3 browser extension for Chrome, Edge and Firefox. Uses `chrome.declarativeNetRequest` for rule-based request interception and `chrome.webRequest` for observational tracking (execution logging, not blocking).
 
 # Architecture
 
@@ -46,24 +46,12 @@ Local rule matcher used by webRequest listeners and the request processor. Suppo
 
 This is separate from the `common/rule-processor/` shared package — it's a lighter-weight matcher specific to the extension's needs.
 
-# Safari (disabled)
-
-Safari uses separate entry points suffixed with `.safari.ts`:
-- `service-worker/index.safari.ts`
-- `content-scripts/app/index.safari.ts`
-- `content-scripts/client/index.safari.ts`
-- `service-worker/services/messageHandler.safari.ts`
-
-Safari's `declarativeNetRequest` API has differences — `ResourceType` enum is not defined, so resource types are hardcoded as string literals.
-
-Built with a separate Rollup config: `rollup.config.safari.js`.
-
 # Build System
 
 - **Bundler**: Rollup (`rollup.config.js`)
 - **Build command**: `npm run build` (builds `../common` first, then mv3)
 - **Output**: `dist/` directory
-- **Manifests**: Browser-specific manifests (`manifest.chrome.json`, `manifest.edge.json`, `manifest.firefox.json`, `manifest.safari.json`) are processed at build time — version injected from package.json, content script URL patterns generated from config.
+- **Manifests**: Browser-specific manifests (`manifest.chrome.json`, `manifest.edge.json`, `manifest.firefox.json`) are processed at build time — version injected from package.json, content script URL patterns generated from config.
 - **Config dependency**: `../config/` provides environment-specific values (`WEB_URL`, `OTHER_WEB_URLS`, `browser`).
 - **Tests**: Playwright-based E2E tests in `tests/`.
 

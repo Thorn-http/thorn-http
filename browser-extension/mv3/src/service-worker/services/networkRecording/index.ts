@@ -23,7 +23,7 @@ import {
 //   alter the recorded on-the-wire traffic). Start-time only. NOTE: clears the ENTIRE browser HTTP
 //   cache (all sites), not just the recorded origin — Chrome ignores the origins filter for the
 //   `cache` data type (see wipeOriginBrowsingData). Chrome/Edge only (browsingData feature-guarded;
-//   Firefox/Safari no-op). Default false.
+//   Firefox no-op). Default false.
 // - wipeServiceWorkers: when true, unregister the target origin's service workers AND clear the
 //   Cache API (cacheStorage) they serve from at record start, so SW-cached responses don't bypass
 //   capture. Shares the single browsingData.remove call with disableCache. Default false.
@@ -415,7 +415,7 @@ const isValidUrl = (url: string): boolean => {
 };
 
 // Advanced settings: clear cache / service workers for the recorded origin at record start, so the
-// load is cold and SW-cached responses don't bypass capture. Chrome/Edge only — Firefox/Safari lack
+// load is cold and SW-cached responses don't bypass capture. Chrome/Edge only — Firefox lacks
 // chrome.browsingData, so the feature-detect early-return makes this a clean no-op there.
 //
 // Coalesces both flags into ONE browsingData.remove call:
@@ -434,7 +434,7 @@ const isValidUrl = (url: string): boolean => {
 // like the body-recorder script registration); a cache wipe that doesn't land just means a few warm-cache entries.
 const wipeOriginBrowsingData = (url: string, config: NetworkRecordingConfig) => {
   const remove = (chrome as any).browsingData?.remove;
-  if (typeof remove !== "function") return; // Firefox/Safari: no browsingData → no-op
+  if (typeof remove !== "function") return; // Firefox: no browsingData → no-op
 
   const dataToRemove: chrome.browsingData.DataTypeSet = {};
   if (config.disableCache) dataToRemove.cache = true;
@@ -708,7 +708,7 @@ const openPanel = (tabId: number) => {
     // Firefox: global sidebar (auto-open validated on FF 151, no user gesture needed).
     firefoxSidebar.open().catch(() => {});
   }
-  // Safari / other: no panel API → no-op (capture + streaming still work).
+  // Other browsers: no panel API → no-op (capture + streaming still work).
 };
 
 /**

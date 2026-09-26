@@ -4,4 +4,3 @@ Read `claude.md` at the repo root first: it describes the layout, how the bundle
 
 - Follow the existing code style of the file you edit.
 - Never edit `dist/` or `node_modules/`.
-- `browser-extension/mv3/src/**/*.safari.ts` and `rollup.config.safari.js` are kept but not built (Safari is disabled).

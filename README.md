@@ -152,7 +152,6 @@ The rules travel inside the link itself, after the `#`, which browsers never sen
 | **Edge** | ✅ Supported | All features. |
 | **Firefox 127+** | ✅ Supported | Delay applies to `fetch`/XHR requests only. Network recording opens in the sidebar. The "clear cache before recording" option isn't available. |
 | Other Chromium browsers | Untested | The Chrome build should load, but it isn't tested. |
-| Safari | Not shipped | The Safari code is kept in the repository but isn't built or released. |
 
 **Delay in detail.** On Chrome and Edge, `fetch`/XHR requests and page loads can be delayed right away. Scripts, styles, images and fonts are delayed through Chrome's debugger, **only if you allow it**: Thorn HTTP explains what the permission does before asking, Chrome shows a "started debugging this browser" bar while it's in use, and you can turn it off at any time in Settings.
 

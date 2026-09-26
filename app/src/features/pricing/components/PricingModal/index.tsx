@@ -16,7 +16,6 @@ import { trackCheckoutFailedEvent, trackCheckoutInitiated } from "modules/analyt
 import { PricingModalFooterBanner } from "./components/FooterBanner";
 import "./index.scss";
 import ProductSwitcher from "../ProductSwitcher";
-import { isSafariBrowser } from "actions/ExtensionActions";
 
 interface PricingModalProps {
   isOpen: boolean;
@@ -49,9 +48,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
   const [isTableScrolledToRight, setIsTableScrolledToRight] = useState(false);
   const [isTableScrollable, setIsTableScrollable] = useState(false);
   const [isCheckoutCompleted, setIsCheckoutCompleted] = useState(false);
-  const [activeProduct, setActiveProduct] = useState(
-    product || (isSafariBrowser() ? PRICING.PRODUCTS.API_CLIENT : PRICING.PRODUCTS.HTTP_RULES)
-  );
+  const [activeProduct, setActiveProduct] = useState(product || PRICING.PRODUCTS.HTTP_RULES);
 
   const tableRef = useRef(null);
 
@@ -175,9 +172,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                 {title}
               </Typography.Title>
             </Row>
-            {!isSafariBrowser() && (
-              <ProductSwitcher isOpenedFromModal activeProduct={activeProduct} setActiveProduct={setActiveProduct} />
-            )}
+            <ProductSwitcher isOpenedFromModal activeProduct={activeProduct} setActiveProduct={setActiveProduct} />
             <Row justify="center" className="display-row-center w-full" gutter={24}>
               <Col className="display-row-center plan-duration-switch-container">
                 <Switch

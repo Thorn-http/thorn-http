@@ -20,11 +20,4 @@ export const supportedBrowserExtensions = [
     title: "Edge Extension",
     alt: `Thorn HTTP for edge |  proxyman alternatives | mocky.io alternative | Fiddler Alternative | charles proxy alternative`,
   },
-  {
-    name: "Safari",
-    iconURL: "",
-    downloadURL: "https://thorn-http.dev",
-    title: "Safari Extension",
-    alt: `Thorn HTTP for safari |  proxyman alternatives | mocky.io alternative | Fiddler Alternative | charles proxy alternative`,
-  },
 ];

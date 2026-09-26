@@ -266,17 +266,6 @@
     "isScanned": false,
     "isAvailable": false
   },
-  "fresh-safari": {
-    "id": "fresh-safari",
-    "type": "browser",
-    "name": "Safari",
-    "description": "New Profile",
-    "icon": "safari.png",
-    "isActive": false,
-    "comingSoon": false,
-    "isScanned": false,
-    "isAvailable": false
-  },
   "electron": {
     "id": "electron",
     "type": "desktop-app",

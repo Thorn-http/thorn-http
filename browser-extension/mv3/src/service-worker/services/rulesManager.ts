@@ -11,7 +11,7 @@ import { getDelayPageRule } from "./delayedNavigation";
 import { UpdateDynamicRuleOptions } from "common/types";
 import { sendMessageToApp } from "./messageHandler/sender";
 
-// Object.values(chrome.declarativeNetRequest.ResourceType) cannot be used because in some browsers like safari and firefox
+// Object.values(chrome.declarativeNetRequest.ResourceType) cannot be used because in some browsers like firefox
 // chrome.declarativeNetRequest.ResourceType is not defined.
 const ALL_RESOURCE_TYPES: chrome.declarativeNetRequest.ResourceType[] = [
   "main_frame" as chrome.declarativeNetRequest.ResourceType.MAIN_FRAME,

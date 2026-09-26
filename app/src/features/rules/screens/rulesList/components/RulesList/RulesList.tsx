@@ -11,14 +11,13 @@ import { GettingStarted } from "./components";
 import SpinnerColumn from "components/misc/SpinnerColumn";
 import FeatureLimiterBanner from "components/common/FeatureLimiterBanner/featureLimiterBanner";
 import { useFeatureIsOn } from "@growthbook/growthbook-react";
-import { isExtensionInstalled, isSafariBrowser } from "actions/ExtensionActions";
+import { isExtensionInstalled } from "actions/ExtensionActions";
 import ExtensionDeactivationMessage from "components/misc/ExtensionDeactivationMessage";
 import InstallExtensionCTA from "components/misc/InstallExtensionCTA";
 import { getFilteredRecords } from "./utils";
 import RulesListContentHeader from "./components/RulesListContentHeader/RulesListContentHeader";
 import { useSearchParams } from "react-router-dom";
 import { RQBreadcrumb } from "lib/design-system-v2/components";
-import { SafariLimitedSupportView } from "componentsV2/SafariExtension/SafariLimitedSupportView";
 import { RBACEmptyState, RoleBasedComponent } from "features/rbac";
 import "./rulesList.scss";
 
@@ -49,9 +48,7 @@ const RulesList: React.FC<Props> = () => {
 
   if (appMode === GLOBAL_CONSTANTS.APP_MODES.DESKTOP || appMode === GLOBAL_CONSTANTS.APP_MODES.EXTENSION) {
     if (appMode === GLOBAL_CONSTANTS.APP_MODES.EXTENSION) {
-      if (isSafariBrowser()) {
-        return <SafariLimitedSupportView />;
-      } else if (!isExtensionInstalled()) {
+      if (!isExtensionInstalled()) {
         return (
           <InstallExtensionCTA
             heading="Install Browser extension to start modifying network requests"

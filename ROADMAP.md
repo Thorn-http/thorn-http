@@ -10,7 +10,7 @@ Fork do Requestly HTTP Interceptor, relançado como **Thorn HTTP**: extensão gr
 - Escopo: o interceptor (regras). SessionBear/gravação de sessão, API Client e tudo que depende de backend foram removidos.
 - Editor de regras: empacotado na extensão (`app.html`). Hospedar em `app.thorn-http.dev` pode ser reavaliado depois.
 - Side panel de gravação de rede: mantido, 100% local ("Record network" no popup + export HAR).
-- Navegadores: Chrome, Edge, Firefox. O código do Safari foi mantido, mas não é compilado (desativado).
+- Navegadores: Chrome, Edge, Firefox. Safari não é suportado (decidido em 26/set/2026; o código herdado foi removido).
 
 Legenda: `[x]` feito · `[ ]` pendente · 👤 depende de você (contas, jurídico, design)
 
@@ -194,7 +194,7 @@ Levantamento de set/2026 (reviews da Chrome Web Store, issues do Requestly no Gi
 - [ ] **Regras só na aba atual** e filtros por janela e grupo de abas (via regras de sessão do DNR por aba) (ModHeader)
 - [ ] **Regex acima do limite de 2 KB do DNR**: estudar alternativa (dividir em várias regras ou aplicar via page script)
 - [ ] **Sync opcional** via Google Drive (sem backend próprio); a sincronia por arquivo/pasta está em *Diferenciais* (regras no repositório)
-- [ ] Mais idiomas (`_locales/`) e build do Safari
+- [ ] Mais idiomas (`_locales/`)
 
 ## Diferenciais — o que ninguém tem
 

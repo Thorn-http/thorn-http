@@ -78,8 +78,6 @@ Load `browser-extension/mv3/dist` as an unpacked extension (`chrome://extensions
 4. Keep the change focused: one fix or feature per pull request. Unrelated clean-ups belong in their own PR.
 5. Update the documentation when behavior changes (README, in-app texts, [CHANGELOG.md](./CHANGELOG.md) under *Unreleased*).
 
-Some parts of the repository are kept but not built, for example the Safari files (`*.safari.ts`, `rollup.config.safari.js`). Leave them in place.
-
 ## Testing
 
 Every change should keep the test suites green, and every bug fix or feature should come with a test that would have caught it.
