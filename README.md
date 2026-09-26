@@ -332,8 +332,9 @@ Thorn HTTP is built and maintained by an independent developer. It's free and wi
 
 | Coin | Network | Address |
 | --- | --- | --- |
-| Bitcoin | Bitcoin | `bc1qf6zqrp94p56j948yq2e87mtqrudc4cw33m02wd` |
+| USDC or ETH | Base | `0x20328c74AC8E976e2021B764C9D76F969f5Edd1c` |
 | USDC or USDT | Solana | `FJLjmwBzGdA3KYYEdVfHoTLgxRavWHmEC7eUGcPmdzys` |
+| Bitcoin | Bitcoin | `bc1qf6zqrp94p56j948yq2e87mtqrudc4cw33m02wd` |
 
 > [!WARNING]
 > Send only on the network shown. Coins sent on another network may be lost.
