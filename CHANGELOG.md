@@ -53,4 +53,4 @@ First release of Thorn HTTP, **1.0.0 (beta)**, based on [Requestly HTTP Intercep
 - Delay rules sent the full URL to `app.requestly.io`; delay is now fully local.
 - Stopping a recording started from the popup opened `www.browserstack.com`.
 
-[Unreleased]: https://github.com/cleberpereiradasilva/thorn-request/commits/main
+[Unreleased]: https://github.com/Thorn-http/thorn-http/commits/main

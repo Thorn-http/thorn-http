@@ -6,7 +6,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cleberpereiradasilva/thorn-request.git",
+    "url": "git+https://github.com/Thorn-http/thorn-http.git",
     "directory": "browser-extension/config"
   },
   "bugs": {

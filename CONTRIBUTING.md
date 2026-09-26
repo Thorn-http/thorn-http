@@ -51,15 +51,15 @@ These shape every review. A change that breaks one of them won't be merged, howe
 
 - **Small fixes** (typos, obvious bugs, tests): open a pull request directly.
 - **Anything bigger** (new features, new permissions, refactors, new dependencies): open an issue first and describe what you want to do. This avoids work that can't be merged.
-- Check the [open issues](https://github.com/cleberpereiradasilva/thorn-request/issues) and the [roadmap](./ROADMAP.md) to see whether someone is already on it. Comment on an issue to say you're working on it.
+- Check the [open issues](https://github.com/Thorn-http/thorn-http/issues) and the [roadmap](./ROADMAP.md) to see whether someone is already on it. Comment on an issue to say you're working on it.
 
 ## Development setup
 
 Requirements: **Node.js ≥ 18.18** (CI uses Node 22), npm, and bash (Linux or macOS; on Windows, use WSL).
 
 ```sh
-git clone https://github.com/cleberpereiradasilva/thorn-request.git
-cd thorn-request
+git clone https://github.com/Thorn-http/thorn-http.git
+cd thorn-http
 bash install.sh     # install every package
 bash build.sh       # build everything into browser-extension/mv3/dist
 ```
@@ -128,7 +128,7 @@ test: audit every file of the build and every screen for outside traffic
 
 ## Reporting bugs
 
-Open a [bug report](https://github.com/cleberpereiradasilva/thorn-request/issues/new/choose) and include:
+Open a [bug report](https://github.com/Thorn-http/thorn-http/issues/new/choose) and include:
 
 - what you did, what you expected and what happened instead;
 - your browser and its version, and the Thorn HTTP version (shown in the popup);
@@ -138,7 +138,7 @@ Search the existing issues first; if the bug is already reported, add your detai
 
 ## Suggesting features
 
-Open a [feature request](https://github.com/cleberpereiradasilva/thorn-request/issues/new/choose). Start from the problem you want to solve, not only the solution: it helps find the best way to do it. Check the [roadmap](./ROADMAP.md) first; your idea may already be planned.
+Open a [feature request](https://github.com/Thorn-http/thorn-http/issues/new/choose). Start from the problem you want to solve, not only the solution: it helps find the best way to do it. Check the [roadmap](./ROADMAP.md) first; your idea may already be planned.
 
 ## Security issues
 

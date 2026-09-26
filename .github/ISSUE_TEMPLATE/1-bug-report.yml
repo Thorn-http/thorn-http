@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         Thanks for reporting! Please fill in as much as you can: a bug that can be reproduced is a bug that can be fixed.
-        **Security vulnerabilities must not be reported here**: see [SECURITY.md](https://github.com/cleberpereiradasilva/thorn-request/blob/main/SECURITY.md).
+        **Security vulnerabilities must not be reported here**: see [SECURITY.md](https://github.com/Thorn-http/thorn-http/blob/main/SECURITY.md).
   - type: textarea
     id: what-happened
     attributes:

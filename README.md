@@ -7,7 +7,7 @@
 **Intercept and modify HTTP requests, right in your browser.**
 Free, open source and local-first: no account, no backend, no tracking.
 
-[![CI](https://github.com/cleberpereiradasilva/thorn-request/actions/workflows/ci.yml/badge.svg)](https://github.com/cleberpereiradasilva/thorn-request/actions/workflows/ci.yml)
+[![CI](https://github.com/Thorn-http/thorn-http/actions/workflows/ci.yml/badge.svg)](https://github.com/Thorn-http/thorn-http/actions/workflows/ci.yml)
 [![License: AGPL v3](https://img.shields.io/badge/license-AGPL--3.0-2fae6b)](./LICENSE)
 [![Manifest V3](https://img.shields.io/badge/manifest-v3-2fae6b)](#browser-support)
 [![Chrome · Edge · Firefox](https://img.shields.io/badge/browsers-Chrome%20%C2%B7%20Edge%20%C2%B7%20Firefox%20127%2B-2fae6b)](#browser-support)
@@ -163,8 +163,8 @@ The rules travel inside the link itself, after the `#`, which browsers never sen
 Until then, build it from source (about 5 minutes):
 
 ```sh
-git clone https://github.com/cleberpereiradasilva/thorn-request.git
-cd thorn-request
+git clone https://github.com/Thorn-http/thorn-http.git
+cd thorn-http
 bash install.sh
 bash build.sh
 ```
@@ -323,7 +323,7 @@ Contributions are welcome. Please read [CONTRIBUTING.md](./CONTRIBUTING.md) firs
 3. Respect the project's constraints: no third-party network requests from the extension, no `eval`/`new Function` in extension pages, license and copyright notices intact.
 4. By contributing, you agree that your contribution is licensed under the AGPLv3.
 
-Bug reports are most useful with the exported rule attached (Rules → select → **Export**). Questions go to [Discussions](https://github.com/cleberpereiradasilva/thorn-request/discussions); see [SUPPORT.md](./SUPPORT.md) for where to ask what. Everyone taking part follows the [Code of Conduct](./CODE_OF_CONDUCT.md).
+Bug reports are most useful with the exported rule attached (Rules → select → **Export**). Questions go to [Discussions](https://github.com/Thorn-http/thorn-http/discussions); see [SUPPORT.md](./SUPPORT.md) for where to ask what. Everyone taking part follows the [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 Changes between versions are listed in the [CHANGELOG](./CHANGELOG.md).
 

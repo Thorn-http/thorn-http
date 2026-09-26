@@ -101,7 +101,7 @@ Pronto no repo:
 Depende de você:
 
 - [ ] 👤 Busca de marca "Thorn HTTP" (USPTO classe 9, INPI)
-- [x] Repo no GitHub: `cleberpereiradasilva/thorn-request` (`origin`), com README, CONTRIBUTING, SECURITY, SUPPORT, CHANGELOG e templates
+- [x] Repo no GitHub: `Thorn-http/thorn-http` (`origin`), com README, CONTRIBUTING, SECURITY, SUPPORT, CHANGELOG e templates
 - [ ] 👤 No GitHub: ativar Discussions (categoria Q&A) e *Private vulnerability reporting*; preencher o About; criar o e-mail `contact@thorn-http.dev` (Cloudflare Email Routing)
 - [ ] 👤 Publicar `site/` e apontar `thorn-http.dev` para ele (HTTPS é obrigatório em `.dev`)
 - [ ] 👤 (opcional) Registrar `thornhttp.com` e redirecionar

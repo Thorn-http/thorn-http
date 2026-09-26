@@ -4,10 +4,10 @@ Thorn HTTP is maintained by one independent developer and a community of contrib
 
 | I want to… | Go to |
 | --- | --- |
-| Ask a question or get help with a rule | [Discussions → Q&A](https://github.com/cleberpereiradasilva/thorn-request/discussions/categories/q-a) |
-| Share an idea or talk about the project | [Discussions](https://github.com/cleberpereiradasilva/thorn-request/discussions) |
-| Report a bug | [New issue → Bug report](https://github.com/cleberpereiradasilva/thorn-request/issues/new/choose) |
-| Request a feature | [New issue → Feature request](https://github.com/cleberpereiradasilva/thorn-request/issues/new/choose) |
+| Ask a question or get help with a rule | [Discussions → Q&A](https://github.com/Thorn-http/thorn-http/discussions/categories/q-a) |
+| Share an idea or talk about the project | [Discussions](https://github.com/Thorn-http/thorn-http/discussions) |
+| Report a bug | [New issue → Bug report](https://github.com/Thorn-http/thorn-http/issues/new/choose) |
+| Request a feature | [New issue → Feature request](https://github.com/Thorn-http/thorn-http/issues/new/choose) |
 | Report a vulnerability | [SECURITY.md](./SECURITY.md) (privately, never in public) |
 | Report a Code of Conduct issue | [contact@thorn-http.dev](mailto:contact@thorn-http.dev) |
 

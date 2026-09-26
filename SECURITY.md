@@ -17,7 +17,7 @@ Only the latest release receives security fixes. Please update before reporting.
 
 Report it privately in one of these ways:
 
-1. **GitHub private vulnerability reporting (preferred):** go to the repository's [Security tab](https://github.com/cleberpereiradasilva/thorn-request/security) and click **Report a vulnerability**.
+1. **GitHub private vulnerability reporting (preferred):** go to the repository's [Security tab](https://github.com/Thorn-http/thorn-http/security) and click **Report a vulnerability**.
 2. **Email:** [contact@thorn-http.dev](mailto:contact@thorn-http.dev), with "Security" in the subject.
 
 Please include:

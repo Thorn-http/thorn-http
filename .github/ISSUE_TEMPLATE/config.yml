@@ -1,10 +1,10 @@
 blank_issues_enabled: false
 contact_links:
   - name: ❓ Questions and help
-    url: https://github.com/cleberpereiradasilva/thorn-request/discussions/categories/q-a
+    url: https://github.com/Thorn-http/thorn-http/discussions/categories/q-a
     about: Ask how to do something, or get help with a rule.
   - name: 🔒 Report a vulnerability
-    url: https://github.com/cleberpereiradasilva/thorn-request/security/advisories/new
+    url: https://github.com/Thorn-http/thorn-http/security/advisories/new
     about: Report security issues privately, never in a public issue.
   - name: 🌐 Website
     url: https://thorn-http.dev

@@ -1,4 +1,4 @@
 # Cloudflare Pages / Netlify redirects.
-/source   https://github.com/cleberpereiradasilva/thorn-request   302
-/issues   https://github.com/cleberpereiradasilva/thorn-request/issues   302
+/source   https://github.com/Thorn-http/thorn-http   302
+/issues   https://github.com/Thorn-http/thorn-http/issues   302
 /docs     /docs/   301
