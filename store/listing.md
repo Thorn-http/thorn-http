@@ -103,6 +103,7 @@ To test: open the add-on's popup, click "Open app", create a Redirect rule
 
 ## Images
 
-- `promo-small-440x280.png`: small promo tile (Chrome Web Store)
+- `promo-small-440x280.png`: small promo tile (Chrome Web Store, Edge Add-ons)
+- `logo-300x300.png`: store logo (Edge Add-ons, required)
 - `screenshots/1-rules.png`, `2-mock-editor.png`, `3-test-url.png`, `4-network-panel.png`, `5-popup.png`: 1280×800 store screenshots
 - Regenerate after UI changes: `bash build.sh`, then `cd browser-extension/mv3 && node scripts/screenshots.js` (raw screenshots in `browser-extension/mv3/screenshots/`)
