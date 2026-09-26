@@ -129,7 +129,7 @@ export const BillingTeamNudge: React.FC = () => {
           </>
         ) : (
           <>
-            <span>{domain}</span> has Thorn HTTP {planNameToShow} Team Plan. Unlock all features by joining the team.
+            <span>{domain}</span> has THorn HTTP {planNameToShow} Team Plan. Unlock all features by joining the team.
           </>
         )}
       </div>

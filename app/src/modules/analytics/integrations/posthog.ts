@@ -1,6 +1,6 @@
 import { IAnalyticsIntegration } from "./common";
 
-// Thorn HTTP collects no analytics. This integration is kept as a no-op so existing
+// THorn HTTP collects no analytics. This integration is kept as a no-op so existing
 // trackEvent/trackAttr call sites keep working without sending data anywhere.
 class NoopAnalyticsIntegration implements IAnalyticsIntegration {
   isIntegrationDone = true;

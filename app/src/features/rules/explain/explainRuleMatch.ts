@@ -169,7 +169,7 @@ export const explainRuleMatch = (
     checks.push({
       id: "extension",
       status: "fail",
-      title: "Thorn HTTP is paused",
+      title: "THorn HTTP is paused",
       detail: "Turn it back on in the toolbar popup.",
     });
   }
@@ -297,7 +297,7 @@ export const explainRuleMatch = (
         id: "devtools",
         status: "info",
         title: "The DevTools Network tab still shows the original response",
-        detail: "The page receives the modified one. Check it in the page, or in Thorn's DevTools panel.",
+        detail: "The page receives the modified one. Check it in the page, or in THorn HTTP's DevTools panel.",
       });
     }
   }

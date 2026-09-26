@@ -70,7 +70,7 @@ export const useFeatureLimiter = () => {
   };
 
   if (isThornExtension()) {
-    // Thorn HTTP is free: no plans, no limits.
+    // THorn HTTP is free: no plans, no limits.
     return {
       checkFeatureLimits: () => {},
       getFeatureLimitValue: (_featureLimitType: FeatureLimitType) => Infinity,

@@ -11,7 +11,7 @@ const isFirefox = () => {
 };
 
 // Add panel for non-extension pages
-const devToolPanelName = isFirefox() ? "Thorn HTTP" : "🌵 Thorn HTTP";
+const devToolPanelName = isFirefox() ? "THorn HTTP" : "🌵 THorn HTTP";
 const iconPath = isFirefox() ? "/resources/images/48x48.png" : "";
 
 if (chrome.devtools.inspectedWindow.tabId > 0) {

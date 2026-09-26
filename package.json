@@ -1,7 +1,7 @@
 {
   "name": "@thorn-http/core",
   "version": "1.1.1",
-  "description": "Thorn HTTP: free, local-first HTTP interceptor extension (fork of Requestly HTTP Interceptor)",
+  "description": "THorn HTTP: free, local-first HTTP interceptor extension (fork of Requestly HTTP Interceptor)",
   "main": "dist/thorn-core.cjs.js",
   "module": "dist/thorn-core.esm.js",
   "exports": {
@@ -20,7 +20,7 @@
     "url": "git+https://github.com/Thorn-http/thorn-http.git"
   },
   "author": {
-    "name": "Thorn HTTP contributors",
+    "name": "THorn HTTP contributors",
     "url": "https://thorn-http.dev"
   },
   "license": "SEE LICENSE IN LICENSE",

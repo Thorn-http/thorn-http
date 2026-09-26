@@ -24,7 +24,7 @@ export const RequestBillingTeamAccessReminder = () => {
   const [isModalClosable, setIsModalClosable] = useState(true);
 
   const emailSubject = "Request a new Billing Team";
-  const emailBody = `Hey Thorn HTTP Team\n\n We'd like to setup a new Billing Team. Could you please assist with the next step here?\n\nThanks\n${user?.details?.profile?.displayName}`;
+  const emailBody = `Hey THorn HTTP Team\n\n We'd like to setup a new Billing Team. Could you please assist with the next step here?\n\nThanks\n${user?.details?.profile?.displayName}`;
 
   const availableBillingTeams = useMemo(() => {
     if (isDomainBlocked) {
@@ -99,7 +99,7 @@ export const RequestBillingTeamAccessReminder = () => {
       open={isModalVisible}
       onCancel={handleModalClose}
       centered
-      title="Get a license to continue using Thorn HTTP"
+      title="Get a license to continue using THorn HTTP"
       footer={null}
     >
       {availableBillingTeams?.length ? (
@@ -108,12 +108,12 @@ export const RequestBillingTeamAccessReminder = () => {
             <div className="text-white">
               {availableBillingTeams?.length > 1 ? (
                 <>
-                  To continue using Thorn HTTP, you need a license. We have found the following billing teams in your
+                  To continue using THorn HTTP, you need a license. We have found the following billing teams in your
                   Organization. If you are part of one of these teams, you can request access to a license.
                 </>
               ) : (
                 <>
-                  To continue using Thorn HTTP, you need a license. We have found the following billing team in your
+                  To continue using THorn HTTP, you need a license. We have found the following billing team in your
                   Organization. If you are part of this team, you can request access to a license.
                 </>
               )}
@@ -143,7 +143,7 @@ export const RequestBillingTeamAccessReminder = () => {
       ) : (
         <>
           <div className="text-white">
-            Get a license to continue using Thorn HTTP To continue using Thorn HTTP, you need a license. You can
+            Get a license to continue using THorn HTTP To continue using THorn HTTP, you need a license. You can
             purchase licenses directly or set up team billing by contacting us at{" "}
             <a href={openEmailClientWithDefaultEmailBody("enterprise.support@requestly.io", emailSubject, emailBody)}>
               enterprise.support@requestly.io

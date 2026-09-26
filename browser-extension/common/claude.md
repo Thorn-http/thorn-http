@@ -26,7 +26,7 @@ The extension popup UI — a standalone React app (Ant Design dark theme) render
 
 ## Devtools Panel (`src/devtools/`)
 
-Chrome DevTools panel integration — adds a "Thorn HTTP" panel to Chrome DevTools.
+Chrome DevTools panel integration — adds a "THorn HTTP" panel to Chrome DevTools.
 
 - **`devtools.js`** — Panel registration via `chrome.devtools.panels.create`. Firefox gets plain text title; Chrome/others get emoji prefix.
 - **`index.tsx`** — Devtools panel React app entry point.

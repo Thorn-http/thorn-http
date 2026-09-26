@@ -1,10 +1,10 @@
-# Store listing — Thorn HTTP
+# Store listing — THorn HTTP
 
 Copy for the Chrome Web Store, Edge Add-ons and Firefox AMO listings.
 
 ## Name
 
-Thorn HTTP: Intercept & Modify HTTP Requests
+THorn HTTP: Intercept & Modify HTTP Requests
 
 ## Short description (≤ 132 characters)
 
@@ -16,7 +16,7 @@ Developer Tools
 
 ## Detailed description
 
-Thorn HTTP lets you intercept and modify HTTP(S) traffic right in your browser. Everything runs locally: no account, no cloud, no analytics.
+THorn HTTP lets you intercept and modify HTTP(S) traffic right in your browser. Everything runs locally: no account, no cloud, no analytics.
 
 Rules
 • Redirect Request: send a URL (or a pattern) to another URL, e.g. production → localhost
@@ -38,11 +38,11 @@ Also
 • Pause everything with one switch
 
 Privacy
-Thorn HTTP stores your rules only in your browser and sends no data anywhere.
+THorn HTTP stores your rules only in your browser and sends no data anywhere.
 
 Open source
-Thorn HTTP is free software under the GNU AGPLv3, based on Requestly HTTP Interceptor. Source code: https://github.com/Thorn-http/thorn-http
-"Requestly" is a trademark of its respective owner; Thorn HTTP is not affiliated with or endorsed by BrowserStack Inc.
+THorn HTTP is free software under the GNU AGPLv3, based on Requestly HTTP Interceptor. Source code: https://github.com/Thorn-http/thorn-http
+"Requestly" is a trademark of its respective owner; THorn HTTP is not affiliated with or endorsed by BrowserStack Inc.
 
 ## Links
 
@@ -103,7 +103,6 @@ To test: open the add-on's popup, click "Open app", create a Redirect rule
 
 ## Images
 
-- `promo-small-440x280.png` — small promo tile (Chrome Web Store)
-- `screenshots/1-rules.png`, `2-redirect-editor.png`, `3-mock-response.png` — 1280×800 store screenshots
-- `screenshots/4-network-panel.png`, `5-popup.png` — extra views (not store-sized; compose onto 1280×800 if you want to use them)
-- Regenerate after UI changes (the icons are still placeholders).
+- `promo-small-440x280.png`: small promo tile (Chrome Web Store)
+- `screenshots/1-rules.png`, `2-mock-editor.png`, `3-test-url.png`, `4-network-panel.png`, `5-popup.png`: 1280×800 store screenshots
+- Regenerate after UI changes: `bash build.sh`, then `cd browser-extension/mv3 && node scripts/screenshots.js` (raw screenshots in `browser-extension/mv3/screenshots/`)

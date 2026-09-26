@@ -17,7 +17,7 @@ import "./installExtensionCTA.css";
 
 const HEADING = "Install Browser extension to start modifying network requests";
 const SUBHEADING =
-  "Thorn HTTP lets developers Modify Headers, Redirect URLs, Switch Hosts, Delay Network requests easily. Private and secure, works locally on your browser.";
+  "THorn HTTP lets developers Modify Headers, Redirect URLs, Switch Hosts, Delay Network requests easily. Private and secure, works locally on your browser.";
 
 const InstallExtensionCTA: React.FC<InstallExtensionContent> = ({
   eventPage,

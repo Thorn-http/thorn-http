@@ -1,7 +1,7 @@
 import { BrowserContext, Page } from "@playwright/test";
 import { test, expect, newRule, saveRule, createRedirectRule, typeInCodeEditor } from "./fixtures";
 
-// Thorn HTTP must work fully offline: no feature may contact, redirect to or open any other server.
+// THorn HTTP must work fully offline: no feature may contact, redirect to or open any other server.
 // These tests use the features the way a user does and fail on any request or tab that leaves the
 // machine (such requests are aborted, so nothing is actually sent).
 

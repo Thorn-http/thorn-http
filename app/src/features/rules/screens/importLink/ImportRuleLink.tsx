@@ -72,7 +72,7 @@ export const ImportRuleLink: React.FC = () => {
       {!linkInUrl && (
         <div className="import-rule-link-paste">
           <Input
-            placeholder="Paste a Thorn HTTP rule link"
+            placeholder="Paste a THorn HTTP rule link"
             value={pastedLink}
             onChange={(e) => setPastedLink(e.target.value)}
             onPressEnter={() => preview(pastedLink)}

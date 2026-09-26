@@ -1,6 +1,6 @@
 # Rule editor (app)
 
-React + Vite application that provides the rule editor UI of Thorn HTTP. It is built in `extension` mode and bundled inside the browser extension (served from `app.html`).
+React + Vite application that provides the rule editor UI of THorn HTTP. It is built in `extension` mode and bundled inside the browser extension (served from `app.html`).
 
 ```sh
 npm install

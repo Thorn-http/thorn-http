@@ -1,10 +1,10 @@
-# Roadmap — Thorn HTTP
+# Roadmap — THorn HTTP
 
-Fork do Requestly HTTP Interceptor, relançado como **Thorn HTTP**: extensão gratuita, local-first, sem conta, sem backend e sem telemetria.
+Fork do Requestly HTTP Interceptor, relançado como **THorn HTTP**: extensão gratuita, local-first, sem conta, sem backend e sem telemetria.
 
 **Decisões**
 
-- Nome: Thorn HTTP (`thorn-http`). Domínio: `thorn-http.dev`.
+- Nome: THorn HTTP (`thorn-http`). Domínio: `thorn-http.dev`.
 - Licença: AGPLv3, mantendo o copyright da BrowserStack.
 - Grátis. Sem cadastro obrigatório (link opcional de newsletter no futuro).
 - Escopo: o interceptor (regras). SessionBear/gravação de sessão, API Client e tudo que depende de backend foram removidos.
@@ -21,7 +21,7 @@ Legenda: `[x]` feito · `[ ]` pendente · 👤 depende de você (contas, jurídi
 - [x] Nome/descrição da extensão, popup, painel do DevTools, menu de contexto, side panel, texto do widget na página
 - [x] Título/manifest da app, header (logo + nome), footer (site + link do código-fonte)
 - [x] Textos "Requestly"/"SessionBook" restantes no código alcançável
-- [x] `LICENSE`: copyright Thorn HTTP + aviso de modificação e de não-afiliação
+- [x] `LICENSE`: copyright THorn HTTP + aviso de modificação e de não-afiliação
 - [x] README com atribuição ao Requestly (AGPLv3)
 - [x] Ícones placeholder (todos os estados do ícone, favicon, logos da app)
 - [ ] 👤 Logo e ícones definitivos (trocar `browser-extension/mv3/resources/images/*`, `app/src/assets/img/brand/*`, `app/public/favicon.png` e regenerar as imagens de `store/`)
@@ -100,7 +100,7 @@ Pronto no repo:
 
 Depende de você:
 
-- [ ] 👤 Busca de marca "Thorn HTTP" (USPTO classe 9, INPI)
+- [ ] 👤 Busca de marca "THorn HTTP" (USPTO classe 9, INPI)
 - [x] Repo no GitHub: `Thorn-http/thorn-http` (`origin`), com README, CONTRIBUTING, SECURITY, SUPPORT, CHANGELOG e templates
 - [ ] 👤 No GitHub: ativar Discussions (categoria Q&A) e *Private vulnerability reporting*; preencher o About; criar o e-mail `contact@thorn-http.dev` (Cloudflare Email Routing)
 - [ ] 👤 Publicar `site/` e apontar `thorn-http.dev` para ele (HTTPS é obrigatório em `.dev`)
@@ -119,7 +119,7 @@ Auditoria de set/2026 (build 1.0.0). Corrigido, com testes em `e2e/security.spec
 - [x] Sites bloqueados recebiam as regras em `window.__REQUESTLY__`; e `isUrlInBlockList` ignorava sites com porta (ex.: `localhost:3000`).
 - [x] Nome de regra entrava sem escape no aviso da página (XSS com regra importada).
 
-- [x] **Erro no cliente "Cannot redefine property: timeout"** (quebrava todo XHR da página, ex.: banner OneTrust) quando o interceptor rodava duas vezes ou junto com outra extensão do mesmo código (Requestly). Agora o patch roda uma vez por janela, tolera propriedades já redefinidas, e usa nomes próprios (`__THORN_HTTP__`, mensagens `thorn:*`), para o Thorn e o Requestly não lerem as regras um do outro. Testes: `e2e/coexistence.spec.ts`.
+- [x] **Erro no cliente "Cannot redefine property: timeout"** (quebrava todo XHR da página, ex.: banner OneTrust) quando o interceptor rodava duas vezes ou junto com outra extensão do mesmo código (Requestly). Agora o patch roda uma vez por janela, tolera propriedades já redefinidas, e usa nomes próprios (`__THORN_HTTP__`, mensagens `thorn:*`), para o THorn e o Requestly não lerem as regras um do outro. Testes: `e2e/coexistence.spec.ts`.
 
 - [x] **Varredura "tudo local"** (a anterior só lia JS/HTML e só navegava por 4 telas). Agora `e2e/build-audit.spec.ts` lê todos os arquivos do build (JSON, CSS, SVG...) e `e2e/local-only.spec.ts` usa as features (regras numa página, gravação start/stop, todas as telas, templates, consentimento do Delay) e falha em qualquer requisição, aba ou bloqueio de CSP para fora da máquina. Encontrado e corrigido:
   - **Delay mandava a URL completa para `app.requestly.io/delay`** (regra estática em `delayRules.json`). Agora é local: fetch/XHR na página; página/iframe numa página de contagem da extensão; scripts/CSS/imagens/fontes pelo `chrome.debugger`, permissão **opcional**, pedida com explicação completa no editor e em Settings. Máximo de 10 minutos.
@@ -133,7 +133,7 @@ Pendente:
 
 - [ ] **Código herdado inerte** ainda no pacote (bloqueado pela CSP, sem uso): SDKs do Firebase, GrowthBook e Stripe; presets de bibliotecas do Insert Script via CDN (o service worker nem os usa); dados de exemplo com URLs do Requestly. Remover.
 - [ ] **Delay de scripts/CSS/imagens no Firefox:** sem `chrome.debugger`; usar `webRequest` bloqueante (suportado no Firefox MV3).
-- [ ] **Mock de XHR com dois interceptores ativos:** com Requestly (ou outro interceptor do mesmo código) também ativo, um mock do Thorn para uma requisição XHR não completa (fetch e XHRs sem mock funcionam). Os wrappers herdados não se compõem; estudar criar o proxy com o XMLHttpRequest nativo, ou avisar no popup quando outro interceptor for detectado.
+- [ ] **Mock de XHR com dois interceptores ativos:** com Requestly (ou outro interceptor do mesmo código) também ativo, um mock do THorn para uma requisição XHR não completa (fetch e XHRs sem mock funcionam). Os wrappers herdados não se compõem; estudar criar o proxy com o XMLHttpRequest nativo, ou avisar no popup quando outro interceptor for detectado.
 - [ ] **Regras visíveis para as páginas:** regras ativas de Modify Response, Request Body e Delay ficam em `window.__REQUESTLY__` (necessário para o page script do fetch/XHR); qualquer site lê mocks e condições. Mitigar com a interceptação "Automático" da v1.1, limitar pelo filtro de página quando houver, e avisar no editor para não colocar segredos nesses mocks.
 - [ ] **Dependências do app** (`npm audit --omit=dev`: 2 críticas, 12 altas): quase todas do Firebase SDK (protobufjs, grpc, websocket-driver; inerte, sem backend) e de ferramentas de build. Remover o Firebase SDK e atualizar `react-router-dom` e `lodash`.
 - [ ] Strings e links herdados sem uso (Stripe, GrowthBook, formbricks, `requestly.tech` mock server): código não executa (CSP `script-src 'self'` bloqueia scripts remotos), mas remover com o Firebase.
@@ -146,9 +146,9 @@ Levantamento de set/2026 (reviews da Chrome Web Store, issues do Requestly no Gi
 - O ModHeader foi marcado como malware em jul/2026 (coletava domínios visitados) e saiu da loja do Edge: ~1,6 mi de usuários procurando alternativa confiável.
 - O Resource Override morreu com o MV3; seus usuários queriam principalmente "mapear arquivo local".
 - Reclamações recorrentes: extensão deixa o Chrome lento ou quebra sites (Google Drive, Azure DevOps), e bugs antigos nas regras de corpo.
-- Recursos das alternativas que o Thorn ainda não tem (Tweak, Mokku, ModHeader, ModResponse, HTTP Toolkit, Charles, Fiddler) estão distribuídos nas versões abaixo. ⭐ = destaque.
+- Recursos das alternativas que o THorn ainda não tem (Tweak, Mokku, ModHeader, ModResponse, HTTP Toolkit, Charles, Fiddler) estão distribuídos nas versões abaixo. ⭐ = destaque.
 
-> **Licença ao implementar:** ideias e funcionalidades são livres; **não copiar código** de ferramentas fechadas (Tweak, ModHeader). Código aberto pode ser reaproveitado respeitando a licença (HTTP Toolkit é AGPLv3; Mokku é MIT — manter os avisos). Não clonar a interface nem usar marcas de forma confusa. Todo código novo do Thorn segue AGPLv3.
+> **Licença ao implementar:** ideias e funcionalidades são livres; **não copiar código** de ferramentas fechadas (Tweak, ModHeader). Código aberto pode ser reaproveitado respeitando a licença (HTTP Toolkit é AGPLv3; Mokku é MIT — manter os avisos). Não clonar a interface nem usar marcas de forma confusa. Todo código novo do THorn segue AGPLv3.
 
 ### v1.1 — Desempenho e compatibilidade
 
@@ -204,7 +204,7 @@ Ideias que nenhuma extensão do segmento (Requestly, Tweak, ModHeader, Mokku) of
 
 ### Confiança e fluxo
 
-- [x] **#1** ⭐ **Regras com validade e aviso na página**: timer por regra ("desligar em 1h") e faixa discreta na página ("Thorn está alterando 3 requisições aqui"). Resolve o clássico "esqueci a regra ligada e perdi horas depurando".
+- [x] **#1** ⭐ **Regras com validade e aviso na página**: timer por regra ("desligar em 1h") e faixa discreta na página ("THorn está alterando 3 requisições aqui"). Resolve o clássico "esqueci a regra ligada e perdi horas depurando".
   - Feito: seletor *Auto-disable* no editor (15 min / 1 h / 4 h / 1 dia), contagem na lista de regras, desligamento pelo service worker via `chrome.alarms`; aviso "Rules applied on this page" ligado por padrão (desligável em Settings), com nomes de regra escapados. e2e: `rule-expiry.spec.ts`
 - [ ] **#2** ⭐ **Regras versionadas no repositório**: sincronizar as regras com uma pasta local (ex.: `.thorn/rules.json`) via File System Access API. O time compartilha pelo git, sem conta e sem servidor.
 - [x] **#3** ⭐ **Compartilhar regra por link**: a regra vai inteira no fragmento da URL (`thorn-http.dev/r#<base64>`), que nunca chega ao servidor. Quem abre importa com um clique; ótimo para issue, PR e Slack.
@@ -217,7 +217,7 @@ Ideias que nenhuma extensão do segmento (Requestly, Tweak, ModHeader, Mokku) of
 - [ ] **#4** ⭐ **Mock com estado (CRUD fake)**: declarar `/api/todos` como coleção; POST adiciona, GET lista, PUT/PATCH atualiza, DELETE remove, tudo guardado no storage da extensão. Dá para fazer o frontend inteiro sem backend pronto (o Mockoon faz isso no desktop; no navegador, ninguém).
 - [ ] **#11** **IA local (Gemini Nano do Chrome, Prompt API)**: gerar dados fake realistas a partir de uma resposta de exemplo, ou criar uma regra a partir de uma frase ("mocka o login retornando erro"). Sem backend nem custo; só aparece se o navegador suportar.
 - [ ] **#13** ⭐ **Replay de HAR** (evolui o "Importar HAR → regras" da v1.3):
-  - **Fontes:** HAR do DevTools, do side panel do Thorn, do Charles, do Proxyman ou do HTTP Toolkit. Formato do LogRocket como bônus: a exportação dele não traz corpos, só status e headers.
+  - **Fontes:** HAR do DevTools, do side panel do THorn, do Charles, do Proxyman ou do HTTP Toolkit. Formato do LogRocket como bônus: a exportação dele não traz corpos, só status e headers.
   - **Agrupamento:** método + URL (+ `operationName` no GraphQL), com checkbox para escolher o que vira mock.
   - **Modos:** *parcial* (só os endpoints marcados vêm do HAR) e *offline total* (tudo vem do HAR; o resto é bloqueado ou devolve 404).
   - **Sequência:** chamadas repetidas à mesma URL (polling, paginação) devolvem as respostas na ordem gravada. Usa o motor do mock com estado.

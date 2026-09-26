@@ -19,7 +19,7 @@ const RuleInfoBanner: React.FC<{ ruleType: string; appMode: string }> = ({ ruleT
         title: "Delays run in your browser, up to 10 minutes. Nothing goes through a server.",
         description: (
           <div>
-            fetch/XHR requests wait inside the page. Page and iframe loads show a Thorn HTTP countdown, then load.
+            fetch/XHR requests wait inside the page. Page and iframe loads show a THorn HTTP countdown, then load.
             Scripts, styles, images and fonts need your permission to use Chrome's debugger (below).
           </div>
         ),

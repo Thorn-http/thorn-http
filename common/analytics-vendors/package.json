@@ -12,7 +12,7 @@
     "build": "rm -rf dist && webpack"
   },
   "author": {
-    "name": "Thorn HTTP contributors",
+    "name": "THorn HTTP contributors",
     "url": "https://thorn-http.dev"
   },
   "license": "SEE LICENSE IN LICENSE",

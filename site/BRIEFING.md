@@ -1,9 +1,9 @@
-# Briefing — Landing page do Thorn HTTP
+# Briefing — Landing page do THorn HTTP
 
 Resumo do produto para quem (pessoa ou IA) for desenhar a página. Imagens do produto em `images/`.
 
 ## O produto
-Thorn HTTP é uma extensão de navegador (Chrome, Edge, Firefox), grátis e open source (AGPLv3),
+THorn HTTP é uma extensão de navegador (Chrome, Edge, Firefox), grátis e open source (AGPLv3),
 para interceptar e modificar requisições HTTP(S) direto no navegador: redirecionar URLs,
 mudar headers, simular respostas de API (mocks), injetar scripts, atrasar requisições e mais.
 Tudo roda 100% local: sem conta, sem servidor, sem coleta de dados.
@@ -61,7 +61,7 @@ mock com estado (CRUD fake), replay de HAR, modo caos (falhas e latência aleat�
 comparar ambientes, painel de feature flags.
 
 ## Marca
-- Nome: Thorn HTTP (ícone: um espinho, fundo verde)
+- Nome: THorn HTTP (ícone: um espinho, fundo verde)
 - Cores do site: fundo escuro #111312, superfície #1a1d1b, verde #2fae6b (destaque #228b54), texto #e8ece9;
   o site também tem tema claro.
 - Tom: técnico, direto, honesto, sem exagero; foco em privacidade e liberdade.

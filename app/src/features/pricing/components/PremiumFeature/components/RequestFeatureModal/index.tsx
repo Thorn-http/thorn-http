@@ -266,7 +266,7 @@ export const RequestFeatureModal: React.FC<RequestFeatureModalProps> = ({
           {billingTeams.length > 1 ? (
             <>
               <Typography.Text>
-                Your organization is currently subscribed to the Thorn HTTP Premium Plan. If you need a Thorn HTTP
+                Your organization is currently subscribed to the THorn HTTP Premium Plan. If you need a THorn HTTP
                 Professional subscription for yourself, send request to admin.
               </Typography.Text>
               {ModalActionButtons}
@@ -274,7 +274,7 @@ export const RequestFeatureModal: React.FC<RequestFeatureModalProps> = ({
           ) : isAcceleratorTeam ? (
             <>
               <Typography.Text>
-                Your organization is currently on the Thorn HTTP Premium Plan. You can join the team to access premium
+                Your organization is currently on the THorn HTTP Premium Plan. You can join the team to access premium
                 features.
               </Typography.Text>
               {ModalActionButtons}
@@ -282,7 +282,7 @@ export const RequestFeatureModal: React.FC<RequestFeatureModalProps> = ({
           ) : (
             <>
               <Typography.Text>
-                Your organization is currently subscribed to the Thorn HTTP Premium Plan. If you need a Thorn HTTP
+                Your organization is currently subscribed to the THorn HTTP Premium Plan. If you need a THorn HTTP
                 Professional subscription for yourself, send request to admin.
               </Typography.Text>
               {ModalActionButtons}

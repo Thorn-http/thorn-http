@@ -1,6 +1,6 @@
-# Contributing to Thorn HTTP
+# Contributing to THorn HTTP
 
-Thanks for taking the time to contribute! Thorn HTTP is a free, local-first HTTP interceptor for the browser, and every bug report, idea, test and pull request helps.
+Thanks for taking the time to contribute! THorn HTTP is a free, local-first HTTP interceptor for the browser, and every bug report, idea, test and pull request helps.
 
 This guide explains how the project works and what a good contribution looks like. If anything here is unclear, that's a bug too: open an issue.
 
@@ -122,14 +122,14 @@ test: audit every file of the build and every screen for outside traffic
 4. For visible changes, add a screenshot or a short recording.
 5. CI builds the extension, runs the tests, packages the zips and lints the Firefox build. A PR is merged only when CI is green.
 
-**Review.** Thorn HTTP is maintained by one independent developer, so reviews happen on a best-effort basis. You'll get feedback as soon as possible; a friendly ping after a week is welcome. Reviews may ask for changes. That's normal and not a judgment of your work.
+**Review.** THorn HTTP is maintained by one independent developer, so reviews happen on a best-effort basis. You'll get feedback as soon as possible; a friendly ping after a week is welcome. Reviews may ask for changes. That's normal and not a judgment of your work.
 
 ## Reporting bugs
 
 Open a [bug report](https://github.com/Thorn-http/thorn-http/issues/new/choose) and include:
 
 - what you did, what you expected and what happened instead;
-- your browser and its version, and the Thorn HTTP version (shown in the popup);
+- your browser and its version, and the THorn HTTP version (shown in the popup);
 - the rule involved, exported as JSON (Rules → select → **Export**), with anything private removed.
 
 Search the existing issues first; if the bug is already reported, add your details there instead of opening a new one.
@@ -144,6 +144,6 @@ Open a [feature request](https://github.com/Thorn-http/thorn-http/issues/new/cho
 
 ## Licensing of contributions
 
-Thorn HTTP is licensed under the [GNU AGPLv3](./LICENSE). By submitting a contribution, you agree that it is licensed under the same license (inbound = outbound), and you confirm that you have the right to submit it. There is no contributor license agreement to sign.
+THorn HTTP is licensed under the [GNU AGPLv3](./LICENSE). By submitting a contribution, you agree that it is licensed under the same license (inbound = outbound), and you confirm that you have the right to submit it. There is no contributor license agreement to sign.
 
 Code copied from other projects must have a license compatible with the AGPLv3, and its origin and license must be noted in the pull request.

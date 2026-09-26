@@ -33,7 +33,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
   toggleModal,
   planDuration,
   selectedPlan = null,
-  title = "Upgrade your plan to get the most out of Thorn HTTP",
+  title = "Upgrade your plan to get the most out of THorn HTTP",
   quantity = 1,
   source,
   product,

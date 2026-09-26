@@ -1,9 +1,9 @@
-Copyright (c) 2026-present Thorn HTTP contributors (modifications)
+Copyright (c) 2026-present THorn HTTP contributors (modifications)
 Copyright (c) 2025-present BrowserStack Inc.
 
-Thorn HTTP is a modified version of Requestly HTTP Interceptor
+THorn HTTP is a modified version of Requestly HTTP Interceptor
 (https://github.com/requestly/interceptor). "Requestly" is a trademark of its
-respective owner; Thorn HTTP is not affiliated with or endorsed by BrowserStack Inc.
+respective owner; THorn HTTP is not affiliated with or endorsed by BrowserStack Inc.
 
 The "ee/" directory of this repository contains only the upstream license text and
 no code: all the code in this repository is available under the GNU AGPLv3 below.

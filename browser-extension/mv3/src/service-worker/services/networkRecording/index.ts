@@ -799,7 +799,7 @@ export const startNetworkRecording = async (
   if (!isExtensionEnabledCache) {
     return {
       success: false,
-      error: "Thorn HTTP extension is disabled. Enable it to start a recording.",
+      error: "THorn HTTP extension is disabled. Enable it to start a recording.",
     };
   }
 
@@ -817,7 +817,7 @@ export const startNetworkRecording = async (
       success: false,
       code: "INCOGNITO_NOT_ALLOWED",
       error:
-        'Thorn HTTP is not allowed in Incognito. Open chrome://extensions, enable "Allow in Incognito" for Thorn HTTP, then start the recording again.',
+        'THorn HTTP is not allowed in Incognito. Open chrome://extensions, enable "Allow in Incognito" for THorn HTTP, then start the recording again.',
     };
   }
 

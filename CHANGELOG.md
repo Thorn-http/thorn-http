@@ -1,12 +1,12 @@
 # Changelog
 
-All notable changes to Thorn HTTP are documented here.
+All notable changes to THorn HTTP are documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-First release of Thorn HTTP, **1.0.0 (beta)**, based on [Requestly HTTP Interceptor](https://github.com/requestly/interceptor).
+First release of THorn HTTP, **1.0.0 (beta)**, based on [Requestly HTTP Interceptor](https://github.com/requestly/interceptor).
 
 ### Added
 

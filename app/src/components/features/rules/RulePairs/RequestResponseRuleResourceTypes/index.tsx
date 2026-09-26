@@ -76,7 +76,7 @@ const ResponseRuleResourceTypes: React.FC<{ ruleDetails: Record<string, unknown>
         <Radio.Group
           disabled={isSampleRule || disabled}
           value={ruleResourceType}
-          // Every resource type is free in Thorn HTTP, so GraphQL is a plain option too. (It used to be
+          // Every resource type is free in THorn HTTP, so GraphQL is a plain option too. (It used to be
           // wrapped in a PremiumFeature whose click handler didn't fire on the editor's first load.)
           onChange={(e) => handleResourceTypeChange(e.target.value)}
         >

@@ -19,7 +19,7 @@ test("page loads are delayed locally, then load with the other rules still appli
   const start = Date.now();
   await page.goto(`${server.domainOrigin}/echo?keep=1`);
   // The local delay page shows the countdown and the address...
-  await expect(page.locator("h1")).toHaveText("Thorn HTTP is delaying this page");
+  await expect(page.locator("h1")).toHaveText("THorn HTTP is delaying this page");
   await expect(page.locator("#url")).toHaveText(`${server.domainOrigin}/echo?keep=1`);
   // ...then loads it once, unchanged (no marker left in the URL), with the header rule applied.
   await page.waitForURL(`${server.domainOrigin}/echo?keep=1`, { timeout: 10000 });
@@ -74,7 +74,7 @@ test("without permission, scripts aren't delayed and the editor explains why", a
 
   await consent.getByRole("button", { name: "Review and allow…" }).click();
   const explanation = editor.locator('[data-testid="subresource-delay-explanation"]');
-  await expect(explanation).toContainText("Thorn HTTP started debugging this browser");
+  await expect(explanation).toContainText("THorn HTTP started debugging this browser");
   await expect(explanation).toContainText("Nothing is read, stored or sent anywhere");
   await expect(explanation).toContainText("chrome://extensions");
   await editor.getByRole("button", { name: "Not now" }).click();

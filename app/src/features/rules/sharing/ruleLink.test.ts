@@ -37,10 +37,10 @@ describe("rule links", () => {
     expect((await readRuleLink(`  ${link}  `))[0]!.name).toBe("Prod → local");
   });
 
-  it("rejects links that are not Thorn links, are damaged or hold no valid rules", async () => {
-    await expect(readRuleLink("https://thorn-http.dev/r#")).rejects.toThrow("isn't a Thorn HTTP rule link");
-    await expect(readRuleLink("https://thorn-http.dev/r#2.abc")).rejects.toThrow("isn't a Thorn HTTP rule link");
-    await expect(readRuleLink("https://thorn-http.dev/r#1.<script>")).rejects.toThrow("isn't a Thorn HTTP rule link");
+  it("rejects links that are not THorn HTTP links, are damaged or hold no valid rules", async () => {
+    await expect(readRuleLink("https://thorn-http.dev/r#")).rejects.toThrow("isn't a THorn HTTP rule link");
+    await expect(readRuleLink("https://thorn-http.dev/r#2.abc")).rejects.toThrow("isn't a THorn HTTP rule link");
+    await expect(readRuleLink("https://thorn-http.dev/r#1.<script>")).rejects.toThrow("isn't a THorn HTTP rule link");
 
     const link = await createRuleLink([redirectRule]);
     await expect(readRuleLink(link.slice(0, -6))).rejects.toThrow("damaged");

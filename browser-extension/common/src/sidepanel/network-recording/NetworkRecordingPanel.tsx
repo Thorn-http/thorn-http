@@ -72,7 +72,7 @@ const STOP_BANNERS: Partial<Record<StopReason, { icon: string; text: string; var
   },
   "extension-disabled": {
     icon: "⚠",
-    text: "Thorn HTTP was disabled — recording stopped",
+    text: "THorn HTTP was disabled — recording stopped",
     variant: "error",
   },
 };
@@ -176,7 +176,7 @@ const NetworkRecordingPanel: React.FC = () => {
     const har = {
       log: {
         version: "1.2",
-        creator: { name: "Thorn HTTP", version: chrome.runtime.getManifest().version },
+        creator: { name: "THorn HTTP", version: chrome.runtime.getManifest().version },
         pages: [] as unknown[],
         entries,
       },

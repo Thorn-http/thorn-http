@@ -36,6 +36,6 @@ test("network recording started from the popup captures requests and exports HAR
   );
   const [download] = await Promise.all([panel.waitForEvent("download"), panel.click(".export-btn")]);
   const har = JSON.parse(fs.readFileSync(await download.path(), "utf8"));
-  expect(har.log.creator.name).toBe("Thorn HTTP");
+  expect(har.log.creator.name).toBe("THorn HTTP");
   expect(har.log.entries.some((entry: any) => entry.request.url.endsWith("/api"))).toBe(true);
 });

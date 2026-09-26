@@ -46,7 +46,7 @@ const PopupHeader: React.FC<PopupHeaderProps> = ({ isExtensionEnabled, handleTog
           <Row align="middle">
             <Tooltip
               open={!isExtensionEnabled}
-              title="Please switch on the Thorn HTTP extension. When paused, rules won't be applied."
+              title="Please switch on the THorn HTTP extension. When paused, rules won't be applied."
               overlayClassName="enable-extension-tooltip"
               color="var(--neutrals-black)"
               overlayInnerStyle={{ fontSize: "14px" }}
@@ -58,7 +58,7 @@ const PopupHeader: React.FC<PopupHeaderProps> = ({ isExtensionEnabled, handleTog
                 className="pause-switch"
               />
             </Tooltip>
-            <Typography.Text>{`Thorn HTTP ${isExtensionEnabled ? "running" : "paused"}`}</Typography.Text>
+            <Typography.Text>{`THorn HTTP ${isExtensionEnabled ? "running" : "paused"}`}</Typography.Text>
           </Row>
         </Col>
         <Col>

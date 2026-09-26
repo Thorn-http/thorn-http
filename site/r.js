@@ -1,4 +1,4 @@
-// Shows the rules inside a Thorn HTTP rule link (https://thorn-http.dev/r#1.<data>). <data> is
+// Shows the rules inside a THorn HTTP rule link (https://thorn-http.dev/r#1.<data>). <data> is
 // the rules as JSON, deflate-compressed and base64url-encoded (app/src/features/rules/sharing/ruleLink.ts).
 // With the extension installed, its content script marks <html data-thorn-http="installed"> and
 // handles the "Import" button.
@@ -32,7 +32,7 @@
     var payload = location.hash.slice(1);
     var parts = payload.split(".");
     if (parts[0] !== "1" || !/^[\w-]+$/.test(parts[1] || "")) {
-      throw new Error("This isn't a Thorn HTTP rule link, or it was cut short.");
+      throw new Error("This isn't a THorn HTTP rule link, or it was cut short.");
     }
     var base64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
     var binary = atob(base64 + "===".slice((base64.length + 3) % 4));
@@ -87,7 +87,7 @@
         download(rules);
       });
       document.getElementById("thorn-import").addEventListener("click", function () {
-        status.textContent = "Opening Thorn HTTP…";
+        status.textContent = "Opening THorn HTTP…";
       });
     },
     function (error) {

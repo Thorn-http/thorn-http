@@ -1,4 +1,4 @@
-<!-- Thanks for contributing to Thorn HTTP! Please read CONTRIBUTING.md before opening the PR. -->
+<!-- Thanks for contributing to THorn HTTP! Please read CONTRIBUTING.md before opening the PR. -->
 
 ## What and why
 

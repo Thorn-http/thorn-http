@@ -15,17 +15,17 @@ export const SubresourceDelayExplanation: React.FC = () => (
       Browsers don't let extensions hold back scripts, styles, images and fonts. The only way to delay them without
       sending them through a server is Chrome's <b>debugger</b>, which needs your permission.
     </p>
-    <h4>What Thorn HTTP does with it</h4>
+    <h4>What THorn HTTP does with it</h4>
     <p>
-      Only while a Delay rule for these request types is switched on, Thorn HTTP attaches to your web tabs, pauses the
+      Only while a Delay rule for these request types is switched on, THorn HTTP attaches to your web tabs, pauses the
       requests your Delay rules match, and lets each one continue when its delay is up. Every other request goes through
       untouched. Nothing is read, stored or sent anywhere: it all happens in your browser. One limit: a page opened from
-      Chrome's New Tab page can load a few files before Thorn HTTP is attached to that tab; reload it if you need those
+      Chrome's New Tab page can load a few files before THorn HTTP is attached to that tab; reload it if you need those
       delayed too.
     </p>
     <h4>What you will see</h4>
     <p>
-      While it's attached, Chrome shows a bar saying <i>"Thorn HTTP started debugging this browser"</i>. That's
+      While it's attached, Chrome shows a bar saying <i>"THorn HTTP started debugging this browser"</i>. That's
       expected. If you close that bar, these delays pause until you resume them here.
     </p>
     <h4>What the permission allows</h4>

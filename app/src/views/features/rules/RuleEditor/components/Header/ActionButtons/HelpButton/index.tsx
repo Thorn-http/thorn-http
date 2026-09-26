@@ -10,7 +10,7 @@ import { isThornExtension } from "utils/EnvUtils";
 import "./index.scss";
 
 export const HelpButton = () => {
-  // The help drawer loads docs from Requestly's servers; not available in Thorn HTTP.
+  // The help drawer loads docs from Requestly's servers; not available in THorn HTTP.
   if (isThornExtension()) return null;
   return <RemoteDocsHelpButton />;
 };

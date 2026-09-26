@@ -1,4 +1,4 @@
-# Cursor rules for Thorn HTTP
+# Cursor rules for THorn HTTP
 
 Read `claude.md` at the repo root first: it describes the layout, how the bundled editor talks to the extension, and the constraints (strict extension CSP, no third-party network requests, keep AGPLv3 notices).
 

@@ -60,7 +60,7 @@ const RulesFeatureContainer = () => {
         placement: "bottomLeft",
         duration: 0,
       });
-      console.log(`[Thorn HTTP]: Error saving rule - ${message.error}`);
+      console.log(`[THorn HTTP]: Error saving rule - ${message.error}`);
       clientRuleStorageService.getRecordById(message.rqRuleId).then((ruleDetails) => {
         const sourceCondition = ruleDetails?.pairs?.[0]?.source;
         trackErrorInSavingDNR({

@@ -78,13 +78,13 @@ const isValidRule = (value: unknown): value is Rule => {
   );
 };
 
-/** Throws with a message fit for the user when the link is broken or not a Thorn link. */
+/** Throws with a message fit for the user when the link is broken or not a THorn HTTP link. */
 export const readRuleLink = async (linkOrPayload: string): Promise<Rule[]> => {
   const payload = getRuleLinkPayload(linkOrPayload);
   const [version, data] = payload.split(".");
 
   if (version !== PAYLOAD_VERSION || !data || payload.length > MAX_PAYLOAD_LENGTH || !/^[\w-]+$/.test(data)) {
-    throw new Error("This isn't a Thorn HTTP rule link, or it was cut short.");
+    throw new Error("This isn't a THorn HTTP rule link, or it was cut short.");
   }
 
   let rules: unknown;

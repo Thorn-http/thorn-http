@@ -1,6 +1,6 @@
 # thorn-http.dev
 
-Static website for Thorn HTTP (no build step, no cookies, no analytics).
+Static website for THorn HTTP (no build step, no cookies, no analytics).
 
 - `index.html` — landing page
 - `docs/index.html` — user docs (`/docs`)

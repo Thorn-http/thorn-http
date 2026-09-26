@@ -13,4 +13,4 @@
    - Chrome Web Store: https://chrome.google.com/webstore/devconsole
    - Edge Add-ons: https://partner.microsoft.com/dashboard/microsoftedge
    - Firefox AMO: https://addons.mozilla.org/developers/ (AMO also asks for the source code: upload a zip of this repository at the release tag)
-6. Tag the release: `git tag -a vX.Y.Z -m "Thorn HTTP vX.Y.Z" && git push --tags`.
+6. Tag the release: `git tag -a vX.Y.Z -m "THorn HTTP vX.Y.Z" && git push --tags`.

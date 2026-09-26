@@ -1,6 +1,6 @@
 # Getting help
 
-Thorn HTTP is maintained by one independent developer and a community of contributors. There is no paid support, but there are good places to ask.
+THorn HTTP is maintained by one independent developer and a community of contributors. There is no paid support, but there are good places to ask.
 
 | I want to… | Go to |
 | --- | --- |
@@ -19,4 +19,4 @@ Thorn HTTP is maintained by one independent developer and a community of contrib
 
 ## When asking
 
-Include your browser and its version, the Thorn HTTP version (shown in the popup) and the rule, exported as JSON (Rules → select → **Export**). Remove anything private from it first.
+Include your browser and its version, the THorn HTTP version (shown in the popup) and the rule, exported as JSON (Rules → select → **Export**). Remove anything private from it first.

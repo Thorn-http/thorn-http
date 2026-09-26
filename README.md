@@ -2,7 +2,7 @@
 
 <img src="docs/images/logo.svg" alt="" width="88" height="88">
 
-# Thorn HTTP
+# THorn HTTP
 
 **Intercept and modify HTTP requests, right in your browser.**
 Free, open source and local-first: no account, no backend, no tracking.
@@ -15,7 +15,7 @@ Free, open source and local-first: no account, no backend, no tracking.
 
 [Website](https://thorn-http.dev) · [Features](#features) · [Install](#install) · [Privacy](#privacy-and-security) · [Development](#development) · [Roadmap](./ROADMAP.md)
 
-<img src="docs/images/mock-editor.png" alt="Thorn HTTP rule editor mocking a checkout API with a 500 error, set to switch itself off in 44 minutes" width="900">
+<img src="docs/images/mock-editor.png" alt="THorn HTTP rule editor mocking a checkout API with a 500 error, set to switch itself off in 44 minutes" width="900">
 
 </div>
 
@@ -23,7 +23,7 @@ Free, open source and local-first: no account, no backend, no tracking.
 
 ## Table of contents
 
-- [Why Thorn HTTP](#why-thorn-http)
+- [Why THorn HTTP](#why-thorn-http)
 - [Features](#features)
   - [Rule types](#rule-types)
   - [Highlights](#highlights)
@@ -46,7 +46,7 @@ Free, open source and local-first: no account, no backend, no tracking.
 
 ---
 
-## Why Thorn HTTP
+## Why THorn HTTP
 
 |  |  |
 | --- | --- |
@@ -54,7 +54,7 @@ Free, open source and local-first: no account, no backend, no tracking.
 | 💻 **Local by default** | Rules and recordings live in your browser. Today, no feature sends your rules or your traffic to a server, ours included. If an online feature is ever added, it will be optional and off until you turn it on. |
 | 🔍 **Open source** | GNU AGPLv3. Anyone can read, audit and build the code. Sensitive permissions are optional and explained before they are requested. |
 
-Thorn HTTP started as a fork of [Requestly's browser extension](https://github.com/requestly/interceptor). It keeps the interceptor and removes everything that needed an account or a server: sign-in, teams, sync, cloud mocks, billing, analytics and remote configuration.
+THorn HTTP started as a fork of [Requestly's browser extension](https://github.com/requestly/interceptor). It keeps the interceptor and removes everything that needed an account or a server: sign-in, teams, sync, cloud mocks, billing, analytics and remote configuration.
 
 ## Features
 
@@ -99,7 +99,7 @@ Record the network in the side panel while you use your app. Next to any `fetch`
 
 #### See why a rule doesn't match
 
-Paste a URL into **Test URL** and Thorn HTTP checks everything the rule depends on, one item at a time, with a hint when something fails:
+Paste a URL into **Test URL** and THorn HTTP checks everything the rule depends on, one item at a time, with a hint when something fails:
 
 letter case · trailing slash · query string · http vs https · invalid regex · request method and type filters · paused extension · disabled rule or group · blocked site
 
@@ -142,7 +142,7 @@ The rules travel inside the link itself, after the `#`, which browsers never sen
 - **Blocked sites**: pages where rules never run
 - Ready-made **templates**
 - **Import** from Requestly JSON exports, Charles Proxy, ModHeader, Resource Override and Header Editor; export to JSON
-- Pages keep working when another extension also patches `XMLHttpRequest`/`fetch`, and Thorn HTTP and Requestly don't read each other's rules
+- Pages keep working when another extension also patches `XMLHttpRequest`/`fetch`, and THorn HTTP and Requestly don't read each other's rules
 
 ## Browser support
 
@@ -153,7 +153,7 @@ The rules travel inside the link itself, after the `#`, which browsers never sen
 | **Firefox 127+** | ✅ Supported | Delay applies to `fetch`/XHR requests only. Network recording opens in the sidebar. The "clear cache before recording" option isn't available. |
 | Other Chromium browsers | Untested | The Chrome build should load, but it isn't tested. |
 
-**Delay in detail.** On Chrome and Edge, `fetch`/XHR requests and page loads can be delayed right away. Scripts, styles, images and fonts are delayed through Chrome's debugger, **only if you allow it**: Thorn HTTP explains what the permission does before asking, Chrome shows a "started debugging this browser" bar while it's in use, and you can turn it off at any time in Settings.
+**Delay in detail.** On Chrome and Edge, `fetch`/XHR requests and page loads can be delayed right away. Scripts, styles, images and fonts are delayed through Chrome's debugger, **only if you allow it**: THorn HTTP explains what the permission does before asking, Chrome shows a "started debugging this browser" bar while it's in use, and you can turn it off at any time in Settings.
 
 ## Install
 
@@ -177,7 +177,7 @@ Then load it:
 
 Point a production script to your local dev server:
 
-1. Click the Thorn HTTP icon in the toolbar and open the rules.
+1. Click the THorn HTTP icon in the toolbar and open the rules.
 2. Click **New Rule** → **Redirect Request**.
 3. Set the condition to **URL** · **Contains** · `app.example.com/main.js`.
 4. Set the destination to `http://localhost:5173/main.js`.
@@ -190,7 +190,7 @@ Not working? Click **Test URL** in the editor and paste the URL the page request
 
 **What stays on your device.** Rules, groups and settings are saved in the browser's extension storage. Network recordings are kept in memory and only saved if you export them.
 
-**What Thorn HTTP doesn't do.** No account or sign-in. No analytics, telemetry, crash reporting or ads in the extension. No remote configuration and no code loaded from the internet: extension pages run under a strict Content Security Policy (`script-src 'self'`).
+**What THorn HTTP doesn't do.** No account or sign-in. No analytics, telemetry, crash reporting or ads in the extension. No remote configuration and no code loaded from the internet: extension pages run under a strict Content Security Policy (`script-src 'self'`).
 
 **How that is checked.** The end-to-end suite fails if the extension talks to anything but the test server:
 
@@ -213,7 +213,7 @@ Found a vulnerability? Please report it privately: see [SECURITY.md](./SECURITY.
 | `storage`, `unlimitedStorage` | Keeps your rules and settings locally, without a size cap for large mocks. |
 | `webRequest`, `webNavigation`, `tabs` | Network recording, the DevTools panel, and knowing which page a request belongs to. |
 | `alarms` | Switches rules off when their timer ends. |
-| `contextMenus` | The right-click menu (pause or resume Thorn HTTP). |
+| `contextMenus` | The right-click menu (pause or resume THorn HTTP). |
 | `sidePanel` *(Chrome, Edge)* | The network recording panel. |
 | `browsingData` *(Chrome, Edge)* | Optional: clears the cache before a recording starts, so the page loads cold. |
 | `debugger` *(optional, Chrome, Edge)* | Only requested if you choose to delay scripts, styles, images and fonts. Not part of the install. |
@@ -328,7 +328,7 @@ Changes between versions are listed in the [CHANGELOG](./CHANGELOG.md).
 
 ## Support the project
 
-Thorn HTTP is built and maintained by an independent developer. It's free and will stay free. If it saves you time, you can support the work. Donations are personal support for the maintainer and don't buy features, priority or support.
+THorn HTTP is built and maintained by an independent developer. It's free and will stay free. If it saves you time, you can support the work. Donations are personal support for the maintainer and don't buy features, priority or support.
 
 | Coin | Network | Address |
 | --- | --- | --- |
@@ -372,19 +372,19 @@ Yes. Your rules and recordings stay in your browser, and the extension doesn't c
 <details>
 <summary><b>Can I bring my Requestly rules?</b></summary>
 
-Yes. Export them from Requestly as JSON and import the file in Thorn HTTP. Settings from Charles Proxy, ModHeader, Resource Override and Header Editor can be imported too.
+Yes. Export them from Requestly as JSON and import the file in THorn HTTP. Settings from Charles Proxy, ModHeader, Resource Override and Header Editor can be imported too.
 </details>
 
 <details>
 <summary><b>How is it related to Requestly?</b></summary>
 
-Thorn HTTP started as a fork of Requestly's open-source browser extension (AGPLv3). It's an independent project and isn't affiliated with Requestly or BrowserStack.
+THorn HTTP started as a fork of Requestly's open-source browser extension (AGPLv3). It's an independent project and isn't affiliated with Requestly or BrowserStack.
 </details>
 
 ## License and attribution
 
-Thorn HTTP is free software, distributed under the **GNU Affero General Public License v3.0**. See [LICENSE](./LICENSE).
+THorn HTTP is free software, distributed under the **GNU Affero General Public License v3.0**. See [LICENSE](./LICENSE).
 
 It is based on [Requestly HTTP Interceptor](https://github.com/requestly/interceptor), © BrowserStack Inc., also licensed under the AGPLv3. The upstream history is kept in this repository, and the changes are summarized in [ROADMAP.md](./ROADMAP.md).
 
-"Requestly" is a trademark of its owner. Thorn HTTP is an independent project and is not affiliated with or endorsed by BrowserStack Inc.
+"Requestly" is a trademark of its owner. THorn HTTP is an independent project and is not affiliated with or endorsed by BrowserStack Inc.

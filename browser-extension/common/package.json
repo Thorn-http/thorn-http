@@ -10,7 +10,7 @@
     "directory": "browser-extension/common"
   },
   "author": {
-    "name": "Thorn HTTP contributors",
+    "name": "THorn HTTP contributors",
     "url": "https://thorn-http.dev"
   },
   "engines": {

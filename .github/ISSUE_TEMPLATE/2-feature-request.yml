@@ -1,5 +1,5 @@
 name: 💡 Feature request
-description: Suggest an idea or an improvement for Thorn HTTP
+description: Suggest an idea or an improvement for THorn HTTP
 labels: ["enhancement"]
 body:
   - type: markdown
@@ -38,7 +38,7 @@ body:
     id: principles
     attributes:
       label: Project principles
-      description: Thorn HTTP is local-first. See CONTRIBUTING.md.
+      description: THorn HTTP is local-first. See CONTRIBUTING.md.
       options:
         - label: This idea works without sending data to a server, or it can be an optional, opt-in feature.
           required: true

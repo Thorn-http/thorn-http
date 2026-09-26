@@ -1,6 +1,6 @@
 # Security policy
 
-Thorn HTTP runs with broad access to the pages you visit, so security reports are taken seriously. Thank you for helping keep its users safe.
+THorn HTTP runs with broad access to the pages you visit, so security reports are taken seriously. Thank you for helping keep its users safe.
 
 ## Supported versions
 
@@ -24,12 +24,12 @@ Please include:
 
 - a description of the issue and its impact;
 - the steps to reproduce it, or a proof of concept (a test page, an exported rule);
-- the browser and Thorn HTTP versions you tested;
+- the browser and THorn HTTP versions you tested;
 - whether the issue is already public anywhere.
 
 ## What to expect
 
-Thorn HTTP is maintained by one independent developer, so these are goals, not guarantees:
+THorn HTTP is maintained by one independent developer, so these are goals, not guarantees:
 
 - an acknowledgement within **7 days**;
 - an assessment and a plan within **30 days**;

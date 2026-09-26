@@ -12,7 +12,7 @@ export function isFeatureCompatible(featureName) {
   const { app_mode, app_version, os } = getAppDetails();
   const compatibilityVersionMap = FEATURE_COMPATIBLE_VERSION[featureName] || {};
 
-  // The Thorn HTTP extension bundles this app, so both always ship the same code. Its own
+  // The THorn HTTP extension bundles this app, so both always ship the same code. Its own
   // versions (1.x) don't relate to the upstream version table: a feature is supported whenever
   // it exists for the current mode.
   if (isThornExtension()) {

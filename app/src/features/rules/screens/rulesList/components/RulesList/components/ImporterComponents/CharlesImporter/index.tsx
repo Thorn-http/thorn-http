@@ -47,7 +47,7 @@ const validExportSteps = [
     step: `Select settings that you need to export and click "Export"`,
   },
   {
-    step: `Steps to be followed in Thorn HTTP:`,
+    step: `Steps to be followed in THorn HTTP:`,
     additionalSteps: [
       {
         step: `Click "Import settings from Charles Proxy" to continue.`,

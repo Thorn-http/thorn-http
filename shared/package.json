@@ -16,7 +16,7 @@
     "build-alias": "tsc-alias"
   },
   "author": {
-    "name": "Thorn HTTP contributors",
+    "name": "THorn HTTP contributors",
     "url": "https://thorn-http.dev"
   },
   "devDependencies": {

@@ -74,7 +74,7 @@ export const AuthConfirmationPopover: React.FC<Props> = ({
       okButtonProps={{ style: { margin: 0 } }}
       cancelText={""}
       icon={null}
-      // No accounts in Thorn HTTP: never ask the user to sign up
+      // No accounts in THorn HTTP: never ask the user to sign up
       disabled={user?.details?.isLoggedIn || disabled || isThornExtension()}
       overlayClassName="auth-confirmation-popover"
       onConfirm={() => {

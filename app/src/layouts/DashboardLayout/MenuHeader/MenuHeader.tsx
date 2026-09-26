@@ -13,7 +13,7 @@ export const MenuHeader = () => {
     <Header className="app-primary-header">
       <div className="app-primary-header-section app-primary-header__left">
         <img src={ThornLogo} alt="" className="app-primary-header-logo" />
-        <span className="app-primary-header-title">Thorn HTTP</span>
+        <span className="app-primary-header-title">THorn HTTP</span>
       </div>
       <div className="app-primary-header-section app-primary-header__right no-drag">
         <div className="app-primary-header__right-section">

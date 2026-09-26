@@ -77,15 +77,15 @@ test("a rule link can be pasted into the editor, and broken links are refused", 
   await app.click('button:has-text("Paste it here")');
   await app.waitForURL(/#\/rules\/import-link/);
 
-  await app.fill('[placeholder="Paste a Thorn HTTP rule link"]', link.slice(0, -8));
+  await app.fill('[placeholder="Paste a THorn HTTP rule link"]', link.slice(0, -8));
   await app.click('button:has-text("Preview")');
   await expect(app.locator('[data-testid="import-rule-link-error"]')).toContainText("damaged");
 
-  await app.fill('[placeholder="Paste a Thorn HTTP rule link"]', "https://example.com/not-a-rule-link");
+  await app.fill('[placeholder="Paste a THorn HTTP rule link"]', "https://example.com/not-a-rule-link");
   await app.click('button:has-text("Preview")');
-  await expect(app.locator('[data-testid="import-rule-link-error"]')).toContainText("isn't a Thorn HTTP rule link");
+  await expect(app.locator('[data-testid="import-rule-link-error"]')).toContainText("isn't a THorn HTTP rule link");
 
-  await app.fill('[placeholder="Paste a Thorn HTTP rule link"]', link);
+  await app.fill('[placeholder="Paste a THorn HTTP rule link"]', link);
   await app.click('button:has-text("Preview")');
   await expect(app.locator('[data-testid="import-rule-link-list"]')).toContainText("pasted redirect");
   await app.click('button:has-text("Import 1 rule")');
@@ -108,7 +108,7 @@ test("without the extension, the website offers the shared rules as a file", asy
   const site = await context.newPage();
 
   await site.goto("https://thorn-http.dev/r#1.broken!");
-  await expect(site.locator("#status")).toContainText("isn't a Thorn HTTP rule link");
+  await expect(site.locator("#status")).toContainText("isn't a THorn HTTP rule link");
 
   await site.goto(link);
   await site.reload(); // a hash-only navigation doesn't reload the page

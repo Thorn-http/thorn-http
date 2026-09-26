@@ -2,7 +2,7 @@ import { GrowthBook } from "@growthbook/growthbook";
 import { trackAttr, trackEvent } from "modules/analytics";
 import { buildBasicUserProperties } from "modules/analytics/utils";
 
-// Thorn HTTP has no remote flag service: these local defaults decide which gated features are on.
+// THorn HTTP has no remote flag service: these local defaults decide which gated features are on.
 // Any flag not listed here resolves to the default passed at the call site.
 const THORN_FEATURE_DEFAULTS = {
   import_rules_from_charles: { defaultValue: true },

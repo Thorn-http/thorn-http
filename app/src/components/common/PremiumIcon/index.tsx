@@ -10,7 +10,7 @@ export const PremiumIcon: React.FC<
     source?: PaidFeatureNudgeViewedSource;
   }
 > = (props) => {
-  // Every feature is free in Thorn HTTP
+  // Every feature is free in THorn HTTP
   if (isThornExtension()) return null;
 
   return (

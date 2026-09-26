@@ -2,7 +2,7 @@
   "name": "@thorn-http/app",
   "version": "26.8.14",
   "private": true,
-  "description": "Thorn HTTP - Lightweight Proxy to Intercept & Modify HTTP(s) requests",
+  "description": "THorn HTTP - Lightweight Proxy to Intercept & Modify HTTP(s) requests",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
     "url": "https://github.com/Thorn-http/thorn-http/issues"
   },
   "author": {
-    "name": "Thorn HTTP contributors",
+    "name": "THorn HTTP contributors",
     "url": "https://thorn-http.dev"
   },
   "engines": {

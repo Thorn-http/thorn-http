@@ -24,7 +24,7 @@ export function isSessionBearExtensionInstalled() {
 }
 
 export function isExtensionVersionCompatible(compatibleVersion = "0.0.1") {
-  // Thorn HTTP bundles the app with the extension: they are always compatible.
+  // THorn HTTP bundles the app with the extension: they are always compatible.
   if (isThornExtension()) return true;
   let currentExtensionVersion = getExtensionVersion();
   currentExtensionVersion = currentExtensionVersion ? currentExtensionVersion : "0.0.1";

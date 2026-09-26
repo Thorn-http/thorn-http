@@ -639,7 +639,7 @@ export const validateRule = (rule, dispatch, appMode) => {
   };
 };
 
-// Usage metrics were sent to Requestly's backend; Thorn HTTP collects nothing.
+// Usage metrics were sent to Requestly's backend; THorn HTTP collects nothing.
 export const ruleModifiedAnalytics = (_user) => {};
 
 const checkUnsupportedRE2Features = (regexString) => {

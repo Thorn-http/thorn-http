@@ -1,4 +1,4 @@
-Thorn HTTP: a free, local-first HTTP interceptor browser extension (fork of Requestly HTTP Interceptor, AGPLv3). No accounts, no backend, no telemetry. See `ROADMAP.md` for status.
+THorn HTTP: a free, local-first HTTP interceptor browser extension (fork of Requestly HTTP Interceptor, AGPLv3). No accounts, no backend, no telemetry. See `ROADMAP.md` for status.
 
 # Layout
 
