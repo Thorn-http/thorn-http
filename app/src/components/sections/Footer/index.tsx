@@ -13,6 +13,8 @@ const PAGES_WITHOUT_FOOTER = [PATHS.SETTINGS.RELATIVE];
 export const THORN_LINKS = {
   WEBSITE: "https://thorn-http.dev",
   SOURCE_CODE: "https://github.com/Thorn-http/thorn-http",
+  // The form on the website; the extension only opens it, with its version filled in.
+  REPORT_PROBLEM: "https://thorn-http.dev/report/",
 };
 
 const AppFooter: React.FC = () => {
@@ -33,6 +35,16 @@ const AppFooter: React.FC = () => {
             <Col>
               <a className="footer-link" href={THORN_LINKS.WEBSITE} target="_blank" rel="noreferrer">
                 thorn-http.dev
+              </a>
+            </Col>
+            <Col>
+              <a
+                className="footer-link"
+                href={`${THORN_LINKS.REPORT_PROBLEM}?v=${encodeURIComponent(getExtensionVersion() ?? "")}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Report a problem
               </a>
             </Col>
             <Col>

@@ -82,6 +82,15 @@ const Popup: React.FC = () => {
 
       <div className="popup-footer">
         <div className="extension-version">v{getExtensionVersion()}</div>
+        {/* Only opens the form on the website; the extension itself sends nothing. */}
+        <a
+          className="report-problem-link"
+          href={`https://thorn-http.dev/report/?v=${encodeURIComponent(getExtensionVersion())}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Report a problem
+        </a>
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ First release of Thorn HTTP, **1.0.0 (beta)**, based on [Requestly HTTP Intercep
 - **Share by link:** rules can be shared in a `thorn-http.dev/r#…` link that carries them after the `#`; the recipient sees a preview, and imported rules start disabled.
 - **Local delay up to 10 minutes:** `fetch`/XHR in the page, page loads through a local extension page, and (Chrome, Edge) scripts, styles, images and fonts through the optional `debugger` permission, requested with a full explanation.
 - Network recording with HAR export, without the BrowserStack integration.
+- **Report a problem** link in the popup and the editor footer. It opens the form on thorn-http.dev with the extension version filled in; the extension itself sends nothing.
 - End-to-end test suite (Playwright) covering every rule type, the editor, the new features, security checks and the local-only audits; CI on GitHub Actions.
 
 ### Changed

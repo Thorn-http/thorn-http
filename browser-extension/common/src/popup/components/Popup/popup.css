@@ -303,6 +303,19 @@
 .popup-footer {
   padding-inline: 1rem;
   padding-bottom: var(--space-4, 8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.popup-footer .report-problem-link {
+  font-size: 11px;
+  color: var(--neutrals-gray-300);
+  text-decoration: underline;
+}
+
+.popup-footer .report-problem-link:hover {
+  color: var(--neutrals-white, #fff);
 }
 
 .popup-footer .extension-version {
