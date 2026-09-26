@@ -1,14 +1,50 @@
 name: 💡 Feature request
-description: Suggest an idea for Thorn HTTP
+description: Suggest an idea or an improvement for Thorn HTTP
 labels: ["enhancement"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea! Please check the [roadmap](https://github.com/cleberpereiradasilva/thorn-request/blob/main/ROADMAP.md) first; it may already be planned.
   - type: textarea
     id: problem
     attributes:
       label: What problem would this solve?
+      description: Describe the situation and why the current features don't cover it.
+      placeholder: "When I test ..., I have to ..."
     validations:
       required: true
   - type: textarea
     id: proposal
     attributes:
       label: Proposed solution
+      description: How would you like it to work?
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and workarounds
+      description: What do you do today? Have you seen this in other tools?
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - A rule type (redirect, headers, mock, delay...)
+        - Rule editor and rules list
+        - Network recording, HAR, DevTools panel
+        - Import / export / sharing
+        - Other
+  - type: checkboxes
+    id: principles
+    attributes:
+      label: Project principles
+      description: Thorn HTTP is local-first. See CONTRIBUTING.md.
+      options:
+        - label: This idea works without sending data to a server, or it can be an optional, opt-in feature.
+          required: true
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd like to work on this myself.

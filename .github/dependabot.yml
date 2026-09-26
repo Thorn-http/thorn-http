@@ -1,0 +1,11 @@
+# Keeps the GitHub Actions used by CI up to date. npm dependencies are updated by hand: the
+# repository has several packages, and each update must be checked against the extension's
+# strict CSP and the local-only audits.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci

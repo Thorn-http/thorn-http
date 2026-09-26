@@ -1,45 +1,28 @@
-<!-- Thanks for contributing to Thorn HTTP! Adding details below helps us review your PR faster. -->
+<!-- Thanks for contributing to Thorn HTTP! Please read CONTRIBUTING.md before opening the PR. -->
 
-Closes issue: <!-- Link to Github issue -->
+## What and why
 
-## 📜 Summary of changes:
+<!-- What does this PR change, and why? -->
 
-<!-- Summarize your changes -->
+Closes #
 
-## 🎥 Demo Video:
+## How to test
 
-<!-- 
-📹 Please provide a video demonstration of your changes in action.
-This helps reviewers understand the functionality and verify the implementation.
+<!-- Steps a reviewer can follow to see the change working. -->
 
-You can:
-- Record a screen recording showing the feature/fix working
-- Upload the video directly to this PR (drag & drop) or share a link (YouTube, Loom, etc.)
-- For small UI changes, GIFs are also acceptable
+1.
 
-If your changes are not user-facing (e.g., refactoring, build improvements), 
-please explain why a video is not applicable.
--->
+## Screenshots or recording
 
-**Video/Demo:** <!-- Add your video link or upload here -->
+<!-- For visible changes. Delete this section otherwise. -->
 
-## ✅ Checklist:
+## Checklist
 
-- [ ] Make sure linting and unit tests pass.
-- [ ] No install/build warnings introduced.
-- [ ] Verified UI in browser.
-- [ ] For UI changes, added/updated analytics events (if applicable).
-- [ ] For changes in extension's code, manually tested in Chrome and Firefox.
-- [ ] Added/updated unit tests for this change.
-- [ ] Raised pull request to update corresponding documentation (if already exists).
-- [ ] **Added demo video showing the changes in action** (if applicable).
-
-## 🧪 Test instructions:
-
-<!-- Add instructions to test these changes -->
-
-## 🔗 Other references:
-
-<!-- If this PR fixes more issues, list here. -->
-<!-- If this PR is related to other PRs, list here. -->
-<!-- List other important links here. -->
+- [ ] `bash build.sh` succeeds.
+- [ ] End-to-end tests pass (`cd browser-extension/mv3 && npm run test:e2e`).
+- [ ] Unit tests pass (`cd app && npm test`).
+- [ ] Added or updated tests that cover this change.
+- [ ] Tried it by hand in Chrome and Firefox (for changes to the extension).
+- [ ] The extension still makes no network requests of its own, and no new permission is required (or it is optional and explained in the PR).
+- [ ] Updated the documentation and the *Unreleased* section of `CHANGELOG.md`, if behavior changed.
+- [ ] Commits follow [Conventional Commits](https://www.conventionalcommits.org/).

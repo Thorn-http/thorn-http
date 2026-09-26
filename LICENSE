@@ -5,6 +5,9 @@ Thorn HTTP is a modified version of Requestly HTTP Interceptor
 (https://github.com/requestly/interceptor). "Requestly" is a trademark of its
 respective owner; Thorn HTTP is not affiliated with or endorsed by BrowserStack Inc.
 
+The "ee/" directory of this repository contains only the upstream license text and
+no code: all the code in this repository is available under the GNU AGPLv3 below.
+
 
 Portions of this software are licensed as follows:
 
