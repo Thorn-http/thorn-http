@@ -141,6 +141,9 @@ export const test = base.extend<Fixtures>({
     const context = await chromium.launchPersistentContext("", {
       // Set PLAYWRIGHT_CHROMIUM_EXECUTABLE to reuse an already installed Chromium.
       executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined,
+      // The full Chromium in headless mode: the default "headless shell" can't load extensions,
+      // so every test would wait for an extension that never starts (this is what hung CI).
+      channel: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ? undefined : "chromium",
       headless: true,
       viewport: { width: 1400, height: 900 },
       acceptDownloads: true,

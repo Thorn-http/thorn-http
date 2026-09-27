@@ -35,7 +35,7 @@
     "test:e2e": "playwright test --config e2e/playwright.config.ts"
   },
   "devDependencies": {
-    "@playwright/test": "^1.44.1",
+    "@playwright/test": "1.63.0",
     "@requestly/web-sdk": "0.15.1",
     "@rollup/plugin-json": "^5.0.0",
     "@rollup/plugin-node-resolve": "^15.2.3",

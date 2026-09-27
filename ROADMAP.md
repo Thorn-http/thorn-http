@@ -23,8 +23,8 @@ Legenda: `[x]` feito · `[ ]` pendente · 👤 depende de você (contas, jurídi
 - [x] Textos "Requestly"/"SessionBook" restantes no código alcançável
 - [x] `LICENSE`: copyright THorn HTTP + aviso de modificação e de não-afiliação
 - [x] README com atribuição ao Requestly (AGPLv3)
-- [x] Ícones placeholder (todos os estados do ícone, favicon, logos da app)
-- [ ] 👤 Logo e ícones definitivos (trocar `browser-extension/mv3/resources/images/*`, `app/src/assets/img/brand/*`, `app/public/favicon.png` e regenerar as imagens de `store/`)
+- [x] Ícones (todos os estados do ícone, favicon, logos da app)
+- [x] Ícone do espinho é o definitivo (decidido em 27/set/2026)
 
 ## Fase 1 — Cortes ✅
 
