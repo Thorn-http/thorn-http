@@ -11,7 +11,6 @@ Free, open source and local-first: no account, no backend, no tracking.
 [![License: AGPL v3](https://img.shields.io/badge/license-AGPL--3.0-2fae6b)](./LICENSE)
 [![Manifest V3](https://img.shields.io/badge/manifest-v3-2fae6b)](#browser-support)
 [![Chrome · Edge · Firefox](https://img.shields.io/badge/browsers-Chrome%20%C2%B7%20Edge%20%C2%B7%20Firefox%20127%2B-2fae6b)](#browser-support)
-![Status: beta](https://img.shields.io/badge/status-beta-f6ad55)
 
 [Website](https://thorn-http.dev) · [Features](#features) · [Install](#install) · [Privacy](#privacy-and-security) · [Development](#development) · [Roadmap](./ROADMAP.md)
 
@@ -157,9 +156,12 @@ The rules travel inside the link itself, after the `#`, which browsers never sen
 
 ## Install
 
-> **Beta.** Store listings on the Chrome Web Store and Firefox Add-ons are coming soon.
+Install it from your browser's store:
 
-Until then, build it from source (about 5 minutes):
+- **Edge:** [Microsoft Edge Add-ons](https://thorn-http.dev/#get)
+- **Chrome** and **Firefox:** in review, coming soon
+
+Or build it from source (about 5 minutes):
 
 ```sh
 git clone https://github.com/Thorn-http/thorn-http.git
