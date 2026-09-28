@@ -158,7 +158,7 @@ The rules travel inside the link itself, after the `#`, which browsers never sen
 
 Install it from your browser's store:
 
-- **Edge:** [Microsoft Edge Add-ons](https://thorn-http.dev/#get)
+- **Edge:** [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/lgpfbibepglhofdkihnmbjafagkklfma)
 - **Chrome** and **Firefox:** in review, coming soon
 
 Or build it from source (about 5 minutes):
